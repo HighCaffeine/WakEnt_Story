@@ -1,11 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class Sound : MonoBehaviour, OnReturnPool<Sound>
+public class Sound : MonoBehaviour, OnReturnPool<Sound>, SoundManager.OnEndBGM
 {
     OnReturnPoolEvent<Sound> OnReturnPool;
+    SoundManager.OnEndBGMEvent OnEndBGMEvent;
 
     private AudioSource audioSource;
+
+    private void OnEnable()
+    {
+        SetEndBGMEvent(SoundManager.Instance.EndBGM);
+    }
 
     public void Play(AudioClip clip, float vol)
     {
@@ -18,6 +24,13 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>
 
     private IEnumerator Playing()
     {
+        string[] names = audioSource.clip.name.Split("_");
+
+        if (names[0] == "BGM")
+        {
+            OnEndBGMEvent(audioSource);
+        }
+
         while (audioSource.isPlaying)
         {
             yield return null;
@@ -36,5 +49,10 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>
         this.OnReturnPool = OnReturnPool;
         
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void SetEndBGMEvent(SoundManager.OnEndBGMEvent OnEndBGMEvent)
+    {
+        this.OnEndBGMEvent = OnEndBGMEvent;
     }
 }

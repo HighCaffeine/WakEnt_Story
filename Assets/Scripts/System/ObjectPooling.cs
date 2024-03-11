@@ -26,7 +26,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
         storageParent = new GameObject("StorageParent").transform;
         storageParent.SetParent(transform);
-        storageParent.gameObject.SetActive(false);
+        //storageParent.gameObject.SetActive(false);
 
         Pooling();
     }
@@ -47,18 +47,25 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
         pool.Push(newObj);
 
+        newObj.gameObject.SetActive(false);
+
         return newObj;
     }
 
     public PoolType GetPool()
     {
+        PoolType obj;
+
         if (pool.Count <= 0)
         {
-            return CreateObject();
+            obj = CreateObject();
+            obj.gameObject.SetActive(true);
+
+            return obj;
         }
 
-        PoolType obj = pool.Pop();
-        obj.transform.SetParent(storageParent);
+        obj = pool.Pop();
+        obj.gameObject.SetActive(true);
 
         return obj;
     }
@@ -68,5 +75,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
         poolObject.transform.SetParent(storageParent);
 
         pool.Push(poolObject);
+
+        poolObject.gameObject.SetActive(false);
     }
 }
