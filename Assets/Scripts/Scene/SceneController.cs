@@ -15,56 +15,42 @@ public enum SceneName
 
 public class SceneController : GenericSingleton<SceneController>
 {
-    
-
-    [SerializeField] private Image loadImage;
-    [SerializeField] private Image loadBar;
-
-
-    private bool asyncIsDone = false;
-
     private new void Awake()
     {
         base.Awake();
-    }
-    
-    public void SetLoadImage(Image loadImage)
-    {
-        this.loadImage = loadImage;
+
+        DontDestroyOnLoad(this);
     }
 
-    public void GoToScene(SceneName sceneName)
+    public void GoToScene(string sceneName)
     {
         StartCoroutine(StartLoad(sceneName));
     }
 
-    IEnumerator StartLoad(SceneName sceneName)
+    public delegate void LoadingBarProgress(float progress);
+    public LoadingBarProgress loadingBarProgress;
+
+    IEnumerator StartLoad(string sceneName)
     {
+        SoundManager.Instance.PauseBGM();
+
         SceneManager.LoadSceneAsync("Loading");
 
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName.ToString());
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = false;
-
-        while (loadImage == null)
-        {
-            if (loadImage != null)
-            {
-                break;
-            }
-
-            yield return new WaitForFixedUpdate();
-        }
 
         while (!async.isDone)
         {
-            loadImage.fillAmount = async.progress;
+            loadingBarProgress?.Invoke(async.progress);
 
             if (async.progress >= 0.9f)
             {
-                asyncIsDone = true;
-
-                async.allowSceneActivation = true;
+                loadingBarProgress?.Invoke(1f);
                 
+                yield return new WaitForSeconds(1f);
+                
+                async.allowSceneActivation = true;
+
                 break;
             }
 
@@ -72,12 +58,5 @@ public class SceneController : GenericSingleton<SceneController>
         }
 
         yield return null;
-    }
-
-    private void GameExit()
-    {
-        GameManager.Instance.Save();
-
-        Application.Quit();
     }
 }

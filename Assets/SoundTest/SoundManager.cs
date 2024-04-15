@@ -5,6 +5,20 @@ using UnityEngine.Audio;
 
 public class SoundManager : ObjectPooling<SoundManager, Sound>
 {
+    public enum BGM
+    {
+        BGM_GeuNaSa,
+        BGM_MaSaeDol,
+        BGM_Sukidakara,
+    }
+
+    public enum Effect
+    {
+        Effect_GoSeGu_KingA,
+        Effect_GoSeGu_Muyo,
+        Effect_Jururu_HuHeEng,
+    }
+    
     public interface OnEndBGM
     {
         public void SetEndBGMEvent(OnEndBGMEvent OnEndBGMEvent);
@@ -37,6 +51,8 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     {
         base.Awake();
 
+        DontDestroyOnLoad(this);
+
         nowPlaySource = gameObject.GetComponent<AudioSource>();
     }
 
@@ -54,6 +70,11 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         //bgmSource.volume = bgmVol * masterVol;
 
         //bgmSource.Play();
+    }
+
+    private void Start()
+    {
+        PlaySound(BGM.BGM_Sukidakara.ToString());    
     }
 
     public void OnChangedVol(SoundType type, float value)
@@ -98,12 +119,12 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         return null;
     }
 
-    public void PlayBGM(string name)
-    {
-        nowPlaySource.clip = GetClip(SoundType.Bgm, name);
+    // public void PlayBGM(string name)
+    // {
+    //     nowPlaySource.clip = GetClip(SoundType.Bgm, name);
 
-        nowPlaySource.Play();
-    }
+    //     nowPlaySource.Play();
+    // }
 
     public void PauseBGM()
     {

@@ -173,11 +173,12 @@ MonoBehaviour:
   bgms:
   - {fileID: 8300000, guid: f9090b1033313754b9d94e2b3a76ac38, type: 3}
   - {fileID: 8300000, guid: b8028b90e4b85264a92ea96066da9143, type: 3}
+  - {fileID: 8300000, guid: 7c85568f2f88aa24793690e6f6365b7d, type: 3}
   effects:
   - {fileID: 8300000, guid: 1ce2840925782e246a58f6fce32a15c1, type: 3}
   - {fileID: 8300000, guid: f54e5402874964642b09eed4ce97ffe1, type: 3}
   - {fileID: 8300000, guid: 86581b425cb5d784095bfb80c5178351, type: 3}
-  bgmSource: {fileID: 0}
+  nowPlaySource: {fileID: 0}
 --- !u!82 &128418399
 AudioSource:
   m_ObjectHideFlags: 0
