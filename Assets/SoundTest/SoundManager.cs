@@ -47,6 +47,8 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     [Header("Source")]
     [SerializeField] private AudioSource nowPlaySource;
 
+    [SerializeField] private AudioMixer mixer;
+
     private new void Awake()
     {
         base.Awake();
@@ -66,6 +68,10 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         masterVol = PlayerPrefs.HasKey(KEY_MASTER) ? PlayerPrefs.GetFloat(KEY_MASTER) : 1.0f;
         bgmVol = PlayerPrefs.HasKey(KEY_BGM) ? PlayerPrefs.GetFloat(KEY_BGM) : 1.0f;
         effectVol = PlayerPrefs.HasKey(KEY_EFFECT) ? PlayerPrefs.GetFloat(KEY_EFFECT) : 1.0f;
+
+        Debug.Log(masterVol);
+        Debug.Log(bgmVol);
+        Debug.Log(effectVol);
 
         //bgmSource.volume = bgmVol * masterVol;
 
@@ -142,6 +148,15 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         string[] soundType = name.Split('_');
 
         sound.Play(GetClip(soundType[0] == "Effect" ? SoundType.Effect : SoundType.Bgm, name), masterVol * effectVol);
+
+        nowPlaySource.volume = masterVol * bgmVol;
+
+        nowPlaySource.loop = false;
+
+        if (soundType[0] == "BGM")
+        {
+            nowPlaySource.loop = true;
+        }
     }
 
     public void EndBGM(AudioSource audioSource)
