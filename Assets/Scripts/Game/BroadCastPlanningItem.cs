@@ -11,6 +11,5 @@ public class BroadCastPlanningItem : MonoBehaviour
 // broadcastplanning
 // broadcastplanningitem의 요청을 받아 해당하는 요소의 해금된 아이템들을 화면에 띄우고 선택된 값을 업데이트 함 
 
-    [SerializeField] private BroadCastPlanning.BroadcastKategorie kategorie;
 
 }

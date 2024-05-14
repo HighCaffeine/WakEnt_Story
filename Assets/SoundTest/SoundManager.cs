@@ -24,6 +24,19 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         public void SetEndBGMEvent(OnEndBGMEvent OnEndBGMEvent);
     }
 
+    public interface OnChangeVol
+    {
+        public void SetOnChangeVol(OnChangeVolEvent OnChangeVolEvent);
+    }
+
+    public interface RegistrationSound
+    {
+        public void SetRegistrationSound(OnRegistrationSound OnRegistrationSound);
+    }
+
+    public delegate void OnRegistrationSound(Sound sound);
+    public delegate float OnChangeVolEvent(SoundType soundType);
+
     public delegate void OnEndBGMEvent(AudioSource audioSource);
 
     public enum SoundType
@@ -46,6 +59,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
 
     [Header("Source")]
     [SerializeField] private AudioSource nowPlaySource;
+    [SerializeField] private List<Sound> playSoundList;
 
     [SerializeField] private AudioMixer mixer;
 
@@ -55,6 +69,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
 
         DontDestroyOnLoad(this);
 
+        playSoundList = new List<Sound>();
         nowPlaySource = gameObject.GetComponent<AudioSource>();
     }
 
@@ -68,10 +83,6 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         masterVol = PlayerPrefs.HasKey(KEY_MASTER) ? PlayerPrefs.GetFloat(KEY_MASTER) : 1.0f;
         bgmVol = PlayerPrefs.HasKey(KEY_BGM) ? PlayerPrefs.GetFloat(KEY_BGM) : 1.0f;
         effectVol = PlayerPrefs.HasKey(KEY_EFFECT) ? PlayerPrefs.GetFloat(KEY_EFFECT) : 1.0f;
-
-        Debug.Log(masterVol);
-        Debug.Log(bgmVol);
-        Debug.Log(effectVol);
 
         //bgmSource.volume = bgmVol * masterVol;
 
@@ -101,7 +112,24 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
             break;
         }
 
+        foreach (Sound sound in playSoundList)
+        {
+            sound.SetVol();
+        }
+
         nowPlaySource.volume = masterVol * bgmVol;
+    }
+
+    public void RegistrationSoundComponent(Sound sound)
+    {
+        playSoundList.Add(sound);
+    }
+
+    public float VolChangeEvent(SoundType type)
+    {
+        float value = SoundType.Effect == type ? effectVol : bgmVol;
+
+        return masterVol * value;
     }
 
     public AudioClip GetClip(SoundType type, string name)
@@ -146,16 +174,20 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     {
         Sound sound = GetPool();
         string[] soundType = name.Split('_');
+        playSoundList.Add(sound);
 
-        sound.Play(GetClip(soundType[0] == "Effect" ? SoundType.Effect : SoundType.Bgm, name), masterVol * effectVol);
+        SoundType type = soundType[0] == "Effect" ? SoundType.Effect : SoundType.Bgm;
+
+        sound.Play(GetClip(type, name), masterVol * effectVol, type);
 
         nowPlaySource.volume = masterVol * bgmVol;
 
-        nowPlaySource.loop = false;
+        AudioSource source = sound.GetAudioSource();
+        source.loop = false;
 
         if (soundType[0] == "BGM")
-        {
-            nowPlaySource.loop = true;
+        {   
+            source.loop = true;
         }
     }
 

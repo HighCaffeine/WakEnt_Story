@@ -29,7 +29,7 @@ public class GameManager : GenericSingleton<GameManager>
         base.Awake();
     }
 
-    private void GameExit()
+    public void GameExit()
     {
         Save();
 

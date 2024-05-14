@@ -12,7 +12,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
     where PoolType : MonoBehaviour, OnReturnPool<PoolType>
     where ManagerType : MonoBehaviour
 {
-    private Transform storageParent;
+    protected Transform storageParent;
     [SerializeField] PoolType prefab;
     [SerializeField] private int poolCount;
 

@@ -1,23 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
-public class Sound : MonoBehaviour, OnReturnPool<Sound>, SoundManager.OnEndBGM
+public class Sound : MonoBehaviour, OnReturnPool<Sound>, SoundManager.OnEndBGM, SoundManager.OnChangeVol, SoundManager.RegistrationSound
 {
-    OnReturnPoolEvent<Sound> OnReturnPool;
-    SoundManager.OnEndBGMEvent OnEndBGMEvent;
+    private OnReturnPoolEvent<Sound> OnReturnPool;
+    private SoundManager.OnEndBGMEvent OnEndBGMEvent;
+
+    private SoundManager.OnChangeVolEvent OnChangeVolEvent;
+    private SoundManager.OnRegistrationSound OnRegistrationSound;
 
     private AudioSource audioSource;
 
-    private void OnEnable()
-    {
-        SetEndBGMEvent(SoundManager.Instance.EndBGM);
-    }
+    SoundManager.SoundType type;
 
-    public void Play(AudioClip clip, float vol)
+    public void Play(AudioClip clip, float vol, SoundManager.SoundType type)
     {
         audioSource.clip = clip;
         audioSource.volume = vol;
         audioSource.Play();
+        this.type = type;
 
         StartCoroutine(Playing());
     }
@@ -39,9 +40,21 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>, SoundManager.OnEndBGM
         OnReturnPool?.Invoke(this);
     }
 
-    public void OnInteraction()
+    public void SetVol()
     {
-        OnReturnPool(this);
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
+        float vol = OnChangeVolEvent(type);
+
+        audioSource.volume = vol;
+    }
+
+    public AudioSource GetAudioSource()
+    {
+        return audioSource;
     }
 
     public void Init(OnReturnPoolEvent<Sound> OnReturnPool)
@@ -49,10 +62,26 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>, SoundManager.OnEndBGM
         this.OnReturnPool = OnReturnPool;
         
         audioSource = GetComponent<AudioSource>();
+
+        SetEndBGMEvent(SoundManager.Instance.EndBGM);
+        SetOnChangeVol(SoundManager.Instance.VolChangeEvent);
+        SetRegistrationSound(SoundManager.Instance.RegistrationSoundComponent);
+
+        OnRegistrationSound(this);
     }
 
     public void SetEndBGMEvent(SoundManager.OnEndBGMEvent OnEndBGMEvent)
     {
         this.OnEndBGMEvent = OnEndBGMEvent;
+    }
+
+    public void SetOnChangeVol(SoundManager.OnChangeVolEvent OnChangeVolEvent)
+    {
+        this.OnChangeVolEvent = OnChangeVolEvent;
+    }
+
+    public void SetRegistrationSound(SoundManager.OnRegistrationSound OnRegistrationSound)
+    {
+        this.OnRegistrationSound = OnRegistrationSound;
     }
 }

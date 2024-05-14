@@ -7,6 +7,8 @@ public class ButtonSelect : MonoBehaviour
     [SerializeField] private GameObject selected;
     [SerializeField] private bool isFirstButton;
 
+    [SerializeField] private SoundManager.Effect effect;
+
     void OnEnable()
     {
         selected.SetActive(isFirstButton);
@@ -16,6 +18,6 @@ public class ButtonSelect : MonoBehaviour
     {
         selected.SetActive(true);
 
-        SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_GoSeGu_Muyo.ToString());
+        SoundManager.Instance.PlaySound(effect.ToString());
     }
 }

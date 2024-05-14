@@ -46,12 +46,17 @@ public class MenuController : GenericSingleton<MenuController>
         broadcastPlanningPanel.SetActive(true);
     }
 
-    [SerializeField] private GameObject broadcastPlanningPanel;
-
-    [SerializeField] private TextMeshProUGUI broadCastMatchingComment;
-
-    public void RequestGetBroadcastMatchingComment()
+    public void OpenCreateBroadcast()
     {
-        broadCastMatchingComment.text = BroadCastPlanning.Instance.GetBroadCastMatchingRateComment();
+        broadcastCreatePanel.SetActive(true);
     }
+
+    public void OpenProductorSelection()
+    {
+        productorSelectionPanel.SetActive(true);
+    }
+
+    [SerializeField] private GameObject broadcastPlanningPanel;
+    [SerializeField] private GameObject broadcastCreatePanel;
+    [SerializeField] private GameObject productorSelectionPanel;
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -122,11 +121,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     }
 
 
-    public float CalculateBroadCastMatchingValue(string contents, string broadcastType)
+    public string CalculateBroadCastMatchingValue(string contents, string broadcastType)
     {
         SetBroadCastValue(contents, broadcastType);
 
-        return broadCast.GetMatchingRate();
+        return GetMatchingRateComment(Mathf.RoundToInt(broadCast.GetMatchingRate()));
     }
 
     private void SetBroadCastValue(string contents, string broadcastType)
@@ -150,12 +149,23 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 broadCast.SetContents(Contents.BroadcasterTogether + i);
             }
         }
-
+ 
         string key = string.Format(contents + "_" + broadcastType);
 
-        float matchingRate = keywordMatching.ContainsKey(key) ? keywordMatching[key] : 0.0f;
+        float matchingRate = GetMatchingRate(contents, broadcastType);
 
         broadCast.SetMatchingRate(matchingRate);
+    }
+
+    public float GetMatchingRate(string contents, string broadcastType)
+    {
+        string key = string.Format("{0}_{1}", contents, broadcastType);
+
+        Debug.Log(key);
+
+        float value = keywordMatching.ContainsKey(key) ? keywordMatching[key] : 0.0f;
+
+        return value;
     }
 
     /// <summary>
@@ -164,23 +174,42 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     /// </summary>
     /// <param name="rate">매칭률</param>
     /// <returns></returns>
-    public string GetBroadCastMatchingRateComment()
+    public string GetMatchingRateComment(int index)
     {
-        int value = (int)Math.Round(broadCast.GetMatchingRate());
-
-        if (value < 0)
+        if (index < 0)
         {
             return matchingRateComment[0];
         }
 
-        return matchingRateComment[value - 1];
+        return matchingRateComment[index];
     }
 
-    public enum BroadcastKategorie
+    //matchingrate 값을 broadcastplanning에서 관리하고, 모든 곳에서 수치로 사용
+    //카테고리에 넘기는 값만 해당하는 string값으로
+
+    /// <summary>
+    /// 
+    /// create팝업 패널을 우선적으로 만들어야 하고, 해당 패널에서 작업자 선택을 함 이후 나올 작업자 선택도 해당 패널로 진행
+    /// broadcastplanning패널에서 비용을 명시해 줘야 함 => 동시에 플레이어의 돈 관리 시스템도 추가(돈은 GameManager 통해서 datamanager로 반영하는걸로)
+    /// 
+    /// 
+    /// 1. 키워드로 받은 결과 값(matchingRate)을 저장
+    /// 2. broadcastcreate창에서 작업자고르기(추후 수정될 수 있음) 
+    ///     => 왁타버스 작업자들 등장시킬 예정 (무리라고 생각되면 다른 방안으로)
+    /// 3. 작업자 값 + 매칭값 + 장비로 기획 비용 및 결과값 계산 로직
+    /// 4. 방송 제작 단계별로 작업자를 정해서 방송을 만드는 걸로
+    ///    => 기획, 맵 제작 ... 등 각 단계별로 집중적으로 오르는 분야 점수가 다름
+    ///       기획 => 완성도
+    ///       맵 제작 => 시청자 만족도 증가
+    ///       2개정도 더 추가 예정
+    /// 5. 방송을 하고 결과값으로 방송당일의 값과 유튜브 업로드 후의 반응 댓글 및 조회수, 좋아요 수에 따른 결과 반영 로직
+    /// 
+    /// Textwindow에서 json에서 이벤트 값으로 튜토리얼 설명 및 정보 안내
+    /// 
+    /// </summary>
+
+    public void GetPlan()
     {
-        None,
-        Gear,
-        Content,
-        Type,
+
     }
 }
