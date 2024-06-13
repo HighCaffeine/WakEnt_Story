@@ -42,6 +42,8 @@ public class DataManager : GenericSingleton<DataManager>
     }
     
     //테스트 함수들 (예시임)
+    //안에 데이터들은 임시로 넣어 둔 거고
+    //이후 데이터 시트로 변경 
     public void SetBroadcastValue(Dictionary<string, float> broadCast)
     {
         string key = string.Format("{0}_{1}", "게임", "개인");
@@ -60,7 +62,20 @@ public class DataManager : GenericSingleton<DataManager>
         }
     }
 
+    public string ParsingBroadCastDataToString(BroadCastPlanning.Contents contents)
+    {
+        return contentsWords[(int)contents];
+    }
+
+    public string ParsingBroadCastDataToString(BroadCastPlanning.BroadcastType broadcastType)
+    {
+        return typeWords[(int)broadcastType];
+    }
+
     private Dictionary<BroadCastPlanning.KategorieType, string[]> kategorieDatas = new Dictionary<BroadCastPlanning.KategorieType, string[]>();
+
+    private string[] contentsWords;
+    private string[] typeWords;
 
     private void SetKategorieData()
     {
@@ -75,6 +90,9 @@ public class DataManager : GenericSingleton<DataManager>
 
         //Type
         string[] types = { "개인", "합방", "시참", "대결" };
+
+        contentsWords = contents;
+        typeWords = types;
 
         kategorieDatas.Add(BroadCastPlanning.KategorieType.Gear, gears);
         kategorieDatas.Add(BroadCastPlanning.KategorieType.Content, contents);

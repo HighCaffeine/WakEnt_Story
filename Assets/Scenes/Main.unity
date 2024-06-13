@@ -174,6 +174,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f9090b1033313754b9d94e2b3a76ac38, type: 3}
   - {fileID: 8300000, guid: 7c85568f2f88aa24793690e6f6365b7d, type: 3}
   - {fileID: 8300000, guid: b8028b90e4b85264a92ea96066da9143, type: 3}
+  - {fileID: 8300000, guid: 05033685a4b5f8943b3b0aba2e39c8fd, type: 3}
+  - {fileID: 8300000, guid: b895fb15201e9f248bc6b2be2b933b2f, type: 3}
   effects:
   - {fileID: 8300000, guid: f54e5402874964642b09eed4ce97ffe1, type: 3}
   - {fileID: 8300000, guid: 1ce2840925782e246a58f6fce32a15c1, type: 3}

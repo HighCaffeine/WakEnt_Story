@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64eda81763fdd54d9e173c1c17f2b90, type: 3}
+  m_Name: SaeGyun
+  m_EditorClassIdentifier: 
+  productorName: "\uC138\uADE0\uB2E8"
+  productorImage: {fileID: 21300000, guid: eeb14abd361ba134d89824fda7c1c105, type: 3}
+  productorType: 0
+  isCompanyMember: 0
+  previousBroadcastProduction: 0
+  price: 2000
+  productorStat:
+    plannerStat: 90
+    mapEditorStat: 23
+    composerStat: 17
+    marketerStat: 28
+  productorLevel:
+    plannerLevel: 5
+    mapEditorLevel: 1
+    composerLevel: 1
+    marketerLevel: 1
+  fatigueLevel: 6
+  maxStemina: 100
+  info: "\uC774\uC138\uACC4\uC544\uC774\uB3CC \uB2E4\uC12F\uC9F8 \uBA64\uBC84 \uACE0\uC138\uAD6C\uC758
+    \uD32C\uB364\uBA85"

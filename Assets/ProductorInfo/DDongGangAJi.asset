@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64eda81763fdd54d9e173c1c17f2b90, type: 3}
+  m_Name: DDongGangAJi
+  m_EditorClassIdentifier: 
+  productorName: "\uB625\uAC15\uC544\uC9C0"
+  productorImage: {fileID: 21300000, guid: 5070183e952fd5246882a2c3dd920a78, type: 3}
+  productorType: 0
+  isCompanyMember: 1
+  previousBroadcastProduction: 0
+  price: 0
+  productorStat:
+    plannerStat: 999
+    mapEditorStat: 999
+    composerStat: 999
+    marketerStat: 999
+  productorLevel:
+    plannerLevel: 5
+    mapEditorLevel: 5
+    composerLevel: 5
+    marketerLevel: 5
+  fatigueLevel: 0
+  maxStemina: 100
+  info: "\uC774\uC138\uACC4\uC544\uC774\uB3CC \uB458\uC9F8 \uBA64\uBC84 \uC9D5\uBC84\uAC70\uC758
+    \uD32C\uB364\uBA85"

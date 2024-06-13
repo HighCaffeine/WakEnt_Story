@@ -51,6 +51,8 @@ public class SceneController : GenericSingleton<SceneController>
                 
                 async.allowSceneActivation = true;
 
+                SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_WakEnt_1.ToString());
+
                 break;
             }
 

@@ -60,7 +60,7 @@ public class LoadingImageController : MonoBehaviour
 
             string tmiData = tmi[randomValue];
 
-            tmiTMP.text = "TMI : ";
+            tmiTMP.text = "";
 
             foreach (char each in tmiData)
             {
@@ -174,8 +174,6 @@ public class LoadingImageController : MonoBehaviour
 
     private void LoadBarProgress(float progress)
     {
-        Debug.Log(loadBar.fillAmount);
-
         loadBar.fillAmount = progress;
     }
 }
