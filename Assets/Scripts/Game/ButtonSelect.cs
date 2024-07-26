@@ -88,7 +88,7 @@ public class MyEventTrigger : MonoBehaviour,
     {
         int index = 0;
 
-        Debug.Log(trigger.Count);
+        //Debug.Log(trigger.Count);
 
         for (int i = trigger.Count; index < i; ++i)
         {
@@ -103,7 +103,7 @@ public class MyEventTrigger : MonoBehaviour,
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("click");
+        //Debug.Log("click");
 
         ExecuteEvent(EventTriggerType.PointerClick, eventData);
     }

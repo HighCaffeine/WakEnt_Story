@@ -10,23 +10,53 @@ public class KategorieManager : GenericSingleton<KategorieManager>
     //kategorieitem들의 요청을 받고 정보를 broadcastplanning에 넘겨줘서
     //broadcastplanning이 나머지 정보들 업데이트 해서 결과값 반영되게
 
+
+    public enum KategorieType
+    {
+        Gear,
+        Content,
+        Type,
+    }
+
+    public enum BroadcastType
+    {
+        BroadcasterTogether,
+        ViewerParticipation,
+
+        Count,
+    }
+
+    public enum Contents
+    {
+        Game,
+        VRTalk,
+        Dance,
+        SingASong,
+        Talk,
+        Radio,
+
+        Count,
+    }
+
+    
+
     [Serializable]
     public class KategorieData
     {
         [SerializeField] private string kategorieData;
-        [SerializeField] private BroadCastPlanning.KategorieType kategorieType;
+        [SerializeField] private KategorieType kategorieType;
 
         public string GetName()
         {
             return kategorieData;
         }
 
-        public BroadCastPlanning.KategorieType GetKategorieType()
+        public KategorieType GetKategorieType()
         {
             return kategorieType;
         }
 
-        public void Init(BroadCastPlanning.KategorieType kategorieType, string kategorieData)
+        public void Init(KategorieType kategorieType, string kategorieData)
         {
             this.kategorieType = kategorieType;
             this.kategorieData = kategorieData;
@@ -56,27 +86,27 @@ public class KategorieManager : GenericSingleton<KategorieManager>
     {
         base.Awake();
 
-        gearKategorie = transform.Find("Gear/KategorieSelect").gameObject;
-        contentKategorie = transform.Find("Content/KategorieSelect").gameObject;
-        typeKategorie = transform.Find("Type/KategorieSelect").gameObject;
+        gearKategorie = transform.Find("Panel/Gear/KategorieSelect").gameObject;
+        contentKategorie = transform.Find("Panel/Content/KategorieSelect").gameObject;
+        typeKategorie = transform.Find("Panel/Type/KategorieSelect").gameObject;
 
-        gearTMP = transform.Find("Gear/SelectedItem").GetComponent<TextMeshProUGUI>();
-        contentTMP = transform.Find("Content/SelectedItem").GetComponent<TextMeshProUGUI>();
-        typeTMP = transform.Find("Type/SelectedItem").GetComponent<TextMeshProUGUI>();
+        gearTMP = transform.Find("Panel/Gear/SelectedItem").GetComponent<TextMeshProUGUI>();
+        contentTMP = transform.Find("Panel/Content/SelectedItem").GetComponent<TextMeshProUGUI>();
+        typeTMP = transform.Find("Panel/Type/SelectedItem").GetComponent<TextMeshProUGUI>();
 
-        matchingResult = transform.Find("Result/Matching").GetComponent<TextMeshProUGUI>();
+        matchingResult = transform.Find("Panel/Result/Matching").GetComponent<TextMeshProUGUI>();
     }
 
     void Start()
     {
-        InitKategorieItem(BroadCastPlanning.KategorieType.Gear);
-        InitKategorieItem(BroadCastPlanning.KategorieType.Content);
-        InitKategorieItem(BroadCastPlanning.KategorieType.Type);
+        InitKategorieItem(KategorieType.Gear);
+        InitKategorieItem(KategorieType.Content);
+        InitKategorieItem(KategorieType.Type);
 
         UpdateKategorieSelect();
     }
 
-    public void InitKategorieItem(BroadCastPlanning.KategorieType kategorieType)
+    public void InitKategorieItem(KategorieType kategorieType)
     {
         InstantiateKategorieObject(kategorieType, DataManager.Instance.GetKategorieData(kategorieType));
     }
@@ -85,17 +115,17 @@ public class KategorieManager : GenericSingleton<KategorieManager>
     {
         switch (kategorieData.GetKategorieType())
         {
-            case BroadCastPlanning.KategorieType.Gear:
+            case KategorieType.Gear:
             gearTMP.text = kategorieData.GetName();
 
             gearKategorie.SetActive(false);
             break;
-            case BroadCastPlanning.KategorieType.Content:
+            case KategorieType.Content:
             contentTMP.text = kategorieData.GetName();
 
             contentKategorie.SetActive(false);
             break;
-            case BroadCastPlanning.KategorieType.Type:
+            case KategorieType.Type:
             typeTMP.text = kategorieData.GetName();
 
             typeKategorie.SetActive(false);
@@ -105,19 +135,19 @@ public class KategorieManager : GenericSingleton<KategorieManager>
         UpdateKategorieSelect();
     }
 
-    public void RequestInActiveOther(BroadCastPlanning.KategorieType type)
+    public void RequestInActiveOther(KategorieType type)
     {
         switch (type)
         {
-            case BroadCastPlanning.KategorieType.Gear:
+            case KategorieType.Gear:
             if (contentKategorie.activeSelf) contentKategorie.SetActive(false);
             if (typeKategorie.activeSelf) typeKategorie.SetActive(false);
             break;
-            case BroadCastPlanning.KategorieType.Content:
+            case KategorieType.Content:
             if (gearKategorie.activeSelf) gearKategorie.SetActive(false);
             if (typeKategorie.activeSelf) typeKategorie.SetActive(false);
             break;
-            case BroadCastPlanning.KategorieType.Type:
+            case KategorieType.Type:
             if (contentKategorie.activeSelf) contentKategorie.SetActive(false);
             if (gearKategorie.activeSelf) gearKategorie.SetActive(false);
             break;
@@ -130,20 +160,20 @@ public class KategorieManager : GenericSingleton<KategorieManager>
 
         newAttempt.SetActive(false);
 
-        if (matchingValue == null)
+        Debug.Log(matchingValue);
+
+        if (matchingValue == BroadCastPlanning.Instance.GetMatchingRateComment(0))
         {
             newAttempt.SetActive(true);
-
-            matchingValue = "첫 시도";
         }
 
         matchingResult.text = string.Format("{0} + {1} -> {2}", contentTMP.text, typeTMP.text, matchingValue);
     }
 
-    private void InstantiateKategorieObject(BroadCastPlanning.KategorieType kategorieType, string[] itemNames)
+    private void InstantiateKategorieObject(KategorieType kategorieType, string[] itemNames)
     {
-        GameObject parent = kategorieType == BroadCastPlanning.KategorieType.Gear ? gear
-                            : kategorieType == BroadCastPlanning.KategorieType.Content ? content
+        GameObject parent = kategorieType == KategorieType.Gear ? gear
+                            : kategorieType == KategorieType.Content ? content
                             : type;
 
         for (int i = 0; i < itemNames.Length; i++)

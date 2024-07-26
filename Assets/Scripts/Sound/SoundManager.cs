@@ -9,8 +9,11 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         BGM_GeuNaSa,
         BGM_MaSaeDol,
         BGM_Sukidakara,
+        //위 음원들은 추후 삭제 예정
         BGM_WakEnt_1,
         BGM_Processing_1,
+        BGM_Main_1,
+        BGM_Event_Positive,
     }
 
     public enum Effect
@@ -18,6 +21,8 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         Effect_GoSeGu_KingA,
         Effect_GoSeGu_Muyo,
         Effect_Jururu_HuHeEng,
+        Effect_ReviewSet,
+        Effect_ReviewTotalPoint,
     }
     
     public interface OnEndBGM
@@ -93,7 +98,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
 
     private void Start()
     {
-        PlaySound(BGM.BGM_Sukidakara.ToString());    
+        PlaySound(BGM.BGM_Main_1.ToString());    
     }
 
     public void OnChangedVol(SoundType type, float value)
@@ -146,6 +151,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
                 {
                     PauseBGM();
 
+                    //playsoundlist 비워야 됨
                     if (!multiBGM)
                     {
                         nowPlaySource.clip = null;

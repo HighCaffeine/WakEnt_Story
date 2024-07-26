@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Devcat;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,7 +39,56 @@ public class DataManager : GenericSingleton<DataManager>
     private void OnEnable()
     {
         SetKategorieData();
+    }
 
+    //시트에서 Point_Comment format으로 string 변환 후 dictionary 추가
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="data"> int : caferank, int : point, string : comment</param>
+    public void SetReviewComment(Dictionary<int, Dictionary<int, string>> data)
+    {
+        List<ReviewCommentData> reviewList = JsonManager.Instance.GetReviewCommentData();
+        
+
+        //랭크간 멘트 통합 -> 구간별 멘트 변경
+        //각 등급 멘트들의 수가 동일하기 때문에 숫자로 나눠서 판단
+        //딕셔너리에는 전체 수 / 카페 등급 수로 반복
+        
+        int cafeRankCount = ValueCastTo<int>.From(BroadcastReviewManager.CafeRank.Count);       //리뷰값 미리 캐스팅
+        int reviewPointSection = reviewList.Count / cafeRankCount;                              //전체리뷰 수 / 카페 랭크 수 = 랭크당 리뷰 수
+        
+        for (int i = 0; i < cafeRankCount; i++)
+        {
+            data.Add(i, new Dictionary<int, string>());
+
+            for (int j = 0; j < reviewPointSection; j++)
+            {
+                int index = i * reviewPointSection + j;
+
+                data[i].Add(reviewList[index].Point, reviewList[index].Comment);
+            }
+        }
+    }
+
+    public void SetMoney(ref long money)
+    {
+        long value = JsonManager.Instance.GetPlayerData()[0].Money;
+
+        Debug.Log(value);
+
+        if (value == 0)
+        {
+            money = 5000;
+        }
+
+        money = value;
+    }
+
+    public void SetDate(ref int date)
+    {
+        date = JsonManager.Instance.GetPlayerData()[0].TimeElapsed;
     }
     
     //테스트 함수들 (예시임)
@@ -62,17 +112,17 @@ public class DataManager : GenericSingleton<DataManager>
         }
     }
 
-    public string ParsingBroadCastDataToString(BroadCastPlanning.Contents contents)
+    public string ParsingBroadCastDataToString(KategorieManager.Contents contents)
     {
         return contentsWords[(int)contents];
     }
 
-    public string ParsingBroadCastDataToString(BroadCastPlanning.BroadcastType broadcastType)
+    public string ParsingBroadCastDataToString(KategorieManager.BroadcastType broadcastType)
     {
         return typeWords[(int)broadcastType];
     }
 
-    private Dictionary<BroadCastPlanning.KategorieType, string[]> kategorieDatas = new Dictionary<BroadCastPlanning.KategorieType, string[]>();
+    private Dictionary<KategorieManager.KategorieType, string[]> kategorieDatas = new Dictionary<KategorieManager.KategorieType, string[]>();
 
     private string[] contentsWords;
     private string[] typeWords;
@@ -94,12 +144,12 @@ public class DataManager : GenericSingleton<DataManager>
         contentsWords = contents;
         typeWords = types;
 
-        kategorieDatas.Add(BroadCastPlanning.KategorieType.Gear, gears);
-        kategorieDatas.Add(BroadCastPlanning.KategorieType.Content, contents);
-        kategorieDatas.Add(BroadCastPlanning.KategorieType.Type, types);
+        kategorieDatas.Add(KategorieManager.KategorieType.Gear, gears);
+        kategorieDatas.Add(KategorieManager.KategorieType.Content, contents);
+        kategorieDatas.Add(KategorieManager.KategorieType.Type, types);
     } 
 
-    public string[] GetKategorieData(BroadCastPlanning.KategorieType kategorieType)
+    public string[] GetKategorieData(KategorieManager.KategorieType kategorieType)
     {
         if (!kategorieDatas.ContainsKey(kategorieType))
         {
@@ -108,7 +158,6 @@ public class DataManager : GenericSingleton<DataManager>
 
         return kategorieDatas[kategorieType];
     }
-
 
 
     /// <summary>

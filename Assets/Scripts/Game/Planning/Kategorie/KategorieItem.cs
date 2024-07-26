@@ -10,7 +10,7 @@ public class KategorieItem : MonoBehaviour
 
     [SerializeField] private KategorieManager.KategorieData kategorieData;
 
-    public void Init(BroadCastPlanning.KategorieType kategorieType, string itemName)
+    public void Init(KategorieManager.KategorieType kategorieType, string itemName)
     {
         kategorieData = new KategorieManager.KategorieData();
 

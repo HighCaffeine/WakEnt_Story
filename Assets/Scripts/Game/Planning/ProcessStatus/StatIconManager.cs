@@ -23,8 +23,8 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
     [SerializeField] private Transform composerStartXPos;
     [SerializeField] private TextMeshProUGUI composerStat;
     [Header("홍보")]
-    [SerializeField] private Transform marketerStartXPos;
-    [SerializeField] private TextMeshProUGUI marketerStat;
+    [SerializeField] private Transform promotorStartXPos;
+    [SerializeField] private TextMeshProUGUI promotorStat;
 
     private RectTransform rect;
 
@@ -60,8 +60,8 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
             startPos.x = composerStartXPos.position.x;
             sprite = icons[2];
             break;
-            case ProductorManager.ProductorType.Marketer:
-            startPos.x = marketerStartXPos.position.x;    
+            case ProductorManager.ProductorType.Promotor:
+            startPos.x = promotorStartXPos.position.x;    
             sprite = icons[3];        
             break;
         }
@@ -78,7 +78,7 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
         plannerStat.text = string.Format("0");
         mapEditorStat.text = string.Format("0");
         composerStat.text = string.Format("0");
-        marketerStat.text = string.Format("0");
+        promotorStat.text = string.Format("0");
     }
 
     public void SetStat(ProductorManager.ProductorType type)
@@ -94,8 +94,8 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
             case ProductorManager.ProductorType.Composer:
             composerStat.text = string.Format("{0}", int.Parse(composerStat.text) + 1);
             break;
-            case ProductorManager.ProductorType.Marketer:  
-            marketerStat.text = string.Format("{0}", int.Parse(marketerStat.text) + 1);
+            case ProductorManager.ProductorType.Promotor:  
+            promotorStat.text = string.Format("{0}", int.Parse(promotorStat.text) + 1);
             break;
         }
     }
@@ -129,7 +129,7 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
         value[0] = int.Parse(plannerStat.text);
         value[1] = int.Parse(mapEditorStat.text);
         value[2] = int.Parse(composerStat.text);
-        value[3] = int.Parse(marketerStat.text);
+        value[3] = int.Parse(promotorStat.text);
 
         return value;
     }

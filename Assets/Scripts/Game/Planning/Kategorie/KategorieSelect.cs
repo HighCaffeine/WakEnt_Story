@@ -5,7 +5,7 @@ using UnityEngine;
 public class KategorieSelect : MonoBehaviour
 {
     [SerializeField] private GameObject kategorie;
-    [SerializeField] private BroadCastPlanning.KategorieType type;
+    [SerializeField] private KategorieManager.KategorieType type;
 
     public void Selected()
     {

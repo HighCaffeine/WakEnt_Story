@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestAni : MonoBehaviour
 {
-    private bool isOpened = false;
+    [SerializeField] private bool isOpened = false;
 
     public Animator menuButtonAnimator;
     public Animator menuListAnimator;
@@ -18,7 +18,6 @@ public class TestAni : MonoBehaviour
             return;
         }
 
- 
         if (isOpened)
         {
             menuButtonAnimator.Play("MenuButtonClose");
@@ -31,5 +30,15 @@ public class TestAni : MonoBehaviour
         }
 
         isOpened = !isOpened;
+    }
+
+
+    //특정 버튼들은 애니메이션 끝나기 전에 그냥 바로 close 애니메이션 실행
+    public void MenuCloseWhenButtonClick()
+    {
+        menuButtonAnimator.Play("MenuButtonClose");
+        menuListAnimator.Play("MenuClose");
+
+        isOpened = false;
     }
 }

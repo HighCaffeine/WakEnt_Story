@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Devcat;
 using UnityEngine;
 
 
@@ -15,12 +16,12 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     [Serializable]
     private class Broadcast
     {
-        private Contents contents;
-        private BroadcastType broadcastType;
+        private KategorieManager.Contents contents;
+        private KategorieManager.BroadcastType broadcastType;
 
         private float matchingRate;
 
-        public float processingTime 
+        public float processingRate 
         {
             private set; 
             get; 
@@ -33,7 +34,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             private int plannerPoint;
             private int mapEditorPoint;
             private int composerPoint;
-            private int marketerPoint;
+            private int promotionPoint;
 
             public int this[ProductorManager.ProductorType type]
             {
@@ -51,8 +52,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                     return mapEditorPoint;
                     case ProductorManager.ProductorType.Composer:
                     return composerPoint;
-                    case ProductorManager.ProductorType.Marketer:
-                    return marketerPoint;
+                    case ProductorManager.ProductorType.Promotor:
+                    return promotionPoint;
                 }
 
                 return 0;
@@ -71,8 +72,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                     case ProductorManager.ProductorType.Composer:
                     composerPoint += value;
                     break;
-                    case ProductorManager.ProductorType.Marketer:
-                    marketerPoint += value;
+                    case ProductorManager.ProductorType.Promotor:
+                    promotionPoint += value;
                     break;
                 }
             }
@@ -82,16 +83,16 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 plannerPoint = 0;
                 mapEditorPoint = 0;
                 composerPoint = 0;
-                marketerPoint = 0;
+                promotionPoint = 0;
             }
         }
 
-        public void SetContents(in Contents contents)
+        public void SetContents(in KategorieManager.Contents contents)
         {
             this.contents = contents;
         }
 
-        public void SetBroadcastType(in BroadcastType broadcastType)
+        public void SetBroadcastType(in KategorieManager.BroadcastType broadcastType)
         {
             this.broadcastType = broadcastType;
         }
@@ -101,17 +102,17 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             matchingRate = value;
         }
 
-        public void SetProcessTime(float value)
+        public void SetProcessRate(float value)
         {
-            this.processingTime = value;
+            this.processingRate = value;
         }
 
-        public Contents GetContents()
+        public KategorieManager.Contents GetContents()
         {
             return contents;
         }
 
-        public BroadcastType GetBroadcastType()
+        public KategorieManager.BroadcastType GetBroadcastType()
         {
             return broadcastType;
         }
@@ -123,39 +124,14 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
         public void Init()
         {
-            this.contents = Contents.Game;
-            this.broadcastType = BroadcastType.BroadcasterTogether;
+            this.contents = KategorieManager.Contents.Game;
+            this.broadcastType = KategorieManager.BroadcastType.BroadcasterTogether;
 
             broadCastPoint.Init();
         }
     }
 
-    public enum KategorieType
-    {
-        Gear,
-        Content,
-        Type,
-    }
-
-    public enum BroadcastType
-    {
-        BroadcasterTogether,
-        ViewerParticipation,
-
-        Count,
-    }
-
-    public enum Contents
-    {
-        Game,
-        VRTalk,
-        Dance,
-        SingASong,
-        Talk,
-        Radio,
-
-        Count,
-    }
+    
 
     private new void Awake()
     {
@@ -214,23 +190,23 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
     private void SetBroadCastValue(string contents, string broadcastType)
     {
-        int contentsCount = (int)Contents.Count;
+        int contentsCount = ValueCastTo<int>.From(KategorieManager.Contents.Count);
 
         for (int i = 0; i < contentsCount; i++)
         {
-            if ((BroadcastType.BroadcasterTogether + i).ToString() == contents)
+            if ((KategorieManager.BroadcastType.BroadcasterTogether + i).ToString() == contents)
             {
-                broadCast.SetBroadcastType(BroadcastType.BroadcasterTogether + i);
+                broadCast.SetBroadcastType(KategorieManager.BroadcastType.BroadcasterTogether + i);
             }
         }
 
-        int broadcastTypeCount = (int)Contents.Count;
+        int broadcastTypeCount = ValueCastTo<int>.From(KategorieManager.Contents.Count);
 
         for (int i = 0; i < broadcastTypeCount; i++)
         {
-            if ((Contents.Game + i).ToString() == broadcastType)
+            if ((KategorieManager.Contents.Game + i).ToString() == broadcastType)
             {
-                broadCast.SetContents(Contents.Game + i);
+                broadCast.SetContents(KategorieManager.Contents.Game + i);
             }
         }
  
@@ -328,6 +304,97 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
     private float GetProgress()
     {
-        return broadCast.processingTime;
+        return broadCast.processingRate;
+    }
+
+    public void AddProcessingRate()
+    {
+        if (CheckMaxProcessing())
+        {
+            return;
+        }
+
+        broadCast.SetProcessRate(broadCast.processingRate + 1);
+    }
+
+    private bool CheckMaxProcessing()
+    {
+        if (broadCast.processingRate >= 100)
+        {
+            //리뷰매니저 리뷰 창 요청
+            //BroadcastReviewManager.Instance.OpenReviewData();
+
+            BroadcastPlanningResult.Instance.SetBroadcastResultPoint();
+            MenuController.Instance.OpenBroadcastResult();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void StartBroadcast(int reviewPoint)
+    {
+        //리뷰값에 따른 추가 점수
+        //스텟값 비율
+        //팬 수
+        //해당 기간 이벤트
+
+        //우선 임의로 30만으로 넣음
+        ViewerCalculate.Instance.SetViewerEachTime(30000);
+        ProcessStatus.Instance.UpdateViewerTap();
+    }
+
+
+    public void TestProcessingMethod()
+    {
+        int processStep = ProductorManager.Instance.TEST_MoveToNextProcessing();
+        int value = 0;
+
+        processStep = 3;
+
+        switch (processStep)
+        {
+            case 0:     //기획
+            value = 0;
+            break;
+            case 1:     //맵 제작
+            value = 40;
+            break;
+            case 2:     //작곡
+            value = 80;
+            break;
+            case 3:
+            value = 100;
+            break;
+        }
+
+        broadCast.SetProcessRate(value);                                //새로 업데이트 된 진행률 값
+        UpdateBroadcastPoint();                                         //새로 받은 값 업데이트(하단 패널 표시)
+
+        //이전 작업자가 작곡가였으면
+        if (processStep >= ValueCastTo<int>.From(ProductorManager.ProcessingType.Count))
+        {
+            //맥스치 체크 후 return
+            CheckMaxProcessing();
+
+            return;
+        }
+        else 
+        {       
+            //현재 단계에 맞는 작업자 선택창
+            SetNextProductorSelection();
+        }
+    }
+
+    private void SetNextProductorSelection()
+    {
+        ProductorManager.Instance.UpdateMoveToFirstProductor();     //작업자 선택 창 설정된 작업자의 제일 앞 작업자로 세팅
+        MenuController.Instance.OpenProductorSelection();           //작업자 선택 창 활성화
+    }
+
+    public int GetBroadcastPoint(ProductorManager.ProductorType type)
+    {
+        return broadCast.broadCastPoint[type];
     }
 }

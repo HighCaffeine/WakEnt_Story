@@ -106,8 +106,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95ae3302065edf4fa575ce203030b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editEvent:
+    PointerEnter: 0
+    PointerExit: 0
+    PointerClick: 0
+    Select: 0
+  myDelegate: []
+  delegates: []
+  test: {fileID: 0}
   selected: {fileID: 7572282973859151215}
   isFirstButton: 1
+  effect: 0
+  selectCancelDelay: 0
 --- !u!114 &3537812186851314214
 MonoBehaviour:
   m_ObjectHideFlags: 0

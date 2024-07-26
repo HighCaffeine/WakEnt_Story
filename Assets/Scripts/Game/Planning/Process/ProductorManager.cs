@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
+using Devcat;
 
 public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 {
@@ -13,12 +15,28 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         Planner,    //기획자  (기획자는 왁굳님이지만 세부 기획으로 들어가는 작업자를 뜻 함)
         MapEditor,  //맵 제작자 (컨텐츠에 해당하는 맵을 제작하는 작업자)
         Composer,   //작곡가 (방송에 쓰일 곡을 작곡하는 작업자) -> 해당 작곡가의 곡을 사용하면 좋겠지만 어려울 듯
-        Marketer,   //공지 및 홍보 담당 (방송 컨텐츠를 왁물원에 정리 및 홍보하는 역할)
+        Promotor,   //공지 및 홍보 담당 (방송 컨텐츠를 왁물원에 정리 및 홍보하는 역할)
         Count,
     }
 
+    public enum ProcessingType
+    {
+        Planning,       //제작 진행 0%일 경우
+        MapCreate,      //제작 진행 40%일 경우
+        Compose,        //제작 진행 80%일 경우
+        Count,          
+    }
+
     private float productorScore;
-    [SerializeField] [Tooltip("현재 방송 제작 단계")] private ProductorType currentProcessProductorType;
+
+    //작업 프로세스는 단계는 3단계만 사용 예정임
+    //현재는 작업자 종류만큼 4단계 사용으로 되어있어서 작업자 타입으로 타입을 해놨는데
+    //새로 만든 프로세스타입 으로 타입변경 후 변환 사용해야 함.
+    //-> 기존 현재 진행 타입과, 선택 작업자의   작업 타입 비교부분에서 문제가 생김.
+    [SerializeField] [Tooltip("현재 방송 제작 단계")] private ProcessingType currentProcessProductorType;
+
+    //Devcat namespace안에 있는 Dictionary로 Enum을 int로 가지고 있음으로써, 명시적 형변환으로 인한 Boxing이 일어나지 않도록 함.
+    private ProductorType CurrentProductorType => ValueCastTo<ProductorType>.From(ValueCastTo<int>.From(currentProcessProductorType));
 
     //작업자 상태창
     [Space(10f)]
@@ -51,7 +69,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     [SerializeField] private List<ProductorInfo> productorInfos;
     private List<ProductorInfoStatusData> productorStatusList;
 
-    private ProductorInfoStatusData currentStatusData;
+    [SerializeField] private ProductorInfoStatusData currentStatusData;
 
 
 
@@ -103,6 +121,18 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         OpenProductorSelection();
     }
 
+    public int TEST_MoveToNextProcessing()
+    {
+        if (currentProcessProductorType >= ProcessingType.Count)
+        {
+            return ValueCastTo<int>.From(ProcessingType.Count);
+        }
+
+        currentProcessProductorType++;
+
+        return ValueCastTo<int>.From(currentProcessProductorType);
+    }
+
     public interface ProductorFieldProcessValue
     {
         public void SetProductorFieldProcess(OnProductorFieldProcess OnProductorFieldProcess);
@@ -113,6 +143,12 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     public interface ProductorStatRequest
     {
         public void SetProductorStatRequest(OnProductorStatRequest OnProductorStatRequest);
+    }
+
+    private UnityEngine.Events.UnityEvent checkObjEvent;        //화면에 확인용 체크표시 띄우기 위한 이벤트
+    public void RegisterCheckObjEvent(UnityEngine.Events.UnityAction unityEvent)
+    {
+        checkObjEvent.AddListener (() => unityEvent.Invoke());
     }
 
     //작업자 선택 후 제작 시작하면 각 작업자 스크립트에서 매니저로 값 넘겨주는걸로
@@ -140,19 +176,45 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     public void ChangeProductorMethod(bool isPrevious)
     {
         ProductorInfoStatusData newData;
+        ProductorInfoStatusData currentNewData = currentStatusData;
 
         while (true)
         {
-            newData = isPrevious ? currentStatusData.previousInfo : currentStatusData.nextInfo;
+            newData = isPrevious ? currentNewData.previousInfo : currentNewData.nextInfo;
 
             if (newData == null)
             {
                 return;
             }
 
+            currentNewData = newData;
+
+            if (newData.productorInfo.productorType != CurrentProductorType)
+            {
+                continue;
+            }
+            else
+            {
+                currentStatusData = newData;
+            }
+
+            break;
+        }
+
+        UpdateProductorStatus(currentStatusData.productorInfo);
+    }
+
+    private void ChangeProductorMethodMoveToFirst(bool isPrevious)
+    {
+        ProductorInfoStatusData newData = currentStatusData;
+
+        while (isPrevious ? newData.previousInfo != null : newData.nextInfo != null)
+        {
+            newData = isPrevious ? currentStatusData.previousInfo : currentStatusData.nextInfo;
+
             currentStatusData = newData;
 
-            if (newData.productorInfo.productorType != currentProcessProductorType)
+            if (newData.productorInfo.productorType != CurrentProductorType)
             {
                 continue;
             }
@@ -160,14 +222,27 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             break;
         }
 
-        UpdateProductorStatus(newData.productorInfo);
+        if (newData.productorInfo.productorType != CurrentProductorType)
+        {
+            ChangeProductorMethodMoveToFirst(false);
+        }
+        else
+        {
+            UpdateProductorStatus(newData.productorInfo);
+        }
+    }
+
+    //작업자 선택 시 첫 작업자로 세팅
+    public void UpdateMoveToFirstProductor()
+    {
+        ChangeProductorMethodMoveToFirst(true);
     }
 
     public void OpenProductorSelection()
     {
         foreach (var data in productorStatusList)
         {
-            if (currentProcessProductorType == data.productorInfo.productorType)
+            if (CurrentProductorType == data.productorInfo.productorType)
             {
                 UpdateProductorStatus(data.productorInfo);
 
@@ -225,7 +300,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     {
         string job = null;
 
-        switch (currentProcessProductorType)
+        switch (CurrentProductorType)
         {
             case ProductorType.Planner:
             job = "기획자";
@@ -236,13 +311,13 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             case ProductorType.Composer:
             job = "작곡가";
             break;
-            case ProductorType.Marketer:
+            case ProductorType.Promotor:
             job = "홍보 담당";
             break;
         }
         
         productorLevel.text = string.Format("직군 : {0}                                     LV.{1}", 
-                                                    job, info.productorLevel[currentProcessProductorType]);
+                                                    job, info.productorLevel[CurrentProductorType]);
     }
 
     private void UpdateProductorStat(ProductorInfo info)
@@ -274,12 +349,12 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         float multiplier = 0.7f;
 
-        if (currentProcessProductorType == info.productorType)
+        if (CurrentProductorType == info.productorType)
         {
             multiplier = 1.3f;
         }
 
-        productorScore += info.productorStat[currentProcessProductorType] * multiplier;
+        productorScore += info.productorStat[CurrentProductorType] * multiplier;
     }
 
     //작업자 화면 값 업데이트
@@ -288,14 +363,13 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     public void SelectedProductor()
     {
         //float matchingRate = BroadCastPlanning.Instance.GetCurrentMatchingRate();
-        float matchingRate = 5;
         productorWorkProcessPanel.SetActive(true);
 
-        ProductorGetWorkProcess(matchingRate);
+        ProductorGetWorkProcess();
     }
 
     //작업자 선택 후 작업자 추가 스텟 진행창
-    private void ProductorGetWorkProcess(float matchingRate)
+    private void ProductorGetWorkProcess()
     {
         //matchingRate는 0(첫 시도), 1(눕), 2(계륵), 3(프로), 4(국밥), 5(해커)로 되어있음
 
@@ -322,6 +396,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     // 이후 productor선택후 프로세스 결과 값은 broadcastmanger에게 넘겨서 진행중인 제작에 추가점수로 들어감
 
     private bool isProcessed = false;
+    CheckTime checkTime;
     private IEnumerator WorkProcess()
     {
         BroadCastPlanning.Instance.UpdateBroadcastPoint();
@@ -334,6 +409,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         int processStep = 0;
         
         float[] newProcessRate = CalculateStemina(info);    //스테미나 패널티
+
         float processMulti = info.previousBroadcastProduction == true ? 0.7f : 1.0f; //이전 작업 유무 패널티
         float matchingRateMulti = GetMatchingRateMulti(BroadCastPlanning.Instance.GetCurrentMatchingRate());
         float[] productorStats = new float[4];
@@ -350,7 +426,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             productorStats[i] = info.productorStat[ProductorType.Planner + i];
         }
 
-        CheckTime checkTime = new CheckTime();
+        checkTime = new CheckTime();
 
         StatIconManager.Instance.SetInitStat();
         SetTitle(1);
@@ -360,22 +436,30 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         if (SoundManager.Instance != null) SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_Processing_1.ToString(), true);
         //GameScene에서 Processing종료 후 플레이어가 확인 후 SOundmanager에게 replay요청
 
+        
         while (true)
         {
             //각 단계별로 확률 체크
-            
             if (processStep >= newProcessRate.Length)
             {
                 break;
             }
             else if (CalculatePercentage(newProcessRate[processStep]))
-            {
+            {   
+                
+
                 processStep++;
                 checkTime.isOverTime = false;
 
                 processingTime = GetProcessingTime(info, processingMulti);
                 processingDelay = GetProcessingDelay(info, processingMulti);
             }
+            else
+            {
+                break;
+            }
+
+            
 
             yield return new WaitForSeconds(2f);
 
@@ -414,6 +498,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         if (SoundManager.Instance != null) SoundManager.Instance.EndMultiAudio();
 
         isProcessed = true;
+        checkObjEvent?.Invoke();
     }
 
     private void GetBackPrevious(ProductorInfoStatusData productorInfoStatusData)
@@ -470,7 +555,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     {
         string value = null;
 
-        switch (currentProcessProductorType)
+        switch (CurrentProductorType)
         {
             case ProductorType.Planner:
             value = "기획";
@@ -481,7 +566,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             case ProductorType.Composer:
             value = "곡";
             break;
-            case ProductorType.Marketer:
+            case ProductorType.Promotor:
             value = "홍보";
             break;
         }
@@ -516,7 +601,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         {
             float rate = newRateArray[i];
 
-            rate *= currentSteminaRate;
+            rate = Mathf.Clamp(rate * currentSteminaRate, 0, 100);
 
             newRateArray[i] = rate;
         }
@@ -534,7 +619,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         float value = Mathf.Clamp(firstValue * secondValue * multi * 0.1f, 0.001f, 2f);
 
-        Debug.Log(value);
+        //Debug.Log(value);
 
         return value;
     }
@@ -545,14 +630,14 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         float value = Mathf.Clamp(firstValue * secondValue * multi * 0.1f, 1f, 14f);
 
-        Debug.Log(value);
+        //Debug.Log(value);
 
         return value;
     }
     
     private int CalculateWorkProcess(float[] stats, float maxValue)
     {
-        int randomValue = Random.Range(1, Mathf.RoundToInt(maxValue));
+        int randomValue = UnityEngine.Random.Range(1, Mathf.RoundToInt(maxValue));
 
         int statAdd = 0;
 
@@ -602,15 +687,20 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     /// <returns></returns>
     private bool CalculatePercentage(float value)
     {
+        if (value == 0f)
+        {
+            return false;
+        }
+
         int multi = 100;
 
         while (value <= 0f)
         {
-            multi *= 10;
-            value /= 10f;
+            multi /= 10;
+            value *= 10f;
         }
 
-        int randomValue = Random.Range(0, multi + 1);
+        int randomValue = UnityEngine.Random.Range(0, multi + 1);
 
         if (randomValue <= value)
         {

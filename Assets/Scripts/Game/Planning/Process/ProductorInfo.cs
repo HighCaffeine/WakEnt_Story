@@ -45,7 +45,7 @@ public class ProductorInfo : ScriptableObject
     public int AllStat { get { return productorStat[ProductorManager.ProductorType.Planner]
                                         + productorStat[ProductorManager.ProductorType.MapEditor]
                                         + productorStat[ProductorManager.ProductorType.Composer]
-                                        + productorStat[ProductorManager.ProductorType.Marketer]; } }
+                                        + productorStat[ProductorManager.ProductorType.Promotor]; } }
 
     [System.Serializable]
     public class ProductorLevel
@@ -53,7 +53,7 @@ public class ProductorInfo : ScriptableObject
         [Range(0, 5)] [SerializeField] private int plannerLevel;
         [Range(0, 5)] [SerializeField] private int mapEditorLevel;
         [Range(0, 5)] [SerializeField] private int composerLevel;
-        [Range(0, 5)] [SerializeField] private int marketerLevel;
+        [Range(0, 5)] [SerializeField] private int promotorLevel;
 
         public int this [ProductorManager.ProductorType type]
         {
@@ -70,8 +70,8 @@ public class ProductorInfo : ScriptableObject
                 return mapEditorLevel;
                 case ProductorManager.ProductorType.Composer:
                 return composerLevel;
-                case ProductorManager.ProductorType.Marketer:
-                return marketerLevel;
+                case ProductorManager.ProductorType.Promotor:
+                return promotorLevel;
             }
 
             return 0;
@@ -84,7 +84,7 @@ public class ProductorInfo : ScriptableObject
         [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short plannerStat;
         [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short mapEditorStat;
         [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short composerStat;
-        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short marketerStat;
+        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short promotorStat;
 
         public short this [ProductorManager.ProductorType type]
         {
@@ -101,8 +101,8 @@ public class ProductorInfo : ScriptableObject
                 return mapEditorStat;
                 case ProductorManager.ProductorType.Composer:
                 return composerStat;
-                case ProductorManager.ProductorType.Marketer:
-                return marketerStat;
+                case ProductorManager.ProductorType.Promotor:
+                return promotorStat;
             }
 
             return 0;
