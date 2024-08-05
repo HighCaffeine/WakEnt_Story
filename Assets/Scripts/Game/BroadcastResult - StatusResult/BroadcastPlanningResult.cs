@@ -65,6 +65,8 @@ public class BroadcastPlanningResult : GenericSingleton<BroadcastPlanningResult>
 
     }
 
+
+    //얘 받아서 추가되는 탭에다가 넘겨줌
     public string GetBroadcastTitle()
     {
         if (broadcastTitle != null)

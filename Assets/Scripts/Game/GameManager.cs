@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-
 
 
 public class GameManager : GenericSingleton<GameManager>
@@ -13,6 +13,10 @@ public class GameManager : GenericSingleton<GameManager>
     public float GameTime => gameTime;
 
     private float gameTime;
+
+    public static bool IsGamePause => isGamePause;
+
+    private static bool isGamePause;
 
     private int currenttime;
     [SerializeField] private float oneTickTime = 1f;
@@ -47,18 +51,37 @@ public class GameManager : GenericSingleton<GameManager>
 
             UpdateTime();
 
-            if (ViewerCalculate.Instance.GetIsStartBroadcast())
+            if (ViewerTabManager.Instance.GetIsStartBroadcast())
             {
-                ViewerCalculate.Instance.AddViewer();
+                ViewerTabManager.Instance.AddViewer();
 
                 if (countForCheckWeek >= 10)
                 {
                     countForCheckWeek = 0;
 
-                    ViewerCalculate.Instance.UpdateGraph();
+                    ViewerTabManager.Instance.UpdateGraph();
                 }
             }
         }
+    }
+
+    public IEnumerator CheckCanStartBroadcast()
+    {
+        Debug.Log("in checkcan start broadcast");
+
+        if (currenttime % 10 == 0)
+        {
+            yield return null;
+        }
+        else
+        {
+            while (currenttime % 10 != 0)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
+        yield return null;
     }
 
     private new void Awake()

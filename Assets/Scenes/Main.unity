@@ -178,6 +178,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 749733d0dc0680b45979a9dacf0612d5, type: 3}
   - {fileID: 8300000, guid: b895fb15201e9f248bc6b2be2b933b2f, type: 3}
   - {fileID: 8300000, guid: 6f6a856f82283f845a602144b2b47c16, type: 3}
+  - {fileID: 8300000, guid: 27ab2b0c16256b34c8695a5b33b9aa6d, type: 3}
   effects:
   - {fileID: 8300000, guid: f54e5402874964642b09eed4ce97ffe1, type: 3}
   - {fileID: 8300000, guid: 1ce2840925782e246a58f6fce32a15c1, type: 3}
@@ -2784,6 +2785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff75507d9a99f4cbad6267a5c49eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneTickTime: 1
+  oneWeekTime: 10
 --- !u!4 &1945984048
 Transform:
   m_ObjectHideFlags: 0

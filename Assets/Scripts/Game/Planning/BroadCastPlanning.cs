@@ -340,9 +340,9 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         //팬 수
         //해당 기간 이벤트
 
-        //우선 임의로 30만으로 넣음
-        ViewerCalculate.Instance.SetViewerEachTime(30000);
-        ProcessStatus.Instance.UpdateViewerTap();
+        //우선 임의로 3만으로 넣음
+        ViewerTabManager.Instance.SetViewerTab(30000);
+        //ProcessStatus.Instance.UpdateViewerTap();       //tab에서 받아서 업데이트
     }
 
 

@@ -24,11 +24,21 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
         pool = new Stack<PoolType>();
 
+        GenerateStorageParent();
+
+        Pooling();
+    }
+
+    protected virtual void GenerateStorageParent()
+    {
         storageParent = new GameObject("StorageParent").transform;
         storageParent.SetParent(transform);
         //storageParent.gameObject.SetActive(false);
+    }
 
-        Pooling();
+    protected void PooledObjectSetParent(Transform transform)
+    {
+        transform.SetParent(storageParent);
     }
 
     private void Pooling()

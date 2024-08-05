@@ -6,4 +6,6 @@ Kiny님
 
 백우람님
 긍정 이벤트 - WAKEnt Story 9th 초안, BGM_Event_Positive
+부정 이벤트 - WNT10th TDMix, BGM_Event_Negative
 게임 BGM -  WAKEnt Story 2nd(TDMix),  BGM_WakEnt_1
+

@@ -40,6 +40,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
 
         [SerializeField] public delegate void OnSetUpEvent();
 
+
         //초기화
         public void InitSetUpEvnet(CafeRank cafeRank, OnSetUpEvent OnSetUpEvent)
         {
@@ -73,7 +74,10 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
 
     [SerializeField] private TextMeshProUGUI broadcastTitle;
 
-    private int totalPoint;
+    [SerializeField] private TextMeshProUGUI totalPoint;
+    [SerializeField] private GameObject fixedContent;
+
+    private int totalPointValue;
 
     public delegate void OnSetUp();
 
@@ -148,7 +152,17 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
     {
         MenuController.Instance.OpenCafeUserReview();
 
+        InitPanelset();
+
         StartCoroutine(SetUpComment());
+    }
+
+    private void InitPanelset()
+    {
+        fixedContent.SetActive(false);
+        totalPointValue = 0;
+
+        ProcessStatus.Instance.DynamicScaler(); 
     }
 
     
@@ -190,7 +204,6 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
     private int ConvertPointToDictionaryKey(int point)
     {
         int index = ValueCastTo<int>.From(ReviewPointSections.Count);
-        totalPoint = 0;
 
         for (int i = 0; i < index; i++)
         {
@@ -200,7 +213,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
 
             if (point <= ValueCastTo<int>.From(reviewPointSections))
             {
-                totalPoint += i + 1;
+                totalPointValue += point;
 
                 return i + 1;
             }
@@ -240,6 +253,13 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         yield return new WaitForSeconds(0.3f);
 
         totalPointDownAnimator.Play("TotalPointMoveToDown");
+        totalPoint.text = totalPointValue.ToString();
+
+        if (totalPointValue >= 40)
+        {
+            fixedContent.SetActive(true);
+        }
+
         SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPoint.ToString());
     }
 
@@ -278,6 +298,6 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         //리뷰점수를 broadcastplanning한테 넘겨서
         //broadcastplanning에서 스텟 + 기대도 + 리뷰점수 총합해서 viewercalculate로 첫 주 뷰어수 넘겨줌
 
-        BroadCastPlanning.Instance.StartBroadcast(totalPoint);
+        BroadCastPlanning.Instance.StartBroadcast(totalPointValue);
     }
 }
