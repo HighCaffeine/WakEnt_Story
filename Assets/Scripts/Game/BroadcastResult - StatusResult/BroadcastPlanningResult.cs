@@ -7,14 +7,14 @@ using UnityEngine;
 public class BroadcastPlanningResult : GenericSingleton<BroadcastPlanningResult>
 {
     [SerializeField] private UnityEngine.UI.Image gearImage;
+    [SerializeField] private TextMeshProUGUI kategorie;
     [SerializeField] private TextMeshProUGUI content;
-    [SerializeField] private TextMeshProUGUI broadcastType;
 
     [SerializeField] private TMP_InputField broadcastTitle;
 
     [Header("방송 스텟들")]
     [SerializeField] private TextMeshProUGUI planningPoint;
-    [SerializeField] private TextMeshProUGUI mapEditorPoint;
+    [SerializeField] private TextMeshProUGUI designerPoint;
     [SerializeField] private TextMeshProUGUI composerPoint;
     [SerializeField] private TextMeshProUGUI promotionPoint;
 
@@ -37,8 +37,8 @@ public class BroadcastPlanningResult : GenericSingleton<BroadcastPlanningResult>
                 case ProductorManager.ProductorType.Planner:
                 planningPoint.text = value.ToString();
                 break;
-                case ProductorManager.ProductorType.MapEditor:
-                mapEditorPoint.text = value.ToString();
+                case ProductorManager.ProductorType.Designer:
+                designerPoint.text = value.ToString();
                 break;
                 case ProductorManager.ProductorType.Composer:
                 composerPoint.text = value.ToString();

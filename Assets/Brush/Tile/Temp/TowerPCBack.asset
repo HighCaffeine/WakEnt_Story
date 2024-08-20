@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: TowerPCBack
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: f708f87ea734acf4ea67c5fdec0c2ed3, type: 3}
+  - {fileID: 21300000, guid: cf6066b495d96d243adcaa42040f0dac, type: 3}
+  - {fileID: 21300000, guid: d79b27f01fddd1344bf7ccb74d1023b4, type: 3}
+  - {fileID: 21300000, guid: 2917584edc6ed444cbb5748b5db82b7f, type: 3}
+  - {fileID: 21300000, guid: b636ad69c1424d3429595b6212d297cd, type: 3}
+  - {fileID: 21300000, guid: 0e44f7ab488c61444bd2fc2e46ba906f, type: 3}
+  - {fileID: 21300000, guid: 07c429928d165e14b975a686a98e7a6e, type: 3}
+  - {fileID: 21300000, guid: 15b2b9772ae54424980c68bee7ca5ce3, type: 3}
+  - {fileID: 21300000, guid: 9b64ad84ce99cd045ad07f592db2873d, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0

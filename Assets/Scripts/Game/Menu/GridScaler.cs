@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,12 @@ using UnityEngine.UI;
 //[RequireComponent(typeof(GridLayoutGroup))]
 public class GridScaler : MonoBehaviour
 {
+    [Header("배경 Transform")][SerializeField] private GameObject backObj;
+    [Header("Grid Parent")][SerializeField] private GameObject itemsParent; 
+    [Space(5f)]
+
     private float beforeWidth, beforeHeight;
-    private RectTransform rect;
+    
     private GridLayoutGroup grid;
 
     [SerializeField] private int count;     //칼럼 갯수
@@ -21,25 +26,42 @@ public class GridScaler : MonoBehaviour
     [Tooltip("true : 배경 고정, false : 아이템 고정")]
     [SerializeField] private bool fixedItemSize;
 
+    private const int MaxMenuItemCount = 6;
+
     private void Awake()
     {
-        rect = gameObject.GetComponent<RectTransform>();
-        grid = gameObject.GetComponent<GridLayoutGroup>();
-
-        beforeWidth = rect.rect.width;
-        beforeHeight = rect.rect.height;
-
         DynamicScaler();
     }
 
     public void DynamicScaler()
     {
+        RectTransform rect = backObj.gameObject.GetComponent<RectTransform>();
+        GridLayoutGroup grid = itemsParent.gameObject.GetComponent<GridLayoutGroup>();
+
+        beforeWidth = rect.rect.width;
+        beforeHeight = rect.rect.height;
+
         if (fixedItemSize)
         {
-            Vector2 newSize = new Vector2(grid.cellSize.x, grid.cellSize.y);
-            newSize.y *= GetVisibleChild();
+            RectMask2D rectMask2D = rect.gameObject.GetComponent<RectMask2D>();
 
-            rect.sizeDelta = newSize;
+            //Vector2 newSize = new Vector2(grid.cellSize.x, grid.cellSize.y);
+            //newSize.y *= GetVisibleChild();
+
+            //rect.sizeDelta = newSize;
+
+            //메뉴 창 최대 grid 수 6개 - 메뉴 갯수 = 빈 공간
+            int blankCount = MaxMenuItemCount - GetVisibleChild();
+
+
+            float cellSizeY = grid.cellSize.y / minCol;
+            float valueAmount = (cellSizeY + grid.spacing.y) * (blankCount / minCol); 
+
+            Vector2 newVector = rectMask2D.padding;
+
+            newVector.y = valueAmount;
+
+            rectMask2D.padding = newVector;
         }
         else
         {
@@ -72,9 +94,9 @@ public class GridScaler : MonoBehaviour
     {
         int value = 1;
 
-        for (int i = 1; i < transform.childCount; i++)
+        for (int i = 1; i < itemsParent.transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (itemsParent.transform.GetChild(i).gameObject.activeSelf)
             {
                 value++;
             }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ViewerBar : MonoBehaviour
 {
-    [SerializeField] private TrendingLine trendingLine;
-
     [SerializeField] private RectTransform trendingRankPoint;
 
     [SerializeField] private UnityEngine.UI.Image bar;
@@ -35,18 +33,6 @@ public class ViewerBar : MonoBehaviour
     public void MultiBarFill(float value)
     {
         bar.fillAmount *= value;
-    }
-
-    public void SetUpTrending(TrendingLine trendingLine)
-    {
-        this.trendingLine = trendingLine;
-    }
-
-    public void ReturnPool()
-    {
-        trendingLine.OnReturnPool();
-
-        trendingLine = null;
     }
 
     private void SetTrendingRankPoint(int rank)

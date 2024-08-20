@@ -72,6 +72,11 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
 
         while (isBroadcastStarted)
         {
+            while (MenuController.IsOpenTab)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
             if (currentWeekViewer >= maxViewer)
             {
                 maxViewer *= 10;
@@ -79,7 +84,7 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
                 UpdateLimit();
             }
 
-            fillAmount = 1.0f * currentWeekViewer / maxViewer;
+            fillAmount = 1.0f * currentWeekViewer / maxViewer * GameManager.GetGameValueMultiple();
 
             viewerBars[viewerBars.Length - 1].SetUpData(fillAmount);
 
@@ -140,8 +145,9 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
         viewerBars[viewerBars.Length - 1].OffPointObject();
 
         ChageFillAmount(Mathf.Clamp(viewerBars.Length - week + 1, 1, 9), Mathf.Clamp(viewerBars.Length - week, 0, 9));
-        TrendingRankLineManager.Instance.TestDrawLine(viewerBars);
 
+        //TrendingRankLineManager.Instance.TestDrawLine(viewerBars);
+        StartCoroutine(TrendingRankLineManager.Instance.TestDrawCoroutine(viewerBars));
     }
 
     int testRank = 1;
@@ -219,11 +225,6 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
     public void SetBarFill(float fillAmount, int index)
     {
         viewerBars[index].SetUpData(fillAmount);
-    }
-
-    public void LineReturnPool(int index)
-    {
-        viewerBars[index].ReturnPool();
     }
 
     public void SetRankPoint(int rank, int index)

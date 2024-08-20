@@ -21,12 +21,12 @@ MonoBehaviour:
   price: 0
   productorStat:
     plannerStat: 999
-    mapEditorStat: 999
+    designerStat: 999
     composerStat: 999
     promotorStat: 999
   productorLevel:
     plannerLevel: 5
-    mapEditorLevel: 5
+    designerLevel: 5
     composerLevel: 5
     promotorLevel: 5
   fatigueLevel: 0

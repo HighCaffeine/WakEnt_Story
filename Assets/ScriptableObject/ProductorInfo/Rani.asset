@@ -21,12 +21,12 @@ MonoBehaviour:
   price: 300
   productorStat:
     plannerStat: 45
-    mapEditorStat: 11
+    designerStat: 28
     composerStat: 17
     promotorStat: 28
   productorLevel:
     plannerLevel: 3
-    mapEditorLevel: 0
+    designerLevel: 0
     composerLevel: 0
     promotorLevel: 0
   fatigueLevel: 5

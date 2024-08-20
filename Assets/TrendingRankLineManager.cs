@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TrendingRankLineManager : ObjectPooling<TrendingRankLineManager, TrendingLine>
@@ -6,47 +7,61 @@ public class TrendingRankLineManager : ObjectPooling<TrendingRankLineManager, Tr
     {
         base.Awake();
     }
+
+    public List<TrendingLine> testLineList = new List<TrendingLine>();
+
+    public System.Collections.IEnumerator TestDrawCoroutine(ViewerBar[] barGroup)
+    {
+        foreach (var line in testLineList)
+        {
+            line.OnReturnPool();
+        }
+
+        testLineList.Clear();
+
+        yield return new WaitForSeconds(Time.deltaTime);
+
+        TestDrawLine(barGroup);
+    }
     
     public void TestDrawLine(ViewerBar[] barGroup)
     {
         ViewerBar beforeBar = barGroup[0];
 
-        Debug.Log("line");
-
         foreach (var bar in barGroup)
         {
-            if (bar == beforeBar)
+            if (!(bar.gameObject.activeSelf && beforeBar.gameObject.activeSelf))
             {
+                beforeBar = bar;
+
                 continue;
             }
 
-            if (!bar.gameObject.activeSelf)
+            if (bar == barGroup[barGroup.Length - 1])
             {
-                continue;
+                break;
             }
 
-            TrendingLine item = GetPool();
+            TrendingLine line = GetPool();
+            testLineList.Add(line);
 
-            ViewerBar currentBar = bar;
+            DrawLine(line, beforeBar.GetTrendingRankPointPos(), bar.GetTrendingRankPointPos());
 
-            DrawLine(item, beforeBar.GetTrendingRankPointPos(), currentBar.GetTrendingRankPointPos());
-
-            beforeBar = currentBar;
+            beforeBar = bar;
         }
     }
 
-
-    //line을 보관해두고 있다가 꺼내서 쓸건데.
-    //주마다 그래프가 왼쪽으로 1칸씩 움직이게 되는데, 때마다 다시 그리기 / 옮긴만큼 선도 같이 옮김
-    //
     public void DrawLine(TrendingLine lineClass, Vector2 pointA, Vector2 pointB)
     {
         RectTransform line = lineClass.GetComponent<RectTransform>();
-        Vector2 dir = pointA - pointB;
+        line.transform.localScale = Vector3.one;
+
+        Vector2 dir = pointB- pointA;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        line.sizeDelta = new Vector2(dir.magnitude, 1f);
+        line.sizeDelta = new Vector2(dir.magnitude, 2f);
         line.pivot = new Vector2(0, 0.5f);
+        line.position = pointA;
         line.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 }

@@ -19,8 +19,13 @@ public class GameManager : GenericSingleton<GameManager>
     private static bool isGamePause;
 
     private int currenttime;
-    [SerializeField] private float oneTickTime = 1f;
-    [SerializeField] private float oneWeekTime = 10f;
+    [SerializeField] private const float oneTickTime = 1f;
+    [SerializeField] private const float oneWeekTime = 10f;
+
+    public static float GetGameValueMultiple() =>  10f / oneWeekTime;
+
+    [SerializeField] private TMPro.TextMeshProUGUI frameText;
+
 
     public Action Save => OnSave;
     public Action Load => OnLoad;
@@ -40,6 +45,12 @@ public class GameManager : GenericSingleton<GameManager>
 
     private void FixedUpdate()
     {
+        if (MenuController.IsOpenTab)
+        {
+            return;
+        }
+
+
         time += Time.deltaTime;
 
         if (time >= oneTickTime)
@@ -55,7 +66,7 @@ public class GameManager : GenericSingleton<GameManager>
             {
                 ViewerTabManager.Instance.AddViewer();
 
-                if (countForCheckWeek >= 10)
+                if (countForCheckWeek >= oneWeekTime)
                 {
                     countForCheckWeek = 0;
 
@@ -65,10 +76,32 @@ public class GameManager : GenericSingleton<GameManager>
         }
     }
 
+
+    //===============================FrameCheck========================================
+    private float frameTime = 0.0f;
+
+    private float deltaTime = 0.0f;
+
+    private float frameCheckTime = 1f;
+
+    private void OnGUI()
+    {
+        float fps = 1.0f / deltaTime;
+        float ms = deltaTime * 1000.0f;
+        frameTime += Time.deltaTime;
+
+        if (frameCheckTime <= frameTime)
+        {
+            frameTime = 0.0f;
+
+            frameText.text = string.Format("FPS : {0:N0} ({1:N1}ms)", fps, ms);
+        }
+    }
+
+    //===============================FrameCheck========================================
+
     public IEnumerator CheckCanStartBroadcast()
     {
-        Debug.Log("in checkcan start broadcast");
-
         if (currenttime % 10 == 0)
         {
             yield return null;
@@ -87,6 +120,14 @@ public class GameManager : GenericSingleton<GameManager>
     private new void Awake()
     {
         base.Awake();
+
+        //프레임 값은 추후 설정으로 ㄱㄱ
+        Application.targetFrameRate = 60;
+    }
+
+    void Update()
+    {
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
     }
 
 

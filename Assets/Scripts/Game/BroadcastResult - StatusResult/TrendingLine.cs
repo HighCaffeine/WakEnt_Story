@@ -11,6 +11,7 @@ public class TrendingLine : MonoBehaviour, OnReturnPool<TrendingLine>
 
     public void OnReturnPool()
     {
+        gameObject.SetActive(false);
         onReturnPoolEvent?.Invoke(this);
     }
 }

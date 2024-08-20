@@ -10,97 +10,97 @@
   "BroadcastRecord": [],
   "MatchingData": [
     {
-      "Contents": "게임",
+      "Kategorie": "게임",
       "Type": "개인",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "게임",
+      "Kategorie": "게임",
       "Type": "합방",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "게임",
+      "Kategorie": "게임",
       "Type": "시참",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "게임",
+      "Kategorie": "게임",
       "Type": "대결",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "노래",
+      "Kategorie": "노래",
       "Type": "개인",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "노래",
+      "Kategorie": "노래",
       "Type": "합방",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "노래",
+      "Kategorie": "노래",
       "Type": "시참",
       "MatchingPoint": 1,
       "Unlocked": "O"
     },
     {
-      "Contents": "노래",
+      "Kategorie": "노래",
       "Type": "대결",
       "MatchingPoint": 2,
       "Unlocked": "O"
     },
     {
-      "Contents": "댄스",
+      "Kategorie": "댄스",
       "Type": "개인",
       "MatchingPoint": 3,
       "Unlocked": "O"
     },
     {
-      "Contents": "댄스",
+      "Kategorie": "댄스",
       "Type": "합방",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "댄스",
+      "Kategorie": "댄스",
       "Type": "시참",
       "MatchingPoint": 2,
       "Unlocked": "O"
     },
     {
-      "Contents": "댄스",
+      "Kategorie": "댄스",
       "Type": "대결",
       "MatchingPoint": 4,
       "Unlocked": "O"
     },
     {
-      "Contents": "토크",
+      "Kategorie": "토크",
       "Type": "개인",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "토크",
+      "Kategorie": "토크",
       "Type": "합방",
       "MatchingPoint": 5,
       "Unlocked": "O"
     },
     {
-      "Contents": "토크",
+      "Kategorie": "토크",
       "Type": "시참",
       "MatchingPoint": 3,
       "Unlocked": "O"
     },
     {
-      "Contents": "토크",
+      "Kategorie": "토크",
       "Type": "대결",
       "MatchingPoint": 1,
       "Unlocked": "O"
@@ -130,22 +130,22 @@
     {
       "KeywordKey": "Personal",
       "KoreanName": "개인",
-      "Type": "BroadcastType"
+      "Type": "Content"
     },
     {
       "KeywordKey": "CollaboStream",
       "KoreanName": "합방",
-      "Type": "BroadcastType"
+      "Type": "Content"
     },
     {
       "KeywordKey": "ViewerParticipation",
       "KoreanName": "시참",
-      "Type": "BroadcastType"
+      "Type": "Content"
     },
     {
       "KeywordKey": "Battle",
       "KoreanName": "대결",
-      "Type": "BroadcastType"
+      "Type": "Content"
     }
   ],
   "ReviewComment": [

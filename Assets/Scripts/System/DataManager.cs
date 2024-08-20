@@ -76,8 +76,6 @@ public class DataManager : GenericSingleton<DataManager>
     {
         long value = JsonManager.Instance.GetPlayerData()[0].Money;
 
-        Debug.Log(value);
-
         if (value == 0)
         {
             money = 5000;
@@ -112,19 +110,19 @@ public class DataManager : GenericSingleton<DataManager>
         }
     }
 
-    public string ParsingBroadCastDataToString(KategorieManager.Contents contents)
+    public string ParsingBroadCastDataToString(KeywordManager.Kategorie Kategorie)
     {
-        return contentsWords[(int)contents];
+        return KategorieWords[(int)Kategorie];
     }
 
-    public string ParsingBroadCastDataToString(KategorieManager.BroadcastType broadcastType)
+    public string ParsingBroadCastDataToString(KeywordManager.Content Content)
     {
-        return typeWords[(int)broadcastType];
+        return typeWords[(int)Content];
     }
 
-    private Dictionary<KategorieManager.KategorieType, string[]> kategorieDatas = new Dictionary<KategorieManager.KategorieType, string[]>();
+    private Dictionary<KeywordManager.BroadcastElement, string[]> kategorieDatas = new Dictionary<KeywordManager.BroadcastElement, string[]>();
 
-    private string[] contentsWords;
+    private string[] KategorieWords;
     private string[] typeWords;
 
     private void SetKategorieData()
@@ -136,27 +134,27 @@ public class DataManager : GenericSingleton<DataManager>
         string[] gears = { "기본", "VR", "트래커", "모션캡쳐" };
         
         //Content
-        string[] contents = { "게임", "노래", "댄스", "토크" };
+        string[] Kategorie = { "게임", "노래", "댄스", "토크" };
 
         //Type
         string[] types = { "개인", "합방", "시참", "대결" };
 
-        contentsWords = contents;
+        KategorieWords = Kategorie;
         typeWords = types;
 
-        kategorieDatas.Add(KategorieManager.KategorieType.Gear, gears);
-        kategorieDatas.Add(KategorieManager.KategorieType.Content, contents);
-        kategorieDatas.Add(KategorieManager.KategorieType.Type, types);
+        kategorieDatas.Add(KeywordManager.BroadcastElement.Gear, gears);
+        kategorieDatas.Add(KeywordManager.BroadcastElement.Content, Kategorie);
+        kategorieDatas.Add(KeywordManager.BroadcastElement.Type, types);
     } 
 
-    public string[] GetKategorieData(KategorieManager.KategorieType kategorieType)
+    public string[] GetKategorieData(KeywordManager.BroadcastElement BroadcastElement)
     {
-        if (!kategorieDatas.ContainsKey(kategorieType))
+        if (!kategorieDatas.ContainsKey(BroadcastElement))
         {
             return new string[] { "" };
         }
 
-        return kategorieDatas[kategorieType];
+        return kategorieDatas[BroadcastElement];
     }
 
 

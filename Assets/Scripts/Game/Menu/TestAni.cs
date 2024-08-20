@@ -22,14 +22,28 @@ public class TestAni : MonoBehaviour
         {
             menuButtonAnimator.Play("MenuButtonClose");
             menuListAnimator.Play("MenuClose");
+
+            TimeElapse();
         }
         else
         {
             menuButtonAnimator.Play("MenuButtonOpen");
             menuListAnimator.Play("MenuOpen");
+
+            TimeStop();
         }
 
         isOpened = !isOpened;
+    }
+
+    public void TimeStop()
+    {
+        MenuController.Instance.TimeNotElapseWhenOpenTab();
+    }
+
+    public void TimeElapse()
+    {
+        MenuController.Instance.CloseTabElapseTime();
     }
 
 

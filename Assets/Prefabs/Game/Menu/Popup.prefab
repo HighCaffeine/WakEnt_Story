@@ -917,6 +917,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debcfb7258a314b48aa6f799cd3c3d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkObj: {fileID: 0}
+  currentWindowType: 0
+  registerEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4354051203662928930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,16 +1915,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6089451352544849660, guid: 474717e2d29851f4e83abdcb37ad0449, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1124.136
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089451352544849660, guid: 474717e2d29851f4e83abdcb37ad0449, type: 3}
       propertyPath: m_SizeDelta.y
       value: 251.612
-      objectReference: {fileID: 0}
-    - target: {fileID: 6089451352544849660, guid: 474717e2d29851f4e83abdcb37ad0449, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 142.316
       objectReference: {fileID: 0}
     - target: {fileID: 7470812152660978533, guid: 474717e2d29851f4e83abdcb37ad0449, type: 3}
       propertyPath: m_Enabled

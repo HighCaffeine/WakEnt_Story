@@ -22,6 +22,22 @@ public class MenuController : GenericSingleton<MenuController>
         Count
     }
 
+    [Header("팝업들")]
+    [SerializeField] private GameObject broadcastPlanningPanel;     //방송기획창
+    [SerializeField] private GameObject broadcastCreatePanel;       //카테고리 전부 선택 후 
+    [SerializeField] private GameObject productorSelectionPanel;    //작업자 선택 창
+    [SerializeField] private GameObject cafeUserReviewPanel;        //리뷰창
+    [SerializeField] private GameObject broadcastResultPanel;       //방송 제작 후 수치 확인 및 방제 변경
+    [SerializeField] private GameObject popupStorePanel;            //팝업스토어 패널
+
+
+    //해당 메뉴들이 켜졌을 경우 화면 좌측 하단에 Temp버튼이 뒤로가기로 변경
+    [Header("메뉴들")]
+    [SerializeField] private GameObject broadcastPlanningMenu;      //방송버튼 누르면 나오는 메뉴창
+    [SerializeField] private GameObject productorMenu;              //작업자버튼 누르면 나오는 메뉴
+    [SerializeField] private GameObject infoMenu;                   //정보버튼 누르면 나오는 메뉴
+    [SerializeField] private GameObject systemMenu;                 //시스템 메뉴
+
     private new void Awake()
     {
         base.Awake();
@@ -29,59 +45,131 @@ public class MenuController : GenericSingleton<MenuController>
         timeRectMask = timeRect.transform.GetComponent<RectMask2D>();
     }
 
-    public void OpenArbeit()
+
+    //==============================팝업창==============================
+    //방송-숙제방송
+    public void OpenHomeworkBroadcast()
     {
 
     }
 
+    //시스템-게임정보
     public void OpenInfo()
     {
 
     }
     
+    //시스템-설정
     public void OpenSettings()
     {
 
     }
 
+    //방송-방송제작
     public void OpenBroadCastPlan()
     {
         broadcastPlanningPanel.SetActive(true);
+        TimeNotElapseWhenOpenTab();
     }
 
+    /////////////////////방송제작 관련/////////////////////////
+    //방송-방송제작-키워드선택
     public void OpenCreateBroadcast()
     {
         broadcastCreatePanel.SetActive(true);
+        TimeNotElapseWhenOpenTab();
     }
 
+    //방송-방송제작-키워드선택-제작
     public void OpenProductorSelection()
     {
         productorSelectionPanel.SetActive(true);
+        TimeNotElapseWhenOpenTab();
+    }
+    
+    //방송제작완료-결과창
+    public void OpenBroadcastResult()
+    {
+        broadcastResultPanel.SetActive(true);
+
+        ProcessStatus.Instance.OffCurrentStatusPanel();         //진행정보 탭 끔
+        ProcessStatus.Instance.DynamicScaler();                 //스크롤 바 재설정
+        
+        TimeNotElapseWhenOpenTab();
     }
 
+    //방송제작완료-결과창-리뷰
     public void OpenCafeUserReview()
     {
         broadcastResultPanel.SetActive(false);
         cafeUserReviewPanel.SetActive(true);
+        TimeNotElapseWhenOpenTab();
     }
-
-    public void OpenBroadcastResult()
-    {
-        broadcastResultPanel.SetActive(true);
-    }
-
     public void CloseCafeUserReview()
     {
         cafeUserReviewPanel.SetActive(false);
+        CloseTabElapseTime();
     }
-
+    
     public void ClosePanelOnEndProcess()
     {
         broadcastPlanningPanel.SetActive(false);
         broadcastCreatePanel.SetActive(false);
         productorSelectionPanel.SetActive(false);
+        CloseTabElapseTime();
+    }
+    /////////////////////방송제작 관련/////////////////////////
+    //==============================팝업창==============================
+
+
+    
+
+
+    //==============================메뉴==============================
+    public void OpenBroadcastPlanningMenu()
+    {
+        broadcastPlanningMenu.gameObject.SetActive(true);
     }
 
+    public void OpenProductorMenu()
+    {
+        productorMenu.gameObject.SetActive(true);
+    }
+
+    public void OpenInfoMenu()
+    {
+        infoMenu.gameObject.SetActive(true);
+    }
+
+    public void OpenSystemMenu()
+    {
+        systemMenu.gameObject.SetActive(true);
+    }
+    //==============================메뉴==============================
+
+
+
+    [Header("상단 정보 탭 - 돈, 시간")]
+    [SerializeField] private TextMeshProUGUI dateText;
+    private RectMask2D timeRectMask;
+    [SerializeField] private RectTransform timeRect;
+    [SerializeField] private TextMeshProUGUI moneyText;
+
+    //=========================상단 탭(돈, 시간) 업데이트==============================
+    public static bool IsOpenTab => isOpenTab;
+    private static bool isOpenTab;
+
+    public void TimeNotElapseWhenOpenTab()
+    {
+        isOpenTab = true;
+    }
+
+    public void CloseTabElapseTime()
+    {
+        isOpenTab = false;
+    }
+
+    
     public void UpdateDate(int year, int month, int week, int time)
     {
         if (dateText != null)
@@ -107,14 +195,5 @@ public class MenuController : GenericSingleton<MenuController>
         }
     }
 
-    [SerializeField] private TextMeshProUGUI dateText;
-    private RectMask2D timeRectMask;
-    [SerializeField] private RectTransform timeRect;
-    [SerializeField] private TextMeshProUGUI moneyText;
-
-    [SerializeField] private GameObject broadcastPlanningPanel;     //방송기획창
-    [SerializeField] private GameObject broadcastCreatePanel;       //카테고리 전부 선택 후 
-    [SerializeField] private GameObject productorSelectionPanel;    //작업자 선택 창
-    [SerializeField] private GameObject cafeUserReviewPanel;        //리뷰창
-    [SerializeField] private GameObject broadcastResultPanel;       //방송 제작 후 수치 확인 및 방제 변경
+    //=========================상단 탭(돈, 시간) 업데이트==============================
 }

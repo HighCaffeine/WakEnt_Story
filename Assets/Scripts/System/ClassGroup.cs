@@ -27,7 +27,7 @@ public class PlayerData
 [System.Serializable]
 public class MatchingData
 {
-    public string Contents;         //컨텐츠 키워드
+    public string Kategorie;         //컨텐츠 키워드
     public string Type;             //타입 키워드
     public int MatchingPoint;       //매칭률 1~5(눕, 계륵, 프로, 국밥, 해커)
     public string Unlocked;         //해금된 조합인지(O, X)
