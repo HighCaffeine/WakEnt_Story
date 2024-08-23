@@ -76,7 +76,6 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     [Space(10f)][Header("작업")]
     [SerializeField] private TextMeshProUGUI title;
 
-    [SerializeField] private GameObject productorWorkProcessPanel;
     [SerializeField] private Image processingProductorImage;
     [SerializeField] private TextMeshProUGUI productorMessage;
 
@@ -363,7 +362,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     public void SelectedProductor()
     {
         //float matchingRate = BroadCastPlanning.Instance.GetCurrentMatchingRate();
-        productorWorkProcessPanel.SetActive(true);
+        MenuController.Instance.OpenProductorWorkProcess();
 
         ProductorGetWorkProcess();
     }
@@ -433,8 +432,10 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         
 
         ProcessingMessage(BroadCastPlanning.Instance.GetCurrentKategorie() + "방송 제작 알잘딱하게");
-        if (SoundManager.Instance != null) SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_Processing_1.ToString(), true);
+        
         //GameScene에서 Processing종료 후 플레이어가 확인 후 SOundmanager에게 replay요청
+
+        bool isFirst = true;
 
         
         while (true)
@@ -462,6 +463,13 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             
 
             yield return new WaitForSeconds(2f);
+
+            if (SoundManager.Instance != null && isFirst) 
+            {
+                SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_Processing_1.ToString(), true);
+
+                isFirst = false;
+            }
 
             StartCoroutine(TimeCheck(processingTime, checkTime));
 
@@ -532,10 +540,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         }
 
         ProcessStatus.Instance.OpenPlanningPoint();
-
-        MenuController.Instance.ClosePanelOnEndProcess();
-
-        productorWorkProcessPanel.SetActive(false);
+        MenuController.Instance.CloseProductorWorkProcess();
 
         if (SoundManager.Instance != null) SoundManager.Instance.ReplayAudio();
         ProcessedPointAddToBroadcast();

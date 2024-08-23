@@ -43,7 +43,7 @@ public class ViewerTabManager : ObjectPooling<ViewerTabManager, ViewerTab>
         viewerTab.SetViewerEachTime(value);
 
 
-        ProcessStatus.Instance.OffCurrentStatusPanel();         //진행정보 탭 끔
+        //ProcessStatus.Instance.OffCurrentStatusPanel();         //진행정보 탭 끔
         ProcessStatus.Instance.DynamicScaler();                 //스크롤 바 재설정
     }
 

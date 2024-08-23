@@ -50,15 +50,14 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
     {
         yield return StartCoroutine(GameManager.Instance.CheckCanStartBroadcast());
 
+        InfoMessageGroup.Instance.RequestMessage(BroadcastPlanningResult.Instance.GetBroadcastTitle() + " 업로드");
+
         isBroadcastStarted = true;
         isFirstWeek = true;
 
         totalViewer = 0;
         week = 1;
         viewerEachTime = value;
-
-        ProcessStatus.Instance.InActiveProcessTab();            //방송 스텟 및 진행정보 탭 끔
-        ProcessStatus.Instance.DynamicScaler();                 //스크롤바 크기 재설정
 
         viewerBars[viewerBars.Length - 1].gameObject.SetActive(true);
 
@@ -188,7 +187,11 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
         totalViewer += viewerEachTime;
         currentWeekViewer += viewerEachTime;
 
-        PlayerController.Instance.AddMoney((long)(viewerEachTime * 0.18f));
+        long addMoneyValue = (long)(viewerEachTime * 0.18f);
+
+        PlayerController.Instance.AddMoney(addMoneyValue);
+
+        ProcessStatus.Instance.UpdateDataEachYear(viewerEachTime, addMoneyValue);
 
         UpdateViewerCount(totalViewer);
     }

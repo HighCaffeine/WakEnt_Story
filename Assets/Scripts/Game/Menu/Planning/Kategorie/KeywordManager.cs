@@ -102,8 +102,6 @@ public class KeywordManager : GenericSingleton<KeywordManager>
         InitKategorieItem(BroadcastElement.Gear);
         InitKategorieItem(BroadcastElement.Content);
         InitKategorieItem(BroadcastElement.Type);
-
-        UpdateKategorieSelect();
     }
 
     public void InitKategorieItem(BroadcastElement BroadcastElement)

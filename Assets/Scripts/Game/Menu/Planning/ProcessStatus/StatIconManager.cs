@@ -26,7 +26,7 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
     [SerializeField] private Transform promotorStartXPos;
     [SerializeField] private TextMeshProUGUI promotorStat;
 
-    private RectTransform rect;
+    [SerializeField]private RectTransform rect;
 
     private new void Awake()
     {

@@ -12,11 +12,32 @@ public class ProcessStatus : GenericSingleton<ProcessStatus>
     [Header("하단 정보창")] [SerializeField] private GameObject statusParent;
 
 
+    [Space(5f)]
+    [Header("집계 데이터")]
+    [Space(5f)]
+    [SerializeField] private TextMeshProUGUI totalViewerEachYear;
+    [SerializeField] private TextMeshProUGUI totalProfitEachYear;
+
+
     private new void Awake()
     {
         base.Awake();
 
+        statusPanelContentGridScaler = transform.Find("Panel/Scroll View/Viewport/Content").GetComponent<GridScaler>();
+
         DynamicScaler();
+    }
+
+    public void UpdateDataEachYear(float viewer, long money)
+    {
+        string[] currentViewers = totalViewerEachYear.text.Split(' ');
+        string[] currentProfits = totalViewerEachYear.text.Split(' ');
+
+        int currentViewer = int.Parse(currentViewers[3]);
+        long currentProfit = long.Parse(currentProfits[3]);
+
+        totalViewerEachYear.text = string.Format("연간 조회수 : {0}", currentViewer + viewer);
+        totalProfitEachYear.text = string.Format("연간 수익 : {0}", currentProfit + money);
     }
 
     public void UpdateStatus(int[] data, float progress)
@@ -34,7 +55,7 @@ public class ProcessStatus : GenericSingleton<ProcessStatus>
 
     private int currentStatusCount = 1;
 
-    [SerializeField] private GridScaler statusPanelContentGridScaler;
+    private GridScaler statusPanelContentGridScaler;
 
     public void OpenPlanningPoint()
     {
@@ -48,17 +69,11 @@ public class ProcessStatus : GenericSingleton<ProcessStatus>
     public void OffCurrentStatusPanel()
     {
         statusParent.transform.GetChild(currentStatusCount).gameObject.SetActive(false);
+        DynamicScaler();
     }
 
     public void DynamicScaler()
     {
         statusPanelContentGridScaler.DynamicScaler();
     }
-
-    public void InActiveProcessTab()
-    {
-        statusParent.transform.GetChild(currentStatusCount).gameObject.SetActive(true);
-    }
-
-    
 }

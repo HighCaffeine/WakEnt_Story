@@ -20,7 +20,7 @@ public class StatIcon : MonoBehaviour, OnReturnPool<StatIcon>
         image = GetComponent<Image>();
         myRect = GetComponent<RectTransform>();
 
-        myRect.sizeDelta = StatIconManager.Instance.GetSize();
+        //myRect.sizeDelta = StatIconManager.Instance.GetSize();
     }
 
     Vector2 newPos;

@@ -343,7 +343,6 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         //우선 임의로 3만으로 넣음
         ViewerTabManager.Instance.SetViewerTab(30000);
         //ProcessStatus.Instance.UpdateViewerTap();       //tab에서 받아서 업데이트
-
     }
 
 
