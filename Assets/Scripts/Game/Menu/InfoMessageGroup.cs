@@ -23,6 +23,12 @@ public class InfoMessageGroup : ObjectPooling<InfoMessageGroup, InfoMessage>
     }
 
     public delegate void OnEndPopupMessage();
+    public interface GetTargetPosition
+    {
+        public void SetOnGetTargetPos(OnGetTargetPos OnGetTargetPos);
+    }
+
+    public delegate Vector2 OnGetTargetPos(RectTransform myRect);
 
     [SerializeField] private float messageTerm;
 
@@ -32,19 +38,7 @@ public class InfoMessageGroup : ObjectPooling<InfoMessageGroup, InfoMessage>
 
         currentActiveMessages = new List<InfoMessage>();
 
-        float height = firstPos.position.y - secondPos.position.y;
-
-        Debug.Log(firstPos.anchoredPosition);
-        Debug.Log(firstPos.position);
-        Debug.Log(firstPos.localPosition);
-        Debug.Log(firstPos.rect.position);
-
-        Debug.Log("=====================");
-
-        Debug.Log(secondPos.anchoredPosition);
-        Debug.Log(secondPos.position);
-        Debug.Log(secondPos.localPosition);
-        Debug.Log(secondPos.rect.position);
+        float height = firstPos.anchoredPosition.y - secondPos.anchoredPosition.y;
 
         messageTerm = height + (height / 10);
     }
@@ -71,6 +65,7 @@ public class InfoMessageGroup : ObjectPooling<InfoMessageGroup, InfoMessage>
 
         InfoMessage infoMessage = GetPool();            //풀에서 메세지에 쓸 객체 가져옴
 
+        infoMessage.SetFirstPos();
         currentActiveMessages.Add(infoMessage);         //리스트에 추가
 
         SetMessage(infoMessage, message);               //메세지 업데이트
@@ -127,11 +122,18 @@ public class InfoMessageGroup : ObjectPooling<InfoMessageGroup, InfoMessage>
     private void SetTargetPos(InfoMessage infoMessage)
     {
         RectTransform rect = infoMessage.GetRect();
-        float targetYPos = rect.position.y - messageTerm;
+        
 
-        Vector2 targetPos = MenuController.Instance.GetRectScaledPos(new Vector2(rect.position.x, targetYPos));
+        infoMessage.MoveToTargetPos();
+    }
 
-        infoMessage.MoveToTargetPos(targetPos);
+    public Vector2 GetTargetPos(RectTransform myRect)
+    {
+        float targetYPos = myRect.anchoredPosition.y - messageTerm;
+
+        Vector2 targetPos = new Vector2(myRect.anchoredPosition.x, targetYPos);
+
+        return targetPos;
     }
 
     public void MinusCurrentActiveMessage()
@@ -141,6 +143,6 @@ public class InfoMessageGroup : ObjectPooling<InfoMessageGroup, InfoMessage>
 
     public Vector2 GetFirstPos()
     {
-        return firstPos.position;
+        return firstPos.anchoredPosition;
     }
 }

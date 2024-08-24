@@ -109,8 +109,10 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         }
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         //SetProductorInfo();
 
         SetProductorStatusList();       //각 데이터의 NextInfo값 넣고 list에 추가

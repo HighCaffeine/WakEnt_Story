@@ -36,7 +36,7 @@ public class StatIcon : MonoBehaviour, OnReturnPool<StatIcon>
     private void FixedUpdate()
     {
         newPos = transform.position;
-        newPos += Vector2.down * Time.deltaTime * speed * 100f;
+        newPos += Vector2.down * Time.deltaTime * speed * 100f * MenuController.Instance.CanvasScalerRatio;
 
         transform.position = newPos;
 

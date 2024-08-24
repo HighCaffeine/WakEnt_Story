@@ -27,6 +27,12 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
         GenerateStorageParent();
 
         Pooling();
+
+    }
+
+    protected void Start()
+    {
+        storageParent.localPosition = Vector3.zero;
     }
 
     protected virtual void GenerateStorageParent()

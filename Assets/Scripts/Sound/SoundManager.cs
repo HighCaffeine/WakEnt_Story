@@ -96,8 +96,10 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         //bgmSource.Play();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         PlaySound(BGM.BGM_Main_1.ToString());    
     }
 

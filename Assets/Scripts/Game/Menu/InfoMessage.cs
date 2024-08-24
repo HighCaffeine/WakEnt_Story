@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessageGroup.EndPopupMessage
+public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessageGroup.EndPopupMessage, InfoMessageGroup.GetTargetPosition
 {
     private OnReturnPoolEvent<InfoMessage> OnReturnPoolEvent;                       //풀 리턴
     private InfoMessageGroup.OnEndPopupMessage OnEndPopupMessage;                   //메세지 출력 종료 후 현재 켜진 메세지 수 감소
+    private InfoMessageGroup.OnGetTargetPos OnGetTargetPos;
 
     private RectTransform myRect;
 
@@ -16,10 +17,13 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
 
     private Vector2 firstPos;
 
+    private bool isWhileMoving = false;
+
     public void Init(OnReturnPoolEvent<InfoMessage> onReturnPoolEvent)
     {
         OnReturnPoolEvent = onReturnPoolEvent;
         SetOnEndPopupMessage(InfoMessageGroup.Instance.MinusCurrentActiveMessage);
+        SetOnGetTargetPos(InfoMessageGroup.Instance.GetTargetPos);
 
         myRect = GetComponent<RectTransform>();
 
@@ -33,30 +37,29 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
         this.message.text = message;
     }
 
-    Coroutine moveToTargetCoroutine;
-
-    public void MoveToTargetPos(Vector2 pos)
+    public void MoveToTargetPos()
     {
-        StartCoroutine(MoveToTargetPosCoroutine(pos));
+        StartCoroutine(MoveToTargetPosCoroutine());
     }
 
-    private IEnumerator MoveToTargetPosCoroutine(Vector2 pos)
+    private IEnumerator MoveToTargetPosCoroutine()
     {
         yield return StartCoroutine(CheckMovedCoroutine());
 
-
-        moveToTargetCoroutine = StartCoroutine(MoveCoroutine(pos, true));
-        moveToTargetCoroutine = null;
+        yield return StartCoroutine(MoveCoroutine(true));
     }
 
     private IEnumerator CheckMovedCoroutine()
     {
         while (true)
         {
-            if (moveToTargetCoroutine == null)
+            if (!isWhileMoving)
             {
                 break;
+
             }
+
+            yield return new WaitForFixedUpdate();
         }
 
         yield return null;
@@ -64,36 +67,47 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
 
     public void InitPos()
     {
-        StartCoroutine(MoveCoroutine(Vector2.zero, false));
+        StartCoroutine(MoveCoroutine(false));
     }
 
-    private IEnumerator MoveCoroutine(Vector2 pos, bool isMoveToDown)
+
+    public void SetFirstPos()
     {
+        myRect.anchoredPosition = firstPos;
+    }
+
+    private IEnumerator MoveCoroutine(bool isMoveToDown)
+    {
+        isWhileMoving = true;
         Vector2 newPos = Vector2.zero;
-    
+
+        //yield return StartCoroutine(BREAKTIME());
+
         //효과음
         if (isMoveToDown)
         {
-            while (pos.y <= myRect.position.y)
+            Vector2 pos = InfoMessageGroup.Instance.GetTargetPos(myRect);
+
+            while (pos.y <= myRect.anchoredPosition.y)
             {
-                newPos = myRect.position;
+                newPos = myRect.anchoredPosition;
 
                 newPos += Vector2.down * Time.deltaTime * moveSpeed * 10f;
 
-                myRect.position = newPos;
+                myRect.anchoredPosition = newPos;
 
                 yield return new WaitForFixedUpdate();
             }
         }
         else
         {
-            while (myRect.position.y <= firstPos.y)
+            while (myRect.anchoredPosition.y <= firstPos.y)
             {
-                newPos = myRect.position;
+                newPos = myRect.anchoredPosition;
 
                 newPos += Vector2.up * Time.deltaTime * moveSpeed * 10f;
 
-                myRect.position = newPos;
+                myRect.anchoredPosition = newPos;
 
                 yield return new WaitForFixedUpdate();
             }
@@ -101,8 +115,10 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
             OnReturnPoolEvent?.Invoke(this);
             OnEndPopupMessage?.Invoke();
             
-            myRect.position = firstPos;
+            myRect.anchoredPosition = firstPos;
         }
+
+        isWhileMoving = false;
     }
 
     public RectTransform GetRect()
@@ -113,5 +129,10 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
     public void SetOnEndPopupMessage(InfoMessageGroup.OnEndPopupMessage OnEndPopupMessage)
     {
         this.OnEndPopupMessage = OnEndPopupMessage;
+    }
+
+    public void SetOnGetTargetPos(InfoMessageGroup.OnGetTargetPos OnGetTargetPos)
+    {
+        this.OnGetTargetPos = OnGetTargetPos;
     }
 }

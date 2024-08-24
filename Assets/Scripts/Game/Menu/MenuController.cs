@@ -53,22 +53,17 @@ public class MenuController : GenericSingleton<MenuController>
         tempButtonText.text = string.Format("Save");
     }
 
-    private float CanvasScalerRatio
+    public float CanvasScalerRatio
     {
         get
         {
-            if (canvasScaler = null)
+            if (canvasScaler == null)
             {
                 canvasScaler = GameObject.FindObjectOfType<CanvasScaler>();
             }
 
             return Screen.width / canvasScaler.referenceResolution.x;
         }
-    }
-
-    public Vector2 GetRectScaledPos(Vector2 pos)
-    {
-        return pos * CanvasScalerRatio;
     }
 
 
