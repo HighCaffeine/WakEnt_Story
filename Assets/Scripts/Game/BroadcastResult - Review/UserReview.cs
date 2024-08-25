@@ -53,14 +53,26 @@ public class UserReview : MonoBehaviour, BroadcastReviewManager.OnGetComment
 
             yield return new WaitForSeconds(0.1f);
 
-            point.text = Random.Range(0, BroadcastReviewManager.ReviewMaxPoint).ToString();
+            this.point.text = Random.Range(0, BroadcastReviewManager.ReviewMaxPoint).ToString();
         }
 
-        point.text = OnGetPointEvnet?.Invoke(cafeRank, cafeRankInfo).ToString();
+        int point = (int)OnGetPointEvnet?.Invoke(cafeRank, cafeRankInfo);
+
+        this.point.text = point.ToString();
         comment.text = OnGetCommentEvent?.Invoke(cafeRank, cafeRankInfo); 
 
-        SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSet.ToString());
-
+        if (point < 5)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetUnder5.ToString());
+        }
+        else if (point < 10)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetOver5.ToString());
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSet10.ToString());
+        }
 
         yield return null;
     }

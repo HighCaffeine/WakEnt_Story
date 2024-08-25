@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -50,6 +48,14 @@ public class GameManager : GenericSingleton<GameManager>
             return;
         }
 
+        //에디터 외에는 메인부터 시작해서 제한 둠
+        #if UNITY_EDITOR_WIN
+        #else
+            if (!SceneController.IsLoadGameScene)
+            {
+                return;
+            }
+        #endif
 
         time += Time.deltaTime;
 
@@ -76,7 +82,7 @@ public class GameManager : GenericSingleton<GameManager>
         }
     }
 
-
+    //==============================빌드 시 삭제========================================
     //===============================FrameCheck========================================
     private float frameTime = 0.0f;
 

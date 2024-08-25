@@ -21,7 +21,7 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
                 {
                     GameObject obj = new GameObject();
 
-                    instance = obj.GetComponent<T>();
+                    instance = obj.AddComponent<T>();
                     obj.name = typeof(T).Name;
                     DontDestroyOnLoad(obj);
                 }

@@ -34,7 +34,7 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>,
             OnEndBGMEvent(audioSource);
         }
 
-        while (audioSource.isPlaying || audioSource.clip != null)
+        while (audioSource.isPlaying && audioSource.clip != null)
         {
             yield return null;
         }

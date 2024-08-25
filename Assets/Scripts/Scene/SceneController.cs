@@ -22,6 +22,15 @@ public class SceneController : GenericSingleton<SceneController>
         DontDestroyOnLoad(this);
     }
 
+    public static bool IsLoadGameScene => isLoadGameScene;
+
+    private static bool isLoadGameScene = false;
+
+    public void TestForEditorElapseTime()
+    {
+        isLoadGameScene = true;
+    }
+
     public void GoToScene(string sceneName)
     {
         StartCoroutine(StartLoad(sceneName));
@@ -51,6 +60,10 @@ public class SceneController : GenericSingleton<SceneController>
                 
                 async.allowSceneActivation = true;
 
+                isLoadGameScene = true;
+
+                //해당 부분 추후 맵 관련하여 결정될 경우
+                //현재 계절 / 맵 단계에 따른 BGM 변경
                 SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_WakEnt_1.ToString());
 
                 break;

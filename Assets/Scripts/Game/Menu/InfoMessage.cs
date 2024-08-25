@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessageGroup.EndPopupMessage, InfoMessageGroup.GetTargetPosition
 {
@@ -86,7 +85,10 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
         //효과음
         if (isMoveToDown)
         {
-            Vector2 pos = InfoMessageGroup.Instance.GetTargetPos(myRect);
+            Vector2 pos = (Vector2)OnGetTargetPos?.Invoke(myRect);
+
+            Debug.Log(pos);
+
 
             while (pos.y <= myRect.anchoredPosition.y)
             {

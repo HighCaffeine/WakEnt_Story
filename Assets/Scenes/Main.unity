@@ -183,8 +183,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f54e5402874964642b09eed4ce97ffe1, type: 3}
   - {fileID: 8300000, guid: 1ce2840925782e246a58f6fce32a15c1, type: 3}
   - {fileID: 8300000, guid: 86581b425cb5d784095bfb80c5178351, type: 3}
-  - {fileID: 8300000, guid: a679c20a20c2f7a4e9d23b2d0d228ee5, type: 3}
-  - {fileID: 8300000, guid: 8c2b6eaf7382c93449a3f06b4bc4e54f, type: 3}
+  - {fileID: 8300000, guid: 76c8047cb2b862d43b2ee2e85b2edda9, type: 3}
+  - {fileID: 8300000, guid: fd2a741157dd25747acc3c9dbb207b03, type: 3}
+  - {fileID: 8300000, guid: 7564f2cc0eeeb7c479768fe7a16391f5, type: 3}
+  - {fileID: 8300000, guid: 46e3d499149cf784484700a985bb3c92, type: 3}
+  - {fileID: 8300000, guid: c9406c62548c67b4184d79d1da5e5b5e, type: 3}
   nowPlaySource: {fileID: 0}
   playSoundList: []
   mixer: {fileID: 24100000, guid: e523d06b9ce1bff428af2c9abae992b0, type: 2}
@@ -2785,8 +2788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ff75507d9a99f4cbad6267a5c49eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneTickTime: 1
-  oneWeekTime: 10
+  frameText: {fileID: 0}
 --- !u!4 &1945984048
 Transform:
   m_ObjectHideFlags: 0

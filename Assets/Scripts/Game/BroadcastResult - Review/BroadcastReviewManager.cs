@@ -258,9 +258,17 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         if (totalPointValue >= 40)
         {
             fixedContent.SetActive(true);
-        }
 
-        SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPoint.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPointFixedContent.ToString());
+        }
+        else
+        {
+            //sfx 점수별로 다르게 1~4, 5~9, 10
+            //고정 컨텐츠 점수 미만일 경우 (40점 미만) 일반 sfx
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPoint.ToString());
+
+        }
+    
     }
 
     public string GetDefaultCommentMessage(CafeRank cafeRank)

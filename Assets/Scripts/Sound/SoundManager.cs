@@ -21,8 +21,12 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         Effect_GoSeGu_KingA,
         Effect_GoSeGu_Muyo,
         Effect_Jururu_HuHeEng,
-        Effect_ReviewSet,
+        Effect_ReviewSetUnder5,
+        Effect_ReviewSetOver5,
+        Effect_ReviewSet10,
         Effect_ReviewTotalPoint,
+        Effect_ReviewTotalPointFixedContent,
+
     }
     
     public interface OnEndBGM

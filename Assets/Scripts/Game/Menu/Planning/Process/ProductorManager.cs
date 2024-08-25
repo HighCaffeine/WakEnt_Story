@@ -462,8 +462,6 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
                 break;
             }
 
-            
-
             yield return new WaitForSeconds(2f);
 
             if (SoundManager.Instance != null && isFirst) 
