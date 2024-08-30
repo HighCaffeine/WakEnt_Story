@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathFinding : GenericSingleton<PathFinding>
 {
+
+    
+    ////////////////////////////테스트///////////////////////////////
+    public Node[,] TEST_GetGrid()
+    {
+        return astar.TEST_GetGrid();
+    }
     [SerializeField] private Astar astar;
 
     new void Awake()
@@ -82,7 +90,10 @@ public class PathFinding : GenericSingleton<PathFinding>
 
     private Stack<Vector2> GetPath(Node startNode, Node targetNode)
     {
-        Debug.Log(startNode + "/" + targetNode);
+        string startNodePos = string.Format("({0}, {1})", startNode.xPos, startNode.yPos);
+        string targetNodePos = string.Format("({0}, {1})", targetNode.xPos, targetNode.yPos);
+
+        Debug.Log(startNodePos + "/" + targetNodePos);
 
         testCheckPath = new List<Vector2>();
 
@@ -103,25 +114,38 @@ public class PathFinding : GenericSingleton<PathFinding>
         return returnValue;
     }
 
+    private static int SIDE => 100;
+    private static int TOPSIDE => 50;
+    private static int DIAGONALSIDE => 56;
+
     private int GetDistance(Node firstNode, Node secondNode)
     {
+        int xSign = firstNode.xPos - secondNode.xPos;
+        int ySign = firstNode.yPos - secondNode.yPos;
+
         int xDistance = Mathf.Abs(firstNode.xPos - secondNode.xPos);
         int yDistance = Mathf.Abs(firstNode.yPos - secondNode.yPos);
 
-        //isometric 크기로 변경 필요
         if (xDistance < yDistance)
         {
-           return xDistance * 14 + (yDistance - xDistance) * 10;
+           return xDistance * TOPSIDE + (yDistance - xDistance) * DIAGONALSIDE;
+        }
+        else if (xDistance > yDistance)
+        {
+           return yDistance * TOPSIDE + (xDistance - yDistance) * DIAGONALSIDE;
         }
         else
         {
-           return yDistance * 14 + (xDistance - yDistance) * 10;
+            if (xSign * ySign > 0)
+            {
+                return yDistance * SIDE;
+            }
+            else
+            {
+                return yDistance * TOPSIDE;
+            }
         }
-
-
-        //return xDistance * 10 + yDistance * 10;
     }
-
 
     //경로 체크
     void OnDrawGizmosSelected()
@@ -133,9 +157,23 @@ public class PathFinding : GenericSingleton<PathFinding>
                 Vector2 current = testCheckPath[i];
                 Vector2 target = testCheckPath[i + 1];
 
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(current, target);
+                //Gizmos.color = Color.red;
+                //Gizmos.DrawLine(current, target);
+
+                var p1 = current;
+                var p2 = target;
+                var thickness = 3;
+                UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
             }
         }
+
+        // if (testCheckPath != null)
+        // {
+        //     foreach (var pos in testCheckPath)
+        //     {
+        //         Gizmos.color = Color.red;
+        //         Gizmos.DrawSphere(pos, 0.1f);
+        //     }
+        // }
     }
 }

@@ -21,7 +21,10 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
                 {
                     GameObject obj = new GameObject();
 
+                    #if UNITY_EDITOR_64
+                    #else
                     instance = obj.AddComponent<T>();
+                    #endif 
                     obj.name = typeof(T).Name;
                     DontDestroyOnLoad(obj);
                 }

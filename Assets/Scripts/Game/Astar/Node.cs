@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [SerializeField]
+[Serializable]
 public class Node
 {
     private Vector3 nodePos;

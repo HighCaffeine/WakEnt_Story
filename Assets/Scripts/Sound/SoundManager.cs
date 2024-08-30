@@ -195,6 +195,11 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     /// <param name="multiBGM">작업자 작업 시 작업 배경음을 틀고 </param>
     public void PlaySound(string name, bool multiBGM = false)
     {
+        if (Instance == null)
+        {
+            return;
+        }
+
         if (playSoundList == null)
         {
             return;
