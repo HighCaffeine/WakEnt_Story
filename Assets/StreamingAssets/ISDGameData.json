@@ -4,7 +4,7 @@
       "UserName": "왁엔터",
       "UserID": "-",
       "Money": 5000,
-      "TimeElapsed": 0
+      "TimeElapsed": 3
     }
   ],
   "BroadcastRecord": [],
@@ -130,22 +130,22 @@
     {
       "KeywordKey": "Personal",
       "KoreanName": "개인",
-      "Type": "Content"
+      "Type": "BroadcastType"
     },
     {
       "KeywordKey": "CollaboStream",
       "KoreanName": "합방",
-      "Type": "Content"
+      "Type": "BroadcastType"
     },
     {
       "KeywordKey": "ViewerParticipation",
       "KoreanName": "시참",
-      "Type": "Content"
+      "Type": "BroadcastType"
     },
     {
       "KeywordKey": "Battle",
       "KoreanName": "대결",
-      "Type": "Content"
+      "Type": "BroadcastType"
     }
   ],
   "ReviewComment": [

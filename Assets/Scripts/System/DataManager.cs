@@ -12,22 +12,22 @@ public class DataManager : GenericSingleton<DataManager>
     //     get { if () return playerData.GetMoney(); } 
     // }
 
-    private struct PlayerData
-    {
-        private int money;
+    // private struct PlayerData
+    // {
+    //     private int money;
 
-        public PlayerData(int money)
-        {
-            this.money = money;
-        }
+    //     public PlayerData(int money)
+    //     {
+    //         this.money = money;
+    //     }
 
-        public int GetMoney()
-        {
-            return money;
-        }
-    }
+    //     public int GetMoney()
+    //     {
+    //         return money;
+    //     }
+    // }
 
-    private PlayerData playerData;
+    // private PlayerData playerData;
 
     private new void Awake()
     {
@@ -74,7 +74,7 @@ public class DataManager : GenericSingleton<DataManager>
 
     public void SetMoney(ref long money)
     {
-        long value = JsonManager.Instance.GetPlayerData()[0].Money;
+        long value = JsonManager.Instance.GetPlayerData().Money;
 
         if (value == 0)
         {
@@ -86,7 +86,7 @@ public class DataManager : GenericSingleton<DataManager>
 
     public void SetDate(ref int date)
     {
-        date = JsonManager.Instance.GetPlayerData()[0].TimeElapsed;
+        date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
     
     //테스트 함수들 (예시임)

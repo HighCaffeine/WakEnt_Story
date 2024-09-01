@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameManager : GenericSingleton<GameManager>
 {
-
     public static int OneWeekMaxValue => 10;
 
     public float GameTime => gameTime;
@@ -20,6 +19,7 @@ public class GameManager : GenericSingleton<GameManager>
     [SerializeField] private const float oneTickTime = 1f;
     [SerializeField] private const float oneWeekTime = 10f;
 
+    //뷰어 값 한 주 값 따라서 변동되게 (기존 설정한 1주 10tick / targetTick)
     public static float GetGameValueMultiple() =>  10f / oneWeekTime;
 
     [SerializeField] private TMPro.TextMeshProUGUI frameText;
@@ -49,13 +49,11 @@ public class GameManager : GenericSingleton<GameManager>
         }
 
         //에디터 외에는 메인부터 시작해서 제한 둠
-        #if UNITY_EDITOR_WIN
-        #else
-            if (!SceneController.IsLoadGameScene)
-            {
-                return;
-            }
-        #endif
+        if (!SceneController.IsLoadGameScene)
+        {
+            return;
+        }
+        
 
         time += Time.deltaTime;
 
@@ -92,9 +90,14 @@ public class GameManager : GenericSingleton<GameManager>
 
     private void OnGUI()
     {
+        if (frameText == null)
+        {
+            return;
+        }
         float fps = 1.0f / deltaTime;
         float ms = deltaTime * 1000.0f;
         frameTime += Time.deltaTime;
+
 
         if (frameCheckTime <= frameTime)
         {

@@ -466,7 +466,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
             if (SoundManager.Instance != null && isFirst) 
             {
-                SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_Processing_1.ToString(), true);
+                SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_Processing_1.ToString(), false, true);
 
                 isFirst = false;
             }
@@ -546,6 +546,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         ProcessedPointAddToBroadcast();
 
         BroadCastPlanning.Instance.UpdateBroadcastPoint();
+
+        SoundManager.Instance.ReplayAudio();
     }
 
     private void ProcessedPointAddToBroadcast()

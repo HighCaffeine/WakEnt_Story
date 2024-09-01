@@ -28,7 +28,7 @@ public class LoadingImageController : MonoBehaviour
     {
         fadeColor = new Color(1f, 1f, 1f, 1f);
 
-        SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_MaSaeDol.ToString());
+        SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_MaSaeDol.ToString(), false);
         SceneController.Instance.loadingBarProgress = LoadBarProgress;
     }
 

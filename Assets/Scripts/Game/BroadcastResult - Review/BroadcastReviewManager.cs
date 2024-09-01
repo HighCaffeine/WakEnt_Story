@@ -259,13 +259,13 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         {
             fixedContent.SetActive(true);
 
-            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPointFixedContent.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPointFixedContent.ToString(), false);
         }
         else
         {
             //sfx 점수별로 다르게 1~4, 5~9, 10
             //고정 컨텐츠 점수 미만일 경우 (40점 미만) 일반 sfx
-            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPoint.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewTotalPoint.ToString(), false);
 
         }
     
@@ -307,5 +307,6 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         //broadcastplanning에서 스텟 + 기대도 + 리뷰점수 총합해서 viewercalculate로 첫 주 뷰어수 넘겨줌
 
         BroadCastPlanning.Instance.StartBroadcast(totalPointValue);
+        //SoundManager.Instance.PlaySound(SoundManager.BGM.BGM_WakEnt_1.ToString());
     }
 }

@@ -14,13 +14,15 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>,
     private AudioSource audioSource;
 
     SoundManager.SoundType type;
+    bool isMainBGM;
 
-    public void Play(AudioClip clip, float vol, SoundManager.SoundType type, bool playNoOffBGM)
+    public void Play(AudioClip clip, float vol, SoundManager.SoundType type, bool isMainBGM, bool playNoOffBGM)
     {
         audioSource.clip = clip;
         audioSource.volume = vol;
         audioSource.Play();
         this.type = type;
+        this.isMainBGM = isMainBGM;
 
         StartCoroutine(Playing(playNoOffBGM));
     }
@@ -34,16 +36,21 @@ public class Sound : MonoBehaviour, OnReturnPool<Sound>,
             OnEndBGMEvent(audioSource);
         }
 
-        while (audioSource.isPlaying && audioSource.clip != null)
+        while (isMainBGM || audioSource.isPlaying && audioSource.clip != null)
         {
             yield return null;
         }
 
         if (multiBGM)
         {
-            SoundManager.Instance.UnPauseBGM();
+            SoundManager.Instance.ReplayAudio();
         }
 
+        OnReturnPool?.Invoke(this);
+    }
+
+    public void TestOnReturn()
+    {
         OnReturnPool?.Invoke(this);
     }
 

@@ -23,25 +23,26 @@ public class JsonManager : GenericSingleton<JsonManager>
     public Extension extension = Extension.json;
     public string fileName;
 
+
     private new void Awake()
     {
         base.Awake();
 
-        path = Application.streamingAssetsPath + "/" + fileName + "." + extension.ToString();
+#if UNITY_EDITOR || UNITY_EDITOR || UNITY_IOS
+        path = Path.Combine(Application.streamingAssetsPath, fileName + "." + extension.ToString());
+#else 
+        path = Path.Combine(Application.persistentDataPath, fileName + "." + extension.ToString());
+#endif
 
-        //StartCoroutine(GetData());
         GetData();
     }
 
     private void GetData()
     {
         string jsonString = string.Empty;
-
 #if UNITY_EDITOR || UNITY_IOS || UNITY_STANDALONE_WIN
 
         jsonString = File.ReadAllText(path);
-
-        Debug.Log(jsonString);
 
 #elif UNITY_ANDROID
 
@@ -61,7 +62,11 @@ public class JsonManager : GenericSingleton<JsonManager>
 
         jsonString = www.text;
 #endif
-        data = JsonUtility.FromJson<DataTable>(jsonString);
+
+        
+        var textData = Resources.Load("ISDGameData") as TextAsset;
+
+        data = JsonUtility.FromJson<DataTable>(textData.ToString());
     }
 
     public List<MatchingData> GetMatchingData()
@@ -86,9 +91,9 @@ public class JsonManager : GenericSingleton<JsonManager>
         return data.Event;
     }
 
-    public List<PlayerData> GetPlayerData()
+    public PlayerData GetPlayerData()
     {
-        return data.PlayerData;
+        return data.PlayerData[0];
     }
 
     public List<BroadcastRecord> GetBroadcastRecord()

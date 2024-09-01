@@ -19,7 +19,7 @@ public class PlayerData
 {
     public string UserName;
     public string UserID;
-    public long Money;
+    public int Money;
     public int TimeElapsed;
 }
 

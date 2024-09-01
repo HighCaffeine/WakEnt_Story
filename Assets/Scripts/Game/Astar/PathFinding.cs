@@ -23,9 +23,7 @@ public class PathFinding : GenericSingleton<PathFinding>
 
     public Stack<Vector2> PathFind(Vector2 productorPos, Vector2 targetPos)
     {
-        Debug.Log("productor");
         Node productorNode = astar.GetNode(productorPos);
-        Debug.Log("target");
         Node targetNode = astar.GetNode(targetPos);
 
         List<Node> openNode = new List<Node>();
@@ -93,8 +91,6 @@ public class PathFinding : GenericSingleton<PathFinding>
         string startNodePos = string.Format("({0}, {1})", startNode.xPos, startNode.yPos);
         string targetNodePos = string.Format("({0}, {1})", targetNode.xPos, targetNode.yPos);
 
-        Debug.Log(startNodePos + "/" + targetNodePos);
-
         testCheckPath = new List<Vector2>();
 
         Stack<Vector2> returnValue = new Stack<Vector2>();
@@ -146,6 +142,19 @@ public class PathFinding : GenericSingleton<PathFinding>
             }
         }
     }
+
+    // public void LineRender(Vector2 startPos)
+    // {
+    //     //game scene 라인 path따라
+    //     LineRenderer lineRenderer = GetComponent<LineRenderer>();
+
+    //     lineRenderer.SetPosition(0, startPos);
+
+    //     for (int i = 1; i < testCheckPath.Count; i++)
+    //     {
+    //         lineRenderer.SetPosition(i, testCheckPath[i]);
+    //     }
+    // }
 
     //경로 체크
     void OnDrawGizmosSelected()

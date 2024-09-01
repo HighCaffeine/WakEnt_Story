@@ -93,7 +93,5 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
         pool.Push(poolObject);
 
         poolObject.gameObject.SetActive(false);
-
-        Debug.Log(poolObject.name);
     }
 }

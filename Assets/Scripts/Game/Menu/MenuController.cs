@@ -345,6 +345,7 @@ public class MenuController : GenericSingleton<MenuController>
             dateText.text = string.Format("{0}년 {1}월 {2}주", year, month, week);
         }
 
+
         if (timeRectMask != null)
         {
             float eachSpace = timeRect.rect.height / 10;

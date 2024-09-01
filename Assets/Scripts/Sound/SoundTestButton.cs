@@ -8,6 +8,6 @@ public class SoundTestButton : MonoBehaviour
     {
         GameObject obj = transform.gameObject;
 
-        SoundManager.Instance.PlaySound(obj.name);   
+        SoundManager.Instance.PlaySound(obj.name, false);   
     }
 }

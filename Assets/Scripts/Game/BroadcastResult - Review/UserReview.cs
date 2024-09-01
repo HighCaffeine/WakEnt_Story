@@ -63,15 +63,15 @@ public class UserReview : MonoBehaviour, BroadcastReviewManager.OnGetComment
 
         if (point < 5)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetUnder5.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetUnder5.ToString(), false);
         }
         else if (point < 10)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetOver5.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSetOver5.ToString(), false);
         }
         else
         {
-            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSet10.ToString());
+            SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_ReviewSet10.ToString(), false);
         }
 
         yield return null;

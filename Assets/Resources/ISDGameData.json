@@ -1,0 +1,295 @@
+{
+  "PlayerData": [
+    {
+      "UserName": "왁엔터",
+      "UserID": "-",
+      "Money": 5000,
+      "TimeElapsed": 3
+    }
+  ],
+  "BroadcastRecord": [],
+  "MatchingData": [
+    {
+      "Kategorie": "게임",
+      "Type": "개인",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "게임",
+      "Type": "합방",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "게임",
+      "Type": "시참",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "게임",
+      "Type": "대결",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "노래",
+      "Type": "개인",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "노래",
+      "Type": "합방",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "노래",
+      "Type": "시참",
+      "MatchingPoint": 1,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "노래",
+      "Type": "대결",
+      "MatchingPoint": 2,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "댄스",
+      "Type": "개인",
+      "MatchingPoint": 3,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "댄스",
+      "Type": "합방",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "댄스",
+      "Type": "시참",
+      "MatchingPoint": 2,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "댄스",
+      "Type": "대결",
+      "MatchingPoint": 4,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "토크",
+      "Type": "개인",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "토크",
+      "Type": "합방",
+      "MatchingPoint": 5,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "토크",
+      "Type": "시참",
+      "MatchingPoint": 3,
+      "Unlocked": "O"
+    },
+    {
+      "Kategorie": "토크",
+      "Type": "대결",
+      "MatchingPoint": 1,
+      "Unlocked": "O"
+    }
+  ],
+  "Keyword": [
+    {
+      "KeywordKey": "Game",
+      "KoreanName": "게임",
+      "Type": "Content"
+    },
+    {
+      "KeywordKey": "Sing",
+      "KoreanName": "노래",
+      "Type": "Content"
+    },
+    {
+      "KeywordKey": "Dance",
+      "KoreanName": "댄스",
+      "Type": "Content"
+    },
+    {
+      "KeywordKey": "Talk",
+      "KoreanName": "토크",
+      "Type": "Content"
+    },
+    {
+      "KeywordKey": "Personal",
+      "KoreanName": "개인",
+      "Type": "BroadcastType"
+    },
+    {
+      "KeywordKey": "CollaboStream",
+      "KoreanName": "합방",
+      "Type": "BroadcastType"
+    },
+    {
+      "KeywordKey": "ViewerParticipation",
+      "KoreanName": "시참",
+      "Type": "BroadcastType"
+    },
+    {
+      "KeywordKey": "Battle",
+      "KoreanName": "대결",
+      "Type": "BroadcastType"
+    }
+  ],
+  "ReviewComment": [
+    {
+      "Comment": "오....더 연습하셔야 될 것 같아요!",
+      "Point": 1,
+      "CafeRank": "진드기"
+    },
+    {
+      "Comment": "조금만 더 하시면 잘할 것 같아요!",
+      "Point": 2,
+      "CafeRank": "진드기"
+    },
+    {
+      "Comment": "너무 좋은데요?!",
+      "Point": 3,
+      "CafeRank": "진드기"
+    },
+    {
+      "Comment": "와!!! 대박!!!!",
+      "Point": 4,
+      "CafeRank": "진드기"
+    },
+    {
+      "Comment": "음 별로.",
+      "Point": 1,
+      "CafeRank": "닭둘기"
+    },
+    {
+      "Comment": "이정도면 양호하지.",
+      "Point": 2,
+      "CafeRank": "닭둘기"
+    },
+    {
+      "Comment": "오 좋은데?",
+      "Point": 3,
+      "CafeRank": "닭둘기"
+    },
+    {
+      "Comment": "이거야!! 이거!!!",
+      "Point": 4,
+      "CafeRank": "닭둘기"
+    },
+    {
+      "Comment": "아직 많이 부족하네요.",
+      "Point": 1,
+      "CafeRank": "왁무새"
+    },
+    {
+      "Comment": "연습하면 잘 하실듯?",
+      "Point": 2,
+      "CafeRank": "왁무새"
+    },
+    {
+      "Comment": "엄청 느셨네요.",
+      "Point": 3,
+      "CafeRank": "왁무새"
+    },
+    {
+      "Comment": "이건 인정!",
+      "Point": 4,
+      "CafeRank": "왁무새"
+    },
+    {
+      "Comment": "아 이건 좀.",
+      "Point": 1,
+      "CafeRank": "침팬치"
+    },
+    {
+      "Comment": "그나마 나음.",
+      "Point": 2,
+      "CafeRank": "침팬치"
+    },
+    {
+      "Comment": "이제야 잘하시네.",
+      "Point": 3,
+      "CafeRank": "침팬치"
+    },
+    {
+      "Comment": "캬 이거지!",
+      "Point": 4,
+      "CafeRank": "침팬치"
+    },
+    {
+      "Comment": "이걸 왜 하는거지?",
+      "Point": 1,
+      "CafeRank": "느그자"
+    },
+    {
+      "Comment": "볼만해졌네.",
+      "Point": 2,
+      "CafeRank": "느그자"
+    },
+    {
+      "Comment": "꽤 재밌는데?",
+      "Point": 3,
+      "CafeRank": "느그자"
+    },
+    {
+      "Comment": "지렸다~레게노!!",
+      "Point": 4,
+      "CafeRank": "느그자"
+    }
+  ],
+  "Event": [
+    {
+      "EventKey": "tutorial_main_1",
+      "EventComment": "안녕하세요! ㅁㅁㅁ의 진행을 도와드릴 비서 ㅁㅁㅁ 입니다.",
+      "Achivement": "왁엔터 설립",
+      "Progressed": "X",
+      "Note": "초회 한정",
+      "IsRepeat": "X"
+    },
+    {
+      "EventKey": "tutorial_main_2",
+      "EventComment": "(유저의 역할)님의 목표는 이세계 아이돌에 합격한 6명의 아이돌을 관리하고 방송을 기획하여 왁엔터를 성장시켜야 합니다.",
+      "Achivement": "-",
+      "Progressed": "X",
+      "Note": "초회 한정",
+      "IsRepeat": "X"
+    },
+    {
+      "EventKey": "tutorial_main_3",
+      "EventComment": null,
+      "Achivement": null,
+      "Progressed": "X",
+      "Note": "방송기획/멤버확인",
+      "IsRepeat": "X"
+    },
+    {
+      "EventKey": "tutorial_planning_1",
+      "EventComment": null,
+      "Achivement": null,
+      "Progressed": null,
+      "Note": null,
+      "IsRepeat": null
+    },
+    {
+      "EventKey": "tutorial_planningResult_1",
+      "EventComment": "기본적으로 장비 + 방송 이름으로 제목이 결정됩니다. 이름을 누를 시 변경이 가능하고, 최대 20자까지 가능합니다.",
+      "Achivement": null,
+      "Progressed": null,
+      "Note": null,
+      "IsRepeat": null
+    }
+  ]
+}

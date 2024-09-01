@@ -104,7 +104,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     {
         base.Start();
 
-        PlaySound(BGM.BGM_Main_1.ToString());    
+        PlaySound(BGM.BGM_Main_1.ToString(), false);    
     }
 
     public void OnChangedVol(SoundType type, float value)
@@ -193,7 +193,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     /// </summary>
     /// <param name="name"></param>
     /// <param name="multiBGM">작업자 작업 시 작업 배경음을 틀고 </param>
-    public void PlaySound(string name, bool multiBGM = false)
+    public void PlaySound(string name, bool isMainBGM, bool multiBGM = false)
     {
         if (Instance == null)
         {
@@ -206,12 +206,13 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         }
 
         Sound sound = GetPool();
+
         string[] soundType = name.Split('_');
         playSoundList.Add(sound);
 
         SoundType type = soundType[0] == "Effect" ? SoundType.Effect : SoundType.Bgm;
 
-        sound.Play(GetClip(type, name, multiBGM), masterVol * effectVol, type, multiBGM);
+        sound.Play(GetClip(type, name, multiBGM), masterVol * effectVol, type, isMainBGM, multiBGM);
 
         nowPlaySource.volume = masterVol * bgmVol;
 
@@ -246,6 +247,11 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
     }
     public void ReplayAudio()
     {
+        if (nowPlaySource != null)
+        {
+            nowPlaySource.gameObject.SetActive(true);
+        }
+
         nowPlaySource?.UnPause();
     }
 

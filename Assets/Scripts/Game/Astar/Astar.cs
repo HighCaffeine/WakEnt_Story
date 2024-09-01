@@ -241,19 +241,19 @@ public class Astar : MonoBehaviour
         {
             for (int y = -1; y <= 1; y++)
             {
-                // if ((x == 0 && y == 0)
-                //     || (x == -1 && y == -1)
-                //     || (x == -1 && y == 1)
-                //     || (x == 1 && y == -1)
-                //     || (x == 1 && y == 1))
-                // {
-                //     continue;
-                // }
-
-                if (x == 0 && y == 0)
+                if ((x == 0 && y == 0)
+                    || (x == -1 && y == -1)
+                    || (x == -1 && y == 1)
+                    || (x == 1 && y == -1)
+                    || (x == 1 && y == 1))
                 {
                     continue;
                 }
+
+                // if (x == 0 && y == 0)
+                // {
+                //     continue;
+                // }
 
                 int aroundNodeX = middleNode.xPos + x;
                 int aroundNodeY = middleNode.yPos + y;
@@ -276,53 +276,51 @@ public class Astar : MonoBehaviour
         return aroundNodeList;
     }
 
-    // Draw Gizmos in the Scene view
-    // void OnDrawGizmos()
-    // {
-    //     return;
-
-    //     if (drawTestGridGizmos)
-    //     {
-    //         if (testGridPos != null)
-    //         {
-    //             foreach (var node in testGridPos)
-    //             {
-    //                 Gizmos.color = Color.blue;
-    //                 Gizmos.DrawWireSphere(node, 0.1f);
-    //             }
-    //         }
-    //     }
+    //Draw Gizmos in the Scene view
+    void OnDrawGizmos()
+    {
+        if (drawTestGridGizmos)
+        {
+            if (testGridPos != null)
+            {
+                foreach (var node in testGridPos)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireSphere(node, 0.1f);
+                }
+            }
+        }
         
-    //     if (grid != null)
-    //     {
-    //         // Visualize nodes using Gizmos
-    //         foreach (Node node in grid)
-    //         {
-    //             // Check for null node
-    //             if (node == null)
-    //                 continue;
+        if (grid != null)
+        {
+            // Visualize nodes using Gizmos
+            foreach (Node node in grid)
+            {
+                // Check for null node
+                if (node == null)
+                    continue;
 
-    //             Gizmos.color = node.IsWalkalbe ? Color.green : Color.red;
-    //             Gizmos.DrawWireSphere(node.Pos, 0.05f);
-    //         }
+                Gizmos.color = node.IsWalkalbe ? Color.green : Color.red;
+                Gizmos.DrawWireSphere(node.Pos, 0.05f);
+            }
 
-    //         //return;
+            //return;
 
-    //         ///위에서 Node Index 컨버터 만들고 활성화
-    //         Gizmos.color = Color.black;
-    //         Gizmos.DrawSphere(grid[0, 0].Pos, 0.1f);
-    //         Gizmos.DrawSphere(grid[worldSizeX - 1, worldSizeY - 1].Pos, 0.1f);
+            ///위에서 Node Index 컨버터 만들고 활성화
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(grid[0, 0].Pos, 0.1f);
+            Gizmos.DrawSphere(grid[worldSizeX - 1, worldSizeY - 1].Pos, 0.1f);
 
 
-    //         Gizmos.color = Color.red;
+            Gizmos.color = Color.red;
 
-    //         Gizmos.DrawSphere(grid[worldSizeX - 1, 0].Pos, 0.1f);
+            Gizmos.DrawSphere(grid[worldSizeX - 1, 0].Pos, 0.1f);
 
-    //         return;
+            return;
 
-    //         Debug.Log("(0, 0) : " + grid[0, 0].Pos);
-    //         Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, worldSizeY - 1) + " : " + grid[worldSizeX - 1, worldSizeY - 1].Pos);
-    //         Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, 0) + " : " + grid[worldSizeX - 1, 0].Pos);
-    //     }
-    // }
+            Debug.Log("(0, 0) : " + grid[0, 0].Pos);
+            Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, worldSizeY - 1) + " : " + grid[worldSizeX - 1, worldSizeY - 1].Pos);
+            Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, 0) + " : " + grid[worldSizeX - 1, 0].Pos);
+        }
+    }
 }

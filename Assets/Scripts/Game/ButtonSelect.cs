@@ -146,7 +146,7 @@ public class ButtonSelect : MyEventTrigger
         selected.SetActive(true);
 
 
-        if (SoundManager.Instance != null) SoundManager.Instance.PlaySound(effect.ToString());
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySound(effect.ToString(), false);
     }
 
 
