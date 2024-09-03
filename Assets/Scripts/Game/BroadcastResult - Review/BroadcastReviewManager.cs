@@ -106,7 +106,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
     void Start()
     {
         //Debug.Log("set comment");
-        //DataManager.Instance.SetReviewComment(commentDictionary);
+        DataManager.Instance.SetReviewComment(commentDictionary);
         //DebugTest();
     }
 
