@@ -1,4 +1,0 @@
-repository "NONAME_ISEDOLFANGAME@cabbeg@cloud"
-  path "/"
-    br "/main"
-    co "/main"
