@@ -2789,6 +2789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frameText: {fileID: 0}
+  cursorImage: {fileID: 2800000, guid: 52b47f2e7948e9a49a4ac6c6c771a535, type: 3}
 --- !u!4 &1945984048
 Transform:
   m_ObjectHideFlags: 0

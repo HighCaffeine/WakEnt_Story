@@ -159,22 +159,22 @@ public class PathFinding : GenericSingleton<PathFinding>
     //경로 체크
     void OnDrawGizmosSelected()
     {
-        if (testCheckPath != null)
-        {
-            for (int i = 0; i < testCheckPath.Count - 1; i++)
-            {
-                Vector2 current = testCheckPath[i];
-                Vector2 target = testCheckPath[i + 1];
+        // if (testCheckPath != null)
+        // {
+        //     for (int i = 0; i < testCheckPath.Count - 1; i++)
+        //     {
+        //         Vector2 current = testCheckPath[i];
+        //         Vector2 target = testCheckPath[i + 1];
 
-                //Gizmos.color = Color.red;
-                //Gizmos.DrawLine(current, target);
+        //         //Gizmos.color = Color.red;
+        //         //Gizmos.DrawLine(current, target);
 
-                var p1 = current;
-                var p2 = target;
-                var thickness = 3;
-                UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
-            }
-        }
+        //         var p1 = current;
+        //         var p2 = target;
+        //         var thickness = 3;
+        //         UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
+        //     }
+        // }
 
         // if (testCheckPath != null)
         // {

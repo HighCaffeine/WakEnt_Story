@@ -49,6 +49,7 @@ public class DataManager : GenericSingleton<DataManager>
     /// <param name="data"> int : caferank, int : point, string : comment</param>
     public void SetReviewComment(Dictionary<int, Dictionary<int, string>> data)
     {
+        Debug.Log("in set review comment method");
         List<ReviewCommentData> reviewList = JsonManager.Instance.GetReviewCommentData();
         
 
@@ -67,6 +68,8 @@ public class DataManager : GenericSingleton<DataManager>
             {
                 int index = i * reviewPointSection + j;
 
+                Debug.Log(reviewList[index].Point + "/" + reviewList[index].Comment);
+
                 data[i].Add(reviewList[index].Point, reviewList[index].Comment);
             }
         }
@@ -74,7 +77,11 @@ public class DataManager : GenericSingleton<DataManager>
 
     public void SetMoney(ref long money)
     {
-        long value = JsonManager.Instance.GetPlayerData().Money;
+        //JsonManager.Instance.WriteBuildLog("Set Money Request");
+
+        Debug.Log("set money request");
+
+        int value = JsonManager.Instance.GetPlayerData().Money;
 
         if (value == 0)
         {

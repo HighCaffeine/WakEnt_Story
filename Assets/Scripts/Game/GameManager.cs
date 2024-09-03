@@ -25,6 +25,9 @@ public class GameManager : GenericSingleton<GameManager>
     [SerializeField] private TMPro.TextMeshProUGUI frameText;
 
 
+    [Header("Cursor")]
+    [SerializeField] private Texture2D cursorImage;
+
     public Action Save => OnSave;
     public Action Load => OnLoad;
 
@@ -129,6 +132,10 @@ public class GameManager : GenericSingleton<GameManager>
     private new void Awake()
     {
         base.Awake();
+        //DontDestroyOnLoad(this);
+
+        Cursor.SetCursor(cursorImage, Vector2.zero, CursorMode.Auto);
+
 
         //프레임 값은 추후 설정으로 ㄱㄱ
         Application.targetFrameRate = 60;
