@@ -66,7 +66,7 @@ public class DataManager : GenericSingleton<DataManager>
             for (int j = 0; j < reviewPointSection; j++)
             {
                 int index = i * reviewPointSection + j;
-
+                
                 data[i].Add(reviewList[index].Point, reviewList[index].Comment);
             }
         }
@@ -74,7 +74,7 @@ public class DataManager : GenericSingleton<DataManager>
 
     public void SetMoney(ref long money)
     {
-        int value = JsonManager.Instance.GetPlayerData(true).Money;
+        int value = JsonManager.Instance.GetPlayerData().Money;
 
         if (value == 0)
         {
@@ -86,7 +86,7 @@ public class DataManager : GenericSingleton<DataManager>
 
     public void SetDate(ref int date)
     {
-        date = JsonManager.Instance.GetPlayerData(true).TimeElapsed;
+        date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
     
     //테스트 함수들 (예시임)

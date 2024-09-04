@@ -1,0 +1,4 @@
+repository "WakEnt_Story@cabbeg@cloud"
+  path "/"
+    br "/main"
+    co "/main"

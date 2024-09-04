@@ -15,8 +15,6 @@ public class PlayerController : GenericSingleton<PlayerController>
 
     private void Start()
     {
-        Debug.Log("playerController start");
-
         DataManager.Instance.SetMoney(ref money);
 
         MenuController.Instance.UpdateMoney(money);

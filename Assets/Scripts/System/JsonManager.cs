@@ -28,26 +28,27 @@ public class JsonManager : GenericSingleton<JsonManager>
     {
         base.Awake();
 
-        GetData();
-    }
-
-    private void GetData()
-    {
 #if UNITY_EDITOR || UNITY_EDITOR || UNITY_IOS
         path = Path.Combine(Application.streamingAssetsPath, fileName + "." + extension.ToString());
 #else 
         path = Path.Combine(Application.persistentDataPath, fileName + "." + extension.ToString());
 #endif
 
+        GetData();
+    }
+    private void GetData()
+    {
+        string jsonString = string.Empty;
+        
+        path = Path.Combine(Application.persistentDataPath, fileName + "." + extension.ToString());
         string beforePath = Path.Combine(Application.streamingAssetsPath, fileName + "." + extension.ToString());
 
         if (!File.Exists(path))
         {
             System.IO.File.Copy(beforePath, path);
         }
-
-        string jsonString = string.Empty;
-#if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID || UNITY_STANDALONE_WIN
+        
+#if UNITY_EDITOR || UNITY_IOS || UNITY_STANDALONE_WIN || UNITY_ANDROID
 
         jsonString = File.ReadAllText(path);
 
@@ -70,6 +71,7 @@ public class JsonManager : GenericSingleton<JsonManager>
         jsonString = www.text;
 #endif
 
+        
         data = JsonConvert.DeserializeObject<DataTable>(jsonString);
     }
 
@@ -95,7 +97,7 @@ public class JsonManager : GenericSingleton<JsonManager>
         return data.Event;
     }
 
-    public PlayerData GetPlayerData(bool check)
+    public PlayerData GetPlayerData()
     {
         return data.PlayerData[0];
     }

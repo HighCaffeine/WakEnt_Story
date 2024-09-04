@@ -105,23 +105,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
 
     void Start()
     {
-        //Debug.Log("set comment");
         DataManager.Instance.SetReviewComment(commentDictionary);
-        //DebugTest();
-    }
-
-    private void DebugTest()
-    {
-        Debug.Log("in comment debug");
-        foreach (var comment in commentDictionary)
-        {
-            Debug.Log(comment.Key);
-
-            foreach (var value in comment.Value)
-            {
-                Debug.Log(value.Key + "/" + value.Value);
-            }
-        }
     }
 
     /// <summary>
