@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 
 public class Astar : MonoBehaviour
@@ -24,9 +20,6 @@ public class Astar : MonoBehaviour
 
         worldSizeX = tilemap.cellBounds.size.x;
         worldSizeY = tilemap.cellBounds.size.y;
-
-        Debug.Log("Number of tiles on the x-axis = " + worldSizeX.ToString() + ", on the y-axis = " + worldSizeY.ToString());
-        //Prints 40,38 which are the number of tiles in scene view.
 
         GenerateNodes();
     }
@@ -62,7 +55,7 @@ public class Astar : MonoBehaviour
                     continue;
                 }
 
-                TestUpdatePos(cellCenterWorldPos);
+                UpdateMaxMinPos(cellCenterWorldPos);
 
                 bool walkable = !(Physics2D.OverlapCircle(cellCenterWorldPos, 0.01f, walkableLayerMask)); //Check to see if tile is able to walked on
                 Node node = new Node(x, y, cellCenterWorldPos, walkable); //For the Node, gives information for if the tile is walkable
@@ -70,60 +63,13 @@ public class Astar : MonoBehaviour
             }
         }
     }
-    private int ConvertPosToNodeIndex(Vector2 pos)
-    {
-        int value;
-
-        
-
-
-
-        return -1;
-    }
-
-
-    ////////////////////////////////테스트/////////////////////////////////////
-    
-    public Node[,] TEST_GetGrid()
-    {
-        return grid;
-    }
-
-
-    private void CalculateActiveNodeSize(Vector2 higher, Vector2 lower)
-    {
-        float highX = Mathf.Abs(higher.x);
-        float highY = Mathf.Abs(higher.y);
-        float lowX = Mathf.Abs(lower.x);
-        float lowY = Mathf.Abs(lower.y);
-
-        int xSize = Mathf.RoundToInt((highX + lowX) / gridBase.cellSize.y);
-        int ySize = Mathf.RoundToInt((highY + lowY) / (gridBase.cellSize.y / 2));
-        
-        if (higher.x * lower.x < 0)
-        {
-            xSize++;
-        }
-
-        if (higher.y * lower.y < 0)
-        {
-            ySize++;
-        }
-
-        activeNodeWorldSize = new Vector2Int(xSize, ySize);
-    }
-
-    
-
-    Vector2Int activeNodeWorldSize;
 
     private Vector2 higher;
     private Vector2 lower;
 
     private List<Vector2> testGridPos;
-    public bool drawTestGridGizmos;
 
-    private void TestUpdatePos(Vector2 pos)
+    private void UpdateMaxMinPos(Vector2 pos)
     {
         if (higher.x < pos.x)
         {
@@ -145,8 +91,6 @@ public class Astar : MonoBehaviour
             lower.y = pos.y;
         }
     }
-
-    ////////////////////////////////테스트/////////////////////////////////////
 
     public Node GetNode(Vector2 pos)
     {
@@ -236,7 +180,10 @@ public class Astar : MonoBehaviour
     public List<Node> GetAroundNode(Node middleNode)
     {
         List<Node> aroundNodeList = new List<Node>();
+        List<int> xNotWalkable = new List<int>();
+        List<int> yNotWalkable = new List<int>();
 
+        //iswalkable 노드 위치 미리 캐싱
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
@@ -250,13 +197,44 @@ public class Astar : MonoBehaviour
                     continue;
                 }
 
-                // if (x == 0 && y == 0)
-                // {
-                //     continue;
-                // }
+                int aroundNodeX = middleNode.xPos + x;
+                int aroundNodeY = middleNode.yPos + y;
+
+                if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)
+                {
+                    Node aroundNode = grid[aroundNodeX, aroundNodeY];
+
+                    if (!aroundNode.IsWalkalbe)
+                    {
+                        xNotWalkable.Add(aroundNode.xPos);
+                        yNotWalkable.Add(aroundNode.yPos);
+                    }
+                }
+            }
+        }
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                {
+                    continue;
+                }
 
                 int aroundNodeX = middleNode.xPos + x;
                 int aroundNodeY = middleNode.yPos + y;
+
+                if ((x == -1 && y == -1)
+                    || (x == -1 && y == 1)
+                    || (x == 1 && y == -1)
+                    || (x == 1 && y == 1))
+                {
+                    if (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY))
+                    {
+                        continue;
+                    }
+                }
 
                 if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)
                 {
@@ -274,53 +252,5 @@ public class Astar : MonoBehaviour
         }
 
         return aroundNodeList;
-    }
-
-    //Draw Gizmos in the Scene view
-    void OnDrawGizmos()
-    {
-        if (drawTestGridGizmos)
-        {
-            if (testGridPos != null)
-            {
-                foreach (var node in testGridPos)
-                {
-                    Gizmos.color = Color.blue;
-                    Gizmos.DrawWireSphere(node, 0.1f);
-                }
-            }
-        }
-        
-        if (grid != null)
-        {
-            // Visualize nodes using Gizmos
-            foreach (Node node in grid)
-            {
-                // Check for null node
-                if (node == null)
-                    continue;
-
-                Gizmos.color = node.IsWalkalbe ? Color.green : Color.red;
-                Gizmos.DrawWireSphere(node.Pos, 0.05f);
-            }
-
-            //return;
-
-            ///위에서 Node Index 컨버터 만들고 활성화
-            Gizmos.color = Color.black;
-            Gizmos.DrawSphere(grid[0, 0].Pos, 0.1f);
-            Gizmos.DrawSphere(grid[worldSizeX - 1, worldSizeY - 1].Pos, 0.1f);
-
-
-            Gizmos.color = Color.red;
-
-            Gizmos.DrawSphere(grid[worldSizeX - 1, 0].Pos, 0.1f);
-
-            return;
-
-            Debug.Log("(0, 0) : " + grid[0, 0].Pos);
-            Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, worldSizeY - 1) + " : " + grid[worldSizeX - 1, worldSizeY - 1].Pos);
-            Debug.Log(string.Format("({0}, {1})", worldSizeX - 1, 0) + " : " + grid[worldSizeX - 1, 0].Pos);
-        }
     }
 }

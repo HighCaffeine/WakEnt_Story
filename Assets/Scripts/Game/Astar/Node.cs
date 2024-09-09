@@ -17,6 +17,7 @@ public class Node
     public Vector3 Pos { get => nodePos; private set{} }
 
     public Node parentNode;
+    public Node childNode;
 
     private bool isWalkable;
 
