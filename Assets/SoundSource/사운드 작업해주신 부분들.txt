@@ -8,4 +8,4 @@ Kiny님
 긍정 이벤트 - WAKEnt Story 9th 초안, BGM_Event_Positive
 부정 이벤트 - WNT10th TDMix, BGM_Event_Negative
 게임 BGM -  WAKEnt Story 2nd(TDMix),  BGM_WakEnt_1
-
+시상식음원 - WNT 7th tdmix 페이드 아웃 46초 페이드 아웃 시작, BGM_WakTubeAward

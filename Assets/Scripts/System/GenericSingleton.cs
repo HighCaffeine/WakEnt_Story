@@ -14,20 +14,20 @@ public class GenericSingleton<T> : MonoBehaviour where T : Component
     private static void Init()
     {
         if (instance == null)
+        {
+            instance = FindObjectOfType<T>();
+
+            if (instance == null)
             {
-                instance = FindObjectOfType<T>();
+                GameObject obj = new GameObject();
 
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject();
-
-                    #if UNITY_EDITOR_64
-                    #else
-                    instance = obj.AddComponent<T>();
-                    #endif 
-                    obj.name = typeof(T).Name;
-                    DontDestroyOnLoad(obj);
-                }
+                #if UNITY_EDITOR_64
+                #else
+                instance = obj.AddComponent<T>();
+                #endif 
+                obj.name = typeof(T).Name;
+                DontDestroyOnLoad(obj);
             }
+        }
     }
 }

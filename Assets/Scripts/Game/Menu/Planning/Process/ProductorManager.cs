@@ -5,10 +5,13 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using Devcat;
+using System.Diagnostics;
 
 public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 {
     public const int PRODUCTORMAXSTAT = 999;
+    public const int MINFEVERCOUNT = 3;
+    public const int MAXFEVERCOUNT = 30;
 
     public enum ProductorType
     {
@@ -66,7 +69,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     [SerializeField] private TextMeshProUGUI companyMember;
     [SerializeField] private TextMeshProUGUI infoText;
     
-    [SerializeField] private List<ProductorInfo> productorInfos;
+    [SerializeField] private List<ProductorInfo> productorInfos;        //datamanager 통해서 읽어올 거임.
     private List<ProductorInfoStatusData> productorStatusList;
 
     [SerializeField] private ProductorInfoStatusData currentStatusData;
@@ -493,7 +496,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
                 //시간값 영향 -> 스테미나만 영향 받는걸로
                 //딜레이 영향 -> 스테미나, 해당 작업 단게의 스텟(전체 스텟치 / 작업자 스텟치)
 
-                StatIconManager.Instance.AddStatIcon(ProductorType.Planner + CalculateWorkProcess(productorStats, randomLength));
+                StatIconManager.Instance.AddStatIcon(ProductorType.Planner + CalculateWorkProcess(info));
 
                 yield return new WaitForSeconds(processingDelay);
             }
@@ -538,6 +541,12 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         {
             return;
         }
+
+        //작업자 고르고 프로세스 끝난 뒤 broadcastplanning한테 방송 시작 알림.  이벤트로 넘길거 나중에
+        //하단 함수들 전부 BroadcastPlanningEvent로 추가해서 foreach 
+        CharacterManager.Instance.CallBackEvent(CharacterManager.CharacterEventType.IsBroadcastPlanning);
+
+        BroadCastPlanning.Instance.SetBroadcastPlanning();
 
         ProcessStatus.Instance.OpenPlanningPoint();
         MenuController.Instance.CloseProductorWorkProcess();
@@ -642,20 +651,24 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         return value;
     }
     
-    private int CalculateWorkProcess(float[] stats, float maxValue)
+    private int CalculateWorkProcess(ProductorInfo info)
     {
+        int maxValue = info.AllStat;
         int randomValue = UnityEngine.Random.Range(1, Mathf.RoundToInt(maxValue));
 
         int statAdd = 0;
+        int index = 0;
 
-        for (int i = 0; i < stats.Length; i++)
+        for (var i = ProductorType.Planner; i < ProductorType.Count; i++)
         {
-            statAdd += Mathf.RoundToInt(stats[i]);
+            statAdd += Mathf.RoundToInt(info.productorStat[i]);
 
             if (randomValue <= statAdd)
             {
-                return i;
+                return index;
             }
+
+            index++;
         }
 
         return 0;
@@ -717,6 +730,41 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         return false;
     }
 
+    //4가지 스텟 중 하나를 피버 효과로 
+    //계산식 넣어서 수치 결정할 거
+    private int ProductorFever(ProductorInfo info, int statIndex)
+    {
+        //특정 캐릭터 info 내부에 자리 번호 추가 예정임.
+        //자리 번호를 CharacterManager에게 넘겨서 해당 캐릭터에게 fever효과 애니메이션 실행
+
+
+        //최대 30까지 넘겨줄 거.
+        //스텟치가 999인데 최대치 퍼센트 계산해서 하는걸로 최소치 3
+
+
+        int feverCount = MINFEVERCOUNT;
+        float percent = info.productorStat[ProductorType.Planner + statIndex] / PRODUCTORMAXSTAT * 100;
+
+        float calPercent = Mathf.Clamp(percent, 5, 100);
+
+        while (true)
+        {
+            if (!CalculatePercentage(calPercent))
+            {
+                break;
+            }
+
+            feverCount++;
+
+            if (feverCount >= MAXFEVERCOUNT)
+            {
+                break;
+            }
+        }
+
+        return feverCount;
+    }
+
     /*
     총 작업량 값에 각 작업자들이 필드 작업을 할 경우 productormanager에게 값 전달 및 업데이트(delegate)
     시간 값으로 하면 계속 while 돌리다가 한명이라도 작업을 할 경우 return 예외처리 해야함
@@ -748,4 +796,31 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     {
 
     }
+
+
+    //callback으로 스탯 몇 개 올리는지 넘겨줌
+
+    public int AddStatFieldInteractive(int targetIndex)
+    {
+        if (targetIndex < 0 && productorInfos.Count <= targetIndex)
+        {
+            return -1;
+        }
+
+        ProductorInfo targetCharacter = productorInfos[targetIndex];
+
+        int[] calValues = new int[ValueCastTo<int>.From(ProductorType.Count)];
+
+        //추가할 스텟 랜덤으로 가져옴
+        int addIndex = CalculateWorkProcess(targetCharacter);       //추가할 Index
+        int addValue = ProductorFever(targetCharacter, addIndex);     //추가할 값
+
+        calValues[addIndex] += addValue;
+
+        BroadCastPlanning.Instance.CalculateProcessingData(calValues);  //방송 스텟에 추가, 캐릭터 애니메이션이 끝나야 스텟 추가를 해야 함.
+
+
+        //end
+        return addValue;
+    } 
 }

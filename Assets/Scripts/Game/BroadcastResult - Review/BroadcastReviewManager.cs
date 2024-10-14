@@ -65,7 +65,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
     public static int ReviewMaxPoint => 10;
 
     // int : caferank, int : point, string : comment
-    private Dictionary<int, Dictionary<int, string>> commentDictionary;
+    private Dictionary<int, Dictionary<int, string[]>> commentDictionary;
 
     [SerializeField]private List<UserReviewSetUp> setUpEvents;
 
@@ -97,7 +97,7 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         base.Awake();
 
         setUpEvents = new List<UserReviewSetUp>();
-        commentDictionary = new Dictionary<int, Dictionary<int, string>>();
+        commentDictionary = new Dictionary<int, Dictionary<int, string[]>>();
 
         MenuController.Instance.OpenCafeUserReview();
         
@@ -117,7 +117,9 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
     {
         int key = ConvertPointToDictionaryKey(GetBroadcastReviewPoint(rank, cafeRankInfo));
 
-        string value = commentDictionary[ValueCastTo<int>.From(rank)][key];
+        int rand = Random.Range(0, 2);
+
+        string value = commentDictionary[ValueCastTo<int>.From(rank)][key][rand];
 
         return value;
     }

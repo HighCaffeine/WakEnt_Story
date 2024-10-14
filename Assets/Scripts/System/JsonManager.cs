@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
+using System;
 
 public enum Extension
 {
@@ -23,7 +24,6 @@ public class JsonManager : GenericSingleton<JsonManager>
     public Extension extension = Extension.json;
     public string fileName;
 
-
     private new void Awake()
     {
         base.Awake();
@@ -36,6 +36,7 @@ public class JsonManager : GenericSingleton<JsonManager>
 
         GetData();
     }
+
     private void GetData()
     {
         string jsonString = string.Empty;
@@ -110,5 +111,22 @@ public class JsonManager : GenericSingleton<JsonManager>
     public List<Keyword> GetKeyword()
     {
         return data.Keyword;
+    }
+
+    public List<CharacterData> GetCharacterData()
+    {
+        return data.CharacterData;
+    }
+    public List<CharacterComment> GetCharacterComment()
+    {
+        return data.CharacterComment;
+    }
+    public List<GameHelpInfo> GetGameHelpInfo()
+    {
+        return data.GameHelpInfo;
+    }
+    public List<ResourcesTable> GetResourcesTable()
+    {
+        return data.ResourcesTable;
     }
 }

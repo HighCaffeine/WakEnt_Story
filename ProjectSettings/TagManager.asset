@@ -12,10 +12,10 @@ TagManager:
   - Water
   - UI
   - NotwalkableArea
-  - 
-  - 
-  - 
-  - 
+  - InteractiveArea
+  - Seat
+  - StartPos
+  - Character
   - 
   - 
   - 

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Devcat;
-using UnityEditor;
 using UnityEngine;
 
 public class DataManager : GenericSingleton<DataManager>
 {
+    public static string ResourcePath = Path.Combine(Application.dataPath, "Resources"); 
+
     // public int Money
     // {
     //     get { if () return playerData.GetMoney(); } 
@@ -29,9 +31,16 @@ public class DataManager : GenericSingleton<DataManager>
 
     // private PlayerData playerData;
 
+
     private new void Awake()
     {
         base.Awake();
+
+        //Invoke("HashInit", 0.1f);
+
+
+        HashInit();
+
 
         //SetBroadcastValue(null);
     }
@@ -47,7 +56,7 @@ public class DataManager : GenericSingleton<DataManager>
     /// 
     /// </summary>
     /// <param name="data"> int : caferank, int : point, string : comment</param>
-    public void SetReviewComment(Dictionary<int, Dictionary<int, string>> data)
+    public void SetReviewComment(Dictionary<int, Dictionary<int, string[]>> data)
     {
         List<ReviewCommentData> reviewList = JsonManager.Instance.GetReviewCommentData();
         
@@ -61,13 +70,20 @@ public class DataManager : GenericSingleton<DataManager>
         
         for (int i = 0; i < cafeRankCount; i++)
         {
-            data.Add(i, new Dictionary<int, string>());
+            data.Add(i, new Dictionary<int, string[]>());
 
             for (int j = 0; j < reviewPointSection; j++)
             {
                 int index = i * reviewPointSection + j;
                 
-                data[i].Add(reviewList[index].Point, reviewList[index].Comment);
+                if (data[i].ContainsKey(reviewList[index].Point))
+                {
+                    data[i][reviewList[index].Point][1] = reviewList[index].Comment;
+                }
+                else
+                {
+                    data[i].Add(reviewList[index].Point, new string[2] {reviewList[index].Comment, null});
+                }
             }
         }
     }
@@ -290,4 +306,141 @@ public class DataManager : GenericSingleton<DataManager>
     }
 
     
+
+
+    ////////////////////////////////Resource Hash Table////////////////////////////
+    
+    [SerializeField] private Hashtable resourceHashTable;
+
+    private Dictionary<int, Character> characterDataEachSeat;
+
+    public Sprite GetSpriteFromID(ResourceID resourceID, ResourceType resourceType)
+    {
+        return resourceHashTable[ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType)] as Sprite;
+    }
+
+    public AnimationClip GetAnimationClipFromID(ResourceID resourceID, ResourceType resourceType)
+    {
+        long key = ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType);
+
+        return resourceHashTable[key] as AnimationClip;
+    }
+
+    public string GetPathFromID(ResourceID resourceID, ResourceType resourceType)
+    {
+        string folderName = resourceType.ToString();
+        string fileName = string.Format("{0}_{1}", folderName, resourceID.ToString());
+
+        return Path.Combine(folderName, fileName);
+    }
+
+    //Resource파일 내부에 리소스들을 미리 캐싱함.
+    private void HashInit()
+    {
+        //해시테이블 내부에 키, 밸류 형식으로 리소스 가져옴
+        //Key -> ResourceID + ResourceType
+        //현재는 공통 이미지이지만 추후 캐릭터 별 Sprite, sprite sheet가 있을 경우 해당 부분들 가져와야 함
+
+        long key = ValueCastTo<long>.From(ResourceID.Character_ISD_Ine);
+
+        
+        List<ResourcesTable> resourcesTables = JsonManager.Instance.GetResourcesTable();
+        List<CharacterData> characterDatas = JsonManager.Instance.GetCharacterData();
+
+        resourceHashTable = new Hashtable();
+
+
+        //Texture 2D로 들어오는데 Sprite 변환으로 받으면 될 듯.
+        //주석처리된 부분들은 아직 애니메이션 파일들 추가를 안해서 못 읽어와서 주석 처리해둠.
+
+        foreach (var data in resourcesTables)
+        {
+            resourceHashTable.Add(data.ID, data.Key);
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.DefaultSprite.ToString(), data.Key)))
+            {
+                resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.DefaultSprite.ToString(), data.Key)));
+            }
+
+            if (data.Key.Contains(ResourceType.Item.ToString()))
+            {
+                continue;
+            }
+
+
+            //현재 두 sprite모두 sprite와 동일 ID사용할 거라 주석처리
+            // if (!File.Exists(Path.Combine(ResourcePath, ResourceType.Sprite.ToString(), data.Key)))
+            // {
+            //     resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.Sprite.ToString(), ResourceType.StandingSprite.ToString() + "_" + data.Key)));
+            // }
+            // if (!File.Exists(Path.Combine(ResourcePath, ResourceType.Sprite.ToString(), data.Key)))
+            // {
+            //     resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.Sprite.ToString(), ResourceType.SitSprite.ToString() + "_" + data.Key)));
+            // }
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.IdleAni.ToString(), data.Key)))
+            {
+                resourceHashTable.Add(data.IdleAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.IdleAni.ToString(), ResourceType.IdleAni.ToString() + "_" + data.Key)));
+            }
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WalkAni.ToString(), data.Key)))
+            {
+                resourceHashTable.Add(data.WalkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WalkAni.ToString(), ResourceType.WalkAni.ToString() + "_" + data.Key)));
+            }
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WorkAni.ToString(), data.Key)))
+            {
+                resourceHashTable.Add(data.WorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WorkAni.ToString(), ResourceType.WorkAni.ToString() + "_" + data.Key)));
+            }
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.SitAni.ToString(), data.Key)))
+            {
+                resourceHashTable.Add(data.SitAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.SitAni.ToString(), ResourceType.SitAni.ToString() + "_" + data.Key)));
+            }
+        }
+
+
+
+        //TEST_DEBUGHASH();
+    }
+
+
+    private void TEST_DEBUGHASH()
+    {
+        Debug.Log("ID : " + ValueCastTo<int>.From(ResourceID.Character_ISD_Ine).ToString() + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine)]);
+
+        Debug.Log("Sprite : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.DefaultSprite)).ToString() 
+                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.DefaultSprite)]);
+
+        Debug.Log("IdleAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.IdleAni)).ToString() 
+                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.IdleAni)]);
+
+        Debug.Log("WorkAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WorkAni)).ToString() 
+                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WorkAni)]);
+
+        Debug.Log("WalkAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WalkAni)).ToString() 
+                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WalkAni)]);
+
+
+
+    }
+
+    private int CharacterID(int id)
+    {
+        //resourcetype 뒤에서부터 크기 확인하고 이상이면 빼서 리턴 다 확인해도 안빼면 그게 코드임
+
+        return 1;
+    }
+
+    private string ConvertIDToResourceName(int key)
+    {
+        ResourceID resourceID = ValueCastTo<ResourceID>.From(key);
+
+        return resourceID.ToString();
+    }
+
+    // private void ReadDataFromResource(string path, )
+    // {
+        
+    // }
 }

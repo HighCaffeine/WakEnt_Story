@@ -7,14 +7,15 @@ public class Astar : MonoBehaviour
 {
     public Tilemap tilemap; // Reference to the isometric tilemap
     public Grid gridBase;
-    public LayerMask walkableLayerMask; // For obstacle detection
+    public LayerMask notWalkableLayerMask; // For obstacle detection
+    public LayerMask interactiveLayerMask;  //check for interactive area
 
     [SerializeField] Node[,] grid;
 
-    [SerializeField]private int worldSizeX; // Number of tiles in the X axis
-    [SerializeField]private int worldSizeY; // Number of tiles in the Y axis
+    [SerializeField] private int worldSizeX; // Number of tiles in the X axis
+    [SerializeField] private int worldSizeY; // Number of tiles in the Y axis
 
-    void Start()
+    void Awake()
     {
         tilemap.CompressBounds();                   //맵 cellbound 재설정
 
@@ -32,8 +33,6 @@ public class Astar : MonoBehaviour
         Vector3 actualOrigin = tilemap.transform.position; //Actual position of the tilemap
         Vector3 originOffset = actualOrigin - tilemapOrigin; //Calculation to offset the node to the correct tile
 
-        testGridPos = new List<Vector2>();//grid size 체크
-
         for (int x = 0; x < worldSizeX; x++)
         {
             for (int y = 0; y < worldSizeY; y++)
@@ -47,8 +46,6 @@ public class Astar : MonoBehaviour
                 // Check if a tile exists in the current cell
                 bool hasTile = tilemap.HasTile(cellPosition);
 
-                testGridPos.Add(cellCenterWorldPos);
-
                 if (!hasTile)
                 {
                     grid[x, y] = null; // Skip this cell
@@ -57,8 +54,12 @@ public class Astar : MonoBehaviour
 
                 UpdateMaxMinPos(cellCenterWorldPos);
 
-                bool walkable = !(Physics2D.OverlapCircle(cellCenterWorldPos, 0.01f, walkableLayerMask)); //Check to see if tile is able to walked on
-                Node node = new Node(x, y, cellCenterWorldPos, walkable); //For the Node, gives information for if the tile is walkable
+                //interactive랑 notwalkable구역을 나눠놨음. 
+                //마지막 포인트 근처 / 이전 노드까지 가서 거기서 상호작용 내부에서 자리로 이동하는 느낌쓰로 갈 듯
+                bool notWalkable = Physics2D.OverlapCircle(cellCenterWorldPos, 0.01f, notWalkableLayerMask); //Check to see if tile is able to walked on
+                bool interactiveArea = Physics2D.OverlapCircle(cellCenterWorldPos, 0.01f, interactiveLayerMask);
+
+                Node node = new Node(x, y, cellCenterWorldPos, notWalkable, interactiveArea); //For the Node, gives information for if the tile is walkable
                 grid[x, y] = node;
             }
         }
@@ -66,8 +67,6 @@ public class Astar : MonoBehaviour
 
     private Vector2 higher;
     private Vector2 lower;
-
-    private List<Vector2> testGridPos;
 
     private void UpdateMaxMinPos(Vector2 pos)
     {
@@ -104,6 +103,8 @@ public class Astar : MonoBehaviour
 
 
         //설계 당시에는 [0, y]가 맞는데 지금은 테스트 용으로 다른 구역도 만들어서 해당 부분 생각해서 수정 필요
+        //현재 위치 값 거리 0.1f로 해놔서 그런상태
+        //기존은 percent계산으로해서 중간에 안둬도 됐는데 지금은 저런 방식으로 진행중이라 수정이 피요함
         if (pos.x < grid[0, 0].Pos.x)
         {  
             for (int y = 0; y < worldSizeY; y++)
@@ -177,25 +178,31 @@ public class Astar : MonoBehaviour
         return grid[nodeXPos, nodeYPos];
     }
 
-    public List<Node> GetAroundNode(Node middleNode)
+    public List<Node> GetAroundNode(Node middleNode, Node targetNode, bool isCheckDiagonal = false)
     {
         List<Node> aroundNodeList = new List<Node>();
         List<int> xNotWalkable = new List<int>();
         List<int> yNotWalkable = new List<int>();
 
+        if (!isCheckDiagonal)
+        {
         //iswalkable 노드 위치 미리 캐싱
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
             {
-                if ((x == 0 && y == 0)
-                    || (x == -1 && y == -1)
-                    || (x == -1 && y == 1)
-                    || (x == 1 && y == -1)
-                    || (x == 1 && y == 1))
+                if (x == 0 && y == 0)
                 {
                     continue;
                 }
+                    if ((x == -1 && y == -1)
+                        || (x == -1 && y == 1)
+                        || (x == 1 && y == -1)
+                        || (x == 1 && y == 1))
+                    {
+                        continue;
+                    }
+                
 
                 int aroundNodeX = middleNode.xPos + x;
                 int aroundNodeY = middleNode.yPos + y;
@@ -204,13 +211,14 @@ public class Astar : MonoBehaviour
                 {
                     Node aroundNode = grid[aroundNodeX, aroundNodeY];
 
-                    if (!aroundNode.IsWalkalbe)
+                    if (aroundNode.IsNotWalkalbe)
                     {
                         xNotWalkable.Add(aroundNode.xPos);
                         yNotWalkable.Add(aroundNode.yPos);
                     }
                 }
             }
+        }
         }
 
         for (int x = -1; x <= 1; x++)
@@ -225,14 +233,17 @@ public class Astar : MonoBehaviour
                 int aroundNodeX = middleNode.xPos + x;
                 int aroundNodeY = middleNode.yPos + y;
 
-                if ((x == -1 && y == -1)
-                    || (x == -1 && y == 1)
-                    || (x == 1 && y == -1)
-                    || (x == 1 && y == 1))
+                if (!isCheckDiagonal)
                 {
-                    if (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY))
+                    if ((x == -1 && y == -1)
+                        || (x == -1 && y == 1)
+                        || (x == 1 && y == -1)
+                        || (x == 1 && y == 1))
                     {
-                        continue;
+                        if (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY))
+                        {
+                            continue;
+                        }
                     }
                 }
 
@@ -243,7 +254,20 @@ public class Astar : MonoBehaviour
                         continue;
                     }
 
-                    if (grid[aroundNodeX, aroundNodeY].IsWalkalbe)
+                    if (targetNode != grid[aroundNodeX, aroundNodeY] && grid[aroundNodeX, aroundNodeY].IsInteractable)
+                    {
+                        if (isCheckDiagonal)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            aroundNodeList =  GetAroundNode(middleNode, targetNode, true);
+                            break;
+                        }
+                    }
+
+                    if (!grid[aroundNodeX, aroundNodeY].IsNotWalkalbe)
                     {
                         aroundNodeList.Add(grid[aroundNodeX, aroundNodeY]);
                     }

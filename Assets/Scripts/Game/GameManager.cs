@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public class GameManager : GenericSingleton<GameManager>
@@ -177,5 +179,15 @@ public class GameManager : GenericSingleton<GameManager>
         int time = 1 + currenttime % 10;
 
         MenuController.Instance.UpdateDate(year, month, week, time);
+    }
+
+    public void PauseGame()
+    {
+        isGamePause = true;
+    }
+
+    public void ResumeGame()
+    {
+        isGamePause = false;
     }
 }

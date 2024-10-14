@@ -13,19 +13,23 @@ public class Node
     public int hCost { get; set;} // 현재 노드부터 목표 노드까지의 거리
     public int FCost { get=> gCost + hCost; } // 현재 노드의 총 거리 값
 
-    public bool IsWalkalbe { get => isWalkable; private set {} }
-    public Vector3 Pos { get => nodePos; private set{} }
+    public bool IsNotWalkalbe { get => isNotWalkable; private set {} }
+    public bool IsInteractable { get => isInteractiveArea; private set {}}
+    public Vector2 Pos { get => nodePos; private set{} }
 
     public Node parentNode;
     public Node childNode;
 
-    private bool isWalkable;
+    private bool isNotWalkable;
+    private bool isInteractiveArea;
 
-    public Node(int _xPos, int _yPos, Vector3 _nodePos, bool _isWalkable)
+    public Node(int xPos, int yPos, Vector2 nodePos, bool isNotWalkable, bool isInteractiveArea)
     {
-        xPos = _xPos;
-        yPos = _yPos;
-        nodePos = _nodePos;
-        isWalkable = _isWalkable;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.nodePos = nodePos;
+        this.isNotWalkable = isNotWalkable;
+
+        this.isInteractiveArea = isInteractiveArea;
     }
 }

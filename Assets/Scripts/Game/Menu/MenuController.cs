@@ -237,8 +237,12 @@ public class MenuController : GenericSingleton<MenuController>
             menuList.SetActive(false);
             tempButtonText.text = string.Format("Save");
 
+            CloseTabElapseTime();
+
             return;
         }
+
+        TimeNotElapseWhenOpenTab();
 
         menuList.SetActive(true);
         tempButtonText.text = string.Format("Back");
@@ -330,11 +334,16 @@ public class MenuController : GenericSingleton<MenuController>
     public void TimeNotElapseWhenOpenTab()
     {
         isOpenTab = true;
+
+        GameManager.Instance.PauseGame();
     }
 
     public void CloseTabElapseTime()
     {
         isOpenTab = false;
+
+        
+        GameManager.Instance.ResumeGame();
     }
 
     

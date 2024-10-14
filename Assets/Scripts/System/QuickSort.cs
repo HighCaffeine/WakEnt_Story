@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public static class QuickSort
 {
     public static T[] GetSorting<T>(T[] data) where T : GetIntValue
@@ -58,6 +60,13 @@ public static class QuickSort
     }
 
     public static void Swap<T>(ref T[] list, int a, int b) 
+    {
+        T temp = list[a];
+        list[a] = list[b];
+        list[b] = temp;
+    }
+
+    public static void Swap<T>(List<T> list, int a, int b) 
     {
         T temp = list[a];
         list[a] = list[b];

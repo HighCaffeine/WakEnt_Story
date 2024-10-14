@@ -3,6 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewProductor", menuName = "Productor/CreateNewProductor")]
 public class ProductorInfo : ScriptableObject
 {
+    public bool isFieldCharacter;       //캐릭터가 맵에 있는지 기본 세팅 캐릭터 는 true
+    public bool isIsegyeIdol;           //이세돌분들인지 -> 이세돌분들의 경우 작업자가 아니기 때문에 하단 구조체 등의 값들은 없음.
+                                        //캐릭터 생성을 위한 정보들 추가 필요 이미지나 멘트 종류 등
+    public int seatNum;                 //좌석번호
+
+
     public string productorName;    //작업계 이름
     public Sprite productorImage;   //특정 작업자 이미지 (기본은 팬덤 이미지로 대체)
     public ProductorManager.ProductorType productorType;      //어떤 작업자인지(작업자 타입별로 해당 분야 보너스 존재)\
@@ -26,10 +32,10 @@ public class ProductorInfo : ScriptableObject
 
     //====
 
-    public bool isCompanyMember;
-    public bool previousBroadcastProduction;
+    public bool isCompanyMember;                        //회사 멤버인지
+    public bool previousBroadcastProduction;            //이전 작업을 했는지
 
-    public int price;
+    public int price;                                   //회사 맴버가 아닐 시 외주 가격
 
     public ProductorStat productorStat;
     public ProductorLevel productorLevel;

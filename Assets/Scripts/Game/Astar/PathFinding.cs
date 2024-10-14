@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathFinding : GenericSingleton<PathFinding>
@@ -13,6 +12,7 @@ public class PathFinding : GenericSingleton<PathFinding>
         base.Awake();
 
         astar = GetComponent<Astar>();
+        testCheckError = new List<Vector2>();
     } 
 
     public Queue<Vector2> CurvedPathFind(Vector2 productorPos, Vector2 targetPos)
@@ -46,16 +46,19 @@ public class PathFinding : GenericSingleton<PathFinding>
 
             openNode.Remove(currentNode);
             closeNode.Add(currentNode);
+            testCheckError.Add(currentNode.Pos);
 
+            //interactive노드일 경우의 체크.
             if (currentNode == targetNode)
             {
                 return GetPath(productorNode, targetNode);
             }
 
-            List<Node> aroundNode = astar.GetAroundNode(currentNode);
+            List<Node> aroundNode = astar.GetAroundNode(currentNode, targetNode);
 
             foreach (var node in aroundNode)
             {
+
                 if (closeNode.Contains(node))
                 {
                     continue;
@@ -85,18 +88,16 @@ public class PathFinding : GenericSingleton<PathFinding>
         return null;
     }
 
-    List<Vector2> testCheckBezier;
-    List<Vector2> testCheckPath;
-
-    List<Vector2> testCheckBezierPoint;
 
     private Stack<Vector2> GetPath(Node startNode, Node targetNode)
     {
-        testCheckPath = new List<Vector2>();
+        if (testCheckBezier == null)
+            testCheckPath = new List<Vector2>();
 
         Stack<Vector2> s = new Stack<Vector2>();
 
-        Node currentNode = targetNode;
+        //Node currentNode = targetNode;
+        Node currentNode = targetNode.parentNode;       //타겟 제외
 
         bool isSameY = false;
         bool isSameX = false;
@@ -106,11 +107,16 @@ public class PathFinding : GenericSingleton<PathFinding>
 
         while (currentNode != startNode)
         {
-            currentNode.parentNode.childNode = currentNode;
+            //이전 노드까지 넣어서 맵 뚫는 구간 아예 없도록 했는데
+            //childnode체크 버그 있음.
+            if (currentNode != targetNode)
+            {
+                currentNode.parentNode.childNode = currentNode;
+            }
 
             if (currentNode.parentNode == startNode)
             {
-                if (!testCheckPath.Contains(currentNode.Pos))
+                if (!s.Contains(currentNode.Pos))
                 {
                     testCheckPath.Add(currentNode.Pos);
                     s.Push(currentNode.Pos);
@@ -125,19 +131,19 @@ public class PathFinding : GenericSingleton<PathFinding>
                 {
                     isSameY = false;
 
-                    if (currentNode.childNode != null && !testCheckPath.Contains(currentNode.childNode.Pos))
+                    if (currentNode.childNode != null && !s.Contains(currentNode.childNode.Pos))
                     {
                         testCheckPath.Add(currentNode.childNode.Pos);
                         s.Push(currentNode.childNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.Pos))
+                    if (!s.Contains(currentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.Pos);
                         s.Push(currentNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.parentNode.Pos))
+                    if (!s.Contains(currentNode.parentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.parentNode.Pos);
                         s.Push(currentNode.parentNode.Pos);
@@ -153,19 +159,19 @@ public class PathFinding : GenericSingleton<PathFinding>
                 {
                     isSameX = false;
 
-                    if (currentNode.childNode != null &&!testCheckPath.Contains(currentNode.childNode.Pos))
+                    if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
                     {
                         testCheckPath.Add(currentNode.childNode.Pos);
                         s.Push(currentNode.childNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.Pos))
+                    if (!s.Contains(currentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.Pos);
                         s.Push(currentNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.parentNode.Pos))
+                    if (!s.Contains(currentNode.parentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.parentNode.Pos);
                         s.Push(currentNode.parentNode.Pos);
@@ -179,19 +185,19 @@ public class PathFinding : GenericSingleton<PathFinding>
             {
                 if (!isSameX || !isSameY)
                 {
-                    if (currentNode.childNode != null &&!testCheckPath.Contains(currentNode.childNode.Pos))
+                    if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
                     {
                         testCheckPath.Add(currentNode.childNode.Pos);
                         s.Push(currentNode.childNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.Pos))
+                    if (!s.Contains(currentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.Pos);
                         s.Push(currentNode.Pos);
                     }
 
-                    if (!testCheckPath.Contains(currentNode.parentNode.Pos))
+                    if (!s.Contains(currentNode.parentNode.Pos))
                     {
                         testCheckPath.Add(currentNode.parentNode.Pos);
                         s.Push(currentNode.parentNode.Pos);
@@ -207,7 +213,7 @@ public class PathFinding : GenericSingleton<PathFinding>
             }
             else
             {
-                if (!testCheckPath.Contains(currentNode.Pos))
+                if (!s.Contains(currentNode.Pos))
                 {
                     testCheckPath.Add(currentNode.Pos);
                     s.Push(currentNode.Pos);
@@ -261,8 +267,11 @@ public class PathFinding : GenericSingleton<PathFinding>
         Queue<Vector2> calPos = new Queue<Vector2>();
         Queue<Vector2> calStorage = new Queue<Vector2>();
         
-        testCheckBezier = new List<Vector2>();
-        testCheckBezierPoint = new List<Vector2>();
+        if (testCheckBezier == null)
+        {
+            testCheckBezier = new List<Vector2>();
+            testCheckBezierPoint = new List<Vector2>();
+        }
 
         //Path는 노드 상 대각선 이동 허용한 루트로 받아올거임.
         //각 지점들을 pop해서 vecterQueue에 계속 enqueue 하다가 3개 되면 곡선 계산해서 VectorStack에 push 
@@ -337,14 +346,10 @@ public class PathFinding : GenericSingleton<PathFinding>
                     Vector2 v5 = Vector2.Lerp(v2, v3, t);
                     Vector2 targetPos = Vector2.Lerp(v4, v5, t);
 
-                    if (!testCheckBezier.Contains(targetPos))
-                    {
-                        testCheckBezier.Add(targetPos);
-                    }
-
                     if (!calPos.Contains(targetPos))
                     {
                         calPos.Enqueue(targetPos);
+                        testCheckBezier.Add(targetPos);
                     }
                 }
 
@@ -376,7 +381,7 @@ public class PathFinding : GenericSingleton<PathFinding>
         {
             Vector2 pos = calStorage.Dequeue();
 
-            if (!testCheckBezierPoint.Contains(pos))
+            if (!calPos.Contains(pos))
             {
                 calPos.Enqueue(pos);
                 testCheckBezier.Add(pos);
@@ -423,6 +428,35 @@ public class PathFinding : GenericSingleton<PathFinding>
         return newPos;
     }
 
+    public Vector2 GetNodePos(Vector2 targetPos)
+    {
+        Node node = astar.GetNode(targetPos);
+
+        if (node == null)
+        {
+            return Vector2.zero;
+        }
+
+        return node.Pos;
+    }
+
+    List<Vector2> testCheckBezier;
+    List<Vector2> testCheckPath;
+
+    List<Vector2> testCheckBezierPoint;
+
+    List<Vector2> testCheckError;
+
+    public void TestResetList()
+    {
+        testCheckBezier.Clear();
+        testCheckBezier.Clear();
+        testCheckBezierPoint.Clear();
+        testCheckError.Clear();
+    }   
+
+    private Vector2[] checkPos = {new Vector2(-33f, -5.75f), new Vector2(-32.5f, -6f)};
+
     //경로 체크
     void OnDrawGizmos()
     {
@@ -432,6 +466,11 @@ public class PathFinding : GenericSingleton<PathFinding>
             {
                 Vector2 current = testCheckBezier[i];
                 Vector2 target = testCheckBezier[i + 1];
+
+                if (target == checkPos[0] || target == checkPos[1])
+                {
+                    continue;
+                }
 
                 //Gizmos.color = Color.red;
                 //Gizmos.DrawLine(current, target);
@@ -449,6 +488,12 @@ public class PathFinding : GenericSingleton<PathFinding>
             {
                 Vector2 current = testCheckPath[i];
                 Vector2 target = testCheckPath[i + 1];
+
+
+                if (current == checkPos[0] || current == checkPos[1])
+                {
+                    continue;
+                }
 
                 var p1 = current;
                 var p2 = target;
@@ -472,6 +517,16 @@ public class PathFinding : GenericSingleton<PathFinding>
         //     {
         //         Gizmos.color = Color.red;
         //         Gizmos.DrawSphere(pos, 0.1f);
+        //     }
+        // }
+
+
+        // if (testCheckError != null)
+        // {
+        //     foreach (var node in testCheckError)
+        //     {
+        //         Gizmos.color = Color.red;
+        //         Gizmos.DrawSphere(node, 0.05f);
         //     }
         // }
     }

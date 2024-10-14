@@ -167,6 +167,10 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
     [SerializeField] private Broadcast broadCast;
 
+    public static bool IsBroadcastPlanning => isBroadcastPlanning;
+
+    private static bool isBroadcastPlanning;
+
     void Start()
     {
         DataManager.Instance.SetBroadcastValue(keywordMatching);
@@ -396,5 +400,18 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public int GetBroadcastPoint(ProductorManager.ProductorType type)
     {
         return broadCast.broadCastPoint[type];
+    }
+
+    public void SetBroadcastPlanning()
+    {
+        isBroadcastPlanning = true;
+    }
+
+
+
+    //캐릭터 이벤트 관련
+    public void AddSpecialCurrency(int amount)
+    {
+        //특수 재화 추가
     }
 }

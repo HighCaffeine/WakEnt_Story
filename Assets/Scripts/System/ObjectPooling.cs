@@ -61,7 +61,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
         newObj.Init(OnReturnUp);
 
-        pool.Push(newObj);
+        //pool.Push(newObj);
 
         newObj.gameObject.SetActive(false);
 
