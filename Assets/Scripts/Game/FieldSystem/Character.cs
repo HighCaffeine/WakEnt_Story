@@ -229,29 +229,23 @@ public class Character : MonoBehaviour,
         //캐릭터무브먼트는 어디로 가는지는 모르고 경로만 받고
         //도착하면 interactive 하는거임
 
-        //TEST
-        if (iSEGYEIDOL == CharacterManager.ISEGYEIDOL.JingBurger)
-        {
-            return;
-        }
-
         if (moveCoroutine != null)
         {
             return;
         }
 
+
         //targetIndex -> 중복 검사를 위해 넣어둔 매니저의 타겟리스트 내부의 위치
         //이동 끝나고 해당 index는 비워줌
-        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, -1, out targetIndex, out lastPos);
+        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, characterData.SeatNumber, out targetIndex, out lastPos);
 
         TEST_targetPos = lastPos;
 
         if (path == null)
         {
+            SetIdle();
             return;
         }
-
-        
 
         moveCoroutine = StartCoroutine(MoveToTarget(path, MoveType.Target, null));
     }   
@@ -265,6 +259,7 @@ public class Character : MonoBehaviour,
 
                                                 
 
+        //테스트 메세지
         RequestMessage("하이네");
 
         moveCoroutine = StartCoroutine(MoveToTarget(path, MoveType.MySeat, Sit));
@@ -276,9 +271,13 @@ public class Character : MonoBehaviour,
     {
         //isCharacterMove = true;
 
+        Debug.Log(transform.name + " - Move");
+
         if (isOnMySeat)
         {
             yield return StandUp();
+
+            Debug.Log(transform.name + " - Stand Up");
         }
 
         SetWalk();
@@ -292,6 +291,8 @@ public class Character : MonoBehaviour,
             yield return StartCoroutine(MoveToTargetPos(targetPos));
         }
 
+        Debug.Log(transform.name + " - end move");
+
         FlipToTarget(lastPos);
 
         currentState = State.Interactive;
@@ -302,6 +303,10 @@ public class Character : MonoBehaviour,
         moveCoroutine = null;
         //WalkAni = false;
 
+
+
+        //이거랑 다른 캐릭터 타겟 정하는거랑 겹쳐서 그런 듯
+        //아예 요청하는 쪽이 본인 자리에 돌아갈 때 해당 이벤트 실행하는 방식으로
         if (targetIndex != -1) OnClearTarget?.Invoke(targetIndex);
     }
 
@@ -447,6 +452,8 @@ public class Character : MonoBehaviour,
     CharacterManager.OnUpdateCharacterState OnUpdateCharacterState; //캐릭터 퇴근, 출근, 해고 상태 업데이트
                                                                     //매니저가 모든 캐릭터의 상태를 가지고 있음.
 
+    CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex;           //좌석에 앉을 때 0으로 변경, 좌석 일어날 때 1 
+
 
     //콜백용 함수 전부 등록
     public void RegisterMovementEventToManager()
@@ -512,6 +519,7 @@ public class Character : MonoBehaviour,
         RegisterMovementTargetClear(CharacterManager.Instance.ClearTargetIndex);
         RegisterCharacterStateUpdate(CharacterManager.Instance.SetCharacterStatus);
         RegisterMovementEventToManager();
+        RegisterUpdateSeatIndexEvent(CharacterManager.Instance.UpdateSeatInterState); //이벤트 등록 함수 매니저측에서 만들어서 ㄱㄱ
 
         //CharacterManager.Instance.SetCharacterInfo(characterData);
     }
@@ -560,6 +568,12 @@ public class Character : MonoBehaviour,
         StartCoroutine(SitCoroutine());
     }
 
+    //캐릭터에 붙어있는 interactive event에 해당 이벤트 넣어서 call all event에서 실행(interactive 끝날 때)
+    private void UpdateSeatState(CharacterManager.CharacterInteractiveState characterInteractiveState)
+    {
+        OnUpdateSeatIndex?.Invoke(characterData.SeatNumber, characterInteractiveState);
+    }
+
     private IEnumerator SitCoroutine()
     {
         //lastpos로 가서 애니메이션 으로 바꿔치기 할 거임
@@ -568,6 +582,7 @@ public class Character : MonoBehaviour,
         AnimationSpeedSet(false);
 
         isOnMySeat = true;
+        UpdateSeatState(CharacterManager.CharacterInteractiveState.CanInteractive);
         SetSit();
 
         Invoke("SetWalk", UnityEngine.Random.Range(5, 10));
@@ -588,13 +603,12 @@ public class Character : MonoBehaviour,
 
     public void CallInteractiveAction()
     {
-        Debug.Log(transform.name + "interactive");
-        Debug.Log("event : " + interactiveTargetAction);
         interactiveTargetAction?.Invoke();
     }
 
     public IEnumerator StandUp()
     {
+        UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
         AnimationSpeedSet(true);
         isOnMySeat = false;
         SetSit();
@@ -639,5 +653,10 @@ public class Character : MonoBehaviour,
     public void SetStandingSprite()
     {
         spriteRenderer.sprite = characterSprites[1];
+    }
+
+    public void RegisterUpdateSeatIndexEvent(CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex)
+    {
+        this.OnUpdateSeatIndex = OnUpdateSeatIndex;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CharacterMessage : MonoBehaviour, OnReturnPool<CharacterMessage>

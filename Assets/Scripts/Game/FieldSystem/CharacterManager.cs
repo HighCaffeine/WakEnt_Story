@@ -9,8 +9,9 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 {
     public enum CharacterInteractiveState
     {
-        CanInter = 0,   //자리에 있음
-        CantInter = 1,  //상호작용중
+        None = -1,
+        CanInteractive = 0,   //자리에 있음
+        CantInteractive = 1,  //상호작용중
     }
 
     public enum StageCharacterLimit
@@ -46,6 +47,10 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         Count,
     }
 
+    //현재 캐릭터에 이벤트 등록해서 사용할 예정이였는데,
+    //list로 interactive가능한지 아닌지 판단만 하고
+    //해당 정보는 캐릭터 데이터 내부에 가지고 있거나 해서 
+    //데이터 저장하거나 그럴 때 위치로 ㅇㅇ
     public enum CharacterState
     {
         Fired,
@@ -73,11 +78,12 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         void RegisterMovementTargetClear(OnClearTarget OnClearTarget);
         void RegisterCharacterStateUpdate(OnUpdateCharacterState OnUpdateCharacterState);
         void RegisterGetPathEvent(OnGetPath OnGetPath);
+        void RegisterUpdateSeatIndexEvent(OnUpdateSeatIndex OnUpdateSeatIndex);
     }
 
     //좌석 변경 시 본인 좌석 번호를 넘겨줘서 등록/업데이트하는 이벤트
     //좌석 변경
-    public delegate void UpdateSeatIndex(int index);
+    public delegate void OnUpdateSeatIndex(int index, CharacterInteractiveState characterInteractiveState);
     public delegate Queue<Vector2> OnGetPath(Vector2 myPos, PathFindMode pathFindMode, int characterIndex, out int index, out Vector2 targetPos);
     public delegate void OnClearTarget(int index);
 
@@ -98,15 +104,22 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     private int[] characterStatusArr;                       //현재 캐릭터가 퇴근한 상태인지 출근한 상태인지
                                                             //해당 정보로 interactive 판단하는 것도 괜찮을 듯
                                                             //
+    private List<int> characterSeatInteractable;
 
     private List<Vector2> characterSeatList;                //각 좌석 위치
 
     private StageCharacterLimit currentStageCharacterLimit; //현재 스테이지 캐릭터 수 제한
 
     private int currentStageCharacterCount;                 //현재 맵에 있는 캐릭터 수
+    private int interactiveCharacterCount;                  //현재 상호작용하려고 하는 캐릭터의 수
+                                                            //해당 캐릭터가 자리에 앉을 때까지 오래걸릴 수도 있기 때문에(맵크기가 좀 클 수도 있음)
+                                                            //그래서 미리빼고 characterseatinteractable 값을
+                                                            //target이였던 애는 풀어주고 본인자리 복귀중인 캐릭터는 자리 앉을 때 돌려주는 걸로 
 
     private new void Awake()
     {
+        currentStageCharacterLimit = StageCharacterLimit.FirstStage;
+
         Init();
 
         base.Awake();
@@ -130,6 +143,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         charactersPos = new List<Vector2>();
         targetedList = new List<KeyValuePair<Vector2, Vector2>>();
         characterSeatList = new List<Vector2>();
+        characterSeatInteractable = new List<int>();
 
         //스테이지 구분 넣어서 스테이지마다 다르게
         int characterArrSize = ValueCastTo<int>.From(ISEGYEIDOL.Count) + ValueCastTo<int>.From(StageCharacterLimit.FirstStage);
@@ -154,6 +168,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         for (int i = 0; i < count; i++)
         {
             charactersPos.Add(Vector2.zero);
+            characterSeatInteractable.Add(ValueCastTo<int>.From(CharacterInteractiveState.None));
         }
     }
 
@@ -183,6 +198,9 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     /// <returns></returns>
     public Queue<Vector2> GetPath(Vector2 startPos, PathFindMode pathFindMode, int characterIndex, out int index, out Vector2 targetPos)
     {
+        int targetIndex = -1;       //타겟 interactive 가능 여부 설정용
+        targetPos = Vector2.zero;
+
         index = -1;
 
         switch(pathFindMode)
@@ -190,24 +208,42 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             case PathFindMode.SwapSeat:
             //swapseat함수에서 자리 변경 시 해당 선택캐릭터를 대상캐릭터의 인덱스로 넣어서 사용
             //대상캐릭터에게도 선택 캐릭터의 index보내서 이동
-            targetPos = GetRandomCharacterPos(startPos);
+            targetPos = GetRandomCharacterPos(startPos, out targetIndex);
 
             return PathFinding.Instance.CurvedPathFind(startPos, targetPos);
-            case PathFindMode.Random:
-            targetPos = GetRandomCharacterPos(startPos);
 
-            if (targetPos == Vector2.zero)
+            case PathFindMode.Random:
+            
+            //현재 상호작용 요청 캐릭터가 둘 이상이면 바로 리턴
+            if (interactiveCharacterCount >= 2)
             {
                 return null;
             }
 
+            interactiveCharacterCount++;
+
+            targetPos = GetRandomCharacterPos(startPos, out targetIndex);
+
+            if (targetPos == Vector2.zero)
+            {
+                Debug.Log(ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine - 1 + characterIndex)).ToString());
+                interactiveCharacterCount--;
+
+                return null;
+            }
+
+
+            Debug.Log("found Target");
+
             Debug.Log("startPos : " + startPos);
             Debug.Log("taget : " + targetPos);
 
+            UpdateSeatInterState(targetIndex, CharacterInteractiveState.CantInteractive);
             targetedList.Add(new KeyValuePair<Vector2, Vector2>(startPos, targetPos));
             index = targetedList.Count - 1;
 
             return PathFinding.Instance.CurvedPathFind(startPos, targetPos);
+
             case PathFindMode.MoveToMySeat:
             index = -1;
             targetPos = characterSeatList[characterIndex - 1];
@@ -249,9 +285,10 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     }
 
     //내부에서 2 캐릭터가 동일 타겟 또는 이동하는 캐릭터로 안 가도록 내부 체크 추가
-    private Vector2 GetRandomCharacterPos(Vector2 characterPos)
+    private Vector2 GetRandomCharacterPos(Vector2 characterPos, out int targetIndex)
     {
         Vector2 newPos;
+        targetIndex = -1;
         
         while (true)
         {
@@ -261,15 +298,20 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
                 return Vector2.zero;
             }
 
-            newPos = charactersPos[UnityEngine.Random.Range(0, charactersPos.Count)];
+            int index = UnityEngine.Random.Range(0, charactersPos.Count);
+            newPos = charactersPos[index];
 
-            if (newPos == characterPos)
+            targetIndex = index;
+
+            if (newPos == characterPos 
+                || characterSeatInteractable[index] == ValueCastTo<int>.From(CharacterInteractiveState.CantInteractive))
             {
                 continue;
             }
 
             if (CheckDuplicatedTarget(newPos))
             {
+                characterSeatInteractable[index] = ValueCastTo<int>.From(CharacterInteractiveState.CantInteractive);
                 break;
             }
         } 
@@ -295,9 +337,6 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         //Ray쏴서 체크하지 않을까 싶음
     }
 
-    private List<int> characterInteractiveState = new List<int>();              //interactive 가능한 캐릭터가 몇인지 체크용
-
-    private int interactiveCharacterCount;
 
     private List<KeyValuePair<Vector2, Vector2>> targetedList;
 
@@ -306,7 +345,6 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     //True -> 이동 가능
     private bool CheckDuplicatedTarget(Vector2 targetPos)
     {
-        Debug.Log("targetedPairList = " + targetedList.Count);
         foreach (var pos in targetedList)
         {
             if (pos.Key == targetPos || pos.Value == targetPos)
@@ -388,13 +426,23 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
                 SetCharacterData(character, data.CharacterID, data);
 
-                characterInteractiveState.Add(ValueCastTo<int>.From(CharacterInteractiveState.CanInter));
+                //캐릭터 데이터 내부에 캐릭터가 마지막에 어떤 상태였는지등 적용해줄거
+                //위치(이동 중 종료할 수도 있기 때문에)값 현재 타겟으로 이동중인 곳 위치(POS) 저장
+                //fever 상태였을 경우 계산된 fever카운트, 현재 fever진행 수치
+                //characterInteractiveState.Add(ValueCastTo<int>.From(CharacterInteractiveState.None));
 
                 //방송 제작중이 아니라면 다시 출근시킴 -> 나중에 출근여부 확인해서 본인 좌석번호에서 시작하는 걸로 수정
                 character.ReturnMySeat();
 
                 //본인좌석에 해당하는 위치값 넣어줌
-                charactersPos[data.SeatNumber - 1] = characterSeatList[data.SeatNumber - 1];
+
+                try
+                {
+                    charactersPos[data.SeatNumber - 1] = characterSeatList[data.SeatNumber - 1];
+                } catch (Exception e)
+                {
+                    Debug.Log(e.Message);
+                }
 
                 //TEST
                 if (temp == 4)
@@ -427,8 +475,6 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             this.OnCharacterMovementEvents.Add(eventData);
         }
     }
-
-
     
     //스테이지에 허용된 캐릭터 수 만큼 배열을 처음에 세팅할 거 -1로
     //Fired         -   해고하면
@@ -463,6 +509,15 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     {
         characterStatusArr[index] = ValueCastTo<int>.From(CharacterState.LeaveWork);
     }
+
+
+    //캐릭터 상호작용 가능 여부
+    public void UpdateSeatInterState(int index, CharacterInteractiveState characterInteractiveState)
+    {
+        characterSeatInteractable[index] = ValueCastTo<int>.From(characterInteractiveState);
+    }
+
+
 
     public AnimationClip GetAnimationClip(long characterID, ResourceType resourceType)
     {
