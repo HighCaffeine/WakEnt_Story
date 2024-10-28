@@ -237,13 +237,17 @@ public class Character : MonoBehaviour,
 
         //targetIndex -> 중복 검사를 위해 넣어둔 매니저의 타겟리스트 내부의 위치
         //이동 끝나고 해당 index는 비워줌
-        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, characterData.SeatNumber, out targetIndex, out lastPos);
+        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, 
+                                                characterData.SeatNumber - 1, out targetIndex, out lastPos);
 
         TEST_targetPos = lastPos;
 
         if (path == null)
         {
             SetIdle();
+
+            Debug.Log(transform.name + " Path Not Found");
+
             return;
         }
 
@@ -255,7 +259,7 @@ public class Character : MonoBehaviour,
     public void ReturnMySeat()
     {
         Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.MoveToMySeat, 
-                                                characterData.SeatNumber, out targetIndex, out lastPos);
+                                                characterData.SeatNumber - 1, out targetIndex, out lastPos);
 
                                                 
 
@@ -280,7 +284,10 @@ public class Character : MonoBehaviour,
             Debug.Log(transform.name + " - Stand Up");
         }
 
+        Debug.Log(transform.name + " PathCount : " + path.Count);
+
         SetWalk();
+        isCharacterMove = true;
 
         while (path.Count > ValueCastTo<int>.From(moveType))
         {
@@ -295,6 +302,7 @@ public class Character : MonoBehaviour,
 
         FlipToTarget(lastPos);
 
+        isCharacterMove = false;
         currentState = State.Interactive;
         action?.Invoke();
 
@@ -302,23 +310,16 @@ public class Character : MonoBehaviour,
         //isCharacterMove = false;
         moveCoroutine = null;
         //WalkAni = false;
-
-
-
-        //이거랑 다른 캐릭터 타겟 정하는거랑 겹쳐서 그런 듯
-        //아예 요청하는 쪽이 본인 자리에 돌아갈 때 해당 이벤트 실행하는 방식으로
-        if (targetIndex != -1) OnClearTarget?.Invoke(targetIndex);
     }
 
     private IEnumerator MoveToTargetPos(Vector2 targetPos)
     {
-        isCharacterMove = true;
         Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
 
-        while (!(Vector2.Distance(transform.position, targetPos) <= 0.01f))
+        while (!(Vector2.Distance(transform.position, targetPos) <= 0.02f))
         {
             Vector2 newPos = transform.position; 
-            newPos += direction * Time.deltaTime;
+            newPos += direction * Time.deltaTime * 0.75f;
 
             transform.position = newPos;
 
@@ -327,10 +328,7 @@ public class Character : MonoBehaviour,
 
         transform.position = targetPos;
 
-        seatSpriteOffEvent?.Invoke();
-        
-
-        isCharacterMove = false;
+        //seatSpriteOffEvent?.Invoke();
     }
 
     private void FlipToTarget(Vector2 targetPos)
@@ -392,6 +390,7 @@ public class Character : MonoBehaviour,
             currentState = State.None;
 
             //캐릭터 상호작용
+            //return my seat 함수 전달
             interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, out interactiveTargetAction,this.StatAdd);
 
             return;
@@ -448,7 +447,6 @@ public class Character : MonoBehaviour,
     CharacterManager.OnGetPath OnGetPath;
     OnReturnPoolEvent<Character> OnReturnPoolEvent;     //해고하고 다른 작업자로 바뀔 때 호출
 
-    CharacterManager.OnClearTarget OnClearTarget;       //GotoTarget 이동 다 한 후 해당 pos 값 매니저측에 삭제 요청
     CharacterManager.OnUpdateCharacterState OnUpdateCharacterState; //캐릭터 퇴근, 출근, 해고 상태 업데이트
                                                                     //매니저가 모든 캐릭터의 상태를 가지고 있음.
 
@@ -499,10 +497,6 @@ public class Character : MonoBehaviour,
         this.OnGetPath = OnGetPath;
     }
 
-    public void RegisterMovementTargetClear(CharacterManager.OnClearTarget OnClearTarget)
-    {
-        this.OnClearTarget = OnClearTarget;
-    }
     public void RegisterCharacterStateUpdate(CharacterManager.OnUpdateCharacterState OnUpdateCharacterState)
     {
         this.OnUpdateCharacterState = OnUpdateCharacterState;
@@ -516,7 +510,6 @@ public class Character : MonoBehaviour,
 
         //RegisterMovementEvent();
         RegisterGetPathEvent(CharacterManager.Instance.GetPath);
-        RegisterMovementTargetClear(CharacterManager.Instance.ClearTargetIndex);
         RegisterCharacterStateUpdate(CharacterManager.Instance.SetCharacterStatus);
         RegisterMovementEventToManager();
         RegisterUpdateSeatIndexEvent(CharacterManager.Instance.UpdateSeatInterState); //이벤트 등록 함수 매니저측에서 만들어서 ㄱㄱ
@@ -611,7 +604,6 @@ public class Character : MonoBehaviour,
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
         AnimationSpeedSet(true);
         isOnMySeat = false;
-        SetSit();
 
         yield return new WaitForSeconds(0.5f);
 

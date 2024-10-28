@@ -25,8 +25,13 @@ public class CharacterMessage : MonoBehaviour, OnReturnPool<CharacterMessage>
         rect = GetComponent<RectTransform>();
     }
 
+    public string targetName;
+
     public void SetMessage(string text, Transform targetTransform, CharacterManager.OnCharacterIsMove OnCharacterIsMove, params Action[] callback)
     {
+        //test
+        targetName = targetTransform.name;
+
         this.targetTransform = targetTransform;
         message.text = text;
 
