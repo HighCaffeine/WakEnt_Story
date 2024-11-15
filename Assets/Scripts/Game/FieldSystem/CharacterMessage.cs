@@ -87,23 +87,32 @@ public class CharacterMessage : MonoBehaviour, OnReturnPool<CharacterMessage>
 
     private void Init()
     {
-        foreach (var eventData in callback)
+        if (callback != null)
         {
-            eventData?.Invoke();
-        }
+            foreach (var eventData in callback)
+            {
+                eventData?.Invoke();
+            }
 
-        //callback 정리
-        for (int i = 0; i < callback.Length; i++)
-        {
-            callback[i] = null;
+            //callback 정리
+            for (int i = 0; i < callback.Length; i++)
+            {
+                callback[i] = null;
+            }
         }
 
         OnReturnPoolEvent?.Invoke(this);
 
-        StopCoroutine(fixedPosCoroutine);
-        StopCoroutine(messageDisappearCoroutine);
+        if (fixedPosCoroutine != null)
+        {
+            StopCoroutine(fixedPosCoroutine);
+            fixedPosCoroutine = null;
+        }
 
-        messageDisappearCoroutine = null;
-        fixedPosCoroutine = null;
+        if (messageDisappearCoroutine != null)
+        {
+            StopCoroutine(messageDisappearCoroutine);
+            messageDisappearCoroutine = null;
+        }
     }
 }

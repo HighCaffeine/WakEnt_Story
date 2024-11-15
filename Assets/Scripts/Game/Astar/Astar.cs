@@ -178,23 +178,28 @@ public class Astar : MonoBehaviour
         return grid[nodeXPos, nodeYPos];
     }
 
-    public List<Node> GetAroundNode(Node middleNode, Node targetNode, bool isCheckDiagonal = false)
-    {
-        List<Node> aroundNodeList = new List<Node>();
-        List<int> xNotWalkable = new List<int>();
-        List<int> yNotWalkable = new List<int>();
+    List<Node> aroundNodeList = new List<Node>();
+    List<int> xNotWalkable = new List<int>();
+    List<int> yNotWalkable = new List<int>();
 
-        if (!isCheckDiagonal)
+    public List<Node> GetAroundNode(Node middleNode, Node targetNode, bool isCheckDiagonal = true)
+    {
+        aroundNodeList.Clear();
+        
+        if (isCheckDiagonal)
         {
-        //iswalkable 노드 위치 미리 캐싱
-        for (int x = -1; x <= 1; x++)
-        {
-            for (int y = -1; y <= 1; y++)
+            xNotWalkable.Clear();
+            yNotWalkable.Clear();
+
+            //iswalkable 노드 위치 미리 캐싱
+            for (int x = -1; x <= 1; x++)
             {
-                if (x == 0 && y == 0)
+                for (int y = -1; y <= 1; y++)
                 {
-                    continue;
-                }
+                    if (x == 0 && y == 0)
+                    {
+                        continue;
+                    }
                     if ((x == -1 && y == -1)
                         || (x == -1 && y == 1)
                         || (x == 1 && y == -1)
@@ -202,23 +207,28 @@ public class Astar : MonoBehaviour
                     {
                         continue;
                     }
-                
 
-                int aroundNodeX = middleNode.xPos + x;
-                int aroundNodeY = middleNode.yPos + y;
+                    int aroundNodeX = middleNode.xPos + x;
+                    int aroundNodeY = middleNode.yPos + y;
 
-                if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)
-                {
-                    Node aroundNode = grid[aroundNodeX, aroundNodeY];
-
-                    if (aroundNode.IsNotWalkalbe)
+                    if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)
                     {
-                        xNotWalkable.Add(aroundNode.xPos);
-                        yNotWalkable.Add(aroundNode.yPos);
+                        Node aroundNode = grid[aroundNodeX, aroundNodeY];
+
+                        if (aroundNode.IsNotWalkable)
+                        {
+                            if (middleNode.xPos == aroundNode.xPos)
+                            {
+                                yNotWalkable.Add(aroundNode.yPos);
+                            }
+                            else if (middleNode.yPos == aroundNode.yPos)
+                            {
+                                xNotWalkable.Add(aroundNode.xPos);
+                            }
+                        }
                     }
                 }
             }
-        }
         }
 
         for (int x = -1; x <= 1; x++)
@@ -229,9 +239,6 @@ public class Astar : MonoBehaviour
                 {
                     continue;
                 }
-
-                int aroundNodeX = middleNode.xPos + x;
-                int aroundNodeY = middleNode.yPos + y;
 
                 if (!isCheckDiagonal)
                 {
@@ -240,37 +247,32 @@ public class Astar : MonoBehaviour
                         || (x == 1 && y == -1)
                         || (x == 1 && y == 1))
                     {
-                        if (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY))
-                        {
-                            continue;
-                        }
+                        continue;
                     }
+                }
+
+                int aroundNodeX = middleNode.xPos + x;
+                int aroundNodeY = middleNode.yPos + y;
+
+                if (isCheckDiagonal && (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY)))
+                {
+                    return GetAroundNode(middleNode, targetNode, false);
                 }
 
                 if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)
                 {
-                    if (grid[aroundNodeX, aroundNodeY] == null)
+                    if ((grid[aroundNodeX, aroundNodeY] == null)
+                        || (targetNode != grid[aroundNodeX, aroundNodeY] && grid[aroundNodeX, aroundNodeY].IsInteractable))
                     {
                         continue;
                     }
 
-                    if (targetNode != grid[aroundNodeX, aroundNodeY] && grid[aroundNodeX, aroundNodeY].IsInteractable)
+                    if (grid[aroundNodeX, aroundNodeY].IsNotWalkable)
                     {
-                        if (isCheckDiagonal)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            aroundNodeList =  GetAroundNode(middleNode, targetNode, true);
-                            break;
-                        }
+                        continue;
                     }
 
-                    if (!grid[aroundNodeX, aroundNodeY].IsNotWalkalbe)
-                    {
-                        aroundNodeList.Add(grid[aroundNodeX, aroundNodeY]);
-                    }
+                    aroundNodeList.Add(grid[aroundNodeX, aroundNodeY]);
                 }
             }
         }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Devcat;
 using UnityEngine;
 
-
 public class CharacterManager : ObjectPooling<CharacterManager, Character>
 {
     public enum CharacterInteractiveState
@@ -78,6 +77,8 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         void RegisterCharacterStateUpdate(OnUpdateCharacterState OnUpdateCharacterState);
         void RegisterGetPathEvent(OnGetPath OnGetPath);
         void RegisterUpdateSeatIndexEvent(OnUpdateSeatIndex OnUpdateSeatIndex);
+
+        void RegisterCharacterCanInteractiveEvent(OnCharacterCanInteractive OnCharacterCanInteractive);
     }
 
     //좌석 변경 시 본인 좌석 번호를 넘겨줘서 등록/업데이트하는 이벤트
@@ -85,6 +86,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     public delegate void OnUpdateSeatIndex(int seatNum, CharacterInteractiveState characterInteractiveState);
     public delegate Queue<Vector2> OnGetPath(Vector2 myPos, PathFindMode pathFindMode, int characterIndex, out int index, out Vector2 targetPos);
     public delegate void OnUpdateCharacterState(int index, CharacterState characterState);
+    public delegate bool OnCharacterCanInteractive(int index);
     public delegate void OnCharacterMovementEvent(); //이벤트 매니저한테 등록해서 전체 콜백용.
     private List<OnCharacterMovementEvent> OnCharacterMovementEvents;
 
@@ -185,6 +187,18 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         }
     }
 
+    //test
+    public List<Action> testaction = new List<Action>();
+
+    public void Test_ResetCharacterState()
+    {
+        foreach (var action in testaction)
+        {
+            action?.Invoke();
+        }
+    }
+    //test
+
 
     /// <summary>
     /// 
@@ -196,7 +210,6 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     /// <returns></returns>
     public Queue<Vector2> GetPath(Vector2 startPos, PathFindMode pathFindMode, int characterIndex, out int index, out Vector2 targetPos)
     {
-        int targetIndex = -1;       //타겟 interactive 가능 여부 설정용
         targetPos = Vector2.zero;
 
         index = -1;
@@ -206,48 +219,24 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             case PathFindMode.SwapSeat:
             //swapseat함수에서 자리 변경 시 해당 선택캐릭터를 대상캐릭터의 인덱스로 넣어서 사용
             //대상캐릭터에게도 선택 캐릭터의 index보내서 이동
-            targetPos = GetRandomCharacterPos(characterIndex, out targetIndex);
+            targetPos = GetRandomCharacterPos(characterIndex, out index);
 
             return PathFinding.Instance.CurvedPathFind(startPos, targetPos);
 
             case PathFindMode.Random:
-            Debug.Log("Req Found Target : " + ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine + characterIndex)).ToString());
-            
-            //현재 상호작용 요청 캐릭터가 둘 이상이거나 내가 누군가에게 상호작용 요청을 받았을 경우
-            if (interactiveCharacterCount >= 2 
+            //현재 상호작용 요청 캐릭터가 둘 이상이거나 캐릭터 자체가 둘 미만이거나 내가 누군가에게 상호작용 요청을 받았을 경우
+            if (MaxMoveCharacterCount * 2 - 1 <= interactiveCharacterCount || (currentStageCharacterCount - interactiveCharacterCount) < 2
                 || characterSeatInteractable[characterIndex] == ValueCastTo<int>.From(CharacterInteractiveState.CantInteractive))
             {
-                Debug.Log("FindTarget Fail : " + ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine + characterIndex)).ToString());
                 return null;
             }
 
-            interactiveCharacterCount++;
-
-            Debug.Log("tryGetTarget : " + ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine + characterIndex)).ToString());
-            targetPos = GetRandomCharacterPos(characterIndex, out targetIndex);
-
-            // if (targetPos == Vector2.zero)
-            // {
-            //     
-            //     interactiveCharacterCount--;
-
-            //     return null;
-            // }
-
-             UpdateSeatInterState(targetIndex + 1, CharacterInteractiveState.CantInteractive);
-
-
-            Debug.Log("found Target : " + ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine + characterIndex)).ToString() 
-            + "->" + ValueCastTo<ISEGYEIDOL>.From((ISEGYEIDOL.Ine + targetIndex)).ToString());
-
-            Debug.Log("startPos : " + startPos);
-            Debug.Log("taget : " + targetPos);
-
-            index = targetIndex;
+            targetPos = GetRandomCharacterPos(characterIndex, out index);
+            
+            UpdateSeatInterState(index + 1, CharacterInteractiveState.CantInteractive);
 
             //테스트용
             targetedList.Add(new KeyValuePair<Vector2, Vector2>(startPos, targetPos));
-
 
             return PathFinding.Instance.CurvedPathFind(startPos, targetPos);
 
@@ -257,45 +246,17 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             return PathFinding.Instance.CurvedPathFind(startPos, targetPos);
 
             default:
-            targetPos = Vector2.zero;
             return null;
         }
-
     }
 
-    List<Vector2> test = new List<Vector2>();
-
-    List<KeyValuePair<Vector2, Vector2>> targetedList = new List<KeyValuePair<Vector2, Vector2>>();
-
-    private void OnDrawGizmos() 
-    {
-        if (test != null)
-        {
-            int index = 0;
-            foreach (var pos in targetedList)
-            {
-                index++;
-
-                if (index == 1)
-                {
-                    Gizmos.color = Color.red;
-                }
-                else
-                {
-                    Gizmos.color = Color.blue;
-                }
-
-                Gizmos.DrawWireSphere(pos.Key, 0.25f);
-                Gizmos.DrawWireSphere(pos.Value, 0.5f);
-            }
-        }
-    }
 
     //내부에서 2 캐릭터가 동일 타겟 또는 이동하는 캐릭터로 안 가도록 내부 체크 추가
     private Vector2 GetRandomCharacterPos(int characterIndex, out int targetIndex)
     {
-        Vector2 newPos;
-        
+        Vector2 newPos = Vector2.zero;
+        targetIndex = -1;
+
         while (true)
         {
             int index = seatNumberList[UnityEngine.Random.Range(0, currentStageCharacterCount)];
@@ -318,6 +279,27 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         return newPos;
     }
 
+    public bool IsCanMoveForInteractive(int index)
+    {
+        return characterSeatInteractable[index - 1] == ValueCastTo<int>.From(CharacterInteractiveState.CanInteractive);
+    }
+
+    //캐릭터 상호작용 가능 여부
+    public void UpdateSeatInterState(int seatNum, CharacterInteractiveState characterInteractiveState)
+    {
+        characterSeatInteractable[seatNum - 1] = ValueCastTo<int>.From(characterInteractiveState);
+
+        switch (characterInteractiveState)
+        {
+            case CharacterInteractiveState.CanInteractive:
+            interactiveCharacterCount--;
+            break;
+            case CharacterInteractiveState.CantInteractive:
+            interactiveCharacterCount++;
+            break;
+        }
+    }
+
     private void SelectTargetSeat()
     {
         //gamemanager에게 게임 pause 요청
@@ -326,10 +308,8 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         //플레이어가 좌석을 선택을 할 거임.
         //Ray쏴서 체크하지 않을까 싶음
     }
-
-
     
-    //자리 변경 시 함
+    //자리 변경
     //좌석위치에 따라 인덱스 관리를 할 거고
     //해당 swap으로 위치(characterPos), 작업자들 정보(characterInfo), 작업자들 이벤트정보 (characterEvent)바꿔줄 거
     //바꾸면서 경로 지정해줄 거임.
@@ -383,14 +363,10 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
         SetSeatPos();
 
-        int temp = 0;
-
         foreach (var data in characterDataList)
         {
             if (data.isFieldCharacter == "O")
             {
-                temp++;
-
                 Character character = GetPool();
 
                 character.transform.name = data.Name;
@@ -408,21 +384,12 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
                 character.ReturnMySeat();
 
                 //본인좌석에 해당하는 위치값 넣어줌
-
-                try
-                {
-                    charactersPos[data.SeatNumber - 1] = characterSeatList[data.SeatNumber - 1];
-                } catch (Exception e)
-                {
-                    Debug.Log(e.Message);
-                }
+                charactersPos[data.SeatNumber - 1] = characterSeatList[data.SeatNumber - 1];
 
                 yield return new WaitForSeconds(0.5f);
             }
         }
     }
-
-    
     
     private void SetCharacterData(Character character, int characterID, CharacterData characterData)
     {
@@ -438,6 +405,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
     public void RegisterCharacterEvent(params OnCharacterMovementEvent[] OnCharacterMovementEvent)
     {
+
         foreach (var eventData in OnCharacterMovementEvent)
         {
             this.OnCharacterMovementEvents.Add(eventData);
@@ -478,15 +446,6 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         characterStatusArr[index] = ValueCastTo<int>.From(CharacterState.LeaveWork);
     }
 
-
-    //캐릭터 상호작용 가능 여부
-    public void UpdateSeatInterState(int seatNum, CharacterInteractiveState characterInteractiveState)
-    {
-        characterSeatInteractable[seatNum - 1] = ValueCastTo<int>.From(characterInteractiveState);
-    }
-
-
-
     public AnimationClip GetAnimationClip(long characterID, ResourceType resourceType)
     {
         ResourceID resourceID = ValueCastTo<ResourceID>.From(characterID);
@@ -501,22 +460,13 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         return DataManager.Instance.GetSpriteFromID(resourceID, resourceType);
     }
 
+    //캐릭터 이벤트 함수 호출(방송 제작 상태 업데이트)
     public void CallBackEvent(CharacterEventType characterEventType)
     {
         for (int i = ValueCastTo<int>.From(characterEventType); i < this.OnCharacterMovementEvents.Count; i += ValueCastTo<int>.From(CharacterEventType.Count))
         {
             this.OnCharacterMovementEvents[i]?.Invoke();
         }
-    }
-    
-    //좌석 번호 세팅(캐릭터 내부에서 호출하여 사용)
-    public void SetSeatNum(ref int seatNum)
-    {
-        //int targetIndex = 
-
-        //SwitchPos()
-
-        //내부에서 요청한 캐릭터 이외의 위치들에 Line 그려서 고를 수 있게 설정
     }
 
     //맵의 경우 프리팹 브러쉬 사용해서 세팅할거고 좌석 세팅은 어쩔 수 없이 수동으로 좀 세팅을 해야할 듯.
@@ -587,4 +537,29 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
         //따로 자리 변경 후 길 찾아가라고 이벤트 호출시킬거임 타겟만 전달
         //pool객체 가져올 때 해당 객체의 길 찾는 
     }
+
+
+    List<Vector2> test = new List<Vector2>();
+    List<KeyValuePair<Vector2, Vector2>> targetedList = new List<KeyValuePair<Vector2, Vector2>>();
+    private Color[] t_color = {Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.red};
+
+    private void OnDrawGizmos() 
+    {
+        if (test != null)
+        {
+            int index = 0;
+            foreach (var pos in targetedList)
+            {
+                index++;
+
+                index %= t_color.Length;
+
+                Gizmos.color = t_color[index];
+
+                Gizmos.DrawWireSphere(pos.Key, 0.25f);
+                Gizmos.DrawWireSphere(pos.Value, 0.5f);
+            }
+        }
+    }
+
 }

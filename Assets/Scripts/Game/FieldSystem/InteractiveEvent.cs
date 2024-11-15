@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractiveEvent : MonoBehaviour
 {
@@ -25,26 +27,55 @@ public class InteractiveEvent : MonoBehaviour
     [SerializeField] private Animation interactiveAni;
     [SerializeField] private SpriteRenderer interactiveSpriteRender;
 
+    [Space(10f)]
+    [Header("상호작용 후 대기 조건")][SerializeField] private UnityEngine.Events.UnityEvent returnSeatCheck;
+    [Header("조건 없을 시 시간")][SerializeField] private float returnSeatDelay;
+
+
+    //사물이랑 상호작용할 때 캐릭터를 사물 방향으로 회전할려고 추가함
+    private Func<bool> enviDirection;
+
     void Awake()
     {
+        if (interactiveType != InteractiveType.Environment)
+        {
+            return;
+        }
+
         interactiveAni = GetComponent<Animation>();
+
+        Environment envi = GetComponent<Environment>();
+
+        if (envi)
+        {
+            enviDirection = envi.GetIsRight;
+        }
     }
 
     //callback -> 상호작용 이후 증가하는 요소들 넣어줌
     //targetAni -> 상호작용 시 애니메이션 동작하는 이벤트 넘겨줌, 자리가 바뀌게 될 수도 있으니 상호작용 때 마다 계속 넘겨주는걸로
-    public void Interactive(bool isBroadcastPlanning, int targetIndex, out Action targetAni, params Action<int>[] callback)
+    //targetFlipRight로 돌려주는데, 캐릭터는 Character에 있는 함수 이벤트리스트에 넣어서 다시 돌려주면 되는데
+    //사물의 경우 사용할 시 다시 돌려주는 함수를 Environment에 따로 구현 필요함.
+    public void Interactive(bool isBroadcastPlanning, int targetIndex, out bool characterFlipRight, out Action targetAni, Action returnSeat, params Action<int>[] callback)
     {
         targetAni= null;
+        characterFlipRight = false;
 
         switch (interactiveType)
         {
             case InteractiveType.Environment:
             targetAni = PlayInteractiveAnimation;       //임시 등록
-            EnvironmentInteractive(isBroadcastPlanning);
+            EnvironmentInteractive(isBroadcastPlanning, out characterFlipRight);
             break;
             case InteractiveType.Character:
             CharacterInteractive(isBroadcastPlanning, targetIndex, callback);
             break;
+        }
+
+        //자리로 되돌아가는 조건 체크를 위한 코루틴
+        if (returnSeat != null)
+        {
+            StartCoroutine(WaitReturnSeatEventCall(returnSeat));
         }
     }
 
@@ -60,18 +91,18 @@ public class InteractiveEvent : MonoBehaviour
         {
 
             //테스트
-            CharacterManager.Instance.RequestPopupMessage("흠..", transform, null, null);
+            //CharacterManager.Instance.RequestPopupMessage("흠..", transform, null, null);
             //방송제작중이 아닐 경우 특수 재화 증가
             //캐릭터 매니저 통해서 broadcastplanning에게 추가 요청
         }
     }
     
-    //캐릭터는 콜백받아서 
-
-    private void EnvironmentInteractive(bool isBroadcastPlanning, params Action<int>[] callback)
+    private void EnvironmentInteractive(bool isBroadcastPlanning, out bool characterFlipRight, params Action[] callback)
     {
-        //캐릭터의 체력을 회복하는 등 캐릭터 자체에 효과가 들어가게 됨
+        //캐릭터가 사물과 상호작용할 때 방향 flip을 해주기 위함.
+        characterFlipRight = (bool)enviDirection?.Invoke();
 
+        //캐릭터의 체력을 회복하는 등 캐릭터 자체에 효과가 들어가게 됨
         if (isBroadcastPlanning)
         {  
             //제작중인 경우는 없는걸로 하는게 맞는 듯.
@@ -101,6 +132,25 @@ public class InteractiveEvent : MonoBehaviour
         {
             eventData?.Invoke();
         }
+    }
+
+    
+
+    private IEnumerator WaitReturnSeatEventCall(Action returnSeat)
+    {
+        if (returnSeatCheck.GetPersistentEventCount() > 0)
+        {
+            yield return returnSeatCheck;
+        }
+        else
+        {
+            yield return new WaitForSeconds(returnSeatDelay);
+        }
+        
+        returnSeat?.Invoke();
+        CallAllEvent();
+
+        yield return null;
     }
 
     /*

@@ -46,6 +46,7 @@ public class CharacterMessageManager : ObjectPooling<CharacterMessageManager, Ch
         return messageObj;
     }
 
+    //scaler값 곱해야할 듯
     public Vector2 MessagePosToScreenPos(Vector2 messagePos)
     {
         float width = Screen.width;
@@ -55,5 +56,15 @@ public class CharacterMessageManager : ObjectPooling<CharacterMessageManager, Ch
         messagePos.y -= height * 0.5f;
 
         return messagePos;
+    }
+
+
+
+    //environment / character가 메세지 요청할 때 쓸 함수. 
+    //매개변수로 리소스 아이디 넘겨줘서 받는걸로
+    //아래에서는 datamanager에게 요청해서 받아오는걸로
+    public string GetMessage(long id)
+    {
+        return null;
     }
 }

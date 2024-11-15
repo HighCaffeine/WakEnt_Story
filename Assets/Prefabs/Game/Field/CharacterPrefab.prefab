@@ -189,9 +189,11 @@ MonoBehaviour:
   iSEGYEIDOL: 0
   animator: {fileID: -3480857999503869268}
   currentState: 0
+  isRight: 0
   interactiveLayer:
     serializedVersion: 2
     m_Bits: 1408
+  TEST_targetPos: {x: 0, y: 0}
 --- !u!114 &-5976408289483800729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,9 +207,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactiveType: 1
-  interactiveEventList: []
+  interactiveEventList:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3579743073778454671}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: ChangeStateInter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3579743073778454671}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: ResetCharacterInterState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3579743073778454671}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: FlipEndInteractive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   interactiveAni: {fileID: 0}
   interactiveSpriteRender: {fileID: 0}
+  returnSeatCheck:
+    m_PersistentCalls:
+      m_Calls: []
+  returnSeatDelay: 3
 --- !u!95 &-3480857999503869268
 Animator:
   serializedVersion: 5

@@ -15,6 +15,7 @@ public class PathFinding : GenericSingleton<PathFinding>
         testCheckError = new List<Vector2>();
     } 
 
+    //변수 추가해서 상호작용 직후 돌아갈 경우 처음은 interactive 타일 체크 X
     public Queue<Vector2> CurvedPathFind(Vector2 productorPos, Vector2 targetPos)
     {
         Stack<Vector2> vec = PathFind(productorPos, targetPos);
@@ -58,7 +59,6 @@ public class PathFinding : GenericSingleton<PathFinding>
 
             foreach (var node in aroundNode)
             {
-
                 if (closeNode.Contains(node))
                 {
                     continue;
@@ -238,23 +238,45 @@ public class PathFinding : GenericSingleton<PathFinding>
         int xDistance = Mathf.Abs(firstNode.xPos - secondNode.xPos);
         int yDistance = Mathf.Abs(firstNode.yPos - secondNode.yPos);
 
-        if (xDistance < yDistance)
+        if (xSign * ySign > 0)
         {
-           return xDistance * TOPSIDE + (yDistance - xDistance) * DIAGONALSIDE;
-        }
-        else if (xDistance > yDistance)
-        {
-           return yDistance * TOPSIDE + (xDistance - yDistance) * DIAGONALSIDE;
-        }
-        else
-        {
-            if (xSign * ySign > 0)
+            if (xDistance < yDistance)
             {
-                return yDistance * SIDE;
+                return xDistance * TOPSIDE + (yDistance - xDistance) * DIAGONALSIDE;
+            }
+            else if (xDistance > yDistance)
+            {
+                return yDistance * TOPSIDE + (xDistance - yDistance) * DIAGONALSIDE;
             }
             else
             {
                 return yDistance * TOPSIDE;
+            }
+        }
+        else if (xSign * ySign < 0)
+        {
+             if (xDistance < yDistance)
+            {
+                return xDistance * SIDE + (yDistance - xDistance) * DIAGONALSIDE;
+            }
+            else if (xDistance > yDistance)
+            {
+                return yDistance * SIDE + (xDistance - yDistance) * DIAGONALSIDE;
+            }   
+            else
+            {
+                return xDistance * SIDE;
+            }    
+        }
+        else
+        {
+            if (xSign == 0)
+            {
+                return yDistance * DIAGONALSIDE;
+            }
+            else
+            {
+                return xDistance * DIAGONALSIDE;
             }
         }
     }
@@ -450,7 +472,7 @@ public class PathFinding : GenericSingleton<PathFinding>
     public void TestResetList()
     {
         testCheckBezier.Clear();
-        testCheckBezier.Clear();
+        testCheckPath.Clear();
         testCheckBezierPoint.Clear();
         testCheckError.Clear();
     }   

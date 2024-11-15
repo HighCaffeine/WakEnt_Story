@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Devcat;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour, 
@@ -37,7 +38,7 @@ public class Character : MonoBehaviour,
     방송제작이 시작 됐다고 매니저 측에서 확인되면, 이벤트 호출해서 현재 맵에 잇는 
     캐릭터들을 work상태로 변경
 
-
+    
 
 
     */
@@ -98,6 +99,8 @@ public class Character : MonoBehaviour,
 
     }
 
+    private bool isFirstMoveFromSetData;
+
     public void SetData(Sprite sprite, CharacterData characterData, int characterID)
     {
         this.characterData = characterData;
@@ -127,10 +130,18 @@ public class Character : MonoBehaviour,
         aoc[ResourceType.WorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WorkAni);
         aoc[ResourceType.SitAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitAni);
 
-        animator.speed = ANISPEED;
-
-
+        AnimationSpeedSet(false);
         animator.writeDefaultValuesOnDisable = false;
+        
+        isRight = true;
+        isFirstMoveFromSetData = true;
+
+        UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
+
+
+        //test
+        CharacterManager.Instance.testaction.Add(TEST_TurnToMoveState);
+
     }
 
     private void FixedUpdate()
@@ -168,6 +179,8 @@ public class Character : MonoBehaviour,
     private bool SitAni {get {return animator.GetBool(AniState.SitAni.ToString());} set {animator.SetBool(AniState.SitAni.ToString(), value);}}
 
     private int targetIndex;
+
+    [SerializeField]private bool isRight;
 
     private void SetSit()
     {
@@ -213,13 +226,19 @@ public class Character : MonoBehaviour,
     {
         //기본 컴퓨터 두드리는 애니메이션 돌림
         //ani.Play(aniNames[ValueCastTo<long>.From(AniName.IdleKeyboard)]);
-        SetIdle();
+        //SetIdle();
 
         //조건으로 제작중이라고 전달 받으면 work로 변경
-        if (isBroadcastPlanning)
-        {
-            currentState = State.Work;
-        }
+        // if (isBroadcastPlanning)
+        // {
+        //     //SetWork();
+        // }
+    }
+
+
+    public void TEST_TurnToMoveState()
+    {
+        currentState = State.Move;
     }
 
     private void Move()
@@ -234,39 +253,79 @@ public class Character : MonoBehaviour,
             return;
         }
 
+        Debug.Log(transform.name);
+
+        moveCoroutine = StartCoroutine(MoveToTarget(path, moveType, moveDelegate));
+
+        path = null;
+    }   
+
+    Queue<Vector2> path;
+    MoveType moveType;
+
+    Action moveDelegate;
+
+    bool moveToTarget;
+    private void CheckMoveToTarget()
+    {
+        if ((characterData.SeatNumber == 3 || characterData.SeatNumber == 4))
+        {
+            //return;
+        }
+
+        if (moveCoroutine != null || !(bool)OnCharacterCanInteractive?.Invoke(characterData.SeatNumber))
+        {
+            SetWalkForRandomSec();
+            return;
+        }
 
         //targetIndex -> 중복 검사를 위해 넣어둔 매니저의 타겟리스트 내부의 위치
         //이동 끝나고 해당 index는 비워줌
-        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, 
-                                                characterData.SeatNumber - 1, out targetIndex, out lastPos);
+        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, 
+                                            characterData.SeatNumber - 1, out targetIndex, out lastPos);
 
-        TEST_targetPos = lastPos;
 
         if (path == null)
         {
-            SetIdle();
+            if (isBroadcastPlanning) 
+            {
+                SetWork();
+            }
+            else
+            {
+                SetIdle();
+            }
 
-            Debug.Log(transform.name + " Path Not Found");
+            SetWalkForRandomSec();
 
             return;
         }
 
-        moveCoroutine = StartCoroutine(MoveToTarget(path, MoveType.Target, null));
-    }   
+        TEST_targetPos = lastPos;
+        moveType = MoveType.Target;
+        moveDelegate = null;
+        moveToTarget = true;
+        SetWalk();
+    }
 
 
     //캐릭터 본인 위치로 이동
     public void ReturnMySeat()
     {
-        Queue<Vector2> path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.MoveToMySeat, 
+        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.MoveToMySeat, 
                                                 characterData.SeatNumber - 1, out targetIndex, out lastPos);
 
-                                                
-
         //테스트 메세지
-        RequestMessage("하이네");
+        if (isFirstMoveFromSetData)
+        {
+            RequestMessage("하이네");
+        }
 
-        moveCoroutine = StartCoroutine(MoveToTarget(path, MoveType.MySeat, Sit));
+        isFirstMoveFromSetData = true;
+        moveType = MoveType.MySeat;
+        moveDelegate = Sit;
+
+        SetWalk();
     }
 
     private Vector2 lastPos;
@@ -275,21 +334,14 @@ public class Character : MonoBehaviour,
     {
         //isCharacterMove = true;
 
-        Debug.Log(transform.name + " - Move");
-
         if (isOnMySeat)
         {
             yield return StandUp();
-
-            Debug.Log(transform.name + " - Stand Up");
         }
 
-        Debug.Log(transform.name + " PathCount : " + path.Count);
-
-        SetWalk();
         isCharacterMove = true;
 
-        while (path.Count > ValueCastTo<int>.From(moveType))
+        while (path.Count > 0)
         {
             Vector2 targetPos = path.Dequeue();
 
@@ -298,13 +350,14 @@ public class Character : MonoBehaviour,
             yield return StartCoroutine(MoveToTargetPos(targetPos));
         }
 
-        Debug.Log(transform.name + " - end move");
-
         FlipToTarget(lastPos);
 
         isCharacterMove = false;
-        currentState = State.Interactive;
+
         action?.Invoke();
+        currentState = State.Interactive;
+
+        path = null;
 
         //이동 끝나서 코루틴 null로 바꾸고 상태 상호작용으로 변경
         //isCharacterMove = false;
@@ -316,8 +369,11 @@ public class Character : MonoBehaviour,
     {
         Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
 
-        while (!(Vector2.Distance(transform.position, targetPos) <= 0.02f))
+        isCharacterMove = true; 
+        while (!(Vector2.Distance(transform.position, targetPos) <= 0.03f))
         {
+            
+
             Vector2 newPos = transform.position; 
             newPos += direction * Time.deltaTime * 0.75f;
 
@@ -327,19 +383,30 @@ public class Character : MonoBehaviour,
         }
 
         transform.position = targetPos;
+        isCharacterMove = false;
 
         //seatSpriteOffEvent?.Invoke();
     }
 
     private void FlipToTarget(Vector2 targetPos)
     {
+        bool isRight = targetPos.x < transform.position.x ? false : true;
+
+        Flip(isRight);
+    }
+
+    private void Flip(bool isRight)
+    {
         Vector2 characterScale = transform.localScale;
+        int scaleX = isRight ? -1 : 1;
 
-        int multi = targetPos.x <= transform.position.x ? 1 : -1;
-
-        characterScale.x = multi;
-
+        characterScale.x = scaleX;
         transform.localScale = characterScale;
+    }
+
+    public void FlipEndInteractive()
+    {
+        Flip(isRight);
     }
 
     [SerializeField] private LayerMask interactiveLayer;
@@ -360,49 +427,88 @@ public class Character : MonoBehaviour,
         //interactive 시 ineractive 요청한 캐릭터와 요청받은 캐릭터 둘 다 메세지를 띄워야 함.
         //interactive가 끝났다는 것도 리턴 받아야 함.
 
-        var target = Physics2D.OverlapCircle(lastPos, 0.5f, interactiveLayer).transform;
+        Transform target;
+
+        if (this.targetIndex != -1)
+        {
+            LayerMask characterInterLayer = (1 << LayerMask.NameToLayer("Character")) & interactiveLayer.value;
+
+            target = Physics2D.OverlapCircle(lastPos, 0.1f, characterInterLayer.value).transform;
+        }
+        else
+        {
+            LayerMask characterInterLayer = (1 << LayerMask.NameToLayer("Character")) ^ interactiveLayer.value;
+
+            target = Physics2D.OverlapCircle(lastPos, 0.1f, characterInterLayer.value).transform;
+        }
+
 
         InteractiveEvent interactiveEvent = target.GetComponent<InteractiveEvent>();
+        bool interTargetFlipRight = target.position.x < transform.position.x ? false : true;
         
         //캐릭터체크
         var targetCharacter = target.GetComponent<Character>();
-        int targetIndex = -1;
 
-        //Debug.Log(transform.name + "interactive start");
-        //Debug.Log("target : " + target);
-
-
-
-        if (targetCharacter != null && !isOnMySeat)
+        if (targetCharacter != null)
         {
             if (targetCharacter.name == transform.name)
             {
                 return;
             }
 
-            targetIndex = targetCharacter.GetCharacterIndex();
 
             targetCharacter.TEST_Message("안녕 언니");
             targetCharacter.FlipToTarget(transform.position);
 
             TEST_Message("안녕 버거야");
 
-            currentState = State.None;
-
             //캐릭터 상호작용
             //return my seat 함수 전달
-            interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, out interactiveTargetAction,this.StatAdd);
 
-            return;
+            interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,            //순서대로 방송중인지, 타겟이 몇번인지(캐릭터용)
+                                                                out isRight,                    //target의 방향
+                                                                out interactiveTargetAction,    // 타겟의 애니메이션 받을려고 넣음
+                                                                ReturnMySeat,                   //상호작용 끝나면 자리로 되돌아갈 수 있도록 콜백
+                                                                StatAdd);                       //상호작용 시 스텟추가를 위해 콜백
+        }
+        else
+        {
+            //캐릭터가 처음으로 본인 자리에 가서 interactive하는 경우에는 returnmyseat 이벤트 호출 X
+
+            
+
+            if (isFirstMoveFromSetData)
+            {
+                isFirstMoveFromSetData = false;
+                interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,
+                                                                    out isRight, 
+                                                                    out interactiveTargetAction, 
+                                                                    null, 
+                                                                    StatAdd);
+            }
+            else
+            {
+                interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, 
+                                                                    out isRight, 
+                                                                    out interactiveTargetAction, 
+                                                                    ReturnMySeat, 
+                                                                    StatAdd);
+            }
         }
 
-        //Debug.Log(transform.name + " -> " + target);
-        //Debug.Log("inetactive : " + interactiveEvent);
-
-        //사물 상호작용
-        interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, out interactiveTargetAction,this.StatAdd);
-
         currentState = State.None;
+    }
+
+    public void ChangeStateInter()
+    {
+        if (isBroadcastPlanning)
+        {
+            SetWork();
+        }
+        else
+        {
+            SetIdle();
+        }
     }
 
     public void TEST_Message(string msg)
@@ -449,8 +555,8 @@ public class Character : MonoBehaviour,
 
     CharacterManager.OnUpdateCharacterState OnUpdateCharacterState; //캐릭터 퇴근, 출근, 해고 상태 업데이트
                                                                     //매니저가 모든 캐릭터의 상태를 가지고 있음.
-
     CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex;           //좌석에 앉을 때 0으로 변경, 좌석 일어날 때 1 
+    CharacterManager.OnCharacterCanInteractive OnCharacterCanInteractive;
 
 
     //콜백용 함수 전부 등록
@@ -513,6 +619,7 @@ public class Character : MonoBehaviour,
         RegisterCharacterStateUpdate(CharacterManager.Instance.SetCharacterStatus);
         RegisterMovementEventToManager();
         RegisterUpdateSeatIndexEvent(CharacterManager.Instance.UpdateSeatInterState); //이벤트 등록 함수 매니저측에서 만들어서 ㄱㄱ
+        RegisterCharacterCanInteractiveEvent(CharacterManager.Instance.IsCanMoveForInteractive);
 
         //CharacterManager.Instance.SetCharacterInfo(characterData);
     }
@@ -544,6 +651,8 @@ public class Character : MonoBehaviour,
         return false;
     }
 
+
+    //내부에서 따로 random할거
     private void StatAdd(int amount)
     {
         //할당치 체크 완료 후 작업자 스텟 증가 요청 -> 매니저 통해서 Productor매니저가서 ProductorInfo 증가
@@ -561,6 +670,12 @@ public class Character : MonoBehaviour,
         StartCoroutine(SitCoroutine());
     }
 
+    //interactiveEvent에 callevent에 추가해서 사용
+    public void ResetCharacterInterState()
+    {
+        UpdateSeatState(CharacterManager.CharacterInteractiveState.CanInteractive);
+    }
+
     //캐릭터에 붙어있는 interactive event에 해당 이벤트 넣어서 call all event에서 실행(interactive 끝날 때)
     private void UpdateSeatState(CharacterManager.CharacterInteractiveState characterInteractiveState)
     {
@@ -569,6 +684,11 @@ public class Character : MonoBehaviour,
 
     private IEnumerator SitCoroutine()
     {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
+
         //lastpos로 가서 애니메이션 으로 바꿔치기 할 거임
         yield return StartCoroutine(MoveToTargetPos(lastPos));
 
@@ -576,21 +696,38 @@ public class Character : MonoBehaviour,
 
         isOnMySeat = true;
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CanInteractive);
+
+
         SetSit();
 
-        Invoke("SetWalk", UnityEngine.Random.Range(5, 10));
+        Flip(isRight);
+
+        SetWalkForRandomSec();
+    }
+
+    private void SetWalkForRandomSec()
+    {
+        if (moveToTarget)
+        {
+            Invoke("SetWalkForRandomSec", UnityEngine.Random.Range(10, 15));
+
+            moveToTarget  = false;
+
+            return;
+        }
+
+        Invoke("CheckMoveToTarget", UnityEngine.Random.Range(3, 6));
     }
 
     private void AnimationSpeedSet(bool reverse)
     {
         if (reverse)
         {
-            animator.speed = ANISPEED * -1; 
-            //animator.StartPlayback();
+            animator.SetFloat("AniSpeed", ANISPEED * -1);
         }
         else
         {
-            animator.speed = ANISPEED; 
+            animator.SetFloat("AniSpeed", ANISPEED);
         }
     }
 
@@ -618,12 +755,10 @@ public class Character : MonoBehaviour,
     {
         if (isBroadcastPlanning)
         {
-            currentState = State.Work;
             SetWork();
         }
         else
         {
-            currentState = State.Idle;
             SetIdle();
         }
 
@@ -650,5 +785,10 @@ public class Character : MonoBehaviour,
     public void RegisterUpdateSeatIndexEvent(CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex)
     {
         this.OnUpdateSeatIndex = OnUpdateSeatIndex;
+    }
+
+    public void RegisterCharacterCanInteractiveEvent(CharacterManager.OnCharacterCanInteractive OnCharacterCanInteractive)
+    {
+        this.OnCharacterCanInteractive = OnCharacterCanInteractive;
     }
 }

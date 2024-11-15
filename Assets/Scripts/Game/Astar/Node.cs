@@ -13,7 +13,7 @@ public class Node
     public int hCost { get; set;} // 현재 노드부터 목표 노드까지의 거리
     public int FCost { get=> gCost + hCost; } // 현재 노드의 총 거리 값
 
-    public bool IsNotWalkalbe { get => isNotWalkable; private set {} }
+    public bool IsNotWalkable { get => isNotWalkable; private set {} }
     public bool IsInteractable { get => isInteractiveArea; private set {}}
     public Vector2 Pos { get => nodePos; private set{} }
 
