@@ -363,8 +363,27 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
         SetSeatPos();
 
+        int temp = 0;
+
         foreach (var data in characterDataList)
         {
+            temp++;
+
+            if (!((temp == 2) || (temp == 3)))
+            {
+                //continue;
+            }
+
+            if ((temp == 2))
+            {
+                //continue;
+            }
+
+            if (!(temp == 4))
+            {
+                //continue;
+            }
+
             if (data.isFieldCharacter == "O")
             {
                 Character character = GetPool();

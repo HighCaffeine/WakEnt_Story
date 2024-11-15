@@ -254,9 +254,16 @@ public class Astar : MonoBehaviour
                 int aroundNodeX = middleNode.xPos + x;
                 int aroundNodeY = middleNode.yPos + y;
 
-                if (isCheckDiagonal && (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY)))
+                if (xNotWalkable.Contains(aroundNodeX) || yNotWalkable.Contains(aroundNodeY))
                 {
-                    return GetAroundNode(middleNode, targetNode, false);
+                    if (isCheckDiagonal)
+                    {
+                        return GetAroundNode(middleNode, targetNode, false);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 if (aroundNodeX >= 0 && aroundNodeX < worldSizeX && aroundNodeY >= 0 && aroundNodeY < worldSizeY)

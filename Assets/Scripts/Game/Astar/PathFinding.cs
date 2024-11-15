@@ -77,7 +77,7 @@ public class PathFinding : GenericSingleton<PathFinding>
                 else
                 {
                     node.gCost = newGcost;
-                    node.hCost = GetDistance(currentNode, targetNode);
+                    node.hCost = GetDistance(node, targetNode);
                     node.parentNode = currentNode;
 
                     openNode.Add(node);
