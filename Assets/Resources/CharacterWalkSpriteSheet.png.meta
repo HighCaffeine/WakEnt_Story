@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 492
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -126,10 +126,10 @@ TextureImporter:
       name: CharacterWalkSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 254
-        y: 1477
-        width: 306
-        height: 490
+        x: 149
+        y: 1
+        width: 132
+        height: 255
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,10 +147,10 @@ TextureImporter:
       name: CharacterWalkSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 814
-        y: 1477
-        width: 306
-        height: 490
+        x: 422
+        y: 1
+        width: 158
+        height: 246
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,10 +168,10 @@ TextureImporter:
       name: CharacterWalkSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 1374
-        y: 1477
-        width: 306
-        height: 490
+        x: 729
+        y: 1
+        width: 132
+        height: 255
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,10 +189,10 @@ TextureImporter:
       name: CharacterWalkSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 1934
-        y: 1477
-        width: 306
-        height: 490
+        x: 1019
+        y: 1
+        width: 123
+        height: 246
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,241 +210,10 @@ TextureImporter:
       name: CharacterWalkSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 2494
-        y: 1477
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc60a547fd52ee346826547bde65aa1e
-      internalID: 1682436917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_5
-      rect:
-        serializedVersion: 2
-        x: 254
-        y: 985
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14afa67dcb4e7de4d8609958116d1056
-      internalID: 1779717601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_6
-      rect:
-        serializedVersion: 2
-        x: 814
-        y: 985
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db3055d869cb1fe44969cec232ea399b
-      internalID: -1455895608
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_7
-      rect:
-        serializedVersion: 2
-        x: 1374
-        y: 985
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9e873ca34fd7b2488c89ee39781a13b
-      internalID: -207043509
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_8
-      rect:
-        serializedVersion: 2
-        x: 1934
-        y: 985
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b245e8e678d8a2945955d6eef9d0fc34
-      internalID: -1500829978
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_9
-      rect:
-        serializedVersion: 2
-        x: 2494
-        y: 985
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9aeb4f2551db6b34da4313f91a24950a
-      internalID: 1633985512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_10
-      rect:
-        serializedVersion: 2
-        x: 254
-        y: 493
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41307af5f3cfe8d4cb45d25a24e8208d
-      internalID: -1566868187
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_11
-      rect:
-        serializedVersion: 2
-        x: 814
-        y: 493
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e680189c8b30e84ab9111efa7483779
-      internalID: -224309689
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_12
-      rect:
-        serializedVersion: 2
-        x: 1374
-        y: 493
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 208833e7e57008444b1082513b201baa
-      internalID: 540688243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_13
-      rect:
-        serializedVersion: 2
-        x: 1934
-        y: 493
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c845d39a3e00bd74c8cafbe6f865573d
-      internalID: -884423172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_14
-      rect:
-        serializedVersion: 2
-        x: 2494
-        y: 493
-        width: 306
-        height: 490
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ded385c555cc0f46ae9d57780af85fe
-      internalID: 506970551
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterWalkSpriteSheet_15
-      rect:
-        serializedVersion: 2
-        x: 254
+        x: 1309
         y: 1
-        width: 306
-        height: 490
+        width: 132
+        height: 255
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45d8f68798623204fbab2a3de0e30fba
-      internalID: -2044620976
+      spriteID: 43e25124ddd516a42b43e9dc806e061f
+      internalID: -1793263987
       vertices: []
       indices: 
       edges: []
@@ -471,24 +240,9 @@ TextureImporter:
     nameFileIdTable:
       CharacterWalkSpriteSheet_0: -280809937
       CharacterWalkSpriteSheet_1: 222660607
-      CharacterWalkSpriteSheet_10: -1566868187
-      CharacterWalkSpriteSheet_11: -224309689
-      CharacterWalkSpriteSheet_12: 540688243
-      CharacterWalkSpriteSheet_13: -884423172
-      CharacterWalkSpriteSheet_14: 506970551
-      CharacterWalkSpriteSheet_15: -2044620976
-      CharacterWalkSpriteSheet_16: -453055583
-      CharacterWalkSpriteSheet_17: 1944776751
-      CharacterWalkSpriteSheet_18: 153329170
-      CharacterWalkSpriteSheet_19: -648322218
       CharacterWalkSpriteSheet_2: 287293662
       CharacterWalkSpriteSheet_3: 239779387
-      CharacterWalkSpriteSheet_4: 1682436917
-      CharacterWalkSpriteSheet_5: 1779717601
-      CharacterWalkSpriteSheet_6: -1455895608
-      CharacterWalkSpriteSheet_7: -207043509
-      CharacterWalkSpriteSheet_8: -1500829978
-      CharacterWalkSpriteSheet_9: 1633985512
+      CharacterWalkSpriteSheet_4: -1793263987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

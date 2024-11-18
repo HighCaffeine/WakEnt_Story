@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Devcat;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour, 
@@ -139,9 +138,7 @@ public class Character : MonoBehaviour,
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
 
 
-        //test
         CharacterManager.Instance.testaction.Add(TEST_TurnToMoveState);
-
     }
 
     private void FixedUpdate()
@@ -268,11 +265,6 @@ public class Character : MonoBehaviour,
     bool moveToTarget;
     private void CheckMoveToTarget()
     {
-        if ((characterData.SeatNumber == 3 || characterData.SeatNumber == 4))
-        {
-            //return;
-        }
-
         if (moveCoroutine != null || !(bool)OnCharacterCanInteractive?.Invoke(characterData.SeatNumber))
         {
             SetWalkForRandomSec();
@@ -401,7 +393,7 @@ public class Character : MonoBehaviour,
         int scaleX = isRight ? -1 : 1;
 
         characterScale.x = scaleX;
-        transform.localScale = characterScale;
+        transform.GetChild(0).localScale = characterScale;
     }
 
     public void FlipEndInteractive()
@@ -558,6 +550,9 @@ public class Character : MonoBehaviour,
     CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex;           //좌석에 앉을 때 0으로 변경, 좌석 일어날 때 1 
     CharacterManager.OnCharacterCanInteractive OnCharacterCanInteractive;
 
+    CharacterManager.OnCharacterInteractiveSenderEvent OnCharacterInteractiveSenderEvent;   //상호작용 스텟팝업 이벤트
+    CharacterManager.OnCharacterSFXRequestEvent OnCharacterSFXRequestEvent;                 //효과음 요청 이벤트
+
 
     //콜백용 함수 전부 등록
     public void RegisterMovementEventToManager()
@@ -620,10 +615,52 @@ public class Character : MonoBehaviour,
         RegisterMovementEventToManager();
         RegisterUpdateSeatIndexEvent(CharacterManager.Instance.UpdateSeatInterState); //이벤트 등록 함수 매니저측에서 만들어서 ㄱㄱ
         RegisterCharacterCanInteractiveEvent(CharacterManager.Instance.IsCanMoveForInteractive);
+        RegisterCharacterInteractiveSenderEvent(CharacterManager.Instance.ReqPopupStat);
+        RegisterCharacterRequestSFXEvent(CharacterManager.Instance.RequestSFX);
 
         //CharacterManager.Instance.SetCharacterInfo(characterData);
     }
+
+    private int statAmount;
+    private UnityEngine.UI.Image popupStatImage;
+    private TMPro.TextMeshProUGUI popupStatText;
+    private Animation popupAni;
     
+    public void ReqPopupStat()
+    {
+        //매니저에게 요청
+        //StartCoroutine(PopupStatCoroutine());
+    }
+
+    private IEnumerator PopupStatCoroutine()
+    {
+        yield return PopupReq();
+
+        ActivePopupMessage();
+        ActivePopupSFX();
+    }
+    private void ActivePopupMessage()
+    {
+        popupStatImage.transform.parent.gameObject.SetActive(true);
+
+        popupAni.Play();
+    }
+    public void InactivePopupMessage()
+    {
+        popupStatImage.transform.parent.gameObject.SetActive(false);
+    }
+    private void ActivePopupSFX()
+    {
+        OnCharacterSFXRequestEvent?.Invoke(CharacterManager.CharacterSFXType.StatPopup);
+    }
+    private IEnumerator PopupReq()
+    {
+        popupStatImage.sprite = OnCharacterInteractiveSenderEvent?.Invoke(characterData.SeatNumber - 1);
+        popupStatText.text = string.Format("+{0}", statAmount);
+
+        yield return null;
+    }
+
 
     //interactive 이벤트한테 넘겨서 쓸거임.
     private void RequestMessage(string message)
@@ -653,10 +690,20 @@ public class Character : MonoBehaviour,
 
 
     //내부에서 따로 random할거
+    //스텟 이벤트는 
+    //interactive로 넘겨지고 interactive측에서 실행시킬거.
+    //productor스텟치도 알아야함. -> productor 매니저에게 등록된 이벤트로
+
     private void StatAdd(int amount)
     {
         //할당치 체크 완료 후 작업자 스텟 증가 요청 -> 매니저 통해서 Productor매니저가서 ProductorInfo 증가
         //작업자는 해당 방식으로 추가하면 되는데, 이세돌의 스텟 구조는 아직 결정을 안해서 따로 없을 수도
+    }
+
+    //statadd로 받은 결과를 charactermanager에게 받은 이벤트 호출하여 어떤 스텟의 amount값 넘겨서 표시
+    private void StatPopupRequest()
+    {
+
     }
 
     //처음 시작 때 받은 위치로 가서 좌석에 앉는 애니메이션 할거임.
@@ -790,5 +837,15 @@ public class Character : MonoBehaviour,
     public void RegisterCharacterCanInteractiveEvent(CharacterManager.OnCharacterCanInteractive OnCharacterCanInteractive)
     {
         this.OnCharacterCanInteractive = OnCharacterCanInteractive;
+    }
+
+    public void RegisterCharacterInteractiveSenderEvent(CharacterManager.OnCharacterInteractiveSenderEvent OnCharacterInteractiveSenderEvent)
+    {
+        this.OnCharacterInteractiveSenderEvent = OnCharacterInteractiveSenderEvent;
+    }
+
+    public void RegisterCharacterRequestSFXEvent(CharacterManager.OnCharacterSFXRequestEvent OnCharacterSFXRequestEvent)
+    {
+        this.OnCharacterSFXRequestEvent = OnCharacterSFXRequestEvent;
     }
 }

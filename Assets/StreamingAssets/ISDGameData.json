@@ -1162,191 +1162,215 @@
       "Key": "Item_Broadcast_Fever",
       "Info": "아이템 사용 시 캐릭터를 피버 상태로 만듭니다.",
       "ID": 101,
-      "SpriteID": 1000101
+      "SpriteID": 10101
     },
     {
       "Key": "Item_Broadcast_FatigueReliever",
       "Info": "아이템 사용 시 캐릭터의 피로도를 감소시킵니다.",
       "ID": 102,
-      "SpriteID": 1000102
+      "SpriteID": 10102
     },
     {
       "Key": "Item_Broadcast_PlanPointBoost",
       "Info": "아이템 사용 시 캐릭터를 골라 재미 포인트를 증가시키는 이벤트를 실행합니다.",
       "ID": 103,
-      "SpriteID": 1000103
+      "SpriteID": 10103
     },
     {
       "Key": "Item_Broadcast_DesignPointBoost",
       "Info": "아이템 사용 시 캐릭터를 골라 퀄리티 포인트를 증가시키는 이벤트를 실행합니다.",
       "ID": 104,
-      "SpriteID": 1000104
+      "SpriteID": 10104
     },
     {
       "Key": "Item_Broadcast_SoundPointBoost",
       "Info": "아이템 사용 시 캐릭터를 골라 음향 포인트를 증가시키는 이벤트를 실행합니다.",
       "ID": 105,
-      "SpriteID": 1000105
+      "SpriteID": 10105
     },
     {
       "Key": "Item_Broadcast_PromotionPointBoost",
       "Info": "아이템 사용 시 캐릭터를 골라 홍보 포인트를 증가시키는 이벤트를 실행합니다.",
       "ID": 106,
-      "SpriteID": 1000106
+      "SpriteID": 10106
+    },
+    {
+      "Key": "Stat_Broadcast_InterestPoint",
+      "Info": "방송 재미 스텟 수치입니다.",
+      "ID": 201,
+      "SpriteID": 10201
+    },
+    {
+      "Key": "Stat_Broadcast_QualityPoint",
+      "Info": "방송 퀄리티 스텟 수치입니다.",
+      "ID": 202,
+      "SpriteID": 10202
+    },
+    {
+      "Key": "Stat_Broadcast_SoundPoint",
+      "Info": "방송 음향 스텟 수치입니다.",
+      "ID": 203,
+      "SpriteID": 10203
+    },
+    {
+      "Key": "Stat_Broadcast_EditingPoint",
+      "Info": "방송 편집 스텟 수치입니다.",
+      "ID": 204,
+      "SpriteID": 10204
     },
     {
       "Key": "Character_ISD_Ine",
       "Info": "이세계아이돌의 첫 째 아이네",
       "ID": 1001,
-      "SpriteID": 1001001,
-      "SitSpriteID": 10001001,
-      "WalkAniID": 100001001,
-      "WorkAniID": 1000001001,
-      "IdleAniID": 10000001001,
-      "SitAniID": 100000001001
+      "SpriteID": 11001,
+      "SitSpriteID": 21001,
+      "WalkAniID": 101001,
+      "WorkAniID": 201001,
+      "IdleAniID": 301001,
+      "SitAniID": 401001
     },
     {
       "Key": "Character_ISD_Jingburger",
       "Info": "이세계아이돌의 둘 째 징버거",
       "ID": 1002,
-      "SpriteID": 1001002,
-      "SitSpriteID": 10001002,
-      "WalkAniID": 100001002,
-      "WorkAniID": 1000001002,
-      "IdleAniID": 10000001002,
-      "SitAniID": 100000001002
+      "SpriteID": 11002,
+      "SitSpriteID": 21002,
+      "WalkAniID": 101002,
+      "WorkAniID": 201002,
+      "IdleAniID": 301002,
+      "SitAniID": 401002
     },
     {
       "Key": "Character_ISD_Lilpa",
       "Info": "이세계아이돌의 셋 째 릴파",
       "ID": 1003,
-      "SpriteID": 1001003,
-      "SitSpriteID": 10001003,
-      "WalkAniID": 100001003,
-      "WorkAniID": 1000001003,
-      "IdleAniID": 10000001003,
-      "SitAniID": 100000001003
+      "SpriteID": 11003,
+      "SitSpriteID": 21003,
+      "WalkAniID": 101003,
+      "WorkAniID": 201003,
+      "IdleAniID": 301003,
+      "SitAniID": 401003
     },
     {
       "Key": "Character_ISD_Jururu",
       "Info": "이세계아이돌의 넷 째 주르르",
       "ID": 1004,
-      "SpriteID": 1001004,
-      "SitSpriteID": 10001004,
-      "WalkAniID": 100001004,
-      "WorkAniID": 1000001004,
-      "IdleAniID": 10000001004,
-      "SitAniID": 100000001004
+      "SpriteID": 11004,
+      "SitSpriteID": 21004,
+      "WalkAniID": 101004,
+      "WorkAniID": 201004,
+      "IdleAniID": 301004,
+      "SitAniID": 401004
     },
     {
       "Key": "Character_ISD_Gosegu",
       "Info": "이세계아이돌의 다섯 째 고세구",
       "ID": 1005,
-      "SpriteID": 1001005,
-      "SitSpriteID": 10001005,
-      "WalkAniID": 100001005,
-      "WorkAniID": 1000001005,
-      "IdleAniID": 10000001005,
-      "SitAniID": 100000001005
+      "SpriteID": 11005,
+      "SitSpriteID": 21005,
+      "WalkAniID": 101005,
+      "WorkAniID": 201005,
+      "IdleAniID": 301005,
+      "SitAniID": 401005
     },
     {
       "Key": "Character_ISD_Viichan",
       "Info": "이세계아이돌의 막내 비챤",
       "ID": 1006,
-      "SpriteID": 1001006,
-      "SitSpriteID": 10001006,
-      "WalkAniID": 100001006,
-      "WorkAniID": 1000001006,
-      "IdleAniID": 10000001006,
-      "SitAniID": 100000001006
+      "SpriteID": 11006,
+      "SitSpriteID": 21006,
+      "WalkAniID": 101006,
+      "WorkAniID": 201006,
+      "IdleAniID": 301006,
+      "SitAniID": 401006
     },
     {
       "Key": "Character_WAK_Wakgood",
       "Info": "왁엔터의 사장",
-      "ID": 10001,
-      "SpriteID": 1010001,
-      "SitSpriteID": 10010001,
-      "WalkAniID": 100010001,
-      "WorkAniID": 1000010001,
-      "IdleAniID": 10000010001,
-      "SitAniID": 100000010001
+      "ID": 2001,
+      "SpriteID": 12001,
+      "SitSpriteID": 22001,
+      "WalkAniID": 102001,
+      "WorkAniID": 202001,
+      "IdleAniID": 302001,
+      "SitAniID": 402001
     },
     {
       "Key": "Character_WAK_Roentgenium",
       "Info": "이세계아이돌의 매니저",
-      "ID": 10002,
-      "SpriteID": 1010002,
-      "SitSpriteID": 10010002,
-      "WalkAniID": 100010002,
-      "WorkAniID": 1000010002,
-      "IdleAniID": 10000010002,
-      "SitAniID": 100000010002
+      "ID": 2002,
+      "SpriteID": 12002,
+      "SitSpriteID": 22002,
+      "WalkAniID": 102002,
+      "WorkAniID": 202002,
+      "IdleAniID": 302002,
+      "SitAniID": 402002
     },
     {
       "Key": "Character_Productor_Temp1",
       "Info": "작업자1",
-      "ID": 100001,
-      "SpriteID": 1100001,
-      "SitSpriteID": 10100001,
-      "WalkAniID": 100100001,
-      "WorkAniID": 1000100001,
-      "IdleAniID": 10000100001,
-      "SitAniID": 100000100001
+      "ID": 3001,
+      "SpriteID": 13001,
+      "SitSpriteID": 23001,
+      "WalkAniID": 103001,
+      "WorkAniID": 203001,
+      "IdleAniID": 303001,
+      "SitAniID": 403001
     },
     {
       "Key": "Character_Productor_Temp2",
       "Info": "작업자2",
-      "ID": 100002,
-      "SpriteID": 1100002,
-      "SitSpriteID": 10100002,
-      "WalkAniID": 100100002,
-      "WorkAniID": 1000100002,
-      "IdleAniID": 10000100002,
-      "SitAniID": 100000100002
+      "ID": 3002,
+      "SpriteID": 13002,
+      "SitSpriteID": 23002,
+      "WalkAniID": 103002,
+      "WorkAniID": 203002,
+      "IdleAniID": 303002,
+      "SitAniID": 403002
     },
     {
       "Key": "Character_Productor_Temp3",
       "Info": "작업자3",
-      "ID": 100003,
-      "SpriteID": 1100003,
-      "SitSpriteID": 10100003,
-      "WalkAniID": 100100003,
-      "WorkAniID": 1000100003,
-      "IdleAniID": 10000100003,
-      "SitAniID": 100000100003
+      "ID": 3003,
+      "SpriteID": 13003,
+      "SitSpriteID": 23003,
+      "WalkAniID": 103003,
+      "WorkAniID": 203003,
+      "IdleAniID": 303003,
+      "SitAniID": 403003
     },
     {
       "Key": "Character_Productor_Temp4",
       "Info": "작업자4",
-      "ID": 100004,
-      "SpriteID": 1100004,
-      "SitSpriteID": 10100004,
-      "WalkAniID": 100100004,
-      "WorkAniID": 1000100004,
-      "IdleAniID": 10000100004,
-      "SitAniID": 100000100004
+      "ID": 3004,
+      "SpriteID": 13004,
+      "SitSpriteID": 23004,
+      "WalkAniID": 103004,
+      "WorkAniID": 203004,
+      "IdleAniID": 303004,
+      "SitAniID": 403004
     },
     {
       "Key": "Character_Productor_Temp5",
       "Info": "작업자5",
-      "ID": 100005,
-      "SpriteID": 1100005,
-      "SitSpriteID": 10100005,
-      "WalkAniID": 100100005,
-      "WorkAniID": 1000100005,
-      "IdleAniID": 10000100005,
-      "SitAniID": 100000100005
+      "ID": 3005,
+      "SpriteID": 13005,
+      "SitSpriteID": 23005,
+      "WalkAniID": 103005,
+      "WorkAniID": 203005,
+      "IdleAniID": 303005,
+      "SitAniID": 403005
     },
     {
       "Key": "Character_Productor_Temp6",
       "Info": "작업자6",
-      "ID": 100006,
-      "SpriteID": 1100006,
-      "SitSpriteID": 10100006,
-      "WalkAniID": 100100006,
-      "WorkAniID": 1000100006,
-      "IdleAniID": 10000100006,
-      "SitAniID": 100000100006
+      "ID": 3006,
+      "SpriteID": 13006,
+      "SitSpriteID": 23006,
+      "WalkAniID": 103006,
+      "WorkAniID": 203006,
+      "IdleAniID": 303006,
+      "SitAniID": 403006
     }
   ],
   "CharacterData": [
@@ -1356,6 +1380,7 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 1,
       "CharacterID": 1001,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
@@ -1364,6 +1389,7 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 2,
       "CharacterID": 1002,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
@@ -1372,6 +1398,7 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 3,
       "CharacterID": 1003,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
@@ -1380,6 +1407,7 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 4,
       "CharacterID": 1004,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
@@ -1388,6 +1416,7 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 5,
       "CharacterID": 1005,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
@@ -1396,62 +1425,71 @@
       "IsFieldCharacter": "O",
       "SeatNumber": 6,
       "CharacterID": 1006,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
       "Name": "우왁굳",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 10001,
+      "CharacterID": 2001,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
       "Name": "뢴트게늄",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 10002,
+      "CharacterID": 2002,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
       "Name": "Temp1",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100001,
+      "CharacterID": 3001,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
       "Name": "Temp2",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100002,
+      "CharacterID": 3002,
+      "RemainFeverCount": 0,
       "Status": 3
     },
     {
       "Name": "Temp3",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100003,
+      "CharacterID": 3003,
+      "RemainFeverCount": 0,
       "Status": 1
     },
     {
       "Name": "Temp4",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100004,
+      "CharacterID": 3004,
+      "RemainFeverCount": 0,
       "Status": 1
     },
     {
       "Name": "Temp5",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100005,
+      "CharacterID": 3005,
+      "RemainFeverCount": 0,
       "Status": 1
     },
     {
       "Name": "Temp6",
       "IsIsegyeIdol": "X",
       "IsFieldCharacter": "X",
-      "CharacterID": 100006,
+      "CharacterID": 3006,
+      "RemainFeverCount": 0,
       "Status": 1
     },
     {

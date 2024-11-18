@@ -8,20 +8,24 @@ public enum ResourceID
     Item_Broadcast_DesignPointBoost     = 104,
     Item_Broadcast_SoundPointBoost      = 105,
     Item_Broadcast_PromotionPointBoost  = 106,
+    Stat_Broadcast_InterestPoint        = 201,
+    Stat_Broadcast_QualityPoint         = 202,
+    Stat_Broadcast_SoundPoint           = 203,
+    Stat_Broadcast_EditingPoint         = 204,
     Character_ISD_Ine                   = 1001,
     Character_ISD_Jingburger            = 1002,
     Character_ISD_Lilpa                 = 1003,
     Character_ISD_Jururu                = 1004,
     Character_ISD_Gosegu                = 1005,
     Character_ISD_Viichan               = 1006,
-    Character_WAK_Wakgood               = 10001,
-    Character_WAK_Roentgenium           = 10002,
-    Character_Productor_Temp1           = 100001,
-    Character_Productor_Temp2           = 100002,
-    Character_Productor_Temp3           = 100003,
-    Character_Productor_Temp4           = 100004,
-    Character_Productor_Temp5           = 100005,
-    Character_Productor_Temp6           = 100006,
+    Character_WAK_Wakgood               = 2001,
+    Character_WAK_Roentgenium           = 2002,
+    Character_Productor_Temp1           = 3001,
+    Character_Productor_Temp2           = 3002,
+    Character_Productor_Temp3           = 3003,
+    Character_Productor_Temp4           = 3004,
+    Character_Productor_Temp5           = 3005,
+    Character_Productor_Temp6           = 3006,
 } 
 
 //위의 ResourceID + Type값 -> 리소스 데이터
@@ -30,40 +34,37 @@ public enum ResourceID
 public enum ResourceType : long
 {
     Item                                = 100,
+    Stat                                = 200,
     ISD                                 = 1000,
-    WAK                                 = 10000,
-    Productor                           = 100000,
-    TypeCount                           = 4,
+    WAK                                 = 2000,
+    Productor                           = 3000,
+    TypeCount                           = 5,
 
-    DefaultSprite                       = 1000000,         //현재 Sprite는 아이네님 스탠딩 프로토타입으로 해둠.
-    SitSprite                           = 10000000,
+    DefaultSprite                       = 10000,         //현재 Sprite는 아이네님 스탠딩 프로토타입으로 해둠.
+    SitSprite                           = 20000,
     SpriteCount                         = 2,
 
-    WalkAni                             = 100000000,        //디롬님께서 주신 기본 캐릭터 Walk애니로 대체
-    WorkAni                             = 1000000000,
-    IdleAni                             = 10000000000,
-    SitAni                              = 100000000000,
+    WalkAni                             = 100000,        //디롬님께서 주신 기본 캐릭터 Walk애니로 대체
+    WorkAni                             = 200000,
+    IdleAni                             = 300000,
+    SitAni                              = 400000,
     AniCount                            = 4,
 }
 
-[Flags]
-public enum ResourceTypeBit
-{
-    Item                                = 1 << 2,
-    ISD                                 = 1 << 3,
-    WAK                                 = 1 << 4,
-    Productor                           = 1 << 5,
-    DefaultSprite                       = 1 << 6,         
-    SitSprite                           = 1 << 7,
-    WalkAni                             = 1 << 8,       
-    WorkAni                             = 1 << 9,
-    IdleAni                             = 1 << 10,
-    SitAni                              = 1 << 11,
-}
-
-//sprite는 2*****으로 하고
-//ani는 1*****로 주말에 수정 진행
-
+// [Flags]
+// public enum ResourceTypeBit
+// {
+//     Item                                = 1 << 2,
+//     ISD                                 = 1 << 3,
+//     WAK                                 = 1 << 4,
+//     Productor                           = 1 << 5,
+//     DefaultSprite                       = 1 << 6,         
+//     SitSprite                           = 1 << 7,
+//     WalkAni                             = 1 << 8,       
+//     WorkAni                             = 1 << 9,
+//     IdleAni                             = 1 << 10,
+//     SitAni                              = 1 << 11,
+// }
 
 
 /// <summary>
