@@ -96,7 +96,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     public delegate bool OnCharacterCanInteractive(int index);
     public delegate void OnCharacterMovementEvent(); //이벤트 매니저한테 등록해서 전체 콜백용.
     
-    public delegate Sprite OnCharacterInteractiveSenderEvent(int index);   //캐릭터가 상호작용 후 interactiveevent측에서 띄울거임.
+    public delegate void OnCharacterInteractiveSenderEvent(int index);   //캐릭터가 상호작용 후 interactiveevent측에서 띄울거임.
                                                                 // 
     public delegate void OnCharacterSFXRequestEvent(CharacterSFXType sfxType);
     private List<OnCharacterMovementEvent> OnCharacterMovementEvents;
@@ -546,9 +546,11 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
     }
 
-    public Sprite ReqPopupStat(int index)
+    public void ReqPopupStat(int index)
     {
-        return null;
+        CharacterPopupStatManager.Instance.SetStatPopup(ProductorManager.Instance.AddStatFieldInteractive(index), 
+                                                        charactersPos[index],
+                                                        ProductorManager.Instance.GetStatType(index));
     }
 
     //productormanager에게 넘겨서 characterData와 ProductorInfo index 오차 없도록

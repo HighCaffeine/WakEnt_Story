@@ -26,6 +26,7 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         Effect_ReviewSet10,
         Effect_ReviewTotalPoint,
         Effect_ReviewTotalPointFixedContent,
+        Effect_FieldStatPopup,
 
     }
     

@@ -31,9 +31,4 @@ public class Productor : MonoBehaviour, OnReturnPool<Productor>, ProductorManage
     {
         this.OnProductorFieldProcess = OnProductorFieldProcess;
     }
-
-    
-    //필드 작업자 추가 후 Astar추가 예정 -> Isometric예정이라 Layer로 검색/grid검색 둘 중 하나로
-    //필드 작업로직 추가
-    //애니메이션 컨트롤
 }

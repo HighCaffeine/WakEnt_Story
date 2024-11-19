@@ -128,6 +128,7 @@ public class ResourcesTable
     //public string Info;         //정보
     public int ID;              //리소스 ID 저장할 때 쓰는 값
     public long SpriteID;          //Sprite ID
+    public long SitSpriteID;        //앉은 이미지
     public long WalkAniID;         //걷는 애니메이션 ID
     public long WorkAniID;         //작업 애니메이션 ID
     public long IdleAniID;          //Idle 애니메이션 ID

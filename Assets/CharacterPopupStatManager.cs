@@ -12,18 +12,43 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
 
     [Header("이미지 띄우는 시간")] [SerializeField] private float disappearTime;
 
-    public float DisappearTime => disappearTime;
-
+    private RectTransform rect;
 
     private new void Awake()
     {
         base.Awake();
+
+        rect = GetComponent<RectTransform>();
     }
-    public void SetStatPopup(int statAmount, ResourceID resourceID)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="statAmount"></param>
+    /// <param name="productorType">증가시킬 스텟 종류</param>
+    public void SetStatPopup(int statAmount, Vector2 position, ProductorManager.ProductorType productorType)
     {
         CharacterStatPopup popupObj = GetPool();
 
-        popupObj.SetStatPopup(statAmount, DataManager.Instance.GetSpriteFromID(resourceID, ResourceType.Stat));
+        ResourceID resourceID = ResourceID.Stat_Broadcast_InterestPoint;
+
+        switch (productorType)
+        {
+            case ProductorManager.ProductorType.Planner:
+            resourceID = ResourceID.Stat_Broadcast_InterestPoint;
+            break;
+            case ProductorManager.ProductorType.Designer:
+            resourceID = ResourceID.Stat_Broadcast_QualityPoint;
+            break;
+            case ProductorManager.ProductorType.Composer:
+            resourceID = ResourceID.Stat_Broadcast_SoundPoint;
+            break;
+            case ProductorManager.ProductorType.Promotor:
+            resourceID = ResourceID.Stat_Broadcast_EditingPoint;
+            break;
+        }
+
+        popupObj.SetStatPopup(statAmount, DataManager.Instance.GetSpriteFromID(resourceID, ResourceType.DefaultSprite), position);
     }
 
     //scaler값 곱해야할 듯
@@ -40,6 +65,8 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
 
     public void ReqPlaySFX()
     {
-        //SoundManager.Instance.PlaySound();
+        if (!SoundManager.Instance) return;
+
+        SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_FieldStatPopup.ToString(), false);
     }
 }

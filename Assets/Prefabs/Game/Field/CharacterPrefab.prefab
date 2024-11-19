@@ -248,7 +248,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3579743073778454671}
         m_TargetAssemblyTypeName: Character, Assembly-CSharp
-        m_MethodName: ReqPopupStat
+        m_MethodName: RequestPopupStat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

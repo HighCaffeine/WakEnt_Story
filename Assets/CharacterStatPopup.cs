@@ -11,19 +11,36 @@ public class CharacterStatPopup : MonoBehaviour, OnReturnPool<CharacterStatPopup
     [SerializeField] private TMPro.TextMeshProUGUI statAmount;
     [SerializeField] private Animation popupAni;
 
+    private RectTransform rect;
+
     public void Init(OnReturnPoolEvent<CharacterStatPopup> onReturnPoolEvent)
     {
         OnReturnPool = onReturnPoolEvent;
 
+        rect = GetComponent<RectTransform>();
+
         RegisterPlaySFXEvent(CharacterPopupStatManager.Instance.ReqPlaySFX);
     }
 
-    public void SetStatPopup(int amount, Sprite statSprite)
+    public void SetStatPopup(int amount, Sprite statSprite, Vector2 position)
     {
         statImage.sprite = statSprite;
-        statAmount.text = string.Format("+{0}", statAmount);
+        statAmount.text = string.Format("+{0}", amount);
+
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(position);
+        rect.anchoredPosition = CharacterMessageManager.Instance.MessagePosToScreenPos(screenPos); 
 
         popupAni.Play();
+    }
+
+    public void PlaySFX()
+    {
+        OnPlaySFXEvent?.Invoke();
+    }
+
+    public void ReturnPool()
+    {
+        OnReturnPool?.Invoke(this);
     }
 
     public void PopupDisappear()

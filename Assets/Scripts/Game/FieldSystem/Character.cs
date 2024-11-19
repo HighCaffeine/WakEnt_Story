@@ -621,48 +621,13 @@ public class Character : MonoBehaviour,
         //CharacterManager.Instance.SetCharacterInfo(characterData);
     }
 
-    private int statAmount;
-    private UnityEngine.UI.Image popupStatImage;
-    private TMPro.TextMeshProUGUI popupStatText;
-    private Animation popupAni;
-    
-    public void ReqPopupStat()
-    {
-        //매니저에게 요청
-        //StartCoroutine(PopupStatCoroutine());
-    }
-
-    private IEnumerator PopupStatCoroutine()
-    {
-        yield return PopupReq();
-
-        ActivePopupMessage();
-        ActivePopupSFX();
-    }
-    private void ActivePopupMessage()
-    {
-        popupStatImage.transform.parent.gameObject.SetActive(true);
-
-        popupAni.Play();
-    }
-    public void InactivePopupMessage()
-    {
-        popupStatImage.transform.parent.gameObject.SetActive(false);
-    }
-    private void ActivePopupSFX()
-    {
-        OnCharacterSFXRequestEvent?.Invoke(CharacterManager.CharacterSFXType.StatPopup);
-    }
-    private IEnumerator PopupReq()
-    {
-        popupStatImage.sprite = OnCharacterInteractiveSenderEvent?.Invoke(characterData.SeatNumber - 1);
-        popupStatText.text = string.Format("+{0}", statAmount);
-
-        yield return null;
-    }
-
 
     //interactive 이벤트한테 넘겨서 쓸거임.
+    public void RequestPopupStat()
+    {
+        OnCharacterSFXRequestEvent?.Invoke(CharacterManager.CharacterSFXType.StatPopup);
+        OnCharacterInteractiveSenderEvent?.Invoke(characterData.SeatNumber - 1);
+    }
     private void RequestMessage(string message)
     {
         CharacterManager.Instance.RequestPopupMessage(message, transform, GetIsCharacterMove);

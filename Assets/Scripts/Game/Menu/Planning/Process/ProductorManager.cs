@@ -823,4 +823,14 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         //end
         return addValue;
     } 
+
+    public ProductorType GetStatType(int targetIndex)
+    {
+        ProductorInfo targetCharacter = productorInfos[targetIndex];
+
+        int statIndex = CalculateWorkProcess(targetCharacter);
+
+
+        return ProductorType.Planner + statIndex;
+    }
 }

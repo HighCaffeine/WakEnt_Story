@@ -379,24 +379,31 @@ public class DataManager : GenericSingleton<DataManager>
             //     resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.Sprite.ToString(), ResourceType.SitSprite.ToString() + "_" + data.Key)));
             // }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.IdleAni.ToString(), string.Format("{0}_{1}",ResourceType.IdleAni.ToString(), data.Key))))
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.DefaultSprite.ToString(), ResourceType.SitSprite.ToString(), string.Format("{0}_{1}", ResourceType.SitSprite.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.IdleAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.IdleAni.ToString(), ResourceType.IdleAni.ToString() + "_" + data.Key)));
+                resourceHashTable.Add(data.SitSpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.DefaultSprite.ToString(), 
+                                                                                            ResourceType.SitSprite.ToString(), 
+                                                                                            string.Format("{0}_{1}", ResourceType.SitSprite.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WalkAni.ToString(), string.Format("{0}_{1}",ResourceType.WalkAni.ToString(), data.Key))))
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.IdleAni.ToString(), string.Format("{0}_{1}", ResourceType.IdleAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.WalkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WalkAni.ToString(), ResourceType.WalkAni.ToString() + "_" + data.Key)));
+                resourceHashTable.Add(data.IdleAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.IdleAni.ToString(), string.Format("{0}_{1}", ResourceType.IdleAni.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WorkAni.ToString(), string.Format("{0}_{1}",ResourceType.WorkAni.ToString(), data.Key))))
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WalkAni.ToString(), string.Format("{0}_{1}", ResourceType.WalkAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.WorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WorkAni.ToString(), ResourceType.WorkAni.ToString() + "_" + data.Key)));
+                resourceHashTable.Add(data.WalkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WalkAni.ToString(), string.Format("{0}_{1}", ResourceType.WalkAni.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.SitAni.ToString(), string.Format("{0}_{1}",ResourceType.SitAni.ToString(), data.Key))))
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WorkAni.ToString(), string.Format("{0}_{1}", ResourceType.WorkAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.SitAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.SitAni.ToString(), ResourceType.SitAni.ToString() + "_" + data.Key)));
+                resourceHashTable.Add(data.WorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WorkAni.ToString(), string.Format("{0}_{1}", ResourceType.WorkAni.ToString(), data.Key))));
+            }
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))))
+            {
+                resourceHashTable.Add(data.SitAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))));
             }
         }
 
