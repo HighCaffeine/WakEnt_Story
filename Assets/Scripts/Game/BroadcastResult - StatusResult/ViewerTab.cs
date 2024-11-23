@@ -71,10 +71,7 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
 
         while (isBroadcastStarted)
         {
-            while (MenuController.IsOpenTab)
-            {
-                yield return new WaitForFixedUpdate();
-            }
+            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
 
             if (currentWeekViewer >= maxViewer)
             {
@@ -239,7 +236,4 @@ public class ViewerTab : MonoBehaviour, OnReturnPool<ViewerTab>
     {
         this.OnReturnPoolEvent = onReturnPoolEvent;
     }
-
-    //viewerCalculate에서 viewertab을 2~3개정도 캐싱하고 있을거임. (풀링으로 할 거)
-
 }

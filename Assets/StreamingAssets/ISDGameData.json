@@ -1627,5 +1627,72 @@
       "Status": 1
     }
   ],
-  "CharacterComment": []
+  "CharacterComment": [
+    {
+      "ID": 1001,
+      "GotoWork": "하이네",
+      "LeaveWork": "빠이네",
+      "ToIne": "-",
+      "ToJingBurger": "안녕 버거야",
+      "ToLilpa": "릴파 하이",
+      "ToJururu": "르르땅 하이",
+      "ToGosegu": "세구야 안녕",
+      "ToViichan": "챠니 하이"
+    },
+    {
+      "ID": 1002,
+      "GotoWork": "하이부가",
+      "LeaveWork": "빠이부가",
+      "ToIne": "안녕 언니",
+      "ToJingBurger": "-",
+      "ToLilpa": "안녕 릴파야",
+      "ToJururu": "안녕 르르야",
+      "ToGosegu": "안녕 세구야",
+      "ToViichan": "안녕 챤아"
+    },
+    {
+      "ID": 1003,
+      "GotoWork": "리라리라",
+      "LeaveWork": "릴빠릴빠",
+      "ToIne": "아잉네",
+      "ToJingBurger": "버건니 안녕",
+      "ToLilpa": "-",
+      "ToJururu": "르르땅 하이",
+      "ToGosegu": "세구땅 안녕",
+      "ToViichan": "챤하챤하"
+    },
+    {
+      "ID": 1004,
+      "GotoWork": "콘르르",
+      "LeaveWork": "빠이르르",
+      "ToIne": "아이네 언니",
+      "ToJingBurger": "버건니 안녕",
+      "ToLilpa": "안녕 릴파언니",
+      "ToJururu": "-",
+      "ToGosegu": "세구 하이",
+      "ToViichan": "챤하"
+    },
+    {
+      "ID": 1005,
+      "GotoWork": "하이빵가루",
+      "LeaveWork": "빠빠루",
+      "ToIne": "아이네 언니 안녕",
+      "ToJingBurger": "버건니 안녕",
+      "ToLilpa": "안녕 릴파언니",
+      "ToJururu": "르르땅 안녕",
+      "ToGosegu": "-",
+      "ToViichan": "챠니 하이"
+    },
+    {
+      "ID": 1006,
+      "GotoWork": "챤하챤하",
+      "LeaveWork": "빠이빠이",
+      "ToIne": "아이네 언니 안녕",
+      "ToJingBurger": "버건니 안녕",
+      "ToLilpa": "안녕 릴파언니",
+      "ToJururu": "르르땅~",
+      "ToGosegu": "세구언니 안녕",
+      "ToViichan": "-"
+    }
+  ]
 }

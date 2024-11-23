@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
-
 
 public class GameManager : GenericSingleton<GameManager>
 {
@@ -17,7 +17,11 @@ public class GameManager : GenericSingleton<GameManager>
 
     private static bool isGamePause;
 
+    private float beforeTimeScale;
     private int currenttime;
+
+    private List<Action<bool>> pauseEventList = new List<Action<bool>>();
+
     [SerializeField] private const float oneTickTime = 1f;
     [SerializeField] private const float oneWeekTime = 10f;
 
@@ -139,8 +143,10 @@ public class GameManager : GenericSingleton<GameManager>
         Cursor.SetCursor(cursorImage, Vector2.zero, CursorMode.Auto);
 
 
+
         //프레임 값은 추후 설정으로 ㄱㄱ
         Application.targetFrameRate = 60;
+        beforeTimeScale = Time.timeScale;
     }
 
     void Update()
@@ -154,6 +160,13 @@ public class GameManager : GenericSingleton<GameManager>
         DataManager.Instance.SetDate(ref currenttime);
 
         UpdateTime();
+
+    }
+
+    private void Test()
+    {
+        Time.timeScale = 0.0f;
+
     }
 
     public void GameExit()
@@ -184,10 +197,41 @@ public class GameManager : GenericSingleton<GameManager>
     public void PauseGame()
     {
         isGamePause = true;
+        
+        CallbackPauseEvent(isGamePause);
     }
 
     public void ResumeGame()
     {
         isGamePause = false;
+
+        CallbackPauseEvent(isGamePause);
+    }
+
+    public void RegisterPauseEvent(List<Action<bool>> pauseEventInManager)
+    {
+        foreach (var pauseEvent in pauseEventInManager)
+        {
+            pauseEventList.Add(pauseEvent);
+        }
+    }
+
+    public void RegisterPauseEvent(Action<bool> pauseEvent)
+    {
+        pauseEventList.Add(pauseEvent);
+    }
+
+    /// <summary>
+    /// 게임 일시정지 시 멈춰야 할 객체들을 관리하는 측에서
+    /// 각 객체들에게 멈추게할 수 있는 함수들을 정의 후 
+    /// 관리 객체가 해당 함수들을 콜백함수로써 호출하는 함수를 pauseEventList에 등록하여 사용
+    /// </summary>
+    /// <param name="gamePause"></param>
+    private void CallbackPauseEvent(bool gamePause)
+    {
+            foreach (var pauseEvent in pauseEventList)
+            {
+                pauseEvent?.Invoke(gamePause);
+            }
     }
 }

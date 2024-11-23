@@ -27,6 +27,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             get; 
         }
 
+        public void InitProcessingRate()
+        {
+            this.processingRate = 0;
+        }
+
         public BroadCastPoint broadCastPoint = new BroadCastPoint();
 
         public class BroadCastPoint
@@ -64,16 +69,16 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 switch (type)
                 {
                     case ProductorManager.ProductorType.Planner:
-                    plannerPoint += value;
+                    plannerPoint = value;
                     break;
                     case ProductorManager.ProductorType.Designer:
-                    designerPoint += value;
+                    designerPoint = value;
                     break;
                     case ProductorManager.ProductorType.Composer:
-                    composerPoint += value;
+                    composerPoint = value;
                     break;
                     case ProductorManager.ProductorType.Promotor:
-                    promotionPoint += value;
+                    promotionPoint = value;
                     break;
                 }
             }
@@ -290,13 +295,15 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         {
             broadCast.broadCastPoint[ProductorManager.ProductorType.Planner + i] += data[i];
         }
+
+        UpdateBroadcastPoint();
     }
  
 
     //화면 하단/상단에 진행도, 스텟 4개 보여지게 
     public void UpdateBroadcastPoint()
     {
-        int[] data = new int[(int)ProductorManager.ProductorType.Count];
+        int[] data = new int[ValueCastTo<int>.From(ProductorManager.ProductorType.Count)];
 
         for (int i = 0; i < data.Length; i++)
         {
@@ -318,7 +325,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             return;
         }
 
+
         broadCast.SetProcessRate(broadCast.processingRate + 1);
+
+        UpdateBroadcastPoint();
+        CheckNextProcessingStep();
     }
 
     private bool CheckMaxProcessing()
@@ -330,6 +341,9 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
             BroadcastPlanningResult.Instance.SetBroadcastResultPoint();
             MenuController.Instance.OpenBroadcastResult();
+
+            broadCast.InitProcessingRate();
+            isBroadcastPlanning = false;
 
             return true;
         }
@@ -348,6 +362,40 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         ViewerTabManager.Instance.SetViewerTab(30000);
         //ProcessStatus.Instance.UpdateViewerTap();       //tab에서 받아서 업데이트
     }
+
+    private int[] stepValue = {40, 80, 100};
+
+    private int currentProcessStep = 0;
+
+    private void CheckNextProcessingStep()
+    {
+        if (broadCast.processingRate >= stepValue[currentProcessStep])
+        {
+            currentProcessStep++;
+
+            NextStepProcess();
+        }
+
+        broadCast.SetProcessRate(broadCast.processingRate);             //새로 업데이트 된 진행률 값
+        UpdateBroadcastPoint();                                         //새로 받은 값 업데이트(하단 패널 표시)
+    }
+
+    private void NextStepProcess()
+    {
+        if (currentProcessStep >= ValueCastTo<int>.From(ProductorManager.ProcessingType.Count))
+        {
+            //맥스치 체크 후 return
+            CheckMaxProcessing();
+
+            return;
+        }
+        else 
+        {       
+            //현재 단계에 맞는 작업자 선택창
+            SetNextProductorSelection();
+        }
+    }
+    
 
 
     public void TestProcessingMethod()
@@ -393,6 +441,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
     private void SetNextProductorSelection()
     {
+        ProductorManager.Instance.TEST_MoveToNextProcessing();
         ProductorManager.Instance.UpdateMoveToFirstProductor();     //작업자 선택 창 설정된 작업자의 제일 앞 작업자로 세팅
         MenuController.Instance.OpenProductorSelection();           //작업자 선택 창 활성화
     }
@@ -405,6 +454,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public void SetBroadcastPlanning()
     {
         isBroadcastPlanning = true;
+
+        MenuController.Instance.CloseOtherMenu();
     }
 
 

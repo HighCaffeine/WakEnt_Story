@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessageGroup.EndPopupMessage, InfoMessageGroup.GetTargetPosition
+public class InfoMessage : MonoBehaviour, 
+                            OnReturnPool<InfoMessage>, 
+                            InfoMessageGroup.EndPopupMessage, 
+                            InfoMessageGroup.GetTargetPosition
 {
     private OnReturnPoolEvent<InfoMessage> OnReturnPoolEvent;                       //풀 리턴
     private InfoMessageGroup.OnEndPopupMessage OnEndPopupMessage;                   //메세지 출력 종료 후 현재 켜진 메세지 수 감소
@@ -55,7 +58,6 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
             if (!isWhileMoving)
             {
                 break;
-
             }
 
             yield return new WaitForFixedUpdate();
@@ -83,15 +85,15 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
         //yield return StartCoroutine(BREAKTIME());
 
         //효과음
+        SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_UIPopupMessage.ToString(), false);
         if (isMoveToDown)
         {
             Vector2 pos = (Vector2)OnGetTargetPos?.Invoke(myRect);
 
-            Debug.Log(pos);
-
-
             while (pos.y <= myRect.anchoredPosition.y)
             {
+                yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+
                 newPos = myRect.anchoredPosition;
 
                 newPos += Vector2.down * Time.deltaTime * moveSpeed * 10f;
@@ -105,6 +107,8 @@ public class InfoMessage : MonoBehaviour, OnReturnPool<InfoMessage>, InfoMessage
         {
             while (myRect.anchoredPosition.y <= firstPos.y)
             {
+                yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+
                 newPos = myRect.anchoredPosition;
 
                 newPos += Vector2.up * Time.deltaTime * moveSpeed * 10f;

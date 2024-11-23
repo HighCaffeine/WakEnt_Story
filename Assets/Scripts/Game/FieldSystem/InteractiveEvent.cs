@@ -24,7 +24,7 @@ public class InteractiveEvent : MonoBehaviour
     //사물의 경우 자체 애니메이션 함수 등록등 상호작용 시 본인이 할 것들
     [SerializeField] private List<UnityEngine.Events.UnityEvent> interactiveEventList;
 
-    [SerializeField] private Animation interactiveAni;
+    [SerializeField] private Animator interactiveAnimator;
     [SerializeField] private SpriteRenderer interactiveSpriteRender;
 
     [Space(10f)]
@@ -42,7 +42,6 @@ public class InteractiveEvent : MonoBehaviour
             return;
         }
 
-        interactiveAni = GetComponent<Animation>();
 
         Environment envi = GetComponent<Environment>();
 
@@ -50,6 +49,11 @@ public class InteractiveEvent : MonoBehaviour
         {
             enviDirection = envi.GetIsRight;
         }
+    }
+
+    void Start()
+    {
+        interactiveAnimator = GetComponent<Animator>();
     }
 
     //callback -> 상호작용 이후 증가하는 요소들 넣어줌
@@ -119,7 +123,7 @@ public class InteractiveEvent : MonoBehaviour
 
     private void PlayInteractiveAnimation()
     {
-        interactiveAni.Play();
+        interactiveAnimator.Play("EnvironmentAni");
     }
 
     //사물 ani, sprite
@@ -146,6 +150,8 @@ public class InteractiveEvent : MonoBehaviour
         {
             yield return new WaitForSeconds(returnSeatDelay);
         }
+
+        yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
         
         returnSeat?.Invoke();
         CallAllEvent();

@@ -6,6 +6,7 @@ public interface OnReturnPool<PoolType>
     void Init(OnReturnPoolEvent<PoolType> onReturnPoolEvent);
 }
 
+
 public delegate void OnReturnPoolEvent<PoolType>(PoolType type);
 
 public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType>

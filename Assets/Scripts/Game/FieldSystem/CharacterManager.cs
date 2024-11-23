@@ -101,7 +101,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
     public delegate void OnCharacterSFXRequestEvent(CharacterSFXType sfxType);
     private List<OnCharacterMovementEvent> OnCharacterMovementEvents;
 
-
+    private List<Action<bool>> pauseEventList = new List<Action<bool>>();
 
 
 
@@ -401,8 +401,15 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
                 yield return new WaitForSeconds(0.5f);
             }
         }
+
+        GameManager.Instance.RegisterPauseEvent(pauseEventList);
     }
-    
+
+    public void RegisterPauseEvent(Action<bool> pauseEvent)
+    {
+        pauseEventList.Add(pauseEvent);
+    }
+
     private void SetCharacterData(Character character, int characterID, CharacterData characterData)
     {
         ResourceID resourceID = ValueCastTo<ResourceID>.From(characterID);
@@ -553,6 +560,11 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
                                                         ProductorManager.Instance.GetStatType(index));
     }
 
+    public ProductorInfo GetProductorInfo(int index)
+    {
+        return ProductorManager.Instance.GetProductorInfo(index);
+    }
+
     //productormanager에게 넘겨서 characterData와 ProductorInfo index 오차 없도록
     //
 
@@ -585,5 +597,4 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             }
         }
     }
-
 }

@@ -100,7 +100,8 @@ public class BroadcastReviewManager : GenericSingleton<BroadcastReviewManager>
         commentDictionary = new Dictionary<int, Dictionary<int, string[]>>();
 
         MenuController.Instance.OpenCafeUserReview();
-        
+
+        InitPanelset();
     }
 
     void Start()

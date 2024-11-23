@@ -51,6 +51,8 @@ public enum ResourceType : long
     AniCount                            = 4,
 }
 
+public enum CommentType {ToIne, ToJingBurger, ToLilpa, ToJururu, ToGosegu, ToViichan, Count,};
+
 // [Flags]
 // public enum ResourceTypeBit
 // {
@@ -110,8 +112,16 @@ public class CharacterData
 [System.Serializable]
 public class CharacterComment
 {
-    public string CharacterType;    //ISD, WAK, Productor 타입
-    public string Comment;          //타입별 멘트
+    public long ID;
+    public string GotoWork;
+    public string LeaveWork;
+    public string Signature;
+    public string ToIne;
+    public string ToJingBurger;
+    public string ToLilpa;
+    public string ToJururu;
+    public string ToGosegu;
+    public string ToViichan;
 }
 
 [System.Serializable]

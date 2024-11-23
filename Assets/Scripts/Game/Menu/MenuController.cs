@@ -167,6 +167,8 @@ public class MenuController : GenericSingleton<MenuController>
     {
         productorSelectionPanel.SetActive(true);
         TimeNotElapseWhenOpenTab();
+
+        Debug.Log("asd");
     }
 
 
@@ -218,7 +220,7 @@ public class MenuController : GenericSingleton<MenuController>
         broadcastCreatePanel.SetActive(false);
         productorSelectionPanel.SetActive(false);
         CloseTabElapseTime();
-        OpenMenu();
+        //OpenMenu();
         CloseOtherMenu();
 
     }
@@ -294,7 +296,10 @@ public class MenuController : GenericSingleton<MenuController>
             {
                 menuList.SetActive(false);
 
+
                 tempButtonText.text = string.Format("Save");
+                
+                CloseTabElapseTime();
             }
         }
         else
@@ -310,7 +315,12 @@ public class MenuController : GenericSingleton<MenuController>
         CloseOtherMenu();
     }
 
-    private void CloseOtherMenu()
+    public void CloseMenu()
+    {
+        menuList.SetActive(false);
+    }
+
+    public void CloseOtherMenu()
     {
         broadcastPlanningMenu.SetActive(false);
         productorMenu.SetActive(false);
@@ -342,7 +352,6 @@ public class MenuController : GenericSingleton<MenuController>
     {
         isOpenTab = false;
 
-        
         GameManager.Instance.ResumeGame();
     }
 

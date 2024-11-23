@@ -1,6 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
-public class Productor : MonoBehaviour, OnReturnPool<Productor>, ProductorManager.ProductorStatRequest, ProductorManager.ProductorFieldProcessValue
+public class Productor : MonoBehaviour, 
+                        OnReturnPool<Productor>, 
+                        ProductorManager.ProductorStatRequest, 
+                        ProductorManager.ProductorFieldProcessValue
 {
     [SerializeField] private ProductorInfo info;
     ProductorManager.OnProductorStatRequest OnProductorStatRequest;
@@ -19,7 +23,7 @@ public class Productor : MonoBehaviour, OnReturnPool<Productor>, ProductorManage
     public void Init(OnReturnPoolEvent<Productor> onReturnPoolEvent)
     {
         SetProductorStatRequest(ProductorManager.Instance.CalculateProductorStat);
-        SetProductorFieldProcess(ProductorManager.Instance.AddFieldProcessValueToManager);
+        //SetProductorFieldProcess(ProductorManager.Instance.AddFieldProcessValueToManager);
     }
 
     public void SetProductorStatRequest(ProductorManager.OnProductorStatRequest OnProductorStatRequest)
@@ -30,5 +34,10 @@ public class Productor : MonoBehaviour, OnReturnPool<Productor>, ProductorManage
     public void SetProductorFieldProcess(ProductorManager.OnProductorFieldProcess OnProductorFieldProcess)
     {
         this.OnProductorFieldProcess = OnProductorFieldProcess;
+    }
+
+    public void BroadcastPointReq()
+    {
+        //ProductorManager.Instance.AddStatFieldProcessing(info);
     }
 }

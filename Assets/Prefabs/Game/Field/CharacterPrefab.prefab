@@ -192,7 +192,7 @@ MonoBehaviour:
   isRight: 0
   interactiveLayer:
     serializedVersion: 2
-    m_Bits: 1408
+    m_Bits: 3456
   TEST_targetPos: {x: 0, y: 0}
 --- !u!114 &-5976408289483800729
 MonoBehaviour:
@@ -258,7 +258,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  interactiveAni: {fileID: 0}
+  interactiveAnimator: {fileID: 0}
   interactiveSpriteRender: {fileID: 0}
   returnSeatCheck:
     m_PersistentCalls:

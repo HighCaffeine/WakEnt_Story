@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Devcat;
 using UnityEngine;
 
@@ -56,8 +57,11 @@ public class Character : MonoBehaviour,
     private Sprite[] characterSprites;
 
     private CharacterData characterData;
+    private ProductorInfo productorInfo;
 
     private Transform imageTransform;
+
+    private Queue<Action> callActionAfterSit = new Queue<Action>();
 
     enum State
     {
@@ -139,10 +143,18 @@ public class Character : MonoBehaviour,
 
 
         CharacterManager.Instance.testaction.Add(TEST_TurnToMoveState);
+        CharacterManager.Instance.RegisterPauseEvent(PauseAction);
+
+        productorInfo = CharacterManager.Instance.GetProductorInfo(characterData.SeatNumber - 1);
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.IsGamePause)
+        {
+            return;
+        }
+
         switch (currentState)
         {
             case State.Idle:
@@ -310,7 +322,7 @@ public class Character : MonoBehaviour,
         //테스트 메세지
         if (isFirstMoveFromSetData)
         {
-            RequestMessage("하이네");
+            RequestMessage(JsonManager.Instance.GetCharacterComment()[characterData.CharacterID - ValueCastTo<int>.From(ResourceID.Character_ISD_Ine)].GotoWork);
         }
 
         isFirstMoveFromSetData = true;
@@ -364,14 +376,12 @@ public class Character : MonoBehaviour,
         isCharacterMove = true; 
         while (!(Vector2.Distance(transform.position, targetPos) <= 0.03f))
         {
-            
+            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
 
             Vector2 newPos = transform.position; 
             newPos += direction * Time.deltaTime * 0.75f;
 
             transform.position = newPos;
-
-            yield return new WaitForFixedUpdate();
         }
 
         transform.position = targetPos;
@@ -419,13 +429,20 @@ public class Character : MonoBehaviour,
         //interactive 시 ineractive 요청한 캐릭터와 요청받은 캐릭터 둘 다 메세지를 띄워야 함.
         //interactive가 끝났다는 것도 리턴 받아야 함.
 
-        Transform target;
+        Transform target = null;
 
         if (this.targetIndex != -1)
         {
             LayerMask characterInterLayer = (1 << LayerMask.NameToLayer("Character")) & interactiveLayer.value;
 
-            target = Physics2D.OverlapCircle(lastPos, 0.1f, characterInterLayer.value).transform;
+            try
+            {
+                target = Physics2D.OverlapCircle(lastPos, 0.1f, characterInterLayer.value).transform;
+
+            }catch (Exception e)
+            {
+                Debug.Log(e.Message + "/" + transform.name);
+            }
         }
         else
         {
@@ -448,11 +465,12 @@ public class Character : MonoBehaviour,
                 return;
             }
 
+            int targetID = targetCharacter.GetID();
 
-            targetCharacter.TEST_Message("안녕 언니");
+            targetCharacter.TEST_Message(GetComment(targetID, characterData.CharacterID));
             targetCharacter.FlipToTarget(transform.position);
 
-            TEST_Message("안녕 버거야");
+            TEST_Message(GetComment(characterData.CharacterID, targetID));
 
             //캐릭터 상호작용
             //return my seat 함수 전달
@@ -489,6 +507,79 @@ public class Character : MonoBehaviour,
         }
 
         currentState = State.None;
+    }
+
+    private string GetComment(int interID, int targetID)
+    {
+        //캐릭터군 판단 1000/ 2000/ 3000각각나눠서 0인지 체크
+        CharacterManager.ISEGYEIDOL inter = ValueCastTo<CharacterManager.ISEGYEIDOL>.From(interID - ResourceID.Character_ISD_Ine);
+        CharacterManager.ISEGYEIDOL target = ValueCastTo<CharacterManager.ISEGYEIDOL>.From(targetID - ResourceID.Character_ISD_Ine);
+
+        string comment = string.Empty;
+
+        switch (inter)
+        {
+            case CharacterManager.ISEGYEIDOL.Ine:
+            case CharacterManager.ISEGYEIDOL.JingBurger:
+            case CharacterManager.ISEGYEIDOL.Lilpa:
+            case CharacterManager.ISEGYEIDOL.Jururu:
+            case CharacterManager.ISEGYEIDOL.Gosegu:
+            case CharacterManager.ISEGYEIDOL.Viichan:
+            switch (target)
+            {
+                case CharacterManager.ISEGYEIDOL.Ine:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToIne;
+                break;
+                case CharacterManager.ISEGYEIDOL.JingBurger:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJingBurger;
+                break;
+                case CharacterManager.ISEGYEIDOL.Lilpa:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToLilpa;
+                break;
+                case CharacterManager.ISEGYEIDOL.Jururu:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJururu;
+                break;
+                case CharacterManager.ISEGYEIDOL.Gosegu:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToGosegu;
+                break;
+                case CharacterManager.ISEGYEIDOL.Viichan:
+                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToViichan;
+                break;
+            }
+            break;
+            default:
+            comment = "이세돌 아님";
+            break;
+        }
+
+        return comment;
+    }
+
+    public int GetID()
+    {
+        return characterData.CharacterID;
+    }
+
+    //우선 pc 캐싱해서 쓰고
+    //추후 environment 매니저 만들어서 ㄱㄱ
+    //인덱스만 넘겨줘서 처리할거임 나중에
+    Environment pc;
+
+    private void FindPC()
+    {
+        if (!(characterData.SeatNumber == 1 || characterData.SeatNumber == 4))
+            return;
+
+        LayerMask characterInterLayer = (1 << LayerMask.NameToLayer("PC")) & interactiveLayer.value;
+
+        pc = Physics2D.OverlapCircle(lastPos, 1f, characterInterLayer.value).transform.GetComponent<Environment>();
+
+        pc.ChangeImage();
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(lastPos, 1f);
     }
 
     public void ChangeStateInter()
@@ -529,11 +620,41 @@ public class Character : MonoBehaviour,
 
         if (isBroadcastPlanning)
         {
-
+            ProductorWorkProcess();
         }
-        else
+    }
+    private float time = 0.0f;
+    private int currentStep = 0;
+    private void ProductorWorkProcess()
+    {
+        if (!isOnMySeat)
         {
+            return;
+        }
 
+        time += Time.deltaTime;
+
+        if (time >= 1f)
+        {
+            time = 0.0f;
+  
+            ProductorManager.Instance.AddStatFieldProcessing(characterData.SeatNumber - 1);
+
+            if (productorInfo.ProcessedPoint >= ProductorManager.Instance.ProcessLevel[currentStep])
+            {
+                currentStep++;
+                BroadCastPlanning.Instance.AddProcessingRate();
+
+                if (currentStep >= 3)
+                {
+                    currentStep = 0;
+                    productorInfo.InitProcessedPoint();
+                    RequestPopupStat();
+                }
+
+                if (pc != null)
+                    pc.ChangeImage();
+            }
         }
     }
 
@@ -559,7 +680,7 @@ public class Character : MonoBehaviour,
     {
         //1. 방송 제작중 전달   
         //2. 방송 제작 끝 전달
-        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); }, 
+        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); callActionAfterSit.Enqueue(FindPC); }, 
                                                                 () => { this.isBroadcastPlanning = false; SetIdle(); });
     }
 
@@ -580,6 +701,8 @@ public class Character : MonoBehaviour,
 
         while (currentCount < count)
         {
+            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+
             count++;
 
             //피버 텍스트에 currentCount 넣음
@@ -620,7 +743,6 @@ public class Character : MonoBehaviour,
 
         //CharacterManager.Instance.SetCharacterInfo(characterData);
     }
-
 
     //interactive 이벤트한테 넘겨서 쓸거임.
     public void RequestPopupStat()
@@ -715,6 +837,14 @@ public class Character : MonoBehaviour,
         Flip(isRight);
 
         SetWalkForRandomSec();
+
+        while (callActionAfterSit.Count > 0)
+        {
+            callActionAfterSit.Dequeue()?.Invoke();
+        }
+
+        //관리객체 만들기 전까지 임시 사용
+        FindPC();
     }
 
     private void SetWalkForRandomSec()
@@ -812,5 +942,10 @@ public class Character : MonoBehaviour,
     public void RegisterCharacterRequestSFXEvent(CharacterManager.OnCharacterSFXRequestEvent OnCharacterSFXRequestEvent)
     {
         this.OnCharacterSFXRequestEvent = OnCharacterSFXRequestEvent;
+    }
+
+    public void PauseAction(bool pause)
+    {
+        animator.speed = pause ? 0.0f : 1.0f; 
     }
 }

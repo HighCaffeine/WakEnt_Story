@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8167941624685431933}
   - component: {fileID: 4337930614662698496}
   - component: {fileID: 8582094413308121874}
-  - component: {fileID: 2221212688808512941}
   - component: {fileID: 3410381899285430854}
+  - component: {fileID: -5415620562738097875}
   m_Layer: 8
   m_Name: ChairBack
   m_TagString: Untagged
@@ -105,6 +105,10 @@ MonoBehaviour:
   interactiveEventList: []
   interactiveAni: {fileID: 0}
   interactiveSpriteRender: {fileID: 0}
+  returnSeatCheck:
+    m_PersistentCalls:
+      m_Calls: []
+  returnSeatDelay: 0
 --- !u!114 &8582094413308121874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,22 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d5f69ec9610594494bc4b06745c549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!111 &2221212688808512941
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30955654589509592}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f3d9ceaa7ff110d43ab3dabeb726495b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: f3d9ceaa7ff110d43ab3dabeb726495b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  processImageList: []
+  idleImage: {fileID: 0}
+  isRight: 0
+  aoc: {fileID: 22100000, guid: ac1b67a707d54de47bc79275ac041c4c, type: 2}
+  environmentAni: {fileID: 7400000, guid: f3d9ceaa7ff110d43ab3dabeb726495b, type: 2}
 --- !u!61 &3410381899285430854
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,6 +171,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3481369, y: 0.29140013}
   m_EdgeRadius: 0
+--- !u!95 &-5415620562738097875
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30955654589509592}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3903aa1e080e5574b8c30b73297f8cfd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1406217256811845381
 GameObject:
   m_ObjectHideFlags: 0

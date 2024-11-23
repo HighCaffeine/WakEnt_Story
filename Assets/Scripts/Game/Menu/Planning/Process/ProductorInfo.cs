@@ -18,7 +18,7 @@ public class ProductorInfo : ScriptableObject
 
     //====
     public float ProcessedPoint { get { return processedPoint; } 
-                                    private set { AddToPoint(value); } }
+                                     set { AddToPoint(value); } }
     private float processedPoint;
     private void AddToPoint(float value)
     {

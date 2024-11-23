@@ -72,17 +72,15 @@ public class CharacterMessage : MonoBehaviour, OnReturnPool<CharacterMessage>
         {
             time += Time.deltaTime;
 
+            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+
             if (CharacterMessageManager.Instance.DisappearTime <= time)
             {
                 break;
             }
-
-            yield return new WaitForFixedUpdate();
         }
 
         Init();
-
-        yield return null;
     }
 
     private void Init()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager, CharacterStatPopup>
@@ -12,10 +13,14 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
 
     [Header("이미지 띄우는 시간")] [SerializeField] private float disappearTime;
 
+    private System.Collections.Generic.List<Action<bool>> pauseEventList;
+
     private RectTransform rect;
 
     private new void Awake()
     {
+        pauseEventList = new System.Collections.Generic.List<Action<bool>>();
+
         base.Awake();
 
         rect = GetComponent<RectTransform>();
@@ -31,24 +36,32 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
         CharacterStatPopup popupObj = GetPool();
 
         ResourceID resourceID = ResourceID.Stat_Broadcast_InterestPoint;
+        int statIndex = -1;
 
         switch (productorType)
         {
             case ProductorManager.ProductorType.Planner:
             resourceID = ResourceID.Stat_Broadcast_InterestPoint;
+            statIndex = 0;
             break;
             case ProductorManager.ProductorType.Designer:
             resourceID = ResourceID.Stat_Broadcast_QualityPoint;
+            statIndex = 1;
             break;
             case ProductorManager.ProductorType.Composer:
             resourceID = ResourceID.Stat_Broadcast_SoundPoint;
+            statIndex = 2;
             break;
             case ProductorManager.ProductorType.Promotor:
             resourceID = ResourceID.Stat_Broadcast_EditingPoint;
+            statIndex = 3;
             break;
         }
 
-        popupObj.SetStatPopup(statAmount, DataManager.Instance.GetSpriteFromID(resourceID, ResourceType.DefaultSprite), position);
+        popupObj.SetStatPopup(statAmount, 
+                                DataManager.Instance.GetSpriteFromID(resourceID, ResourceType.DefaultSprite), 
+                                position,
+                                () => { ProductorManager.Instance.UpdateToBroadcast(statIndex, statAmount); });
     }
 
     //scaler값 곱해야할 듯
@@ -68,5 +81,10 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
         if (!SoundManager.Instance) return;
 
         SoundManager.Instance.PlaySound(SoundManager.Effect.Effect_FieldStatPopup.ToString(), false);
+    }
+
+    public void RegisterPauseEvent(Action<bool> pauseEvent)
+    {
+        pauseEventList.Add(pauseEvent);
     }
 }

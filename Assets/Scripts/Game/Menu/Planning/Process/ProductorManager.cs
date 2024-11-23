@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using Devcat;
-using System.Diagnostics;
 
 public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 {
@@ -110,12 +109,6 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
             productorStats.Add(text);
         }
-    }
-
-    private new void Start()
-    {
-        base.Start();
-
         //SetProductorInfo();
 
         SetProductorStatusList();       //각 데이터의 NextInfo값 넣고 list에 추가
@@ -125,6 +118,11 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         OpenProductorSelection();
     }
 
+    private new void Start()
+    {
+        base.Start();
+
+    }
     public int TEST_MoveToNextProcessing()
     {
         if (currentProcessProductorType >= ProcessingType.Count)
@@ -244,6 +242,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
     public void OpenProductorSelection()
     {
+        Debug.Log(productorStatusList.Count);
+
         foreach (var data in productorStatusList)
         {
             if (CurrentProductorType == data.productorInfo.productorType)
@@ -256,6 +256,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             }
         }
     }
+
+
 
     private ProductorInfoStatusData SetProductorStatusList(int index = 0)
     {
@@ -452,9 +454,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             }
             else if (CalculatePercentage(newProcessRate[processStep]))
             {   
-                
-
                 processStep++;
+
                 checkTime.isOverTime = false;
 
                 processingTime = GetProcessingTime(info, processingMulti);
@@ -556,6 +557,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         BroadCastPlanning.Instance.UpdateBroadcastPoint();
 
+        MenuController.Instance.CloseMenu();
+        MenuController.Instance.CloseOtherMenu();
         SoundManager.Instance.ReplayAudio();
     }
 
@@ -776,27 +779,38 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     // }
 
 
+    public float[] ProcessLevel = {0.0f, 0.4f, 0.7f, 1.0f};
+
     // 계산 후 작업자의 총 작업량이 1이 넘으면 스텟 추가 이벤트
     // ProductorType.planner + 리턴값으로 ㅈㅁ
     // 아니면 0리턴 
-    public int AddFieldProcessValueToManager(ProductorInfo info)
+    public int AddFieldProcessValueToManager(ProductorInfo info, int index)
     {
         if (info.ProcessedPoint >= 1.0f)
         {
             //스텟 추가
 
             info.InitProcessedPoint();
+
+            CharacterManager.Instance.ReqPopupStat(index);
+
+            return 0;
         }
 
+        info.ProcessedPoint += 0.1f;      
 
         return 0;
     }
 
-    private void AddStatFieldProcessing(ProductorInfo info)
+    public void AddStatFieldProcessing(int index)
     {
-
+        AddFieldProcessValueToManager(productorStatusList[index].productorInfo, index);
     }
 
+    public ProductorInfo GetProductorInfo(int index)
+    {
+        return productorStatusList[index].productorInfo;
+    }
 
     //callback으로 스탯 몇 개 올리는지 넘겨줌
 
@@ -807,22 +821,30 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             return -1;
         }
 
-        ProductorInfo targetCharacter = productorInfos[targetIndex];
 
-        int[] calValues = new int[ValueCastTo<int>.From(ProductorType.Count)];
+        if (targetIndex < 0)
+        {
+            return 0;
+        }
+
+        Debug.Log(targetIndex);
+        ProductorInfo targetCharacter = productorInfos[targetIndex];
 
         //추가할 스텟 랜덤으로 가져옴
         int addIndex = CalculateWorkProcess(targetCharacter);       //추가할 Index
         int addValue = ProductorFever(targetCharacter, addIndex);     //추가할 값
 
-        calValues[addIndex] += addValue;
-
-        BroadCastPlanning.Instance.CalculateProcessingData(calValues);  //방송 스텟에 추가, 캐릭터 애니메이션이 끝나야 스텟 추가를 해야 함.
-
-
         //end
         return addValue;
     } 
+
+    public void UpdateToBroadcast(int index, int amount)
+    {
+        int[] calValues = new int[ValueCastTo<int>.From(ProductorType.Count)];
+
+        calValues[index] += amount;
+        BroadCastPlanning.Instance.CalculateProcessingData(calValues);  //방송 스텟에 추가, 캐릭터 애니메이션이 끝나야 스텟 추가를 해야 함.
+    }
 
     public ProductorType GetStatType(int targetIndex)
     {
@@ -834,3 +856,4 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         return ProductorType.Planner + statIndex;
     }
 }
+ 

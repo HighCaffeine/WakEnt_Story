@@ -10,6 +10,7 @@ public class CharacterStatPopup : MonoBehaviour, OnReturnPool<CharacterStatPopup
     [Header("스텟 이미지")] [SerializeField] private UnityEngine.UI.Image statImage;
     [SerializeField] private TMPro.TextMeshProUGUI statAmount;
     [SerializeField] private Animation popupAni;
+    [SerializeField] private Animator animator;
 
     private RectTransform rect;
 
@@ -20,9 +21,10 @@ public class CharacterStatPopup : MonoBehaviour, OnReturnPool<CharacterStatPopup
         rect = GetComponent<RectTransform>();
 
         RegisterPlaySFXEvent(CharacterPopupStatManager.Instance.ReqPlaySFX);
+        CharacterPopupStatManager.Instance.RegisterPauseEvent(PauseEvent);
     }
 
-    public void SetStatPopup(int amount, Sprite statSprite, Vector2 position)
+    public void SetStatPopup(int amount, Sprite statSprite, Vector2 position, Action updatePoint)
     {
         statImage.sprite = statSprite;
         statAmount.text = string.Format("+{0}", amount);
@@ -31,6 +33,7 @@ public class CharacterStatPopup : MonoBehaviour, OnReturnPool<CharacterStatPopup
         rect.anchoredPosition = CharacterMessageManager.Instance.MessagePosToScreenPos(screenPos); 
 
         popupAni.Play();
+        updatePoint?.Invoke();
     }
 
     public void PlaySFX()
@@ -51,5 +54,10 @@ public class CharacterStatPopup : MonoBehaviour, OnReturnPool<CharacterStatPopup
     public void RegisterPlaySFXEvent(CharacterPopupStatManager.OnPlaySFXEvent OnPlaySFXEvent)
     {
         this.OnPlaySFXEvent = OnPlaySFXEvent;
+    }
+
+    private void PauseEvent(bool pause)
+    {
+        animator.speed = pause ? 0.0f : 1.0f;
     }
 }
