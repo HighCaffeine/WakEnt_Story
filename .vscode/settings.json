@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "WakEnt_Story.sln"
+    "dotnet.defaultSolution": "WakEnt Story.sln"
 }
