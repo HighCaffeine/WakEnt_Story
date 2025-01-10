@@ -53,7 +53,7 @@ public class Character : MonoBehaviour,
 
     private AnimatorOverrideController aoc;
 
-    private Sprite[] characterSprites;
+    [SerializeField]private Sprite[] characterSprites;
 
     private CharacterData characterData;
     private ProductorInfo productorInfo;
@@ -143,17 +143,17 @@ public class Character : MonoBehaviour,
         aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = aoc;
         
-        aoc[ResourceType.StandingIdleAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.StandingIdleAni);
-        aoc[ResourceType.InteractiveAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.InteractiveAni);
-        aoc[ResourceType.SitAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitAni);
-        aoc[ResourceType.WalkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WalkAni);
+        aoc[ResourceFileName.StandingIdleAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.StandingIdleAni);
+        aoc[ResourceFileName.InteractiveAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.InteractiveAni);
+        aoc[ResourceFileName.SitAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitAni);
+        aoc[ResourceFileName.WalkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WalkAni);
 
-        aoc[ResourceType.SitBackIdleLookAroundAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitBackIdleLookAroundAni);
-        aoc[ResourceType.SitBackIdleStretchingAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitBackIdleStretchingAni);
-        aoc[ResourceType.BackWorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.BackWorkAni);
-        aoc[ResourceType.SitFrontIdleLookAroundAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitFrontIdleLookAroundAni);
-        aoc[ResourceType.SitFrontIdleStretchingAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitFrontIdleStretchingAni);
-        aoc[ResourceType.FrontWorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontWorkAni);
+        aoc[ResourceFileName.BackIdleLookAround.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.BackIdleLookAroundAni);
+        aoc[ResourceFileName.BackIdleStretching.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.BackIdleStretchingAni);
+        aoc[ResourceFileName.BackWork.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.BackWorkAni);
+        aoc[ResourceFileName.FrontIdleLookAround.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontIdleLookAroundAni);
+        aoc[ResourceFileName.FrontIdleStretching.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontIdleStretchingAni);
+        aoc[ResourceFileName.FrontWork.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontWorkAni);
 
         AnimationSpeedSet(false);
         animator.writeDefaultValuesOnDisable = false;

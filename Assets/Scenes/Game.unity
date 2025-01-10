@@ -2566,6 +2566,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1692607643}
     m_Modifications:
     - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
+      propertyPath: isFront
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
       propertyPath: isRight
       value: 0
       objectReference: {fileID: 0}
@@ -11912,6 +11916,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1692607643}
     m_Modifications:
     - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
+      propertyPath: isFront
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
       propertyPath: isRight
       value: 1
       objectReference: {fileID: 0}
@@ -16455,6 +16463,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543062158913048458, guid: 7975b677608a6f342823322b75605d12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
+      propertyPath: isFront
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
@@ -32548,6 +32560,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1692607643}
     m_Modifications:
     - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
+      propertyPath: isFront
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
       propertyPath: isRight
       value: 1
       objectReference: {fileID: 0}
@@ -46680,6 +46696,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
+      propertyPath: isFront
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
       propertyPath: environmentAni
       value: 
       objectReference: {fileID: 7400000, guid: da73103e46e56cf46a2f2da0d9b59005, type: 2}
@@ -48722,6 +48742,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1692607643}
     m_Modifications:
+    - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
+      propertyPath: isFront
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -6177089847472146075, guid: 143fc48ca0b21c641927ec5edd8f334a, type: 3}
       propertyPath: environmentAni
       value: 
@@ -52154,6 +52178,7 @@ MonoBehaviour:
   animator: {fileID: 4473192782323418480}
   currentState: 0
   isRight: 0
+  seatIsFront: 0
   interactiveLayer:
     serializedVersion: 2
     m_Bits: 3456
@@ -52207,7 +52232,7 @@ SpriteRenderer:
   m_Size: {x: 1.060606, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &4866748233589791295
@@ -53180,7 +53205,7 @@ SpriteRenderer:
   m_Size: {x: 1.060606, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8967776806889170745
