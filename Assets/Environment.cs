@@ -11,6 +11,7 @@ public class Environment : MonoBehaviour
 
     [Header("사물 방향")]
     [SerializeField] private bool isRight;
+    [SerializeField] private bool isFront;
     [SerializeField] private bool useIdleImage = false;
 
     private SpriteRenderer objImage;
@@ -45,6 +46,7 @@ public class Environment : MonoBehaviour
     }
 
     public bool GetIsRight() { return isRight; }
+    public bool GetIsFront() { return isFront; }
 
     //진행도를 받아와서 전환해야 함.
     //진행도는 요청측에서 계산하며 changeimage함수 호출만 함.

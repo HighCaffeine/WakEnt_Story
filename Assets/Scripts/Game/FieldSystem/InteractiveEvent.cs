@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,6 +35,7 @@ public class InteractiveEvent : MonoBehaviour
 
     //사물이랑 상호작용할 때 캐릭터를 사물 방향으로 회전할려고 추가함
     private Func<bool> enviDirection;
+    private Func<bool> enviLookFront;
 
     void Awake()
     {
@@ -48,6 +50,7 @@ public class InteractiveEvent : MonoBehaviour
         if (envi)
         {
             enviDirection = envi.GetIsRight;
+            enviLookFront = envi.GetIsFront;
         }
     }
 
@@ -60,16 +63,17 @@ public class InteractiveEvent : MonoBehaviour
     //targetAni -> 상호작용 시 애니메이션 동작하는 이벤트 넘겨줌, 자리가 바뀌게 될 수도 있으니 상호작용 때 마다 계속 넘겨주는걸로
     //targetFlipRight로 돌려주는데, 캐릭터는 Character에 있는 함수 이벤트리스트에 넣어서 다시 돌려주면 되는데
     //사물의 경우 사용할 시 다시 돌려주는 함수를 Environment에 따로 구현 필요함.
-    public void Interactive(bool isBroadcastPlanning, int targetIndex, out bool characterFlipRight, out Action targetAni, Action returnSeat, params Action<int>[] callback)
+    public void Interactive(bool isBroadcastPlanning, int targetIndex, out bool characterFlipRight, out bool environmentLookFront, out Action targetAni, Action returnSeat, params Action<int>[] callback)
     {
         targetAni= null;
         characterFlipRight = false;
+        environmentLookFront = false;
 
         switch (interactiveType)
         {
             case InteractiveType.Environment:
             targetAni = PlayInteractiveAnimation;       //임시 등록
-            EnvironmentInteractive(isBroadcastPlanning, out characterFlipRight);
+            EnvironmentInteractive(isBroadcastPlanning, out characterFlipRight, out environmentLookFront);
             break;
             case InteractiveType.Character:
             CharacterInteractive(isBroadcastPlanning, targetIndex, callback);
@@ -101,10 +105,11 @@ public class InteractiveEvent : MonoBehaviour
         }
     }
     
-    private void EnvironmentInteractive(bool isBroadcastPlanning, out bool characterFlipRight, params Action[] callback)
+    private void EnvironmentInteractive(bool isBroadcastPlanning, out bool characterFlipRight, out bool environmentLookFront, params Action[] callback)
     {
         //캐릭터가 사물과 상호작용할 때 방향 flip을 해주기 위함.
         characterFlipRight = (bool)enviDirection?.Invoke();
+        environmentLookFront = (bool)enviLookFront?.Invoke();
 
         //캐릭터의 체력을 회복하는 등 캐릭터 자체에 효과가 들어가게 됨
         if (isBroadcastPlanning)

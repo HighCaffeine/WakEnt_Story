@@ -357,6 +357,7 @@ public class DataManager : GenericSingleton<DataManager>
         {
             resourceHashTable.Add(data.ID, data.Key);
 
+            //item default sprite 
             if (!File.Exists(Path.Combine(ResourcePath, ResourceType.DefaultSprite.ToString(), data.Key)))
             {
                 resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.DefaultSprite.ToString(), data.Key)));
@@ -368,69 +369,62 @@ public class DataManager : GenericSingleton<DataManager>
                 continue;
             }
 
-
-            //현재 두 sprite모두 sprite와 동일 ID사용할 거라 주석처리
-            // if (!File.Exists(Path.Combine(ResourcePath, ResourceType.Sprite.ToString(), data.Key)))
-            // {
-            //     resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.Sprite.ToString(), ResourceType.StandingSprite.ToString() + "_" + data.Key)));
-            // }
-            // if (!File.Exists(Path.Combine(ResourcePath, ResourceType.Sprite.ToString(), data.Key)))
-            // {
-            //     resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.Sprite.ToString(), ResourceType.SitSprite.ToString() + "_" + data.Key)));
-            // }
-
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.DefaultSprite.ToString(), ResourceType.SitSprite.ToString(), string.Format("{0}_{1}", ResourceType.SitSprite.ToString(), data.Key))))
+            //Character
+            //sprite
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.DefaultSprite.ToString(), ResourceFileName.Standing.ToString(), string.Format("{0}_{1}", ResourceType.SitFrontSprite.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.SitSpriteID, Resources.Load<Sprite>(Path.Combine(ResourceType.DefaultSprite.ToString(), 
-                                                                                            ResourceType.SitSprite.ToString(), 
-                                                                                            string.Format("{0}_{1}", ResourceType.SitSprite.ToString(), data.Key))));
+                resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
+                                                                                            ResourceFileName.Standing.ToString(), 
+                                                                                            string.Format("{0}_{1}", ResourceType.StandingSprite.ToString(), data.Key))));
+
+                resourceHashTable.Add(data.SitBackID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
+                                                                                            ResourceFileName.SitBack.ToString(), 
+                                                                                            string.Format("{0}_{1}", ResourceType.SitBackSprite.ToString(), data.Key))));
+
+                resourceHashTable.Add(data.SitFrontID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
+                                                                                            ResourceFileName.SitFront.ToString(), 
+                                                                                            string.Format("{0}_{1}", ResourceType.SitFrontSprite.ToString(), data.Key))));                                                      
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.IdleAni.ToString(), string.Format("{0}_{1}", ResourceType.IdleAni.ToString(), data.Key))))
+            //idle standing
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.StandingIdleAni.ToString(), string.Format("{0}_{1}", ResourceFileName.StandingIdleAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.IdleAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.IdleAni.ToString(), string.Format("{0}_{1}", ResourceType.IdleAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.StandingIdleAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.StandingIdleAni.ToString(), string.Format("{0}_{1}", ResourceFileName.StandingIdleAni.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WalkAni.ToString(), string.Format("{0}_{1}", ResourceType.WalkAni.ToString(), data.Key))))
+            //walkani
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.WalkAni.ToString(), string.Format("{0}_{1}", ResourceFileName.WalkAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.WalkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WalkAni.ToString(), string.Format("{0}_{1}", ResourceType.WalkAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.WalkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WalkAni.ToString(), string.Format("{0}_{1}", ResourceFileName.WalkAni.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.WorkAni.ToString(), string.Format("{0}_{1}", ResourceType.WorkAni.ToString(), data.Key))))
+            //workani
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWork.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.WorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.WorkAni.ToString(), string.Format("{0}_{1}", ResourceType.WorkAni.ToString(), data.Key))));
+                //back
+                //lookaround
+                resourceHashTable.Add(data.SitBackIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleLookAround.ToString(), string.Format("{0}_{1}", ResourceType.SitBackIdleLookAroundAni.ToString(), data.Key))));
+                //stretching
+                resourceHashTable.Add(data.SitBackIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleStretching.ToString(), string.Format("{0}_{1}", ResourceType.SitBackIdleStretchingAni.ToString(), data.Key))));
+                //work
+                resourceHashTable.Add(data.BackWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackWork.ToString(), string.Format("{0}_{1}", ResourceType.BackWorkAni.ToString(), data.Key))));
+
+
+                //front
+                //lookaround
+                resourceHashTable.Add(data.SitFrontIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleLookAround.ToString(), string.Format("{0}_{1}", ResourceType.SitFrontIdleLookAroundAni.ToString(), data.Key))));
+                //stretching
+                resourceHashTable.Add(data.SitFrontIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleStretching.ToString(), string.Format("{0}_{1}", ResourceType.SitFrontIdleStretchingAni.ToString(), data.Key))));
+                //work
+                resourceHashTable.Add(data.FrontWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWork.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))));
             }
 
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceType.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))))
+
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.SitAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceType.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.SittingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.SitAni.ToString(), string.Format("{0}_{1}", ResourceType.SitAni.ToString(), data.Key))));
             }
         }
-
-
-
-        //TEST_DEBUGHASH();
-    }
-
-
-    private void TEST_DEBUGHASH()
-    {
-        Debug.Log("ID : " + ValueCastTo<int>.From(ResourceID.Character_ISD_Ine).ToString() + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine)]);
-
-        Debug.Log("Sprite : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.DefaultSprite)).ToString() 
-                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.DefaultSprite)]);
-
-        Debug.Log("IdleAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.IdleAni)).ToString() 
-                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.IdleAni)]);
-
-        Debug.Log("WorkAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WorkAni)).ToString() 
-                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WorkAni)]);
-
-        Debug.Log("WalkAni : " + (ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WalkAni)).ToString() 
-                                        + "/" + resourceHashTable[ValueCastTo<int>.From(ResourceID.Character_ISD_Ine) + ValueCastTo<int>.From(ResourceType.WalkAni)]);
-
-
-
     }
 
     private int CharacterID(int id)
@@ -446,9 +440,4 @@ public class DataManager : GenericSingleton<DataManager>
 
         return resourceID.ToString();
     }
-
-    // private void ReadDataFromResource(string path, )
-    // {
-        
-    // }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Devcat;
 using UnityEngine;
 
@@ -73,16 +72,34 @@ public class Character : MonoBehaviour,
         Sit,
     }
 
+    enum SpriteType
+    {
+        Standing = 0,
+        SitFront = 1,
+        SitBack = 2,
+    }
+
     enum AniState
     {
-        IdleAni,            //Idle 애니메이션
-        WorkAni,            //작업 애니메이션
-        WalkAni,            //걷는 애니메이션
-
-        SitAni,             //스탠딩 애니메이션
+        Walk,            //걷는 상태인지 여부
+        Interactive,        //상호작용 상태인지 여부
+        Front,              //Front 애니메이션 실행 필요 여부
+        Back,               //Back 애니메이션 실행 필요 여부
+        Work,               //Work 상태인지 여부
+        Idle,               //Idle 상태인지 여부
+        Sit,                //앉아있는 상태인지 여부
+        IdleNum,            //1 -> Stretching, 2 -> LookAround
+        ChangeIdleAni,      //Stretching <-> LookAround 전환용
 
         AniSpeed,           //앉는 애니메이션 반대로 재생할려고 만듦
+    }
 
+    enum IdleAniType
+    {
+        None            = 0,
+        Stretching      = 1,
+        LookAround      = 2,
+        Count,
     }
 
     enum MoveType
@@ -116,22 +133,27 @@ public class Character : MonoBehaviour,
 
         imageTransform = transform.GetChild(0);
 
-        //
         characterSprites = new Sprite[ValueCastTo<long>.From(ResourceType.SpriteCount)];
 
-        //standing
-        characterSprites[0] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.DefaultSprite);   
-        //sit
-        characterSprites[1] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitSprite);   
+        characterSprites[ValueCastTo<int>.From(SpriteType.Standing)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.DefaultSprite);     //standing
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitFrontSprite);    //sitFront
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitBackSprite);     //sitback
 
 
         aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = aoc;
         
-        aoc[ResourceType.IdleAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.IdleAni);
-        aoc[ResourceType.WalkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WalkAni);
-        aoc[ResourceType.WorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WorkAni);
+        aoc[ResourceType.StandingIdleAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.StandingIdleAni);
+        aoc[ResourceType.InteractiveAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.InteractiveAni);
         aoc[ResourceType.SitAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitAni);
+        aoc[ResourceType.WalkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.WalkAni);
+
+        aoc[ResourceType.SitBackIdleLookAroundAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitBackIdleLookAroundAni);
+        aoc[ResourceType.SitBackIdleStretchingAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitBackIdleStretchingAni);
+        aoc[ResourceType.BackWorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.BackWorkAni);
+        aoc[ResourceType.SitFrontIdleLookAroundAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitFrontIdleLookAroundAni);
+        aoc[ResourceType.SitFrontIdleStretchingAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitFrontIdleStretchingAni);
+        aoc[ResourceType.FrontWorkAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontWorkAni);
 
         AnimationSpeedSet(false);
         animator.writeDefaultValuesOnDisable = false;
@@ -174,62 +196,57 @@ public class Character : MonoBehaviour,
         }
     }
 
-
-    private Animator ani;
-
+    private int targetIndex;
     private Coroutine moveCoroutine;
 
     private bool isOnMySeat = false;        //내 좌석에 앉아있는지 체크용
 
-    private bool IdleAni {get { return animator.GetBool(AniState.IdleAni.ToString()); } set { animator.SetBool(AniState.IdleAni.ToString(), value); }}
-    private bool WorkAni {get { return animator.GetBool(AniState.WorkAni.ToString()); } set { animator.SetBool(AniState.WorkAni.ToString(), value); }}
-    private bool WalkAni {get { return animator.GetBool(AniState.WalkAni.ToString()); } set { animator.SetBool(AniState.WalkAni.ToString(), value); }}
- 
-    private bool SitAni {get {return animator.GetBool(AniState.SitAni.ToString());} set {animator.SetBool(AniState.SitAni.ToString(), value);}}
+    private bool WalkAni { get { return animator.GetBool(AniState.Walk.ToString()); } set { animator.SetBool(AniState.Walk.ToString(), value); } }
+    private bool InteractiveAni { get { return animator.GetBool(AniState.Interactive.ToString()); } set { animator.SetBool(AniState.Interactive.ToString(), value); } }
+    private bool FrontAni { get { return animator.GetBool(AniState.Front.ToString()); } set { animator.SetBool(AniState.Front.ToString(), value); } }
+    private bool BackAni { get { return animator.GetBool(AniState.Back.ToString()); } set { animator.SetBool(AniState.Back.ToString(), value); } }
+    private bool WorkAni { get { return animator.GetBool(AniState.Work.ToString()); } set { animator.SetBool(AniState.Work.ToString(), value); } }
+    private bool IdleAni { get { return animator.GetBool(AniState.Idle.ToString()); } set { animator.SetBool(AniState.Idle.ToString(), value); } }
+    private bool SitAni { get {return animator.GetBool(AniState.Sit.ToString());} set { animator.SetBool(AniState.Sit.ToString(), value); } }
+    private int IdleNumAni { get { return animator.GetInteger(AniState.IdleNum.ToString()); } set { animator.SetInteger(AniState.IdleNum.ToString(), value); } }
+    private void SetChangeIdleTrigger() { animator.SetTrigger(AniState.ChangeIdleAni.ToString()); }
 
-    private int targetIndex;
 
-    [SerializeField]private bool isRight;
+    [SerializeField] private bool isRight;
+    [SerializeField] private bool seatIsFront;
 
-    private void SetSit()
-    {
-        IdleAni = false;
-        WorkAni = false;
-        WalkAni = false;
-        SitAni = true;
+    private void RandomIdleNum() { Invoke("SetRandomIdleNum", UnityEngine.Random.Range(2f, 10f)); }
+    private void SetRandomIdleNum() { IdleNumAni = UnityEngine.Random.Range(0, ValueCastTo<int>.From(IdleAniType.Count)); ChangeRandomIdle(); }
+    private void CancelRandomIdleNum() { CancelInvoke("SetRandomIdleNum"); CancelChangeRandomIdle(); }
+    private void ChangeRandomIdle() { InvokeRepeating("SetChangeIdleTrigger", 2f, 5f); }
+    private void CancelChangeRandomIdle() { CancelInvoke("SetChangeIdleTrigger"); }
 
-        currentState = State.Sit;
-    }
+    private void SetSit() { SitAni = true; currentState = State.Sit; if (!isBroadcastPlanning) RandomIdleNum(); }
+    private void RevertSit() { SitAni = false; CancelRandomIdleNum(); }
     
-    private void SetWalk()
-    {
-        IdleAni = false;
-        WorkAni = false;
-        WalkAni = true;
-        SitAni = false;
+    private void SetWalk() { WalkAni = true; currentState = State.Move; }
+    private void RevertWalk() { WalkAni = false; }
+    
+    private void SetWork() { WorkAni = true; currentState = State.Work; }
+    private void RevertWork() { WorkAni = false; }
+    
+    private void SetIdle() { IdleAni = true; currentState = State.Idle; if (SitAni) RandomIdleNum(); } 
+    private void RevertIdle() { IdleAni = false; IdleNumAni = ValueCastTo<int>.From(IdleAniType.None); CancelRandomIdleNum(); } 
 
-        currentState = State.Move;
+    private void CheckSeatDirection()
+    {
+        if (seatIsFront)
+        {
+            FrontAni = true;
+            BackAni = false;
+        }
+        else
+        {
+            FrontAni = false;
+            BackAni = true;
+        }
     }
 
-    private void SetWork()
-    {
-        IdleAni = false;
-        WorkAni = true;
-        WalkAni = false;
-        SitAni = false;
-
-        currentState = State.Work;
-    }
-
-    private void SetIdle()
-    {
-        IdleAni = true;
-        WorkAni = false;
-        WalkAni = false;
-        SitAni = false;
-
-        currentState = State.Idle;
-    } 
 
     private void Idle()
     {
@@ -355,6 +372,7 @@ public class Character : MonoBehaviour,
         }
 
         FlipToTarget(lastPos);
+        RevertWalk();
 
         isCharacterMove = false;
 
@@ -477,6 +495,7 @@ public class Character : MonoBehaviour,
 
             interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,            //순서대로 방송중인지, 타겟이 몇번인지(캐릭터용)
                                                                 out isRight,                    //target의 방향
+                                                                out seatIsFront,                //앉을 좌석이 앞을 보고있는지
                                                                 out interactiveTargetAction,    // 타겟의 애니메이션 받을려고 넣음
                                                                 ReturnMySeat,                   //상호작용 끝나면 자리로 되돌아갈 수 있도록 콜백
                                                                 StatAdd);                       //상호작용 시 스텟추가를 위해 콜백
@@ -492,6 +511,7 @@ public class Character : MonoBehaviour,
                 isFirstMoveFromSetData = false;
                 interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,
                                                                     out isRight, 
+                                                                    out seatIsFront,
                                                                     out interactiveTargetAction, 
                                                                     null, 
                                                                     StatAdd);
@@ -500,6 +520,7 @@ public class Character : MonoBehaviour,
             {
                 interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, 
                                                                     out isRight, 
+                                                                    out seatIsFront,
                                                                     out interactiveTargetAction, 
                                                                     ReturnMySeat, 
                                                                     StatAdd);
@@ -680,8 +701,8 @@ public class Character : MonoBehaviour,
     {
         //1. 방송 제작중 전달   
         //2. 방송 제작 끝 전달
-        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); callActionAfterSit.Enqueue(FindPC); }, 
-                                                                () => { this.isBroadcastPlanning = false; SetIdle(); });
+        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); callActionAfterSit.Enqueue(FindPC); RevertIdle(); }, 
+                                                                () => { this.isBroadcastPlanning = false; SetIdle(); RevertWork(); });
     }
 
 
@@ -835,6 +856,7 @@ public class Character : MonoBehaviour,
         SetSit();
 
         Flip(isRight);
+        CheckSeatDirection();
 
         SetWalkForRandomSec();
 
@@ -880,6 +902,7 @@ public class Character : MonoBehaviour,
 
     public IEnumerator StandUp()
     {
+        RevertSit();
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
         AnimationSpeedSet(true);
         isOnMySeat = false;
@@ -904,24 +927,24 @@ public class Character : MonoBehaviour,
             SetIdle();
         }
 
-        SetSitSprite();
+        SetSprite();
     }
 
-
-    //애니메이션 내부에 함수 추가
-    //
-    public void SetSitSprite()
+    public void SetSprite()
     {
+        if (!SitAni)
+        {
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
+        }
 
-        spriteRenderer.sprite = characterSprites[0];
-
-        //상대 스트라이트끄는 이벤트 받아와서 여기서 실행
-        //해당 이벤트 받아와야 플레이어가 왔다갔따할 때 키고 끌 수 있음
-    }
-    //
-    public void SetStandingSprite()
-    {
-        spriteRenderer.sprite = characterSprites[1];
+        if (FrontAni)
+        {
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)];
+        }
+        else
+        {
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)];
+        }
     }
 
     public void RegisterUpdateSeatIndexEvent(CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex)

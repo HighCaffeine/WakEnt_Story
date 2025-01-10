@@ -40,16 +40,31 @@ public enum ResourceType : long
     Productor                           = 3000,
     TypeCount                           = 5,
 
-    DefaultSprite                       = 10000,         //현재 Sprite는 아이네님 스탠딩 프로토타입으로 해둠.
-    SitSprite                           = 20000,
-    SpriteCount                         = 2,
+    DefaultSprite                       = 10000,   
+    StandingSprite                      = 10000,      
+    SitFrontSprite                      = 20000,
+    SitBackSprite                       = 30000,
+    SpriteCount                         = 3,
 
-    WalkAni                             = 100000,        //디롬님께서 주신 기본 캐릭터 Walk애니로 대체
-    WorkAni                             = 200000,
-    IdleAni                             = 300000,
-    SitAni                              = 400000,
-    AniCount                            = 4,
+    WalkAni                             = 100000,
+    FrontWorkAni                        = 200000,
+    BackWorkAni                         = 210000,
+    StandingIdleAni                     = 300000,
+    SitFrontIdleStretchingAni           = 400000,
+    SitFrontIdleLookAroundAni           = 410000,
+    SitBackIdleStretchingAni            = 420000,
+    SitBackIdleLookAroundAni            = 430000,
+    SitAni                              = 500000,
+    InteractiveAni                      = 600000,         
+    AniCount                            = 10,
 }
+
+public enum ResourceFileName 
+{   
+    DefaultSprite, SitBack, SitFront, Standing, //Sprite 
+    BackIdleLookAround, BackIdleStretching, BackWork, FrontIdleLookAround, FrontIdleStretching, FrontWork, //Work Ani File
+    WalkAni, StandingIdleAni, WorkAni, SitAni, InteractiveAni, //Ani Root File
+};
 
 public enum CommentType {ToIne, ToJingBurger, ToLilpa, ToJururu, ToGosegu, ToViichan, Count,};
 
@@ -134,15 +149,22 @@ public class GameHelpInfo
 [System.Serializable]
 public class ResourcesTable
 {
-    public string Key;          //리소스 키 값
-    //public string Info;         //정보
-    public int ID;              //리소스 ID 저장할 때 쓰는 값
-    public long SpriteID;          //Sprite ID
-    public long SitSpriteID;        //앉은 이미지
-    public long WalkAniID;         //걷는 애니메이션 ID
-    public long WorkAniID;         //작업 애니메이션 ID
-    public long IdleAniID;          //Idle 애니메이션 ID
-    public long SitAniID;
+    public string Key;                          //리소스 키 값
+    //public string Info;                       //정보
+    public int ID;                              //리소스 ID 저장할 때 쓰는 값
+    public long SpriteID;                       //Sprite ID
+    public long SitFrontID;                     //정면 앉은 도트
+    public long SitBackID;                      //뒷면 앉은 도트
+    public long WalkAniID;                      //걷는 ani
+    public long FrontWorkAniID;                 //정면 일하는 ani
+    public long BackWorkAniID;                  //뒷면 일하는 ani
+    public long StandingIdleAniID;              //서있는 idle ani
+    public long SitFrontIdleStretchingAniID;    //앉은 정면 기지개 ani
+    public long SitFrontIdleLookAroundAniID;    //앉은 정면 두리번 ani
+    public long SitBackIdleStretchingAniID;     //앉은 뒷면 기지개 ani
+    public long SitBackIdleLookAroundAniID;     //앉은 뒷면 두리번 ani
+    public long SittingAniID;                   //앉는 ani
+    public long InteractiveAniID;               //상호작용 ani
 }
 
 //키워드의 매칭률
