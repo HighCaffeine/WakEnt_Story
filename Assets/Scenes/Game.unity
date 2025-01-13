@@ -46700,6 +46700,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
+      propertyPath: isRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582094413308121874, guid: 7975b677608a6f342823322b75605d12, type: 3}
       propertyPath: environmentAni
       value: 
       objectReference: {fileID: 7400000, guid: da73103e46e56cf46a2f2da0d9b59005, type: 2}
@@ -52176,6 +52180,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8035280172979850661}
   iSEGYEIDOL: 0
   animator: {fileID: 4473192782323418480}
+  characterSprites: []
   currentState: 0
   isRight: 0
   seatIsFront: 0

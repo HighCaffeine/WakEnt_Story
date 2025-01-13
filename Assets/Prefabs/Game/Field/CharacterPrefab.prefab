@@ -185,11 +185,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94dd842ad0142e48aae419d183be5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 2171147937188426361}
+  spriteRenderer: {fileID: 3685344052879131623}
   iSEGYEIDOL: 0
   animator: {fileID: -3480857999503869268}
+  characterSprites: []
   currentState: 0
   isRight: 0
+  seatIsFront: 0
   interactiveLayer:
     serializedVersion: 2
     m_Bits: 3456
@@ -320,7 +322,7 @@ BoxCollider2D:
   m_Offset: {x: 0.014814764, y: 0.4846561}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4744857, y: 0.01534394}
+    pivot: {x: 0.4744857, y: 0}
     oldSize: {x: 0.58064514, y: 1}
     newSize: {x: 0.58064514, y: 1}
     adaptiveTilingThreshold: 0.5

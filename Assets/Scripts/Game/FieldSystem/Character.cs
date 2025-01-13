@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Devcat;
+using UnityEditor;
 using UnityEngine;
 
 public class Character : MonoBehaviour, 
@@ -87,9 +88,10 @@ public class Character : MonoBehaviour,
         Back,               //Back 애니메이션 실행 필요 여부
         Work,               //Work 상태인지 여부
         Idle,               //Idle 상태인지 여부
-        Sit,                //앉아있는 상태인지 여부
+        Seated,                //앉아있는 상태인지 여부
         IdleNum,            //1 -> Stretching, 2 -> LookAround
         ChangeIdleAni,      //Stretching <-> LookAround 전환용
+        Sitting,            //좌석 앉을 때 쓸 꺼
 
         AniSpeed,           //앉는 애니메이션 반대로 재생할려고 만듦
     }
@@ -124,7 +126,6 @@ public class Character : MonoBehaviour,
     public void SetData(Sprite sprite, CharacterData characterData, int characterID)
     {
         this.characterData = characterData;
-        spriteRenderer.sprite = sprite;
 
         if (characterData.IsIsegyeIdol == "O")
         {
@@ -138,7 +139,6 @@ public class Character : MonoBehaviour,
         characterSprites[ValueCastTo<int>.From(SpriteType.Standing)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.DefaultSprite);     //standing
         characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitFrontSprite);    //sitFront
         characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitBackSprite);     //sitback
-
 
         aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = aoc;
@@ -155,7 +155,10 @@ public class Character : MonoBehaviour,
         aoc[ResourceFileName.FrontIdleStretching.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontIdleStretchingAni);
         aoc[ResourceFileName.FrontWork.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontWorkAni);
 
+        spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
+
         AnimationSpeedSet(false);
+        
         animator.writeDefaultValuesOnDisable = false;
         
         isRight = true;
@@ -207,30 +210,32 @@ public class Character : MonoBehaviour,
     private bool BackAni { get { return animator.GetBool(AniState.Back.ToString()); } set { animator.SetBool(AniState.Back.ToString(), value); } }
     private bool WorkAni { get { return animator.GetBool(AniState.Work.ToString()); } set { animator.SetBool(AniState.Work.ToString(), value); } }
     private bool IdleAni { get { return animator.GetBool(AniState.Idle.ToString()); } set { animator.SetBool(AniState.Idle.ToString(), value); } }
-    private bool SitAni { get {return animator.GetBool(AniState.Sit.ToString());} set { animator.SetBool(AniState.Sit.ToString(), value); } }
+    private bool SitAni { get {return animator.GetBool(AniState.Seated.ToString());} set { animator.SetBool(AniState.Seated.ToString(), value); } }
     private int IdleNumAni { get { return animator.GetInteger(AniState.IdleNum.ToString()); } set { animator.SetInteger(AniState.IdleNum.ToString(), value); } }
     private void SetChangeIdleTrigger() { animator.SetTrigger(AniState.ChangeIdleAni.ToString()); }
-
+    private void SetSittingTrigger() { animator.SetTrigger(AniState.Sitting.ToString()); if ((!isBroadcastPlanning) && isOnMySeat)  RandomIdleNum(); }
+    private void SetWalkTrigger() { animator.SetTrigger(AniState.Walk.ToString()); }
+    private void SetInteractiveTrigger() { animator.SetTrigger(AniState.Interactive.ToString()); }
 
     [SerializeField] private bool isRight;
     [SerializeField] private bool seatIsFront;
 
     private void RandomIdleNum() { Invoke("SetRandomIdleNum", UnityEngine.Random.Range(2f, 10f)); }
-    private void SetRandomIdleNum() { IdleNumAni = UnityEngine.Random.Range(0, ValueCastTo<int>.From(IdleAniType.Count)); ChangeRandomIdle(); }
+    private void SetRandomIdleNum() { animator.enabled = true; IdleNumAni = UnityEngine.Random.Range(1, ValueCastTo<int>.From(IdleAniType.Count)); ChangeRandomIdle(); }
     private void CancelRandomIdleNum() { CancelInvoke("SetRandomIdleNum"); CancelChangeRandomIdle(); }
     private void ChangeRandomIdle() { InvokeRepeating("SetChangeIdleTrigger", 2f, 5f); }
     private void CancelChangeRandomIdle() { CancelInvoke("SetChangeIdleTrigger"); }
 
-    private void SetSit() { SitAni = true; currentState = State.Sit; if (!isBroadcastPlanning) RandomIdleNum(); }
-    private void RevertSit() { SitAni = false; CancelRandomIdleNum(); }
+    private void SetSit() { SitAni = true; /*currentState = State.Sit; if (!isBroadcastPlanning) RandomIdleNum();*/ }
+    private void RevertSit() { animator.enabled = true; SitAni = false;  CancelRandomIdleNum(); }
     
-    private void SetWalk() { WalkAni = true; currentState = State.Move; }
-    private void RevertWalk() { WalkAni = false; }
+    private void SetWalk() { /*WalkAni = true;*/ SetWalkTrigger(); currentState = State.Move; }
+    //private void RevertWalk() { WalkAni = false; }
     
     private void SetWork() { WorkAni = true; currentState = State.Work; }
     private void RevertWork() { WorkAni = false; }
     
-    private void SetIdle() { IdleAni = true; currentState = State.Idle; if (SitAni) RandomIdleNum(); } 
+    private void SetIdle() { IdleAni = true; currentState = State.Idle; } 
     private void RevertIdle() { IdleAni = false; IdleNumAni = ValueCastTo<int>.From(IdleAniType.None); CancelRandomIdleNum(); } 
 
     private void CheckSeatDirection()
@@ -245,6 +250,38 @@ public class Character : MonoBehaviour,
             FrontAni = false;
             BackAni = true;
         }
+    }
+
+    //ani상태 / 
+    public void SetSprite()
+    {
+        if (isOnMySeat)
+        {
+            animator.enabled = false;
+        }
+
+        if (!SitAni)
+        {
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
+        }
+
+        if (FrontAni)
+        {
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)];
+        }
+        else if (BackAni)
+        {   
+            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)];
+        }
+
+        animator.ResetTrigger(AniState.Walk.ToString());
+        animator.ResetTrigger(AniState.Sitting.ToString());
+    }
+
+    private void AnimatorEnableAfterSprite()
+    {
+        animator.enabled = true;
+        animator.StartPlayback();
     }
 
 
@@ -279,8 +316,6 @@ public class Character : MonoBehaviour,
             return;
         }
 
-        Debug.Log(transform.name);
-
         moveCoroutine = StartCoroutine(MoveToTarget(path, moveType, moveDelegate));
 
         path = null;
@@ -308,14 +343,7 @@ public class Character : MonoBehaviour,
 
         if (path == null)
         {
-            if (isBroadcastPlanning) 
-            {
-                SetWork();
-            }
-            else
-            {
-                SetIdle();
-            }
+            SetCurrentStateAni();
 
             SetWalkForRandomSec();
 
@@ -327,6 +355,20 @@ public class Character : MonoBehaviour,
         moveDelegate = null;
         moveToTarget = true;
         SetWalk();
+    }
+
+    private void SetCurrentStateAni()
+    {
+        if (isBroadcastPlanning) 
+        {
+            SetWork();
+            RevertIdle();
+        }
+        else
+        {
+            SetIdle();
+            RevertWork();
+        }
     }
 
 
@@ -362,6 +404,8 @@ public class Character : MonoBehaviour,
 
         isCharacterMove = true;
 
+        SetWalkTrigger();
+
         while (path.Count > 0)
         {
             Vector2 targetPos = path.Dequeue();
@@ -372,7 +416,7 @@ public class Character : MonoBehaviour,
         }
 
         FlipToTarget(lastPos);
-        RevertWalk();
+        //RevertWalk();
 
         isCharacterMove = false;
 
@@ -392,15 +436,46 @@ public class Character : MonoBehaviour,
         Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
 
         isCharacterMove = true; 
-        while (!(Vector2.Distance(transform.position, targetPos) <= 0.03f))
+
+        float beforeDistance = float.MaxValue;
+        float distance = 0.0f;
+        bool isFirst = true;
+
+        do
         {
+            if (distance > beforeDistance)
+            {
+                break;
+            }
+
+            if (!isFirst)
+            {
+                beforeDistance = distance;
+            }
+            else
+            {
+                isFirst = false;
+            }
+
             yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
 
             Vector2 newPos = transform.position; 
             newPos += direction * Time.deltaTime * 0.75f;
 
             transform.position = newPos;
-        }
+
+            distance = Vector2.Distance(transform.position, targetPos);
+        } while (!(distance <= 0.03f));
+
+        // while (!(Vector2.Distance(transform.position, targetPos) <= 0.03f))
+        // {
+        //     yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+
+        //     Vector2 newPos = transform.position; 
+        //     newPos += direction * Time.deltaTime * 0.75f;
+
+        //     transform.position = newPos;
+        // }
 
         transform.position = targetPos;
         isCharacterMove = false;
@@ -493,6 +568,8 @@ public class Character : MonoBehaviour,
             //캐릭터 상호작용
             //return my seat 함수 전달
 
+            SetInteractiveTrigger();
+
             interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,            //순서대로 방송중인지, 타겟이 몇번인지(캐릭터용)
                                                                 out isRight,                    //target의 방향
                                                                 out seatIsFront,                //앉을 좌석이 앞을 보고있는지
@@ -518,6 +595,7 @@ public class Character : MonoBehaviour,
             }
             else
             {
+                SetInteractiveTrigger();
                 interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, 
                                                                     out isRight, 
                                                                     out seatIsFront,
@@ -601,18 +679,6 @@ public class Character : MonoBehaviour,
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(lastPos, 1f);
-    }
-
-    public void ChangeStateInter()
-    {
-        if (isBroadcastPlanning)
-        {
-            SetWork();
-        }
-        else
-        {
-            SetIdle();
-        }
     }
 
     public void TEST_Message(string msg)
@@ -850,14 +916,16 @@ public class Character : MonoBehaviour,
         AnimationSpeedSet(false);
 
         isOnMySeat = true;
+        SetSit();
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CanInteractive);
 
-
-        SetSit();
+        SetSittingTrigger();
+        //SetSit();
 
         Flip(isRight);
         CheckSeatDirection();
 
+        SetCurrentStateAni();
         SetWalkForRandomSec();
 
         while (callActionAfterSit.Count > 0)
@@ -902,10 +970,15 @@ public class Character : MonoBehaviour,
 
     public IEnumerator StandUp()
     {
+        isOnMySeat = false;
+
         RevertSit();
+        RevertIdle();
+        RevertWork();
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
         AnimationSpeedSet(true);
-        isOnMySeat = false;
+
+        SetSittingTrigger();
 
         yield return new WaitForSeconds(0.5f);
 
@@ -920,33 +993,16 @@ public class Character : MonoBehaviour,
     {
         if (isBroadcastPlanning)
         {
-            SetWork();
+            //SetWork();
         }
         else
         {
-            SetIdle();
+            //SetIdle();
         }
 
         SetSprite();
     }
-
-    public void SetSprite()
-    {
-        if (!SitAni)
-        {
-            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
-        }
-
-        if (FrontAni)
-        {
-            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)];
-        }
-        else
-        {
-            spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)];
-        }
-    }
-
+    
     public void RegisterUpdateSeatIndexEvent(CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex)
     {
         this.OnUpdateSeatIndex = OnUpdateSeatIndex;

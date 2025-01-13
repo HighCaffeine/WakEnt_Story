@@ -316,7 +316,8 @@ public class DataManager : GenericSingleton<DataManager>
 
     public Sprite GetSpriteFromID(ResourceID resourceID, ResourceType resourceType)
     {
-        return resourceHashTable[ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType)] as Sprite;
+        long key = ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType);
+        return resourceHashTable[key] as Sprite;
     }
 
     public AnimationClip GetAnimationClipFromID(ResourceID resourceID, ResourceType resourceType)

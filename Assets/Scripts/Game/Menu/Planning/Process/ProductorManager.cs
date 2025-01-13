@@ -827,7 +827,6 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             return 0;
         }
 
-        Debug.Log(targetIndex);
         ProductorInfo targetCharacter = productorInfos[targetIndex];
 
         //추가할 스텟 랜덤으로 가져옴
