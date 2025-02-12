@@ -13,9 +13,11 @@ public class AstarTest : MonoBehaviour
         GoToTargetPos();
     }
 
+    Stack<Vector2> temp = new Stack<Vector2>();
+
     private void GoToTargetPos()
     {
-        Queue<Vector2> path = PathFinding.Instance.CurvedPathFind(startTransform.transform.position, targetTransform.transform.position);
+        Queue<Vector2> path = PathFinding.Instance.CurvedPathFind(startTransform.transform.position, targetTransform.transform.position, ref temp, false, PathFinding.StartNodeDirectionLimit.NONE);
 
         //PathFinding.Instance.LineRender(startTransform.transform.position);
         StartCoroutine(MoveToTarget(path, startTransform));
@@ -33,7 +35,7 @@ public class AstarTest : MonoBehaviour
 
             while (!(Vector2.Distance(npc.transform.position, targetPos) <= 0.01f))
             {
-                Vector2 newPos = npc.transform.position; 
+                Vector2 newPos = npc.transform.position;
                 newPos += direction * Time.deltaTime;
 
                 npc.transform.position = newPos;

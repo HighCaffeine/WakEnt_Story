@@ -5,7 +5,7 @@ using Devcat;
 using UnityEditor;
 using UnityEngine;
 
-public class Character : MonoBehaviour, 
+public class Character : MonoBehaviour,
                                 CharacterManager.CharacterMovementEvent,
                                 OnReturnPool<Character>
 {
@@ -43,7 +43,7 @@ public class Character : MonoBehaviour,
 
     */
 
-    public const float MAXFEVERYIELDTIME = 0.5f; 
+    public const float MAXFEVERYIELDTIME = 0.5f;
     public const float MINFEVERYIELDTIME = 0.1f;
     public const float ANISPEED = 1f;
 
@@ -54,7 +54,7 @@ public class Character : MonoBehaviour,
 
     private AnimatorOverrideController aoc;
 
-    [SerializeField]private Sprite[] characterSprites;
+    [SerializeField] private Sprite[] characterSprites;
 
     private CharacterData characterData;
     private ProductorInfo productorInfo;
@@ -62,6 +62,8 @@ public class Character : MonoBehaviour,
     private Transform imageTransform;
 
     private Queue<Action> callActionAfterSit = new Queue<Action>();
+
+    [Header("이동 시 Layer 계산")][SerializeField] private LayerCalculator layerCalculator;
 
     enum State
     {
@@ -78,6 +80,11 @@ public class Character : MonoBehaviour,
         Standing = 0,
         SitFront = 1,
         SitBack = 2,
+        SitFrontInteractiveLeft = 3,
+        SitFrontInteractiveRight = 4,
+        SitBackInteractiveLeft = 5,
+        SitBackInteractiveRight = 6,
+        Count,
     }
 
     enum AniState
@@ -98,9 +105,9 @@ public class Character : MonoBehaviour,
 
     enum IdleAniType
     {
-        None            = 0,
-        Stretching      = 1,
-        LookAround      = 2,
+        None = 0,
+        Stretching = 1,
+        LookAround = 2,
         Count,
     }
 
@@ -134,15 +141,19 @@ public class Character : MonoBehaviour,
 
         imageTransform = transform.GetChild(0);
 
-        characterSprites = new Sprite[ValueCastTo<long>.From(ResourceType.SpriteCount)];
+        characterSprites = new Sprite[ValueCastTo<long>.From(SpriteType.Count)];
 
         characterSprites[ValueCastTo<int>.From(SpriteType.Standing)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.DefaultSprite);     //standing
         characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitFrontSprite);    //sitFront
         characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, ResourceType.SitBackSprite);     //sitback
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitFrontInteractiveLeft)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, SitInteractiveResourceType.SitFrontInteractiveLeft);     //sitback
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitFrontInteractiveRight)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, SitInteractiveResourceType.SitFrontInteractiveRight);     //sitback
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitBackInteractiveLeft)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, SitInteractiveResourceType.SitBackInteractiveLeft);     //sitback
+        characterSprites[ValueCastTo<int>.From(SpriteType.SitBackInteractiveRight)] = CharacterManager.Instance.GetSpriteFromID(characterData.CharacterID, SitInteractiveResourceType.SitBackInteractiveRight);     //sitback
+        spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
 
         aoc = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        animator.runtimeAnimatorController = aoc;
-        
+
         aoc[ResourceFileName.StandingIdleAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.StandingIdleAni);
         aoc[ResourceFileName.InteractiveAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.InteractiveAni);
         aoc[ResourceFileName.SitAni.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.SitAni);
@@ -155,19 +166,19 @@ public class Character : MonoBehaviour,
         aoc[ResourceFileName.FrontIdleStretching.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontIdleStretchingAni);
         aoc[ResourceFileName.FrontWork.ToString()] = CharacterManager.Instance.GetAnimationClip(characterID, ResourceType.FrontWorkAni);
 
-        spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
+        animator.runtimeAnimatorController = aoc;
 
         AnimationSpeedSet(false);
-        
+
         animator.writeDefaultValuesOnDisable = false;
-        
+
         isRight = true;
         isFirstMoveFromSetData = true;
 
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CantInteractive);
 
 
-        CharacterManager.Instance.testaction.Add(TEST_TurnToMoveState);
+        //CharacterManager.Instance.testaction.Add(TEST_TurnToMoveState);
         CharacterManager.Instance.RegisterPauseEvent(PauseAction);
 
         productorInfo = CharacterManager.Instance.GetProductorInfo(characterData.SeatNumber - 1);
@@ -183,19 +194,19 @@ public class Character : MonoBehaviour,
         switch (currentState)
         {
             case State.Idle:
-            Idle();
-            break;
+                Idle();
+                break;
             case State.Move:
-            Move();
-            break;
+                Move();
+                break;
             case State.Interactive:
-            Interactive();
-            break;
+                Interactive();
+                break;
             case State.Work:
-            Work();
-            break;
+                Work();
+                break;
             default:
-            return;
+                return;
         }
     }
 
@@ -210,10 +221,10 @@ public class Character : MonoBehaviour,
     private bool BackAni { get { return animator.GetBool(AniState.Back.ToString()); } set { animator.SetBool(AniState.Back.ToString(), value); } }
     private bool WorkAni { get { return animator.GetBool(AniState.Work.ToString()); } set { animator.SetBool(AniState.Work.ToString(), value); } }
     private bool IdleAni { get { return animator.GetBool(AniState.Idle.ToString()); } set { animator.SetBool(AniState.Idle.ToString(), value); } }
-    private bool SitAni { get {return animator.GetBool(AniState.Seated.ToString());} set { animator.SetBool(AniState.Seated.ToString(), value); } }
+    private bool SitAni { get { return animator.GetBool(AniState.Seated.ToString()); } set { animator.SetBool(AniState.Seated.ToString(), value); } }
     private int IdleNumAni { get { return animator.GetInteger(AniState.IdleNum.ToString()); } set { animator.SetInteger(AniState.IdleNum.ToString(), value); } }
     private void SetChangeIdleTrigger() { animator.SetTrigger(AniState.ChangeIdleAni.ToString()); }
-    private void SetSittingTrigger() { animator.SetTrigger(AniState.Sitting.ToString()); if ((!isBroadcastPlanning) && isOnMySeat)  RandomIdleNum(); }
+    private void SetSittingTrigger() { animator.SetTrigger(AniState.Sitting.ToString()); if ((!isBroadcastPlanning) && isOnMySeat) RandomIdleNum(); }
     private void SetWalkTrigger() { animator.SetTrigger(AniState.Walk.ToString()); }
     private void SetInteractiveTrigger() { animator.SetTrigger(AniState.Interactive.ToString()); }
 
@@ -221,22 +232,22 @@ public class Character : MonoBehaviour,
     [SerializeField] private bool seatIsFront;
 
     private void RandomIdleNum() { Invoke("SetRandomIdleNum", UnityEngine.Random.Range(2f, 10f)); }
-    private void SetRandomIdleNum() { animator.enabled = true; IdleNumAni = UnityEngine.Random.Range(1, ValueCastTo<int>.From(IdleAniType.Count)); ChangeRandomIdle(); }
+    private void SetRandomIdleNum() { IdleNumAni = UnityEngine.Random.Range(1, ValueCastTo<int>.From(IdleAniType.Count)); ChangeRandomIdle(); }
     private void CancelRandomIdleNum() { CancelInvoke("SetRandomIdleNum"); CancelChangeRandomIdle(); }
     private void ChangeRandomIdle() { InvokeRepeating("SetChangeIdleTrigger", 2f, 5f); }
     private void CancelChangeRandomIdle() { CancelInvoke("SetChangeIdleTrigger"); }
 
     private void SetSit() { SitAni = true; /*currentState = State.Sit; if (!isBroadcastPlanning) RandomIdleNum();*/ }
-    private void RevertSit() { animator.enabled = true; SitAni = false;  CancelRandomIdleNum(); }
-    
+    private void RevertSit() { SitAni = false; CancelRandomIdleNum(); }
+
     private void SetWalk() { /*WalkAni = true;*/ SetWalkTrigger(); currentState = State.Move; }
     //private void RevertWalk() { WalkAni = false; }
-    
+
     private void SetWork() { WorkAni = true; currentState = State.Work; }
     private void RevertWork() { WorkAni = false; }
-    
-    private void SetIdle() { IdleAni = true; currentState = State.Idle; } 
-    private void RevertIdle() { IdleAni = false; IdleNumAni = ValueCastTo<int>.From(IdleAniType.None); CancelRandomIdleNum(); } 
+
+    private void SetIdle() { IdleAni = true; currentState = State.Idle; }
+    private void RevertIdle() { IdleAni = false; IdleNumAni = ValueCastTo<int>.From(IdleAniType.None); CancelRandomIdleNum(); }
 
     private void CheckSeatDirection()
     {
@@ -255,11 +266,6 @@ public class Character : MonoBehaviour,
     //ani상태 / 
     public void SetSprite()
     {
-        if (isOnMySeat)
-        {
-            animator.enabled = false;
-        }
-
         if (!SitAni)
         {
             spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.Standing)];
@@ -270,7 +276,7 @@ public class Character : MonoBehaviour,
             spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitFront)];
         }
         else if (BackAni)
-        {   
+        {
             spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(SpriteType.SitBack)];
         }
 
@@ -280,7 +286,6 @@ public class Character : MonoBehaviour,
 
     private void AnimatorEnableAfterSprite()
     {
-        animator.enabled = true;
         animator.StartPlayback();
     }
 
@@ -298,12 +303,6 @@ public class Character : MonoBehaviour,
         // }
     }
 
-
-    public void TEST_TurnToMoveState()
-    {
-        currentState = State.Move;
-    }
-
     private void Move()
     {
         //이벤트로 사용할거고
@@ -319,12 +318,15 @@ public class Character : MonoBehaviour,
         moveCoroutine = StartCoroutine(MoveToTarget(path, moveType, moveDelegate));
 
         path = null;
-    }   
+    }
 
     Queue<Vector2> path;
     MoveType moveType;
 
     Action moveDelegate;
+
+    //Move 시 layer 계산을 위해 카스텔조 알고리즘을 적용하지 않은 경로도 받기위해 선언
+    Stack<Vector2> noneCurvedPath = new Stack<Vector2>();
 
     bool moveToTarget;
     private void CheckMoveToTarget()
@@ -337,8 +339,8 @@ public class Character : MonoBehaviour,
 
         //targetIndex -> 중복 검사를 위해 넣어둔 매니저의 타겟리스트 내부의 위치
         //이동 끝나고 해당 index는 비워줌
-        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random, 
-                                            characterData.SeatNumber - 1, out targetIndex, out lastPos);
+        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random,
+                                            characterData.SeatNumber - 1, out targetIndex, out lastPos, ref noneCurvedPath);
 
 
         if (path == null)
@@ -359,7 +361,7 @@ public class Character : MonoBehaviour,
 
     private void SetCurrentStateAni()
     {
-        if (isBroadcastPlanning) 
+        if (isBroadcastPlanning)
         {
             SetWork();
             RevertIdle();
@@ -375,8 +377,8 @@ public class Character : MonoBehaviour,
     //캐릭터 본인 위치로 이동
     public void ReturnMySeat()
     {
-        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.MoveToMySeat, 
-                                                characterData.SeatNumber - 1, out targetIndex, out lastPos);
+        path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.MoveToMySeat,
+                                                characterData.SeatNumber - 1, out targetIndex, out lastPos, ref noneCurvedPath);
 
         //테스트 메세지
         if (isFirstMoveFromSetData)
@@ -392,6 +394,7 @@ public class Character : MonoBehaviour,
     }
 
     private Vector2 lastPos;
+    private bool isFirstMove;
     //내부에서 방향 y scale 값 설정
     private IEnumerator MoveToTarget(Queue<Vector2> path, MoveType moveType, Action action)
     {
@@ -403,6 +406,7 @@ public class Character : MonoBehaviour,
         }
 
         isCharacterMove = true;
+        isFirstMove = true;
 
         SetWalkTrigger();
 
@@ -431,15 +435,17 @@ public class Character : MonoBehaviour,
         //WalkAni = false;
     }
 
-    private IEnumerator MoveToTargetPos(Vector2 targetPos)
+    private IEnumerator MoveToTargetPos(Vector2 targetPos, bool isInteractive = false)
     {
         Vector2 direction = (targetPos - (Vector2)transform.position).normalized;
 
-        isCharacterMove = true; 
+        isCharacterMove = true;
 
         float beforeDistance = float.MaxValue;
         float distance = 0.0f;
-        bool isFirst = true;
+        bool isFirst = true;    //경로 받은 후 첫 노드는 따로 값을 빼야해서 선언
+
+        LayerCalculate(targetPos, false);
 
         do
         {
@@ -457,9 +463,9 @@ public class Character : MonoBehaviour,
                 isFirst = false;
             }
 
-            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+            yield return new WaitUntil(() => { return GameManager.IsGamePause == false; });
 
-            Vector2 newPos = transform.position; 
+            Vector2 newPos = transform.position;
             newPos += direction * Time.deltaTime * 0.75f;
 
             transform.position = newPos;
@@ -481,6 +487,23 @@ public class Character : MonoBehaviour,
         isCharacterMove = false;
 
         //seatSpriteOffEvent?.Invoke();
+    }
+
+    private void LayerCalculate(Vector2 targetPos, bool isInteractive)
+    {
+        int layer = 0;
+
+        if (isInteractive)
+        {
+            layer = layerCalculator.GetOrderInLayerInteractive(transform.position, targetPos);
+        }
+        else
+        {
+            layer = layerCalculator.GetOrderInLayer(transform.position, targetPos, isFirstMove, ref noneCurvedPath);
+            isFirstMove = false;
+        }
+
+        if (layer != int.MaxValue) spriteRenderer.sortingOrder = layer;
     }
 
     private void FlipToTarget(Vector2 targetPos)
@@ -513,6 +536,39 @@ public class Character : MonoBehaviour,
 
     public Vector2 TEST_targetPos;
 
+    public void SetSpriteInteractive(Vector2 targetPos)
+    {
+        SpriteType spriteIndex = SpriteType.Standing;
+
+        bool isRight = targetPos.x < transform.position.x ? false : true;
+
+        //캐릭터 방향 기준으로 왼쪽 오른쪽
+        if (seatIsFront)
+        {
+            if (isRight)
+            {
+                spriteIndex = SpriteType.SitFrontInteractiveLeft;
+            }
+            else
+            {
+                spriteIndex = SpriteType.SitFrontInteractiveRight;
+            }
+        }
+        else
+        {
+            if (isRight)
+            {
+                spriteIndex = SpriteType.SitBackInteractiveRight;
+            }
+            else
+            {
+                spriteIndex = SpriteType.SitBackInteractiveLeft;
+            }
+        }
+
+        spriteRenderer.sprite = characterSprites[ValueCastTo<int>.From(spriteIndex)];
+    }
+
     private void Interactive()
     {
         //마지막 경로로 넘어온 path위치를 overlap하여
@@ -532,7 +588,8 @@ public class Character : MonoBehaviour,
             {
                 target = Physics2D.OverlapCircle(lastPos, 0.1f, characterInterLayer.value).transform;
 
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Debug.Log(e.Message + "/" + transform.name);
             }
@@ -547,7 +604,7 @@ public class Character : MonoBehaviour,
 
         InteractiveEvent interactiveEvent = target.GetComponent<InteractiveEvent>();
         bool interTargetFlipRight = target.position.x < transform.position.x ? false : true;
-        
+
         //캐릭터체크
         var targetCharacter = target.GetComponent<Character>();
 
@@ -561,7 +618,8 @@ public class Character : MonoBehaviour,
             int targetID = targetCharacter.GetID();
 
             targetCharacter.TEST_Message(GetComment(targetID, characterData.CharacterID));
-            targetCharacter.FlipToTarget(transform.position);
+            //targetCharacter.FlipToTarget(transform.position);
+            targetCharacter.SetSpriteInteractive(transform.position);
 
             TEST_Message(GetComment(characterData.CharacterID, targetID));
 
@@ -581,26 +639,26 @@ public class Character : MonoBehaviour,
         {
             //캐릭터가 처음으로 본인 자리에 가서 interactive하는 경우에는 returnmyseat 이벤트 호출 X
 
-            
+
 
             if (isFirstMoveFromSetData)
             {
                 isFirstMoveFromSetData = false;
                 interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,
-                                                                    out isRight, 
+                                                                    out isRight,
                                                                     out seatIsFront,
-                                                                    out interactiveTargetAction, 
-                                                                    null, 
+                                                                    out interactiveTargetAction,
+                                                                    null,
                                                                     StatAdd);
             }
             else
             {
                 SetInteractiveTrigger();
-                interactiveEvent.Interactive(isBroadcastPlanning, targetIndex, 
-                                                                    out isRight, 
+                interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,
+                                                                    out isRight,
                                                                     out seatIsFront,
-                                                                    out interactiveTargetAction, 
-                                                                    ReturnMySeat, 
+                                                                    out interactiveTargetAction,
+                                                                    ReturnMySeat,
                                                                     StatAdd);
             }
         }
@@ -624,31 +682,31 @@ public class Character : MonoBehaviour,
             case CharacterManager.ISEGYEIDOL.Jururu:
             case CharacterManager.ISEGYEIDOL.Gosegu:
             case CharacterManager.ISEGYEIDOL.Viichan:
-            switch (target)
-            {
-                case CharacterManager.ISEGYEIDOL.Ine:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToIne;
+                switch (target)
+                {
+                    case CharacterManager.ISEGYEIDOL.Ine:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToIne;
+                        break;
+                    case CharacterManager.ISEGYEIDOL.JingBurger:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJingBurger;
+                        break;
+                    case CharacterManager.ISEGYEIDOL.Lilpa:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToLilpa;
+                        break;
+                    case CharacterManager.ISEGYEIDOL.Jururu:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJururu;
+                        break;
+                    case CharacterManager.ISEGYEIDOL.Gosegu:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToGosegu;
+                        break;
+                    case CharacterManager.ISEGYEIDOL.Viichan:
+                        comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToViichan;
+                        break;
+                }
                 break;
-                case CharacterManager.ISEGYEIDOL.JingBurger:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJingBurger;
-                break;
-                case CharacterManager.ISEGYEIDOL.Lilpa:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToLilpa;
-                break;
-                case CharacterManager.ISEGYEIDOL.Jururu:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToJururu;
-                break;
-                case CharacterManager.ISEGYEIDOL.Gosegu:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToGosegu;
-                break;
-                case CharacterManager.ISEGYEIDOL.Viichan:
-                comment = JsonManager.Instance.GetCharacterComment()[inter - CharacterManager.ISEGYEIDOL.Ine].ToViichan;
-                break;
-            }
-            break;
             default:
-            comment = "이세돌 아님";
-            break;
+                comment = "이세돌 아님";
+                break;
         }
 
         return comment;
@@ -724,7 +782,7 @@ public class Character : MonoBehaviour,
         if (time >= 1f)
         {
             time = 0.0f;
-  
+
             ProductorManager.Instance.AddStatFieldProcessing(characterData.SeatNumber - 1);
 
             if (productorInfo.ProcessedPoint >= ProductorManager.Instance.ProcessLevel[currentStep])
@@ -767,7 +825,7 @@ public class Character : MonoBehaviour,
     {
         //1. 방송 제작중 전달   
         //2. 방송 제작 끝 전달
-        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); callActionAfterSit.Enqueue(FindPC); RevertIdle(); }, 
+        CharacterManager.Instance.RegisterCharacterEvent(() => { this.isBroadcastPlanning = true; SetWork(); callActionAfterSit.Enqueue(FindPC); RevertIdle(); },
                                                                 () => { this.isBroadcastPlanning = false; SetIdle(); RevertWork(); });
     }
 
@@ -788,7 +846,7 @@ public class Character : MonoBehaviour,
 
         while (currentCount < count)
         {
-            yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
+            yield return new WaitUntil(() => { return GameManager.IsGamePause == false; });
 
             count++;
 
@@ -816,7 +874,7 @@ public class Character : MonoBehaviour,
     public void Init(OnReturnPoolEvent<Character> OnReturnPoolEvent)
     {
         this.OnReturnPoolEvent = OnReturnPoolEvent;
-        
+
         isCharacterMove = false;
 
         //RegisterMovementEvent();
@@ -911,11 +969,13 @@ public class Character : MonoBehaviour,
         }
 
         //lastpos로 가서 애니메이션 으로 바꿔치기 할 거임
-        yield return StartCoroutine(MoveToTargetPos(lastPos));
+        yield return StartCoroutine(MoveToTargetPos(lastPos, false));
 
         AnimationSpeedSet(false);
 
+        Debug.Log("sitcoroutine");
         isOnMySeat = true;
+
         SetSit();
         UpdateSeatState(CharacterManager.CharacterInteractiveState.CanInteractive);
 
@@ -927,6 +987,9 @@ public class Character : MonoBehaviour,
 
         SetCurrentStateAni();
         SetWalkForRandomSec();
+
+        LayerCalculate(lastPos, true);
+        SetRandomIdleNum();
 
         while (callActionAfterSit.Count > 0)
         {
@@ -943,7 +1006,7 @@ public class Character : MonoBehaviour,
         {
             Invoke("SetWalkForRandomSec", UnityEngine.Random.Range(10, 15));
 
-            moveToTarget  = false;
+            moveToTarget = false;
 
             return;
         }
@@ -988,7 +1051,6 @@ public class Character : MonoBehaviour,
         yield return new WaitForSeconds(0.5f);
     }
 
-
     public void ChangeStateAfterSit()
     {
         if (isBroadcastPlanning)
@@ -1002,7 +1064,7 @@ public class Character : MonoBehaviour,
 
         SetSprite();
     }
-    
+
     public void RegisterUpdateSeatIndexEvent(CharacterManager.OnUpdateSeatIndex OnUpdateSeatIndex)
     {
         this.OnUpdateSeatIndex = OnUpdateSeatIndex;
@@ -1025,6 +1087,6 @@ public class Character : MonoBehaviour,
 
     public void PauseAction(bool pause)
     {
-        animator.speed = pause ? 0.0f : 1.0f; 
+        animator.speed = pause ? 0.0f : 1.0f;
     }
 }

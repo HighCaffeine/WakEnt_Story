@@ -40,28 +40,37 @@ public enum ResourceType : long
     Productor                           = 3000,
     TypeCount                           = 5,
 
-    DefaultSprite                       = 10000,   
-    StandingSprite                      = 10000,      
-    SitFrontSprite                      = 20000,
-    SitBackSprite                       = 30000,
-    SpriteCount                         = 3,
+    DefaultSprite                       = 100000,   
+    StandingSprite                      = 100000,      
+    SitFrontSprite                      = 200000,
+    SitBackSprite                       = 300000,
+    SitInteractiveSprite                = 400000,
+    SpriteCount                         = 4,
 
-    WalkAni                             = 100000,
-    FrontWorkAni                        = 200000,
-    BackWorkAni                         = 210000,
-    StandingIdleAni                     = 300000,
-    FrontIdleStretchingAni              = 400000,
-    FrontIdleLookAroundAni              = 410000,
-    BackIdleStretchingAni               = 420000,
-    BackIdleLookAroundAni               = 430000,
-    SitAni                              = 500000,
-    InteractiveAni                      = 600000,         
+    WalkAni                             = 1000000,
+    FrontWorkAni                        = 2000000,
+    BackWorkAni                         = 2100000,
+    StandingIdleAni                     = 3000000,
+    FrontIdleStretchingAni              = 4000000,
+    FrontIdleLookAroundAni              = 4100000,
+    BackIdleStretchingAni               = 4200000,
+    BackIdleLookAroundAni               = 4300000,
+    SitAni                              = 5000000,
+    InteractiveAni                      = 6000000,         
     AniCount                            = 10,
+}
+
+public enum SitInteractiveResourceType : long
+{
+    SitFrontInteractiveLeft             = 400000,
+    SitFrontInteractiveRight            = 410000,
+    SitBackInteractiveLeft              = 420000,
+    SitBackInteractiveRight             = 430000,
 }
 
 public enum ResourceFileName 
 {   
-    DefaultSprite, SitBack, SitFront, Standing, //Sprite 
+    DefaultSprite, SitBack, SitFront, Standing, SitInteractive, //Sprite 
     BackIdleLookAround, BackIdleStretching, BackWork, FrontIdleLookAround, FrontIdleStretching, FrontWork, //Work Ani File
     WalkAni, StandingIdleAni, WorkAni, SitAni, InteractiveAni, //Ani Root File
 };
@@ -151,10 +160,11 @@ public class ResourcesTable
 {
     public string Key;                          //리소스 키 값
     //public string Info;                       //정보
-    public int ID;                              //리소스 ID 저장할 때 쓰는 값
+    public long ID;                              //리소스 ID 저장할 때 쓰는 값
     public long SpriteID;                       //Sprite ID
     public long SitFrontID;                     //정면 앉은 도트
     public long SitBackID;                      //뒷면 앉은 도트
+    public long SitInteractiveID;               //앉을 때 interactive F
     public long WalkAniID;                      //걷는 ani
     public long FrontWorkAniID;                 //정면 일하는 ani
     public long BackWorkAniID;                  //뒷면 일하는 ani

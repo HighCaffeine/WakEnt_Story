@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: a2bb706217b11744b9acdd5f1f1308ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dec7db8b917d59f428ad659f2e7758ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.58064514, y: 1}
+  m_Size: {x: 1.060606, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2171147937188426361}
   - component: {fileID: 3579743073778454671}
   - component: {fileID: -5976408289483800729}
+  - component: {fileID: 2169850229711610747}
   - component: {fileID: -3480857999503869268}
   - component: {fileID: 995729047962622181}
   m_Layer: 10
@@ -189,6 +190,7 @@ MonoBehaviour:
   iSEGYEIDOL: 0
   animator: {fileID: -3480857999503869268}
   characterSprites: []
+  layerCalculator: {fileID: 2169850229711610747}
   currentState: 0
   isRight: 0
   seatIsFront: 0
@@ -260,12 +262,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3579743073778454671}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: SetAnimatorActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   interactiveAnimator: {fileID: 0}
   interactiveSpriteRender: {fileID: 0}
   returnSeatCheck:
     m_PersistentCalls:
       m_Calls: []
   returnSeatDelay: 3
+--- !u!114 &2169850229711610747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740700631870320401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327148f5e02c7ed42853b7ea096c2d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  checkTag: 
+  gizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!95 &-3480857999503869268
 Animator:
   serializedVersion: 5

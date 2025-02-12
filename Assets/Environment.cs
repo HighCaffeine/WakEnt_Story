@@ -1,20 +1,22 @@
 using System.Collections.Generic;
+using Devcat;
 using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
     //추후 environment 매니저 만들어서 프리팹 받아서 내부 이미지만 변경하여 사용하는 방식으로 변경
 
-
+    enum DefaultSpriteDirection { LeftImage, RightImage, Count, };
     [Header("상호작용 시 전환 이미지")] [SerializeField] private List<Sprite> processImageList; 
-    [Header("상호작용 이전 기본 이미지")][SerializeField] private Sprite idleImage;
+    [Header("상호작용 이전 기본 이미지 0 : left, 1 : right")][SerializeField] private Sprite[] idleImage;               // 0 leftimage, 1 right Image
 
     [Header("사물 방향")]
     [SerializeField] private bool isRight;
     [SerializeField] private bool isFront;
     [SerializeField] private bool useIdleImage = false;
 
-    private SpriteRenderer objImage;
+    [Header("변경 대상 오브젝트")]
+    [SerializeField] private SpriteRenderer objImage;
     private Animator animator;
     [SerializeField] private AnimatorOverrideController aoc;
 
@@ -32,8 +34,9 @@ public class Environment : MonoBehaviour
 
         if (useIdleImage)
         {
-            objImage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-            objImage.sprite = idleImage;
+            if (!objImage) objImage = transform.GetChild(0).GetComponent<SpriteRenderer>(); 
+            
+            objImage.sprite = GetSprite();
         }
 
         animator.runtimeAnimatorController = aoc;
@@ -43,6 +46,11 @@ public class Environment : MonoBehaviour
         {
             GameManager.Instance.RegisterPauseEvent(PauseEvent);
         }
+    }
+
+    public Sprite GetSprite()
+    {
+        return isRight ? idleImage[ValueCastTo<int>.From(DefaultSpriteDirection.RightImage)] : idleImage[ValueCastTo<int>.From(DefaultSpriteDirection.RightImage)];
     }
 
     public bool GetIsRight() { return isRight; }

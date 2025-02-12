@@ -317,7 +317,14 @@ public class DataManager : GenericSingleton<DataManager>
     public Sprite GetSpriteFromID(ResourceID resourceID, ResourceType resourceType)
     {
         long key = ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType);
-        return resourceHashTable[key] as Sprite;
+        return GetSpriteFromIDNum(key);
+    }
+
+    public Sprite GetSpriteFromIDNum(long key)
+    {
+        Sprite temp = resourceHashTable[key] as Sprite;
+
+        return temp;
     }
 
     public AnimationClip GetAnimationClipFromID(ResourceID resourceID, ResourceType resourceType)
@@ -384,7 +391,29 @@ public class DataManager : GenericSingleton<DataManager>
 
                 resourceHashTable.Add(data.SitFrontID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
                                                                                             ResourceFileName.SitFront.ToString(), 
-                                                                                            string.Format("{0}_{1}", ResourceType.SitFrontSprite.ToString(), data.Key))));                                                      
+                                                                                            string.Format("{0}_{1}", ResourceType.SitFrontSprite.ToString(), data.Key))));
+
+
+                resourceHashTable.Add(data.ID + ValueCastTo<long>.From(SitInteractiveResourceType.SitFrontInteractiveLeft),
+                                                                                            Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitInteractive.ToString(),
+                                                                                            SitInteractiveResourceType.SitFrontInteractiveLeft.ToString(),
+                                                                                            string.Format("{0}_{1}", SitInteractiveResourceType.SitFrontInteractiveLeft.ToString(), data.Key))));
+                resourceHashTable.Add(data.ID + ValueCastTo<long>.From(SitInteractiveResourceType.SitFrontInteractiveRight),
+                                                                                            Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitInteractive.ToString(),
+                                                                                            SitInteractiveResourceType.SitFrontInteractiveRight.ToString(),
+                                                                                            string.Format("{0}_{1}", SitInteractiveResourceType.SitFrontInteractiveRight.ToString(), data.Key))));
+                resourceHashTable.Add(data.ID + ValueCastTo<long>.From(SitInteractiveResourceType.SitBackInteractiveLeft),
+                                                                                            Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitInteractive.ToString(),
+                                                                                            SitInteractiveResourceType.SitBackInteractiveLeft.ToString(),
+                                                                                            string.Format("{0}_{1}", SitInteractiveResourceType.SitBackInteractiveLeft.ToString(), data.Key))));
+                resourceHashTable.Add(data.ID + ValueCastTo<long>.From(SitInteractiveResourceType.SitBackInteractiveRight),
+                                                                                            Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitInteractive.ToString(),
+                                                                                            SitInteractiveResourceType.SitBackInteractiveRight.ToString(),
+                                                                                            string.Format("{0}_{1}", SitInteractiveResourceType.SitBackInteractiveRight.ToString(), data.Key))));
             }
 
             //idle standing

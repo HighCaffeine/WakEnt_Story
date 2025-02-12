@@ -13,17 +13,19 @@ public class PathFinding : GenericSingleton<PathFinding>
 
         astar = GetComponent<Astar>();
         testCheckError = new List<Vector2>();
-    } 
+    }
+
+    public enum StartNodeDirectionLimit {AllowX, AllowY, NONE}
 
     //변수 추가해서 상호작용 직후 돌아갈 경우 처음은 interactive 타일 체크 X
-    public Queue<Vector2> CurvedPathFind(Vector2 productorPos, Vector2 targetPos)
+    public Queue<Vector2> CurvedPathFind(Vector2 productorPos, Vector2 targetPos, ref Stack<Vector2> noneCurvedPath, bool allowX, StartNodeDirectionLimit startNodeDirectionLimit)
     {
-        Stack<Vector2> vec = PathFind(productorPos, targetPos);
+        Stack<Vector2> vec = PathFind(productorPos, targetPos, ref noneCurvedPath, allowX, startNodeDirectionLimit);
 
         return GetBezierCurve(vec);
     }
 
-    private Stack<Vector2> PathFind(Vector2 productorPos, Vector2 targetPos)
+    private Stack<Vector2> PathFind(Vector2 productorPos, Vector2 targetPos, ref Stack<Vector2> path, bool allowX, StartNodeDirectionLimit startNodeDirectionLimit)
     {
         Node productorNode = astar.GetNode(productorPos);
         Node targetNode = astar.GetNode(targetPos);
@@ -52,10 +54,10 @@ public class PathFinding : GenericSingleton<PathFinding>
             //interactive노드일 경우의 체크.
             if (currentNode == targetNode)
             {
-                return GetPath(productorNode, targetNode);
+                return GetPath(productorNode, targetNode, ref path);
             }
 
-            List<Node> aroundNode = astar.GetAroundNode(currentNode, targetNode);
+            List<Node> aroundNode = astar.GetAroundNode(currentNode, targetNode, !IsTargetAroundNode(currentNode, targetNode));
 
             foreach (var node in aroundNode)
             {
@@ -80,6 +82,21 @@ public class PathFinding : GenericSingleton<PathFinding>
                     node.hCost = GetDistance(node, targetNode);
                     node.parentNode = currentNode;
 
+                    if ((currentNode == productorNode) &&(startNodeDirectionLimit != StartNodeDirectionLimit.NONE))
+                    {
+                        bool allowXStartNode = startNodeDirectionLimit == StartNodeDirectionLimit.AllowX ? true : false;
+
+                        if (AroundNodeLimit(node, productorNode, allowXStartNode))
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (AroundNodeLimit(node, targetNode, allowX))
+                    {
+                        continue;
+                    }
+
                     openNode.Add(node);
                 }
             }
@@ -88,142 +105,41 @@ public class PathFinding : GenericSingleton<PathFinding>
         return null;
     }
 
-
-    private Stack<Vector2> GetPath(Node startNode, Node targetNode)
+    //false일 경우 허용 X, 타겟노드 근처만 계산(targetnode랑 거리 계산해서 100미만이면 계산, 100이면 y값 차이 2미만일 경우 진행 나머지는 true로 )
+    //diagonal이 아닌 side / topside 이동 시 
+    //node.x, targetNode.y /  targetNode.x, node.y  둘의 iswalkable이 하나라도 true일 시 대각선 이동 금지.
+    private bool AroundNodeLimit(Node aroundNode, Node targetNode, bool allowX)
     {
-        if (testCheckBezier == null)
-            testCheckPath = new List<Vector2>();
+        bool retval = false;
+        int distance = GetDistance(aroundNode, targetNode);
 
-        Stack<Vector2> s = new Stack<Vector2>();
-
-        //Node currentNode = targetNode;
-        Node currentNode = targetNode.parentNode;       //타겟 제외
-
-        bool isSameY = false;
-        bool isSameX = false;
-
-        testCheckPath.Add(currentNode.Pos);
-        s.Push(currentNode.Pos);
-
-        while (currentNode != startNode)
+        if (distance == DIAGONALSIDE)
         {
-            //이전 노드까지 넣어서 맵 뚫는 구간 아예 없도록 했는데
-            //childnode체크 버그 있음.
-            if (currentNode != targetNode)
+            //allowX가 true면 같은 y라인 노드만 허용
+            if (allowX)
             {
-                currentNode.parentNode.childNode = currentNode;
-            }
-
-            if (currentNode.parentNode == startNode)
-            {
-                if (!s.Contains(currentNode.Pos))
-                {
-                    testCheckPath.Add(currentNode.Pos);
-                    s.Push(currentNode.Pos);
-                }
-   
-                break;
-            }
-
-            if (currentNode.xPos == currentNode.parentNode.xPos)
-            {
-                if (isSameY)
-                {
-                    isSameY = false;
-
-                    if (currentNode.childNode != null && !s.Contains(currentNode.childNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.childNode.Pos);
-                        s.Push(currentNode.childNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.Pos);
-                        s.Push(currentNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.parentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.parentNode.Pos);
-                        s.Push(currentNode.parentNode.Pos);
-                    }
-                }
-
-                isSameX = true;
-                
-            }
-            else if (currentNode.yPos == currentNode.parentNode.yPos)
-            {
-                if (isSameX)
-                {
-                    isSameX = false;
-
-                    if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.childNode.Pos);
-                        s.Push(currentNode.childNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.Pos);
-                        s.Push(currentNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.parentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.parentNode.Pos);
-                        s.Push(currentNode.parentNode.Pos);
-                    }
-                }
-
-                isSameY = true;
-            }
-            else if ((currentNode.xPos != currentNode.parentNode.xPos)
-                    &&(currentNode.yPos != currentNode.parentNode.yPos))
-            {
-                if (!isSameX || !isSameY)
-                {
-                    if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.childNode.Pos);
-                        s.Push(currentNode.childNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.Pos);
-                        s.Push(currentNode.Pos);
-                    }
-
-                    if (!s.Contains(currentNode.parentNode.Pos))
-                    {
-                        testCheckPath.Add(currentNode.parentNode.Pos);
-                        s.Push(currentNode.parentNode.Pos);
-                    }
-                }
-
-                isSameX = true;
-                isSameY = true;
-
-                currentNode = currentNode.parentNode;
-
-                continue;
+                retval = aroundNode.yPos != targetNode.yPos ? true : false;
             }
             else
             {
-                if (!s.Contains(currentNode.Pos))
-                {
-                    testCheckPath.Add(currentNode.Pos);
-                    s.Push(currentNode.Pos);
-                }
+                retval = aroundNode.xPos != targetNode.xPos ? true : false;
             }
-            
-            currentNode = currentNode.parentNode;
         }
 
-        return s;
+        return retval;
+    }
+
+    private bool IsTargetAroundNode(Node aroundNode, Node targetNode)
+    {
+        int distance = GetDistance(aroundNode, targetNode);
+
+        if ((distance < SIDE)
+            || (distance == SIDE && Mathf.Abs(aroundNode.yPos - targetNode.yPos) < 2))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private static int SIDE => 100;
@@ -255,18 +171,18 @@ public class PathFinding : GenericSingleton<PathFinding>
         }
         else if (xSign * ySign < 0)
         {
-             if (xDistance < yDistance)
+            if (xDistance < yDistance)
             {
                 return xDistance * SIDE + (yDistance - xDistance) * DIAGONALSIDE;
             }
             else if (xDistance > yDistance)
             {
                 return yDistance * SIDE + (xDistance - yDistance) * DIAGONALSIDE;
-            }   
+            }
             else
             {
                 return xDistance * SIDE;
-            }    
+            }
         }
         else
         {
@@ -281,14 +197,36 @@ public class PathFinding : GenericSingleton<PathFinding>
         }
     }
 
-    //카스텔조 알고리즘
+    private Stack<Vector2> GetPath(Node startNode, Node targetNode, ref Stack<Vector2> path)
+    {
+        if (testCheckBezier == null)
+            testCheckPath = new List<Vector2>();
 
-    [Space(5f)] [Header("베지어 곡선 곡률")] [Range(0.0f, 2.0f)] [SerializeField] private float bezierCurvature;
+        Stack<Vector2> s = new Stack<Vector2>();
+        //Node currentNode = targetNode;
+        Node currentNode = targetNode.parentNode;       //타겟 제외
+
+        bool isSameY = false;
+        bool isSameX = false;
+
+        while (currentNode != startNode)
+        {
+            testCheckPath.Add(currentNode.Pos);
+            path.Push(currentNode.Pos);
+            s.Push(currentNode.Pos);
+
+            currentNode = currentNode.parentNode;
+        }
+
+        return s;
+    }
+    //카스텔조 알고리즘
+    [Space(5f)][Header("베지어 곡선 곡률")][Range(0.0f, 2.0f)][SerializeField] private float bezierCurvature;
     private Queue<Vector2> GetBezierCurve(Stack<Vector2> path)
     {
         Queue<Vector2> calPos = new Queue<Vector2>();
         Queue<Vector2> calStorage = new Queue<Vector2>();
-        
+
         if (testCheckBezier == null)
         {
             testCheckBezier = new List<Vector2>();
@@ -306,17 +244,13 @@ public class PathFinding : GenericSingleton<PathFinding>
         //lerp로 v1 -> v2, v2 -> v3 계산
 
         int remain = (3 - path.Count % 3) % 3;
-
         Vector2 remainPos = path.Pop();
 
         //밑에 계산식 안 꼬이게 3개 단위로 나눌려고 임의로 넣어서 맞춤
         for (int i = 0; i < remain; i++)
-        {
             path.Push(remainPos);
-        }
 
         path.Push(remainPos);
-
         calPos.Enqueue(remainPos);
         testCheckBezier.Add(remainPos);
 
@@ -335,27 +269,8 @@ public class PathFinding : GenericSingleton<PathFinding>
                 Vector2 v2 = calStorage.Dequeue();          //중간이기 때문에 해당 pos조절로 곡률 변경 가능.
                 Vector2 v3 = calStorage.Dequeue();
 
-                if (path.Count > 0)
-                {
-                    Node v1Node = astar.GetNode(v1);
-                    Node v3Node = astar.GetNode(v3);
-
-                    while (((v1Node.xPos == v3Node.xPos) || (v1Node.yPos == v3Node.yPos)))
-                    {
-                        Vector3 newV3 = path.Pop();
-                        v1 = v2;
-                        v2 = v3;
-                        v3 = newV3;
-
-                        v1Node = astar.GetNode(v1);
-                        v3Node = astar.GetNode(v3);
-
-                        newV3Pos = newV3;
-                    }
-                }
-
                 v2 = CalculateCurvatue(v1, v2, v3);         //베지어 곡선 곡률 계산
-                
+
                 testCheckBezierPoint.Add(v1);
                 testCheckBezierPoint.Add(v2);
                 testCheckBezierPoint.Add(v3);
@@ -378,26 +293,19 @@ public class PathFinding : GenericSingleton<PathFinding>
                 if (path.Count > 0)
                 {
                     Vector2 nextNodePos = path.Pop();
-
                     Node nextNode = astar.GetNode(nextNodePos);
                     Node currentNode = astar.GetNode(v3);
 
                     int dis = GetDistance(nextNode, currentNode);
-                    
                     if (dis <= 100 && dis != 0)
-                    {
                         calStorage.Enqueue(v3);
-                    }
-
                     path.Push(nextNodePos);
                 }
             }
         }
 
         if (newV3Pos != Vector2.zero)
-        {
             calStorage.Enqueue(newV3Pos);
-        }
 
         while (calStorage.Count > 0)
         {
@@ -413,6 +321,277 @@ public class PathFinding : GenericSingleton<PathFinding>
 
         return calPos;
     }
+
+
+    //기존 동일 y / x값의 노드 제외하는 방식
+    // private Stack<Vector2> GetPath(Node startNode, Node targetNode)
+    // {
+    //     if (testCheckBezier == null)
+    //         testCheckPath = new List<Vector2>();
+
+    //     Stack<Vector2> s = new Stack<Vector2>();
+
+    //     //Node currentNode = targetNode;
+    //     Node currentNode = targetNode.parentNode;       //타겟 제외
+
+    //     bool isSameY = false;
+    //     bool isSameX = false;
+
+    //     testCheckPath.Add(currentNode.Pos);
+    //     s.Push(currentNode.Pos);
+
+    //     while (currentNode != startNode)
+    //     {
+    //         //이전 노드까지 넣어서 맵 뚫는 구간 아예 없도록 했는데
+    //         //childnode체크 버그 있음.
+    //         if (currentNode != targetNode)
+    //         {
+    //             currentNode.parentNode.childNode = currentNode;
+    //         }
+
+    //         if (currentNode.parentNode == startNode)
+    //         {
+    //             if (!s.Contains(currentNode.Pos))
+    //             {
+    //                 testCheckPath.Add(currentNode.Pos);
+    //                 s.Push(currentNode.Pos);
+    //             }
+
+    //             break;
+    //         }
+
+    //         if (currentNode.xPos == currentNode.parentNode.xPos)
+    //         {
+    //             if (isSameY)
+    //             {
+    //                 isSameY = false;
+
+    //                 if (currentNode.childNode != null && !s.Contains(currentNode.childNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.childNode.Pos);
+    //                     s.Push(currentNode.childNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.Pos);
+    //                     s.Push(currentNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.parentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.parentNode.Pos);
+    //                     s.Push(currentNode.parentNode.Pos);
+    //                 }
+    //             }
+
+    //             isSameX = true;
+
+    //         }
+    //         else if (currentNode.yPos == currentNode.parentNode.yPos)
+    //         {
+    //             if (isSameX)
+    //             {
+    //                 isSameX = false;
+
+    //                 if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.childNode.Pos);
+    //                     s.Push(currentNode.childNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.Pos);
+    //                     s.Push(currentNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.parentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.parentNode.Pos);
+    //                     s.Push(currentNode.parentNode.Pos);
+    //                 }
+    //             }
+
+    //             isSameY = true;
+    //         }
+    //         else if ((currentNode.xPos != currentNode.parentNode.xPos)
+    //                 &&(currentNode.yPos != currentNode.parentNode.yPos))
+    //         {
+    //             if (!isSameX || !isSameY)
+    //             {
+    //                 if (currentNode.childNode != null &&!s.Contains(currentNode.childNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.childNode.Pos);
+    //                     s.Push(currentNode.childNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.Pos);
+    //                     s.Push(currentNode.Pos);
+    //                 }
+
+    //                 if (!s.Contains(currentNode.parentNode.Pos))
+    //                 {
+    //                     testCheckPath.Add(currentNode.parentNode.Pos);
+    //                     s.Push(currentNode.parentNode.Pos);
+    //                 }
+    //             }
+
+    //             isSameX = true;
+    //             isSameY = true;
+
+    //             currentNode = currentNode.parentNode;
+
+    //             continue;
+    //         }
+    //         else
+    //         {
+    //             if (!s.Contains(currentNode.Pos))
+    //             {
+    //                 testCheckPath.Add(currentNode.Pos);
+    //                 s.Push(currentNode.Pos);
+    //             }
+    //         }
+
+    //         currentNode = currentNode.parentNode;
+    //     }
+
+    //     return s;
+    // }
+    //카스텔조 알고리즘
+
+    // [Space(5f)] [Header("베지어 곡선 곡률")] [Range(0.0f, 2.0f)] [SerializeField] private float bezierCurvature;
+    // private Queue<Vector2> GetBezierCurve(Stack<Vector2> path)
+    // {
+    //     Queue<Vector2> calPos = new Queue<Vector2>();
+    //     Queue<Vector2> calStorage = new Queue<Vector2>();
+
+    //     if (testCheckBezier == null)
+    //     {
+    //         testCheckBezier = new List<Vector2>();
+    //         testCheckBezierPoint = new List<Vector2>();
+    //     }
+
+    //     //Path는 노드 상 대각선 이동 허용한 루트로 받아올거임.
+    //     //각 지점들을 pop해서 vecterQueue에 계속 enqueue 하다가 3개 되면 곡선 계산해서 VectorStack에 push 
+
+    //     //베지어 곡선 공식
+    //     //t = [0, 1]
+    //     //3점 P = (1−t)^2 * P1 + 2(1−t)t * P2 + t^2 * P3
+    //     //x = (1−t)^2 * x1 + 2(1−t)t * x2 + t^2 * x3    
+    //     //y = (1−t)^2 * y1 + 2(1−t)t * y2 + t^2 * y3
+    //     //lerp로 v1 -> v2, v2 -> v3 계산
+
+    //     int remain = (3 - path.Count % 3) % 3;
+
+    //     Vector2 remainPos = path.Pop();
+
+    //     //밑에 계산식 안 꼬이게 3개 단위로 나눌려고 임의로 넣어서 맞춤
+    //     for (int i = 0; i < remain; i++)
+    //     {
+    //         path.Push(remainPos);
+    //     }
+
+    //     path.Push(remainPos);
+
+    //     calPos.Enqueue(remainPos);
+    //     testCheckBezier.Add(remainPos);
+
+    //     Vector2 newV3Pos = Vector2.zero;
+
+    //     while (path.Count > 0)
+    //     {
+    //         Vector2 pos = path.Pop();
+    //         float t = 0.0f;
+
+    //         calStorage.Enqueue(pos);
+
+    //         if (calStorage.Count >= 3)
+    //         {
+    //             Vector2 v1 = calStorage.Dequeue();
+    //             Vector2 v2 = calStorage.Dequeue();          //중간이기 때문에 해당 pos조절로 곡률 변경 가능.
+    //             Vector2 v3 = calStorage.Dequeue();
+
+    //             if (path.Count > 0)
+    //             {
+    //                 Node v1Node = astar.GetNode(v1);
+    //                 Node v3Node = astar.GetNode(v3);
+
+    //                 while (((v1Node.xPos == v3Node.xPos) || (v1Node.yPos == v3Node.yPos)))
+    //                 {
+    //                     Vector3 newV3 = path.Pop();
+    //                     v1 = v2;
+    //                     v2 = v3;
+    //                     v3 = newV3;
+
+    //                     v1Node = astar.GetNode(v1);
+    //                     v3Node = astar.GetNode(v3);
+
+    //                     newV3Pos = newV3;
+    //                 }
+    //             }
+
+    //             v2 = CalculateCurvatue(v1, v2, v3);         //베지어 곡선 곡률 계산
+
+    //             testCheckBezierPoint.Add(v1);
+    //             testCheckBezierPoint.Add(v2);
+    //             testCheckBezierPoint.Add(v3);
+
+    //             while (t <= 1)
+    //             {
+    //                 t += 0.1f;
+
+    //                 Vector2 v4 = Vector2.Lerp(v1, v2, t);
+    //                 Vector2 v5 = Vector2.Lerp(v2, v3, t);
+    //                 Vector2 targetPos = Vector2.Lerp(v4, v5, t);
+
+    //                 if (!calPos.Contains(targetPos))
+    //                 {
+    //                     calPos.Enqueue(targetPos);
+    //                     testCheckBezier.Add(targetPos);
+    //                 }
+    //             }
+
+    //             if (path.Count > 0)
+    //             {
+    //                 Vector2 nextNodePos = path.Pop();
+
+    //                 Node nextNode = astar.GetNode(nextNodePos);
+    //                 Node currentNode = astar.GetNode(v3);
+
+    //                 int dis = GetDistance(nextNode, currentNode);
+
+    //                 if (dis <= 100 && dis != 0)
+    //                 {
+    //                     calStorage.Enqueue(v3);
+    //                 }
+
+    //                 path.Push(nextNodePos);
+    //             }
+    //         }
+    //     }
+
+    //     if (newV3Pos != Vector2.zero)
+    //     {
+    //         calStorage.Enqueue(newV3Pos);
+    //     }
+
+    //     while (calStorage.Count > 0)
+    //     {
+    //         Vector2 pos = calStorage.Dequeue();
+
+    //         if (!calPos.Contains(pos))
+    //         {
+    //             calPos.Enqueue(pos);
+    //             testCheckBezier.Add(pos);
+    //             testCheckBezierPoint.Add(pos);
+    //         }
+    //     }
+
+    //     return calPos;
+    // }
 
     private Vector2 CalculateCurvatue(Vector2 v1, Vector2 v2, Vector2 v3)
     {
@@ -450,9 +629,16 @@ public class PathFinding : GenericSingleton<PathFinding>
         return newPos;
     }
 
-    public Vector2 GetNodePos(Vector2 targetPos)
+    public Node GetNode(Vector2 targetPos)
     {
         Node node = astar.GetNode(targetPos);
+
+        return node;
+    }
+
+    public Vector2 GetNodePos(Vector2 targetPos)
+    {
+        Node node = GetNode(targetPos);
 
         if (node == null)
         {
@@ -460,6 +646,11 @@ public class PathFinding : GenericSingleton<PathFinding>
         }
 
         return node.Pos;
+    }
+
+    public Vector2 GetNodePos(int xPos, int yPos)
+    {
+        return astar.GetNode(xPos, yPos).Pos;
     }
 
     List<Vector2> testCheckBezier;
@@ -475,9 +666,9 @@ public class PathFinding : GenericSingleton<PathFinding>
         testCheckPath.Clear();
         testCheckBezierPoint.Clear();
         testCheckError.Clear();
-    }   
+    }
 
-    private Vector2[] checkPos = {new Vector2(-33f, -5.75f), new Vector2(-32.5f, -6f)};
+    private Vector2[] checkPos = { new Vector2(-33f, -5.75f), new Vector2(-32.5f, -6f) };
 
     //경로 체크
     void OnDrawGizmos()

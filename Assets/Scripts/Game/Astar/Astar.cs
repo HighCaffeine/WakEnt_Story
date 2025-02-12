@@ -15,6 +15,8 @@ public class Astar : MonoBehaviour
     [SerializeField] private int worldSizeX; // Number of tiles in the X axis
     [SerializeField] private int worldSizeY; // Number of tiles in the Y axis
 
+    [SerializeField] private Transform originPos;
+
     void Awake()
     {
         tilemap.CompressBounds();                   //맵 cellbound 재설정
@@ -91,10 +93,52 @@ public class Astar : MonoBehaviour
         }
     }
 
+    public Node GetNode(int xPos, int yPos)
+    {
+        if ((xPos < 0 || xPos >= worldSizeX)
+            || (yPos < 0 || yPos >= worldSizeY))
+        {
+            return null;
+        }
+
+        return grid[xPos, yPos];
+    }
+
+    private Vector2 GetNodePos(Vector2 pos)
+    {
+        Vector2 retVal = Vector2.zero;
+
+        //방정식1 -> pos.x = 0.5x - 0.5y + startPos.position.x
+        //방정식2 -> pos.y = 0.25x + 0.25y + startPos.position.y
+
+        float c1 = originPos.position.x;    //기준 x
+        float c2 = originPos.position.y;    //기준 y
+
+        //방정식 1, 2
+        //방정식 1 -> 0.5x - 0.5y = Y - c1 -> x - y = (X - c1) * 2, 
+        //방정식 2 -> 0.25x + 0.25y = X - c2 -> x + y = (Y - c2) * 4 
+        float equation1 = (pos.x - c1) * 2;
+        float equation2 = (pos.y - c2) * 4;
+
+        retVal.x = (equation1 + equation2) * 0.5f;
+        retVal.y = equation2 - retVal.x;
+
+        // retVal.x = Mathf.RoundToInt(retVal.x);
+        // retVal.y = Mathf.RoundToInt(retVal.y);
+
+        return retVal;
+    }
+
     public Node GetNode(Vector2 pos)
     {
+        //Debug.Log(pos);
+
         int nodeXPos = 0;
         int nodeYPos = 0;
+
+        Vector2 nodePos = GetNodePos(pos);
+
+        return GetNode(Mathf.RoundToInt(nodePos.x), Mathf.RoundToInt(nodePos.y));
 
         //x or y 한 쪽(xPosition이 음수일 경우 y먼저) 탐색으로 node의 x값과 pos의 x값이 동일한 노드를 찾음
         //찾은 노드의 위쪽 노드들을 탐색
@@ -106,7 +150,7 @@ public class Astar : MonoBehaviour
         //현재 위치 값 거리 0.1f로 해놔서 그런상태
         //기존은 percent계산으로해서 중간에 안둬도 됐는데 지금은 저런 방식으로 진행중이라 수정이 피요함
         if (pos.x < grid[0, 0].Pos.x)
-        {  
+        {
             for (int y = 0; y < worldSizeY; y++)
             {
                 //null이면 continue
@@ -174,7 +218,6 @@ public class Astar : MonoBehaviour
                 nodeXPos++;
             }
         }
-
         return grid[nodeXPos, nodeYPos];
     }
 
@@ -182,12 +225,14 @@ public class Astar : MonoBehaviour
     List<int> xNotWalkable = new List<int>();
     List<int> yNotWalkable = new List<int>();
 
+    bool firstCheck = true;
     public List<Node> GetAroundNode(Node middleNode, Node targetNode, bool isCheckDiagonal = true)
     {
         aroundNodeList.Clear();
-        
-        if (isCheckDiagonal)
+
+        if (firstCheck || isCheckDiagonal)
         {
+            firstCheck = false;
             xNotWalkable.Clear();
             yNotWalkable.Clear();
 
@@ -283,6 +328,8 @@ public class Astar : MonoBehaviour
                 }
             }
         }
+
+        firstCheck = true;
 
         return aroundNodeList;
     }

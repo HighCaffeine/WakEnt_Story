@@ -53,7 +53,7 @@ public class CharacterMessageManager : ObjectPooling<CharacterMessageManager, Ch
         float height = Screen.height;
 
         messagePos.x -= width * 0.5f;
-        messagePos.y -= height * 0.5f;
+        messagePos.y -= height * 0.5f + 50f;
 
         return messagePos;
     }

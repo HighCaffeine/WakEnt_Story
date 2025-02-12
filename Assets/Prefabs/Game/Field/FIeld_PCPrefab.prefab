@@ -128,7 +128,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 27cc78ca33895934a975e6cc1e826b9a, type: 3}
   idleImage: {fileID: 21300000, guid: 98762aadce453574391c3e7ea60b0882, type: 3}
   isRight: 0
+  isFront: 0
   useIdleImage: 1
+  objImage: {fileID: 5541952512036522717}
   aoc: {fileID: 22100000, guid: ac1b67a707d54de47bc79275ac041c4c, type: 2}
   environmentAni: {fileID: 0}
 --- !u!61 &8073380428058003190
