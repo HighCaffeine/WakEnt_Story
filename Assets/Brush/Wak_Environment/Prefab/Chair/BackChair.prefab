@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2815465473231721502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.037, y: 0.291, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 2826003634188626873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.172, y: 0.27999982, z: 0}
+  m_LocalPosition: {x: -0.172, y: 0.27999982, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 4842331316779617580}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.041, y: 0.241, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 4367105992063841355}
   - component: {fileID: 3630879058223587487}
   - component: {fileID: 4362530745577016606}
+  - component: {fileID: 7106736658287677417}
   m_Layer: 8
   m_Name: BackChair
   m_TagString: Untagged
@@ -395,3 +396,21 @@ MonoBehaviour:
   moveSpriteLayer: {fileID: 2806541730508258001}
   moveTileLayer: {fileID: 0}
   moveSortingGroupLayer: {fileID: 0}
+  sortingLayerCalculator: {fileID: 7106736658287677417}
+--- !u!114 &7106736658287677417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956916637263597511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8536f4a57bb955f488010d34defe8076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateType: 0
+  spriteRenderers:
+  - {fileID: 8904183648487194807}
+  - {fileID: 2806541730508258001}
+  sortingGroups: []

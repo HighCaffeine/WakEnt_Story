@@ -16,6 +16,14 @@ public class LayerData : MonoBehaviour
     [SerializeField] private TilemapRenderer moveTileLayer;
     [SerializeField] private SortingGroup moveSortingGroupLayer;
 
+    [Header("Z값 계산용 SortingLayerCalculator")][SerializeField] private SortingLayerCalculator sortingLayerCalculator; 
+
+    public float ZPos 
+    {
+        get => sortingLayerCalculator ? sortingLayerCalculator.GetAllZPos()
+                                        : float.MaxValue;
+    }
+
     public int InteractiveLayer 
     { 
         get => interactiveSpriteLayer ? interactiveSpriteLayer.sortingOrder

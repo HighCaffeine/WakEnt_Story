@@ -63,7 +63,7 @@ public class InteractiveEvent : MonoBehaviour
     //targetAni -> 상호작용 시 애니메이션 동작하는 이벤트 넘겨줌, 자리가 바뀌게 될 수도 있으니 상호작용 때 마다 계속 넘겨주는걸로
     //targetFlipRight로 돌려주는데, 캐릭터는 Character에 있는 함수 이벤트리스트에 넣어서 다시 돌려주면 되는데
     //사물의 경우 사용할 시 다시 돌려주는 함수를 Environment에 따로 구현 필요함.
-    public void Interactive(bool isBroadcastPlanning, int targetIndex, out bool characterFlipRight, out bool environmentLookFront, out Action targetAni, Action returnSeat, params Action<int>[] callback)
+    public void Interactive(bool isBroadcastPlanning, int targetIndex, out bool characterFlipRight, out bool environmentLookFront, out Action targetAni, Action returnSeat, Action animatorEnable, params Action<int>[] callback)
     {
         targetAni= null;
         characterFlipRight = false;
@@ -83,7 +83,7 @@ public class InteractiveEvent : MonoBehaviour
         //자리로 되돌아가는 조건 체크를 위한 코루틴
         if (returnSeat != null)
         {
-            StartCoroutine(WaitReturnSeatEventCall(returnSeat));
+            StartCoroutine(WaitReturnSeatEventCall(returnSeat, animatorEnable));
         }
     }
 
@@ -145,7 +145,7 @@ public class InteractiveEvent : MonoBehaviour
 
     
 
-    private IEnumerator WaitReturnSeatEventCall(Action returnSeat)
+    private IEnumerator WaitReturnSeatEventCall(params Action[] returnEvents)
     {
         if (returnSeatCheck.GetPersistentEventCount() > 0)
         {
@@ -158,7 +158,11 @@ public class InteractiveEvent : MonoBehaviour
 
         yield return new WaitUntil( () => { return GameManager.IsGamePause == false; }); 
         
-        returnSeat?.Invoke();
+
+        foreach (var returnEvent in returnEvents)
+        {
+            returnEvent?.Invoke();
+        }
         CallAllEvent();
 
         yield return null;

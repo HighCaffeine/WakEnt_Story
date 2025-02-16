@@ -34,8 +34,6 @@ public class LayerCalculator : MonoBehaviour
     private Vector2 beforePos;
     private int beforeNodeX;
     private int beforeNodeY;
-    private bool side = true;
-
     private float beforeDistance;
 
     private void UpdateBeforeNodeValue(ref Stack<Vector2> noneCurvedPath)
@@ -76,32 +74,30 @@ public class LayerCalculator : MonoBehaviour
 
     private bool IsAllowedCheckLayer(Vector2 characterPos)
     {
-        //사이드 이동 시시
-        // if (checkReachCenter)
-        // {
-        //     float distance = Vector2.Distance(characterPos, beforePos);
-
-        //     if (distance > beforeDistance)
-        //     {
-        //         side = !side;
-        //         checkReachCenter = false;
-        //         beforeDistance = float.MaxValue;
-
-        //         return true;
-        //     }
-
-        //     beforeDistance = distance;
-        // }
-        // else
-        // {
-        // }
-
-        Node characterNode = PathFinding.Instance.GetNode(characterPos);
-
-        if ((characterNode.xPos == beforeNodeX) && (characterNode.yPos == beforeNodeY))
+        if (true)
         {
-            return true;
+            float distance = Vector2.Distance(characterPos, beforePos);
+
+            if (distance > beforeDistance)
+            {
+                checkReachCenter = false;
+                beforeDistance = float.MaxValue;
+
+                return true;
+            }
+
+            beforeDistance = distance;
         }
+        else
+        {
+            Node characterNode = PathFinding.Instance.GetNode(characterPos);
+
+            if ((characterNode.xPos == beforeNodeX) && (characterNode.yPos == beforeNodeY))
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -196,7 +192,8 @@ public class LayerCalculator : MonoBehaviour
 
                     if (newLayer != int.MinValue)
                     {
-                        layer = centerNode.Pos.y > checkNodePos.y ? newLayer - 1 : newLayer + 1;
+                        //layer = centerNode.Pos.y > checkNodePos.y ? newLayer - 1 : newLayer + 1;
+                        layer = newLayer;
                         if (layer < calLayer) calLayer = layer;
                     }
                 }
@@ -204,6 +201,8 @@ public class LayerCalculator : MonoBehaviour
         }
         else
         {
+            return int.MaxValue;
+
             bool isSide = (characterNode.xPos == centerNode.xPos || characterNode.yPos == centerNode.yPos) ? false : true;
             ComparePosValue xComp = (characterNode.xPos > centerNode.xPos) ? ComparePosValue.Left 
                                     : (characterNode.xPos < centerNode.xPos) ? ComparePosValue.Right : ComparePosValue.Equal;
@@ -248,7 +247,8 @@ public class LayerCalculator : MonoBehaviour
 
                         if (newLayer != int.MinValue)
                         {
-                            layer = centerNode.Pos.y > checkNodePos.y ? newLayer - 1 : newLayer + 1;
+                            //layer = centerNode.Pos.y > checkNodePos.y ? newLayer - 1 : newLayer + 1;
+                            layer = newLayer;
                             if (layer < calLayer) calLayer = layer;
                         }
                     }
@@ -328,6 +328,26 @@ public class LayerCalculator : MonoBehaviour
 
         return layer;
     }
+
+    /// 레이어 새 함수
+    public float GetZPos(Vector2 targetPos)
+    {
+        LayerMask characterInterLayer = 1 << LayerMask.NameToLayer("Seat");
+        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.1f, characterInterLayer);
+
+        if (hit)
+        {
+            LayerData layerData = hit.GetComponent<LayerData>();
+
+            return layerData.ZPos;
+        }
+
+        return float.MaxValue;
+    }    
+
+
+
+    /// </summary>
 
     private List<Vector2> test_CheckCollision = new List<Vector2>();
 

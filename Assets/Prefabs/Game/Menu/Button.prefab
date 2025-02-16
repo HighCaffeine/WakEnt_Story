@@ -396,8 +396,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBC29\uC1A1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9874d20c943d8184c9dd5bca3aa97f64, type: 2}
-  m_sharedMaterial: {fileID: 2746622123790977129, guid: 9874d20c943d8184c9dd5bca3aa97f64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fea9dd91c584b3a44aeb3213c1276e86, type: 2}
+  m_sharedMaterial: {fileID: -1144242985144662918, guid: fea9dd91c584b3a44aeb3213c1276e86, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

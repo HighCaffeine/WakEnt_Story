@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8970405008094128160}
   - component: {fileID: 4089047131306792539}
   - component: {fileID: 701420781175616896}
+  - component: {fileID: 5806066503520701584}
   m_Layer: 0
   m_Name: BackTable
   m_TagString: Untagged
@@ -302,6 +303,7 @@ MonoBehaviour:
   moveSpriteLayer: {fileID: 0}
   moveTileLayer: {fileID: 0}
   moveSortingGroupLayer: {fileID: 8970405008094128160}
+  sortingLayerCalculator: {fileID: 5806066503520701584}
 --- !u!60 &701420781175616896
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -351,6 +353,22 @@ PolygonCollider2D:
       - {x: -0.48698008, y: 0.31296897}
       - {x: -0.8840008, y: 0.110771894}
   m_UseDelaunayMesh: 0
+--- !u!114 &5806066503520701584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973666560134146427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8536f4a57bb955f488010d34defe8076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateType: 1
+  spriteRenderers: []
+  sortingGroups:
+  - {fileID: 8970405008094128160}
 --- !u!1 &8104586378201948461
 GameObject:
   m_ObjectHideFlags: 0

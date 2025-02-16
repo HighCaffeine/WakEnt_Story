@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 4842331316779617580}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -0.018, y: 0.059, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 6066461923154982348}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.14, y: 0.449, z: 0}
+  m_LocalPosition: {x: -0.14, y: 0.449, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 4367105992063841355}
   - component: {fileID: 3630879058223587487}
   - component: {fileID: 2965871862783325918}
+  - component: {fileID: 7853164592532918121}
   m_Layer: 8
   m_Name: FrontChair
   m_TagString: Untagged
@@ -363,6 +364,24 @@ MonoBehaviour:
   moveSpriteLayer: {fileID: 412547031829476813}
   moveTileLayer: {fileID: 0}
   moveSortingGroupLayer: {fileID: 0}
+  sortingLayerCalculator: {fileID: 7853164592532918121}
+--- !u!114 &7853164592532918121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956916637263597511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8536f4a57bb955f488010d34defe8076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateType: 0
+  spriteRenderers:
+  - {fileID: 412547031829476813}
+  - {fileID: 2071738749218289323}
+  sortingGroups: []
 --- !u!1 &8056870204696536833
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +407,7 @@ Transform:
   m_GameObject: {fileID: 8056870204696536833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.111, z: 0}
+  m_LocalPosition: {x: -0.047, y: -0.013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

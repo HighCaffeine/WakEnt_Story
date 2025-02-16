@@ -396,7 +396,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
             if (data.isFieldCharacter == "O")
             {
                 index++;
-                if (!(index == 2 || index == 5)) continue;
+                //if (!(index == 3 || index == 5)) continue;
 
                 Character character = GetPool();
 

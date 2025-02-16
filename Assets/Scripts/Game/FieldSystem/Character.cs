@@ -471,6 +471,8 @@ public class Character : MonoBehaviour,
             transform.position = newPos;
 
             distance = Vector2.Distance(transform.position, targetPos);
+
+            /*레이어 계산 함수로 변경*/spriteRenderer.sortingOrder = Mathf.RoundToInt(spriteRenderer.transform.position.y * -100);
         } while (!(distance <= 0.03f));
 
         // while (!(Vector2.Distance(transform.position, targetPos) <= 0.03f))
@@ -496,6 +498,21 @@ public class Character : MonoBehaviour,
         if (isInteractive)
         {
             layer = layerCalculator.GetOrderInLayerInteractive(transform.position, targetPos);
+
+            float zPos = layerCalculator.GetZPos(targetPos);
+
+            if (!seatIsFront)
+            {
+                zPos *= 0.5f;
+            }
+            else
+            {
+                zPos *= 2.0f;
+            }
+            if (SitAni)
+            transform.position = new Vector3(spriteRenderer.transform.position.x
+                                                        , spriteRenderer.transform.position.y
+                                                        , zPos);
         }
         else
         {
@@ -536,11 +553,23 @@ public class Character : MonoBehaviour,
 
     public Vector2 TEST_targetPos;
 
+    public void SetAnimatorEnabled()
+    {
+        animator.enabled = true;
+    }
+
+    public void SetAnimatorDisabled()
+    {
+        animator.enabled = false;
+    }
+
     public void SetSpriteInteractive(Vector2 targetPos)
     {
         SpriteType spriteIndex = SpriteType.Standing;
 
         bool isRight = targetPos.x < transform.position.x ? false : true;
+
+        SetAnimatorDisabled();
 
         //캐릭터 방향 기준으로 왼쪽 오른쪽
         if (seatIsFront)
@@ -628,12 +657,13 @@ public class Character : MonoBehaviour,
 
             SetInteractiveTrigger();
 
-            interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,            //순서대로 방송중인지, 타겟이 몇번인지(캐릭터용)
-                                                                out isRight,                    //target의 방향
-                                                                out seatIsFront,                //앉을 좌석이 앞을 보고있는지
-                                                                out interactiveTargetAction,    // 타겟의 애니메이션 받을려고 넣음
-                                                                ReturnMySeat,                   //상호작용 끝나면 자리로 되돌아갈 수 있도록 콜백
-                                                                StatAdd);                       //상호작용 시 스텟추가를 위해 콜백
+            interactiveEvent.Interactive(isBroadcastPlanning, targetIndex,                          //순서대로 방송중인지, 타겟이 몇번인지(캐릭터용)
+                                                                out isRight,                        //target의 방향
+                                                                out seatIsFront,                    //앉을 좌석이 앞을 보고있는지
+                                                                out interactiveTargetAction,        // 타겟의 애니메이션 받을려고 넣음
+                                                                ReturnMySeat,                       //상호작용 끝나면 자리로 되돌아갈 수 있도록 콜백
+                                                                targetCharacter.SetAnimatorEnabled, //상호작용 종료 후 애니메이터 enable
+                                                                StatAdd);                           //상호작용 시 스텟추가를 위해 콜백
         }
         else
         {
@@ -649,6 +679,7 @@ public class Character : MonoBehaviour,
                                                                     out seatIsFront,
                                                                     out interactiveTargetAction,
                                                                     null,
+                                                                    null,
                                                                     StatAdd);
             }
             else
@@ -659,6 +690,7 @@ public class Character : MonoBehaviour,
                                                                     out seatIsFront,
                                                                     out interactiveTargetAction,
                                                                     ReturnMySeat,
+                                                                    SetAnimatorEnabled,
                                                                     StatAdd);
             }
         }
@@ -972,8 +1004,7 @@ public class Character : MonoBehaviour,
         yield return StartCoroutine(MoveToTargetPos(lastPos, false));
 
         AnimationSpeedSet(false);
-
-        Debug.Log("sitcoroutine");
+        
         isOnMySeat = true;
 
         SetSit();
