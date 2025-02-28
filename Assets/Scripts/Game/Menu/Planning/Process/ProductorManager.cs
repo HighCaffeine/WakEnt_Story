@@ -417,7 +417,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         float[] newProcessRate = CalculateStemina(info);    //스테미나 패널티
 
         float processMulti = info.previousBroadcastProduction == true ? 0.7f : 1.0f; //이전 작업 유무 패널티
-        float matchingRateMulti = GetMatchingRateMulti(BroadCastPlanning.Instance.GetCurrentMatchingRate());
+        //float matchingRateMulti = GetMatchingRateMulti(BroadCastPlanning.Instance.GetCurrentMatchingRate());
         float[] productorStats = new float[4];
         //float processingMulti = processMulti * matchingRateMulti;
 
