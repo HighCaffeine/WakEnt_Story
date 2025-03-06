@@ -60,7 +60,7 @@ public class GameManager : GenericSingleton<GameManager>
         //에디터 외에는 메인부터 시작해서 제한 둠
         if (!SceneController.IsLoadGameScene)
         {
-            return;
+            //return;
         }
         
 
