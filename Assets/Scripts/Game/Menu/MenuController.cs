@@ -24,6 +24,7 @@ public class MenuController : GenericSingleton<MenuController>
 
     [Header("팝업들")]
     [SerializeField] private GameObject broadcastPlanningPanel;     //방송기획창
+    [SerializeField] private GameObject broadcastKeywordSelection;  //키워드 선택창
     [SerializeField] private GameObject broadcastCreatePanel;       //카테고리 전부 선택 후 
     [SerializeField] private GameObject productorSelectionPanel;    //작업자 선택 창
     [SerializeField] private GameObject productorProcessPanel;      //작업자 프로세싱 창

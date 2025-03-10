@@ -11,6 +11,8 @@ public class SoundManager : ObjectPooling<SoundManager, Sound>
         BGM_Sukidakara,
         //위 음원들은 추후 삭제 예정
         BGM_WakEnt_1,
+        BGM_WakEnt_2,
+        BGM_WakEnt_3,
         BGM_Processing_1,
         BGM_Main_1,
         BGM_Event_Positive,
