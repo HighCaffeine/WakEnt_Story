@@ -393,7 +393,7 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
 
         foreach (var data in characterDataList)
         {
-            if (data.isFieldCharacter == "O")
+            if (data.isFieldCharacter == 1)
             {
                 index++;
                 //if (!(index == 3 || index == 5)) continue;

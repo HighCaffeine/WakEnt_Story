@@ -19,6 +19,6 @@ public class KeywordItem : MonoBehaviour
 
     public void SelectItem()
     {
-        KeywordManager.Instance.UpdateKategorieSelect(kategorieData);
+        //KeywordManager.Instance.UpdateKategorieSelect(kategorieData);
     }
 }

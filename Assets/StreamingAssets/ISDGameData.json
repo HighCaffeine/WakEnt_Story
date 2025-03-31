@@ -8,102 +8,1949 @@
     }
   ],
   "BroadcastRecord": [],
+  "ProductorData": [
+    {
+      "Name": "아이네",
+      "IsFieldCharacter": 1,
+      "CharacterType": "Planner",
+      "Info": "이세계아이돌 첫째 멤버",
+      "ProcessCompleteComment": "이정도면 괜찮지 않을까요?"
+    },
+    {
+      "Name": "징버거",
+      "IsFieldCharacter": 1,
+      "CharacterType": "GraphicDesigner",
+      "Info": "이세계아이돌 둘째 멤버",
+      "ProcessCompleteComment": "모시깽 했습니다~"
+    },
+    {
+      "Name": "릴파",
+      "IsFieldCharacter": 1,
+      "CharacterType": "SoundDesigner",
+      "Info": "이세계아이돌 셋째 멤버"
+    },
+    {
+      "Name": "주르르",
+      "IsFieldCharacter": 1,
+      "CharacterType": "Marketer",
+      "Info": "이세계아이돌 넷째 멤버"
+    },
+    {
+      "Name": "고세구",
+      "IsFieldCharacter": 1,
+      "CharacterType": "Planner",
+      "Info": "이세계아이돌 다섯째 멤버"
+    },
+    {
+      "Name": "비챤",
+      "IsFieldCharacter": 1,
+      "CharacterType": "SoundDesigner",
+      "Info": "이세계아이돌 여섯째 멤버"
+    },
+    {
+      "Name": "둘기",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 30,
+      "DesignStat": 5,
+      "SoundStat": 6,
+      "MarketerStat": 7,
+      "PlannerLevel": 1,
+      "DesignLevel": 0,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 30,
+      "Info": "아이네의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "똥강아지",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 5,
+      "DesignStat": 30,
+      "SoundStat": 6,
+      "MarketerStat": 7,
+      "PlannerLevel": 0,
+      "DesignLevel": 1,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 30,
+      "Info": "징버거의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "박쥐",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 5,
+      "DesignStat": 4,
+      "SoundStat": 30,
+      "MarketerStat": 3,
+      "PlannerLevel": 0,
+      "DesignLevel": 0,
+      "SoundLevel": 1,
+      "MarketerLevel": 0,
+      "MaxStemina": 40,
+      "Info": "릴파의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "주폭도",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 5,
+      "DesignStat": 6,
+      "SoundStat": 4,
+      "MarketerStat": 30,
+      "PlannerLevel": 0,
+      "DesignLevel": 0,
+      "SoundLevel": 0,
+      "MarketerLevel": 1,
+      "MaxStemina": 35,
+      "Info": "주르르의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "균냥이",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 30,
+      "DesignStat": 5,
+      "SoundStat": 4,
+      "MarketerStat": 6,
+      "PlannerLevel": 1,
+      "DesignLevel": 0,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 35,
+      "Info": "고세구의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "라니",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 3,
+      "DesignStat": 30,
+      "SoundStat": 5,
+      "MarketerStat": 4,
+      "PlannerLevel": 0,
+      "DesignLevel": 1,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 30,
+      "Info": "비챤의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "팬치",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 300,
+      "EmployPrice": 500,
+      "PlannerStat": 3,
+      "DesignStat": 30,
+      "SoundStat": 5,
+      "MarketerStat": 4,
+      "PlannerLevel": 0,
+      "DesignLevel": 1,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 30,
+      "Info": "우왁굳의 팬덤 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "매형",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 700,
+      "EmployPrice": 1000,
+      "PlannerStat": 9,
+      "DesignStat": 7,
+      "SoundStat": 21,
+      "MarketerStat": 50,
+      "PlannerLevel": 0,
+      "DesignLevel": 0,
+      "SoundLevel": 1,
+      "MarketerLevel": 2,
+      "MaxStemina": 45,
+      "Info": "아이네의 매니저 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "거머리",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 700,
+      "EmployPrice": 1000,
+      "PlannerStat": 51,
+      "DesignStat": 22,
+      "SoundStat": 8,
+      "MarketerStat": 10,
+      "PlannerLevel": 2,
+      "DesignLevel": 1,
+      "SoundLevel": 0,
+      "MarketerLevel": 0,
+      "MaxStemina": 45,
+      "Info": "징버거의 친오빠 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "배트맨",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 700,
+      "EmployPrice": 1000,
+      "PlannerStat": 25,
+      "DesignStat": 10,
+      "SoundStat": 11,
+      "MarketerStat": 49,
+      "PlannerLevel": 1,
+      "DesignLevel": 0,
+      "SoundLevel": 0,
+      "MarketerLevel": 2,
+      "MaxStemina": 45,
+      "Info": "릴파의 매니저 이름",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "싹싹김치",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 700,
+      "EmployPrice": 1000,
+      "PlannerStat": 10,
+      "DesignStat": 53,
+      "SoundStat": 23,
+      "MarketerStat": 5,
+      "PlannerLevel": 0,
+      "DesignLevel": 2,
+      "SoundLevel": 1,
+      "MarketerLevel": 0,
+      "MaxStemina": 40,
+      "Info": "주르르의 친오빠",
+      "ProcessCompleteComment": "킹아"
+    },
+    {
+      "Name": "사랑전도사 젠투",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 90,
+      "DesignStat": 51,
+      "SoundStat": 30,
+      "MarketerStat": 42,
+      "PlannerLevel": 3,
+      "DesignLevel": 1,
+      "SoundLevel": 0,
+      "MarketerLevel": 1,
+      "MaxStemina": 70,
+      "Info": "하현의 8",
+      "ProcessCompleteComment": "정말 사랑스러운 결과군요"
+    },
+    {
+      "Name": "닌닌",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 23,
+      "DesignStat": 63,
+      "SoundStat": 92,
+      "MarketerStat": 50,
+      "PlannerLevel": 0,
+      "DesignLevel": 2,
+      "SoundLevel": 3,
+      "MarketerLevel": 1,
+      "MaxStemina": 70,
+      "Info": "하현의 6",
+      "ProcessCompleteComment": "완성했다."
+    },
+    {
+      "Name": "불곰",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 67,
+      "DesignStat": 22,
+      "SoundStat": 46,
+      "MarketerStat": 93,
+      "PlannerLevel": 2,
+      "DesignLevel": 0,
+      "SoundLevel": 1,
+      "MarketerLevel": 3,
+      "MaxStemina": 75,
+      "Info": "하현의 5",
+      "ProcessCompleteComment": "아가씨를 위해서라면.."
+    },
+    {
+      "Name": "수셈이",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 93,
+      "DesignStat": 43,
+      "SoundStat": 46,
+      "MarketerStat": 49,
+      "PlannerLevel": 3,
+      "DesignLevel": 1,
+      "SoundLevel": 1,
+      "MarketerLevel": 1,
+      "MaxStemina": 75,
+      "Info": "하현의 4",
+      "ProcessCompleteComment": "다 끝냈습니ㄷ..."
+    },
+    {
+      "Name": "단답벌레",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 94,
+      "DesignStat": 50,
+      "SoundStat": 41,
+      "MarketerStat": 67,
+      "PlannerLevel": 3,
+      "DesignLevel": 1,
+      "SoundLevel": 1,
+      "MarketerLevel": 2,
+      "MaxStemina": 75,
+      "Info": "하현의 3",
+      "ProcessCompleteComment": "끝."
+    },
+    {
+      "Name": "티파티0421",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 2500,
+      "EmployPrice": 5000,
+      "PlannerStat": 61,
+      "DesignStat": 45,
+      "SoundStat": 91,
+      "MarketerStat": 39,
+      "PlannerLevel": 2,
+      "DesignLevel": 1,
+      "SoundLevel": 3,
+      "MarketerLevel": 1,
+      "MaxStemina": 75,
+      "Info": "하현의 2",
+      "ProcessCompleteComment": "와#ㄴ성@$입24^니&다!~"
+    },
+    {
+      "Name": "김치만두번영택사스가",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 71,
+      "DesignStat": 95,
+      "SoundStat": 89,
+      "MarketerStat": 43,
+      "PlannerLevel": 2,
+      "DesignLevel": 3,
+      "SoundLevel": 3,
+      "MarketerLevel": 1,
+      "MaxStemina": 80,
+      "Info": "중현의 10",
+      "ProcessCompleteComment": "오니~"
+    },
+    {
+      "Name": "풍신",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 105,
+      "DesignStat": 69,
+      "SoundStat": 55,
+      "MarketerStat": 87,
+      "PlannerLevel": 3,
+      "DesignLevel": 2,
+      "SoundLevel": 1,
+      "MarketerLevel": 3,
+      "MaxStemina": 80,
+      "Info": "중현의 8",
+      "ProcessCompleteComment": "이정도는 아무것도 아니지요."
+    },
+    {
+      "Name": "철도왕 길버트",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 130,
+      "DesignStat": 68,
+      "SoundStat": 70,
+      "MarketerStat": 53,
+      "PlannerLevel": 4,
+      "DesignLevel": 2,
+      "SoundLevel": 2,
+      "MarketerLevel": 1,
+      "MaxStemina": 80,
+      "Info": "중현의 7",
+      "ProcessCompleteComment": "Wunderbar~ 완성했습니다!"
+    },
+    {
+      "Name": "바이터",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 75,
+      "DesignStat": 43,
+      "SoundStat": 82,
+      "MarketerStat": 123,
+      "PlannerLevel": 2,
+      "DesignLevel": 1,
+      "SoundLevel": 2,
+      "MarketerLevel": 4,
+      "MaxStemina": 80,
+      "Info": "중현의 6",
+      "ProcessCompleteComment": "이런이런, 스바라시 하군요"
+    },
+    {
+      "Name": "독고혜지",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 87,
+      "DesignStat": 35,
+      "SoundStat": 121,
+      "MarketerStat": 84,
+      "PlannerLevel": 3,
+      "DesignLevel": 0,
+      "SoundLevel": 4,
+      "MarketerLevel": 3,
+      "MaxStemina": 90,
+      "Info": "중현의 5",
+      "ProcessCompleteComment": "혜디, 나이스!"
+    },
+    {
+      "Name": "메카 맹기산",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 60,
+      "DesignStat": 88,
+      "SoundStat": 89,
+      "MarketerStat": 95,
+      "PlannerLevel": 2,
+      "DesignLevel": 3,
+      "SoundLevel": 3,
+      "MarketerLevel": 3,
+      "MaxStemina": 90,
+      "Info": "중현의 4",
+      "ProcessCompleteComment": "바로 끝내버렷잖냐~"
+    },
+    {
+      "Name": "곽춘식",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 111,
+      "DesignStat": 57,
+      "SoundStat": 87,
+      "MarketerStat": 81,
+      "PlannerLevel": 4,
+      "DesignLevel": 1,
+      "SoundLevel": 3,
+      "MarketerLevel": 3,
+      "MaxStemina": 90,
+      "Info": "중현의 3",
+      "ProcessCompleteComment": "캬~ 이거지~!"
+    },
+    {
+      "Name": "버터우스 3세",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 82,
+      "DesignStat": 115,
+      "SoundStat": 88,
+      "MarketerStat": 53,
+      "PlannerLevel": 3,
+      "DesignLevel": 4,
+      "SoundLevel": 3,
+      "MarketerLevel": 2,
+      "MaxStemina": 90,
+      "Info": "중현의 2",
+      "ProcessCompleteComment": "플로렌스에서는 손쉬운 일이오"
+    },
+    {
+      "Name": "성기사 샬롯",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 5000,
+      "EmployPrice": 10000,
+      "PlannerStat": 70,
+      "DesignStat": 72,
+      "SoundStat": 121,
+      "MarketerStat": 84,
+      "PlannerLevel": 2,
+      "DesignLevel": 2,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 90,
+      "Info": "중현의 1",
+      "ProcessCompleteComment": "아주 굿이네 굿"
+    },
+    {
+      "Name": "진희",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 241,
+      "DesignStat": 121,
+      "SoundStat": 77,
+      "MarketerStat": 71,
+      "PlannerLevel": 5,
+      "DesignLevel": 3,
+      "SoundLevel": 2,
+      "MarketerLevel": 2,
+      "MaxStemina": 100,
+      "Info": "상현의 10",
+      "ProcessCompleteComment": "찰 만트렀타고 생칵해요"
+    },
+    {
+      "Name": "캡틴 설리반",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 83,
+      "DesignStat": 127,
+      "SoundStat": 225,
+      "MarketerStat": 78,
+      "PlannerLevel": 2,
+      "DesignLevel": 3,
+      "SoundLevel": 5,
+      "MarketerLevel": 2,
+      "MaxStemina": 100,
+      "Info": "상현의 9",
+      "ProcessCompleteComment": "아호이!"
+    },
+    {
+      "Name": "이덕수 할아바이",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 127,
+      "DesignStat": 83,
+      "SoundStat": 81,
+      "MarketerStat": 235,
+      "PlannerLevel": 3,
+      "DesignLevel": 2,
+      "SoundLevel": 2,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "상현의 8",
+      "ProcessCompleteComment": "늙으니 이런것도 힘들구만."
+    },
+    {
+      "Name": "시리안 레인",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 97,
+      "DesignStat": 105,
+      "SoundStat": 231,
+      "MarketerStat": 98,
+      "PlannerLevel": 3,
+      "DesignLevel": 3,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "상현의 7",
+      "ProcessCompleteComment": "완성했습니다."
+    },
+    {
+      "Name": "권민",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 243,
+      "DesignStat": 152,
+      "SoundStat": 77,
+      "MarketerStat": 93,
+      "PlannerLevel": 5,
+      "DesignLevel": 4,
+      "SoundLevel": 2,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "상현의 6",
+      "ProcessCompleteComment": "최선을 다했듭니다."
+    },
+    {
+      "Name": "도파민 박사",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 151,
+      "DesignStat": 237,
+      "SoundStat": 47,
+      "MarketerStat": 138,
+      "PlannerLevel": 4,
+      "DesignLevel": 5,
+      "SoundLevel": 1,
+      "MarketerLevel": 4,
+      "MaxStemina": 100,
+      "Info": "상현의 5",
+      "ProcessCompleteComment": "ㅢ..."
+    },
+    {
+      "Name": "미미짱짱세용",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 243,
+      "DesignStat": 116,
+      "SoundStat": 134,
+      "MarketerStat": 95,
+      "PlannerLevel": 5,
+      "DesignLevel": 3,
+      "SoundLevel": 4,
+      "MarketerLevel": 2,
+      "MaxStemina": 100,
+      "Info": "상현의 4",
+      "ProcessCompleteComment": "최선을 다했어용~"
+    },
+    {
+      "Name": "부정형인간",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 251,
+      "DesignStat": 164,
+      "SoundStat": 51,
+      "MarketerStat": 149,
+      "PlannerLevel": 5,
+      "DesignLevel": 4,
+      "SoundLevel": 1,
+      "MarketerLevel": 4,
+      "MaxStemina": 100,
+      "Info": "상현의 3",
+      "ProcessCompleteComment": "시청자가 안좋아하면 어쩌죠..?"
+    },
+    {
+      "Name": "왁파고",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 172,
+      "DesignStat": 77,
+      "SoundStat": 101,
+      "MarketerStat": 267,
+      "PlannerLevel": 4,
+      "DesignLevel": 2,
+      "SoundLevel": 3,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "상현의 2",
+      "ProcessCompleteComment": "완료. 했습니다"
+    },
+    {
+      "Name": "카르나르 융터르",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 10000,
+      "EmployPrice": 20000,
+      "PlannerStat": 198,
+      "DesignStat": 243,
+      "SoundStat": 95,
+      "MarketerStat": 88,
+      "PlannerLevel": 4,
+      "DesignLevel": 5,
+      "SoundLevel": 3,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "상현의 1",
+      "ProcessCompleteComment": "무의식이 이끄는대로 했습니다."
+    },
+    {
+      "Name": "켈리칼리 데이비슨",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 68,
+      "DesignStat": 116,
+      "SoundStat": 231,
+      "MarketerStat": 255,
+      "PlannerLevel": 2,
+      "DesignLevel": 3,
+      "SoundLevel": 5,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "육광천의 6",
+      "ProcessCompleteComment": "아무나 할 수 있는게 아니라구"
+    },
+    {
+      "Name": "아마데우스최",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 223,
+      "DesignStat": 88,
+      "SoundStat": 271,
+      "MarketerStat": 126,
+      "PlannerLevel": 5,
+      "DesignLevel": 2,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "육광천의 5",
+      "ProcessCompleteComment": "조금 플러스~"
+    },
+    {
+      "Name": "비밀소녀",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 261,
+      "DesignStat": 153,
+      "SoundStat": 221,
+      "MarketerStat": 97,
+      "PlannerLevel": 5,
+      "DesignLevel": 4,
+      "SoundLevel": 5,
+      "MarketerLevel": 2,
+      "MaxStemina": 100,
+      "Info": "육광천의 4",
+      "ProcessCompleteComment": "이 정도면 되지 않을까용~?"
+    },
+    {
+      "Name": "데스해머쵸로키",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 253,
+      "DesignStat": 244,
+      "SoundStat": 124,
+      "MarketerStat": 119,
+      "PlannerLevel": 5,
+      "DesignLevel": 5,
+      "SoundLevel": 3,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "육광천의 3",
+      "ProcessCompleteComment": "바로 박살내고 왔다~"
+    },
+    {
+      "Name": "비즈니스킴",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 179,
+      "DesignStat": 184,
+      "SoundStat": 268,
+      "MarketerStat": 121,
+      "PlannerLevel": 4,
+      "DesignLevel": 4,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "육광천의 2",
+      "ProcessCompleteComment": "레이디를 위한 작품입니다."
+    },
+    {
+      "Name": "소피아",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "WorkPrice": 15000,
+      "EmployPrice": 30000,
+      "PlannerStat": 281,
+      "DesignStat": 178,
+      "SoundStat": 191,
+      "MarketerStat": 153,
+      "PlannerLevel": 5,
+      "DesignLevel": 4,
+      "SoundLevel": 4,
+      "MarketerLevel": 4,
+      "MaxStemina": 100,
+      "Info": "육광천의 1",
+      "ProcessCompleteComment": "진심으로 상대했습니다."
+    },
+    {
+      "Name": "히키킹",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "WorkPrice": 17500,
+      "EmployPrice": 35000,
+      "PlannerStat": 182,
+      "DesignStat": 187,
+      "SoundStat": 164,
+      "MarketerStat": 291,
+      "PlannerLevel": 4,
+      "DesignLevel": 4,
+      "SoundLevel": 4,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "사황의 4",
+      "ProcessCompleteComment": "쟈 와루도!"
+    },
+    {
+      "Name": "빅토리",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "WorkPrice": 20000,
+      "EmployPrice": 40000,
+      "PlannerStat": 191,
+      "DesignStat": 287,
+      "SoundStat": 154,
+      "MarketerStat": 266,
+      "PlannerLevel": 4,
+      "DesignLevel": 5,
+      "SoundLevel": 4,
+      "MarketerLevel": 5,
+      "MaxStemina": 120,
+      "Info": "사황의 3",
+      "ProcessCompleteComment": "빅토리~~"
+    },
+    {
+      "Name": "해루석",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "WorkPrice": 25000,
+      "EmployPrice": 50000,
+      "PlannerStat": 300,
+      "DesignStat": 300,
+      "SoundStat": 300,
+      "MarketerStat": 300,
+      "PlannerLevel": 5,
+      "DesignLevel": 5,
+      "SoundLevel": 5,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "사황의 1",
+      "ProcessCompleteComment": "아, 오셨군요."
+    },
+    {
+      "Name": "햄이네",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "EmployPrice": 158,
+      "PlannerStat": 158,
+      "DesignStat": 158,
+      "SoundStat": 158,
+      "MarketerStat": 158,
+      "PlannerLevel": 4,
+      "DesignLevel": 4,
+      "SoundLevel": 4,
+      "MarketerLevel": 4,
+      "MaxStemina": 100,
+      "Info": "아이네의 부캐",
+      "ProcessCompleteComment": "완료했다네~"
+    },
+    {
+      "Name": "밥버거",
+      "IsFieldCharacter": 0,
+      "CharacterType": "GraphicDesigner",
+      "EmployPrice": 1008,
+      "PlannerStat": 63,
+      "DesignStat": 282,
+      "SoundStat": 160,
+      "MarketerStat": 92,
+      "PlannerLevel": 2,
+      "DesignLevel": 5,
+      "SoundLevel": 4,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "징버거의 부캐",
+      "ProcessCompleteComment": "어때요, 참 쉽죠~?"
+    },
+    {
+      "Name": "띨파",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer",
+      "EmployPrice": 700,
+      "PlannerStat": 77,
+      "DesignStat": 77,
+      "SoundStat": 177,
+      "MarketerStat": 277,
+      "PlannerLevel": 3,
+      "DesignLevel": 3,
+      "SoundLevel": 4,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "릴파의 부캐",
+      "ProcessCompleteComment": "다 완료했다고. 엣헴!"
+    },
+    {
+      "Name": "귀족희",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "EmployPrice": 610,
+      "PlannerStat": 91,
+      "DesignStat": 162,
+      "SoundStat": 292,
+      "MarketerStat": 91,
+      "PlannerLevel": 3,
+      "DesignLevel": 4,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "주르르의 부캐",
+      "ProcessCompleteComment": "오호호~ 식은죽 먹기였사와요"
+    },
+    {
+      "Name": "BJ팡이",
+      "IsFieldCharacter": 0,
+      "CharacterType": "Planner",
+      "EmployPrice": 539,
+      "PlannerStat": 300,
+      "DesignStat": 60,
+      "SoundStat": 60,
+      "MarketerStat": 300,
+      "PlannerLevel": 5,
+      "DesignLevel": 2,
+      "SoundLevel": 2,
+      "MarketerLevel": 5,
+      "MaxStemina": 100,
+      "Info": "고세구의 부캐",
+      "ProcessCompleteComment": "어 누나야~"
+    },
+    {
+      "Name": "망냥냥",
+      "IsFieldCharacter": 0,
+      "CharacterType": "SoundDesigner",
+      "EmployPrice": 2000,
+      "PlannerStat": 116,
+      "DesignStat": 116,
+      "SoundStat": 282,
+      "MarketerStat": 116,
+      "PlannerLevel": 3,
+      "DesignLevel": 3,
+      "SoundLevel": 5,
+      "MarketerLevel": 3,
+      "MaxStemina": 100,
+      "Info": "비챤의 부캐",
+      "ProcessCompleteComment": "이몸이 못하는 것은 없느니라!!"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    },
+    {
+      "IsFieldCharacter": 0,
+      "CharacterType": "Marketer"
+    }
+  ],
+  "CharacterData": [
+    {
+      "Name": "아이네",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 1,
+      "CharacterID": 1001,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "징버거",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 2,
+      "CharacterID": 1002,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "릴파",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 3,
+      "CharacterID": 1003,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "주르르",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 4,
+      "CharacterID": 1004,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "고세구",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 5,
+      "CharacterID": 1005,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "비챤",
+      "IsIsegyeIdol": 1,
+      "IsFieldCharacter": 1,
+      "SeatNumber": 6,
+      "CharacterID": 1006,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "둘기",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 2001,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "똥강아지",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 2002,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "박쥐",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3001,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "주폭도",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3002,
+      "RemainFeverCount": 0,
+      "Status": 3
+    },
+    {
+      "Name": "균냥이",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3003,
+      "RemainFeverCount": 0,
+      "Status": 1
+    },
+    {
+      "Name": "라니",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3004,
+      "RemainFeverCount": 0,
+      "Status": 1
+    },
+    {
+      "Name": "팬치",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3005,
+      "RemainFeverCount": 0,
+      "Status": 1
+    },
+    {
+      "Name": "매형",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3006,
+      "RemainFeverCount": 0,
+      "Status": 1
+    },
+    {
+      "Name": "거머리",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3007,
+      "Status": 1
+    },
+    {
+      "Name": "배트맨",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3008,
+      "Status": 1
+    },
+    {
+      "Name": "싹싹김치",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3009,
+      "Status": 1
+    },
+    {
+      "Name": "사랑전도사 젠투",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3010,
+      "Status": 1
+    },
+    {
+      "Name": "닌닌",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3011,
+      "Status": 1
+    },
+    {
+      "Name": "불곰",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3012,
+      "Status": 1
+    },
+    {
+      "Name": "수셈이",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3013,
+      "Status": 1
+    },
+    {
+      "Name": "단답벌레",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3014,
+      "Status": 1
+    },
+    {
+      "Name": "티파티0421",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3015,
+      "Status": 1
+    },
+    {
+      "Name": "김치만두번영택사스가",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3016,
+      "Status": 1
+    },
+    {
+      "Name": "풍신",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3017,
+      "Status": 1
+    },
+    {
+      "Name": "철도왕 길버트",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3018,
+      "Status": 1
+    },
+    {
+      "Name": "바이터",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3019,
+      "Status": 1
+    },
+    {
+      "Name": "독고혜지",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3020,
+      "Status": 1
+    },
+    {
+      "Name": "메카 맹기산",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3021,
+      "Status": 1
+    },
+    {
+      "Name": "곽춘식",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3022,
+      "Status": 1
+    },
+    {
+      "Name": "버터우스 3세",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3023,
+      "Status": 1
+    },
+    {
+      "Name": "성기사 샬롯",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3024,
+      "Status": 1
+    },
+    {
+      "Name": "진희",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3025,
+      "Status": 1
+    },
+    {
+      "Name": "캡틴 설리반",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3026,
+      "Status": 1
+    },
+    {
+      "Name": "이덕수 할아바이",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3027,
+      "Status": 1
+    },
+    {
+      "Name": "시리안 레인",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3028,
+      "Status": 1
+    },
+    {
+      "Name": "권민",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3029,
+      "Status": 1
+    },
+    {
+      "Name": "도파민 박사",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3030
+    },
+    {
+      "Name": "미미짱짱세용",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3031
+    },
+    {
+      "Name": "부정형인간",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3032
+    },
+    {
+      "Name": "왁파고",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3033
+    },
+    {
+      "Name": "카르나르 융터르",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3034
+    },
+    {
+      "Name": "켈리칼리 데이비슨",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3035
+    },
+    {
+      "Name": "아마데우스최",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3036
+    },
+    {
+      "Name": "비밀소녀",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3037
+    },
+    {
+      "Name": "데스해머쵸로키",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3038
+    },
+    {
+      "Name": "비즈니스킴",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3039
+    },
+    {
+      "Name": "소피아",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3040
+    },
+    {
+      "Name": "히키킹",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3041
+    },
+    {
+      "Name": "빅토리",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3042
+    },
+    {
+      "Name": "해루석",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3043
+    },
+    {
+      "Name": "햄이네",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3044
+    },
+    {
+      "Name": "밥버거",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3045
+    },
+    {
+      "Name": "띨파",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3046
+    },
+    {
+      "Name": "귀족희",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3047
+    },
+    {
+      "Name": "BJ팡이",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3048
+    },
+    {
+      "Name": "망냥냥",
+      "IsIsegyeIdol": 0,
+      "IsFieldCharacter": 0,
+      "CharacterID": 3049
+    },
+    {
+      "CharacterID": 3050
+    },
+    {
+      "CharacterID": 3051
+    }
+  ],
   "MatchingData": [
     {
-      "Kategorie": "게임",
-      "Content": "개인",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "LOL",
+      "Game": 5,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -5,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "게임",
-      "Content": "합방",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Valorant",
+      "Game": -4,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -4,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "게임",
-      "Content": "시참",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Battleground",
+      "Game": 3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -5,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "게임",
-      "Content": "대결",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Minecraft",
+      "Game": 4,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "노래",
-      "Content": "개인",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "FIFA",
+      "Game": 3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "노래",
-      "Content": "합방",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "IntegratedGame",
+      "Game": -5,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -1,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "노래",
-      "Content": "시참",
-      "MatchingPoint": 1,
-      "Unlocked": "O"
+      "Content": "HorrorGame",
+      "Game": -5,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "노래",
-      "Content": "대결",
-      "MatchingPoint": 2,
-      "Unlocked": "O"
+      "Content": "Baseball",
+      "Game": 2,
+      "Sports": -2,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -4,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "댄스",
-      "Content": "개인",
-      "MatchingPoint": 3,
-      "Unlocked": "O"
+      "Content": "Badminton",
+      "Game": -2,
+      "Sports": -3,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -4,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "댄스",
-      "Content": "합방",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Rugby",
+      "Game": -2,
+      "Sports": -3,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "댄스",
-      "Content": "시참",
-      "MatchingPoint": 2,
-      "Unlocked": "O"
+      "Content": "Analyze",
+      "Game": -2,
+      "Sports": -4,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -4,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "댄스",
-      "Content": "대결",
-      "MatchingPoint": 4,
-      "Unlocked": "O"
+      "Content": "Golf",
+      "Game": -2,
+      "Sports": -3,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "토크",
-      "Content": "개인",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Billiards",
+      "Game": -2,
+      "Sports": -2,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -2,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "토크",
-      "Content": "합방",
-      "MatchingPoint": 5,
-      "Unlocked": "O"
+      "Content": "Bowling",
+      "Game": -2,
+      "Sports": -2,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "토크",
-      "Content": "시참",
-      "MatchingPoint": 3,
-      "Unlocked": "O"
+      "Content": "ETCSports",
+      "Game": -2,
+      "Sports": -3,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -2,
+      "Life": -1,
+      "Creative": -1
     },
     {
-      "Kategorie": "토크",
-      "Content": "대결",
-      "MatchingPoint": 1,
-      "Unlocked": "O"
+      "Content": "Karaoke",
+      "Game": 4,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Cover",
+      "Game": 1,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "NewAlbum",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "MusicLive",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Streaming",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "VirtualConcert",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Concert",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -5,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Compotition",
+      "Game": -2,
+      "Sports": -4,
+      "Music": -1,
+      "Event": -5,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
+    },
+    {
+      "Content": "CompetitionRelay",
+      "Game": -1,
+      "Sports": -5,
+      "Music": -1,
+      "Event": -5,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
+    },
+    {
+      "Content": "Audition",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -5,
+      "VRChat": -5,
+      "Life": -1,
+      "Creative": -2
+    },
+    {
+      "Content": "Map",
+      "Game": -3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -4,
+      "Life": -1,
+      "Creative": -3
+    },
+    {
+      "Content": "Avatar",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -5,
+      "Life": -2,
+      "Creative": -3
+    },
+    {
+      "Content": "SituationalComedy",
+      "Game": -3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -3
+    },
+    {
+      "Content": "Talk",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -3,
+      "VRChat": -5,
+      "Life": -4,
+      "Creative": -1
+    },
+    {
+      "Content": "ASMR",
+      "Game": -3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -5,
+      "Life": -5,
+      "Creative": -1
+    },
+    {
+      "Content": "Mukbang",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -4,
+      "Life": -4,
+      "Creative": -2
+    },
+    {
+      "Content": "Fashion",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -4,
+      "Life": -4,
+      "Creative": -2
+    },
+    {
+      "Content": "Dance",
+      "Game": -5,
+      "Sports": -2,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -5,
+      "Life": -3,
+      "Creative": -2
+    },
+    {
+      "Content": "Cookbang",
+      "Game": -4,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -5,
+      "Life": -5,
+      "Creative": -3
+    },
+    {
+      "Content": "TaravelVlog",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -1,
+      "Life": -3,
+      "Creative": -1
+    },
+    {
+      "Content": "Camping",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -1,
+      "Life": -2,
+      "Creative": -1
+    },
+    {
+      "Content": "Fishing",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Dubbing",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -4,
+      "Creative": -2
+    },
+    {
+      "Content": "Radio",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -2,
+      "VRChat": -3,
+      "Life": -5,
+      "Creative": -1
+    },
+    {
+      "Content": "Animal",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -5,
+      "Creative": -2
+    },
+    {
+      "Content": "Car",
+      "Game": -3,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -4,
+      "Creative": -2
+    },
+    {
+      "Content": "Comedy",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -1
+    },
+    {
+      "Content": "Exercise",
+      "Game": -5,
+      "Sports": -3,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -4,
+      "Life": -2,
+      "Creative": -2
+    },
+    {
+      "Content": "Movie",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -2,
+      "Creative": -1
+    },
+    {
+      "Content": "Anime",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -3,
+      "Creative": -1
+    },
+    {
+      "Content": "Food",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -1,
+      "Life": -2,
+      "Creative": -4
+    },
+    {
+      "Content": "Beauty",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -2,
+      "Creative": -4
+    },
+    {
+      "Content": "Style",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -3,
+      "Creative": -5
+    },
+    {
+      "Content": "Drawing",
+      "Game": -5,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -4,
+      "Life": -3,
+      "Creative": -4
+    },
+    {
+      "Content": "Science",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -3,
+      "Life": -1,
+      "Creative": -2
+    },
+    {
+      "Content": "Tech",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -1,
+      "Creative": -3
+    },
+    {
+      "Content": "Education",
+      "Game": -2,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -2,
+      "Creative": -3
+    },
+    {
+      "Content": "Ent",
+      "Game": -1,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -1,
+      "Creative": -4
+    },
+    {
+      "Content": "KnowHow",
+      "Game": -4,
+      "Sports": -1,
+      "Music": -1,
+      "Event": -1,
+      "VRChat": -2,
+      "Life": -2,
+      "Creative": -3
     }
   ],
   "Keyword": [
@@ -111,259 +1958,886 @@
       "KeywordKey": "Game",
       "KoreanName": "게임",
       "Type": "Kategorie",
-      "Popularity": 4
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Life",
-      "KoreanName": "라이프",
+      "KeywordKey": "Sports",
+      "KoreanName": "스포츠",
       "Type": "Kategorie",
-      "Popularity": 3
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Music/Song",
+      "KeywordKey": "Music",
       "KoreanName": "음악",
       "Type": "Kategorie",
-      "Popularity": 4
-    },
-    {
-      "KeywordKey": "Creative",
-      "KoreanName": "크리에이티브",
-      "Type": "Kategorie",
-      "Popularity": 2
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Event",
       "KoreanName": "이벤트",
       "Type": "Kategorie",
-      "Popularity": 5
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "ESport",
-      "KoreanName": "ESport",
+      "KeywordKey": "VRChat",
+      "KoreanName": "VRChat",
+      "Type": "Kategorie",
+      "Popularity": 3,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Life",
+      "KoreanName": "라이프",
+      "Type": "Kategorie",
+      "Popularity": 4,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Creative",
+      "KoreanName": "크리에이티브",
+      "Type": "Kategorie",
+      "Popularity": 5,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "LOL",
+      "KoreanName": "롤",
       "Type": "Content",
-      "Popularity": 5
+      "Popularity": 5,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Valorant",
+      "KoreanName": "발로란트",
+      "Type": "Content",
+      "Popularity": 4,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Battleground",
+      "KoreanName": "배틀그라운드",
+      "Type": "Content",
+      "Popularity": 3,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Minecraft",
+      "KoreanName": "마인크래프트",
+      "Type": "Content",
+      "Popularity": 3,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "FIFA",
+      "KoreanName": "피파",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "IntegratedGame",
+      "KoreanName": "종합게임",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "HorrorGame",
+      "KoreanName": "공포게임",
+      "Type": "Content",
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Baseball",
       "KoreanName": "야구",
       "Type": "Content",
-      "Popularity": 4
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Badminton",
       "KoreanName": "배드민턴",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Rugby",
       "KoreanName": "럭비",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Analyze/Talk",
-      "KoreanName": "분석, 탐구",
+      "KeywordKey": "Analyze",
+      "KoreanName": "분석",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Golf",
       "KoreanName": "골프",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 5,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Billiards",
       "KoreanName": "당구",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 5,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Bowling",
       "KoreanName": "볼링",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "ETC Sports",
-      "KoreanName": "기타 스포츠",
+      "KeywordKey": "ETCSports",
+      "KoreanName": "기타스포츠",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Song",
-      "KoreanName": "노래",
+      "KeywordKey": "Karaoke",
+      "KoreanName": "카라오케",
       "Type": "Content",
-      "Popularity": 4
+      "Popularity": 4,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Cover",
+      "KoreanName": "커버곡",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "NewAlbum",
+      "KoreanName": "앨범",
+      "Type": "Content",
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "MusicLive",
-      "KoreanName": "음악라이브",
+      "KoreanName": "라이브뮤직",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Streaming",
       "KoreanName": "스트리밍",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Virtual Concert",
-      "KoreanName": "버츄얼 콘서트",
+      "KeywordKey": "VirtualConcert",
+      "KoreanName": "버츄얼콘서트",
       "Type": "Content",
-      "Popularity": 5
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Concert",
-      "KoreanName": "콘서트",
+      "KoreanName": "콘서트트",
       "Type": "Content",
-      "Popularity": 5
+      "Popularity": 3,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Compotition",
+      "KoreanName": "경기",
+      "Type": "Content",
+      "Popularity": 1,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "CompetitionRelay",
+      "KoreanName": "경기중계",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Audition",
+      "KoreanName": "오디션",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Map",
+      "KoreanName": "맵",
+      "Type": "Content",
+      "Popularity": 4,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Avatar",
+      "KoreanName": "바타",
+      "Type": "Content",
+      "Popularity": 3,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "SituationalComedy",
+      "KoreanName": "상황극",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Talk",
       "KoreanName": "토크",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "ASMR",
       "KoreanName": "ASMR",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "MukBang",
+      "KeywordKey": "Mukbang",
       "KoreanName": "먹방",
       "Type": "Content",
-      "Popularity": 4
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "CookBang",
+      "KeywordKey": "Fashion",
+      "KoreanName": "패션",
+      "Type": "Content",
+      "Popularity": 1,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Dance",
+      "KoreanName": "댄스",
+      "Type": "Content",
+      "Popularity": 2,
+      "Unlocked": 1
+    },
+    {
+      "KeywordKey": "Cookbang",
       "KoreanName": "쿡방",
       "Type": "Content",
-      "Popularity": 4
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "TravelVlog",
-      "KoreanName": "여행 Vlog",
+      "KeywordKey": "TaravelVlog",
+      "KoreanName": "여행Vlog",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 5,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Camping",
       "KoreanName": "캠핑",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Fishing",
       "KoreanName": "낚시",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Dubbing",
       "KoreanName": "더빙",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Radio",
       "KoreanName": "라디오",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Animal",
       "KoreanName": "동물",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Car/Vehicle",
-      "KoreanName": "자동차",
+      "KeywordKey": "Car",
+      "KoreanName": "차가리",
       "Type": "Content",
-      "Popularity": 5
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Comedy",
       "KoreanName": "코미디",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Exercise",
       "KoreanName": "운동",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 1,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Movie",
       "KoreanName": "영화",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Anime",
       "KoreanName": "애니",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Food",
       "KoreanName": "음식",
       "Type": "Content",
-      "Popularity": 4
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Beauty",
       "KoreanName": "뷰티",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 5,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Style",
       "KoreanName": "스타일",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Drawing",
       "KoreanName": "그림",
       "Type": "Content",
-      "Popularity": 3
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Science",
       "KoreanName": "과학",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Tech",
-      "KoreanName": "기술",
+      "KoreanName": "테크",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 4,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "Education",
       "KoreanName": "교육",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 2,
+      "Unlocked": 1
     },
     {
-      "KeywordKey": "Ent.",
+      "KeywordKey": "Ent",
       "KoreanName": "엔터",
       "Type": "Content",
-      "Popularity": 1
+      "Popularity": 3,
+      "Unlocked": 1
     },
     {
       "KeywordKey": "KnowHow",
       "KoreanName": "노하우",
       "Type": "Content",
-      "Popularity": 2
+      "Popularity": 2,
+      "Unlocked": 1
+    }
+  ],
+  "Event": [
+    {
+      "EventKey": "tutorial_main_1",
+      "EventComment": "안녕하세요! 게임 진행을 도와드릴 비서 뢴트게늄이라고 합니다.",
+      "Achivement": "왁엔터 설립",
+      "Progressed": 0,
+      "Note": "초회 한정",
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_main_2",
+      "EventComment": "이세계아이돌에 합격한 6명의 아이돌을 관리 및 방송을 기획하여 왁엔터를 성장시켜야 합니다.",
+      "Achivement": "-",
+      "Progressed": 0,
+      "Note": "초회 한정",
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_main_3",
+      "EventComment": "인기 있는 방송을 제작하여 방송대상을 받기위해 노력해봅시다!",
+      "Progressed": 0,
+      "Note": "방송기획/멤버확인",
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_main_4",
+      "EventComment": "진행에 어려움이 있으면 정보탭에 게임정보를 누르시면 도움이 됩니다",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "toturial_main_5",
+      "EventComment": "우선 방송제작에 도움을 줄 작업자를 고용해보죠. 메뉴 - 고용으로 들어가서 작업자 모집을 해봅시다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "toturial_main_6",
+      "EventComment": "작업자를 모집했으니 방송을 제작해볼까요? 메뉴 - 방송기획으로 들어가서 컨텐츠를 제작할 수 있습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_planning_1",
+      "EventComment": "장비는 이번 방송에서 사용할 기기를 말합니다. 좋은 장비를 사용할 수록 제작비가 오르고 방송의 퀄리티도 좋아집니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_planning_2",
+      "EventComment": "카테고리는 이번 방송의 주제로 팬들의 이목을 끌 핵심적인 요소입니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_planning_3",
+      "EventComment": "키워드는 방송의 방향성을 이끕니다. 주제와 어울리는 키워드로 완성도를 높이거나, 특별한 키워드로 자신만의 방송을 만들 수도 있습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {
+      "EventKey": "tutorial_process_planner",
+      "EventComment": "왁엔터의 첫 방송이 시작되려 합니다. 기획은 누구에게 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_process_graphic",
+      "EventComment": "기획만큼 중요한건 영상미와 썸네일이죠!! 아트는 누구에게 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "tutorial_process_sound",
+      "EventComment": "제작이 막바지에 이르렀습니다. 이제 음향을 편집해야 하는데, 어떤 작업자가 적임일까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_part_planner",
+      "EventComment": "이번 주제는 (-1)와 (-2)군요. 기대가 됩니다. 이번 방송의 기획은 누구에게 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_penalty_keyword",
+      "EventComment": "이번 주제는 (-1)와 (-2)군요. 단기간에 같은 주제를 많이 사용하면 시청자들의 흥미가 떨어질 수 있으니 주의하세요. 기획은 누구한테 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_part_graphic",
+      "EventComment": "작업이 어느정도 진행되었으니 영상을 다듬어야죠. 누구에게 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_part_sound",
+      "EventComment": "마지막으로 음향을 편집할 시간입니다. 누구에게 맡길까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {
+      "EventKey": "tutorial_planning_complete",
+      "EventComment": "왁엔터의 첫 영상이 완료되었습니다!! 이제 유튜브에 올려서 시청자들의 반응을 볼 준비만 남았네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_complete_1",
+      "EventComment": "(n)번째 영상이 완성되었습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_complete_positive1",
+      "EventComment": "이번 영상은 [재미가, 독창성이, 아트가, 음향이 중 1] 높아 기대되네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_complete_positive2",
+      "EventComment": "이번 영상은 전반적으로 훌륭하니 높은 조회수가 나올거 같습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_complete_negative1",
+      "EventComment": "생각대로 되지는 않았지만.. [재미가, 독창성이, 아트가, 음향이 중 1] 높으니 포기하긴 이르다고요!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "planning_complete_negative2",
+      "EventComment": "전반적으로 무난했지만 뭔가 임팩트가 부족하네요...",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {
+      "EventKey": "review_reaction_positive1",
+      "EventComment": "반응이 아주 좋네요!! 모든 구독자들이 주목할겁니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_positive2",
+      "EventComment": "리뷰 점수가 아주 높습니다. 올해의 영상을 기대해도 되지 않을까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_positive3",
+      "EventComment": "최고의 호평을 받았습니다. 다들 이 영상을 보고싶을거에요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_normal1",
+      "EventComment": "괜찮은 점수네요!! 조회수가 얼마나 나올지 기대됩니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_normal2",
+      "EventComment": "좋지도 나쁘지도 않네요. 다음에는 더 나아질겁니다!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_normal3",
+      "EventComment": "무난하네요. 조금 더 발전의 여지가 있겠죠?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_negative1",
+      "EventComment": "낮은 점수이지만… 실제 조회수는 다를수도 있으니 지켜보자고요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_negative2",
+      "EventComment": "이번 영상은 실패했지만, 이걸 교훈삼아 다음 작품은 더 나을겁니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "review_reaction_negative3",
+      "EventComment": "이번에는 약간 부족했네요. 다음에는 더 잘할 수 있을겁니다!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {
+      "EventKey": "fanletter_cafe_positive1",
+      "EventComment": "안녕하세요! 이번에 (-3)의 (-4)방송을 보고 팬카페에 가입했습니다 앞으로도 좋은 방송 부탁드립니다!(팬카페 인원 증가)",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_positive2",
+      "EventComment": "안녕하세요. 최근 인기 급상승 동영상을 보고 팬이 되었어요!! 앞으로도 이렇게 재밌는 영상 많이 제작해주세요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_positive3",
+      "EventComment": "안녕하세요. 이번에 인기투표에 (-3)의 (-4)방송을 투표했어요! 꼭 수상했으면 좋겠어요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_jindeugi1",
+      "EventComment": "왁물원 가입하고 처음으로 메일을 보내봐요! (-3)의 (-4)방송을 보고 팬이 되었어요. 앞으로도 재밌는 방송 많이 해주세요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_dalgdulgi1",
+      "EventComment": "늘 왁엔터 방송들을 보면서 힘을 얻고 있어요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_wakmusae1",
+      "EventComment": "형, 이번 방송 역대급이였어. 역시 형 은신 이야!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_chimpaenchi1",
+      "EventComment": "레게노. 찢었다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_cafe_neugeuja1",
+      "EventComment": "지금부터 왁엔터를 욕하는 것은 느그자를 욕하는 것과 동일하다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_gwanggo_special",
+      "EventComment": "이번 세찜 광고보고 팥반슈크림반찜닭 시켰는데 너무 맛있어요!! 앞으로도 왁엔터에서 광고하는 상품들은 다 살거에요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_gwanggo_mail1",
+      "EventComment": "최근 방송 잘 봤습니다. 근데, 조금 아쉬운 점이 있어 메일 보내게 되었습니다. … ... 이만 줄이겠습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_gwanggo_mail2",
+      "EventComment": "형, 이번꺼 진짜 별로라고 그랬잖아. 내 말 들었으면 더 좋았을텐데… 다음에는 고집 좀 줄이고 우리 말도 경청해줘.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "fanletter_gwanggo_popupstore",
+      "EventComment": "이번에 왁엔터 팝업스토어를 갔다와서 매우 기뻐요!! 드디어 공식 굿즈를 구매할 수 있다니!! 전날부터 너무 기대되서 잠이 안올 지경이였어요. \n특히 햄이네 쿠션이 푹신푹신하고 귀여웠어요. 앞으로도 팝업스토어 자주 열어주었으면 좋겠어요!!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "EventKey": "positive_buff_million",
+      "EventComment": "저희 영상이 최초로 100만 조회수를 돌파했습니다! 구독자들도 기뻐하네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "positive_buff_rank10",
+      "EventComment": "저희 영상이 인기 급상승 동영상 10등 안에 들었습니다. 1등을 향해 나아가죠!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "positive_buff_rank10",
+      "EventComment": "이번 영상이 인기 급상승 동영상 1등에 들었습니다. 모두가 저희 방송을 좋아하네요!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "EventKey": "negative_debuff_",
+      "EventComment": "최근 저희 방송이 재미없다는 댓글들이 많이 보이고 있습니다. 조금 더 분발해야 할 거 같습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_debuff_duplicationplanning",
+      "EventComment": "팬들이 같은 주제의 영상만 올라온다고 질려한다는 반응이 많습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_debuff_longtermnoplanning",
+      "EventComment": "너무 오랫동안 영상이 올라오지 않아서 그런지 팬들이 떠나가고 있습니다!! 빠른 시일내에 영상을 올려야 하지 않을까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_debuff_declineinterest",
+      "EventComment": "@' 컨텐츠에 대한 흥미가 감소했다는 기사가 나왔습니다. 해당 컨텐츠는 피해서 제작하도록 하죠.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_debuff_lowrating",
+      "EventComment": "이번 방송이 재미가 없어서 싫어요를 누르는 팬들이 많아졌습니다. 슬프지만, 시청자들은 냉정하네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_ine",
+      "EventComment": "저번 방송때 너무 무리했나 봅니다. 아이네님이 흐물흐물해지고 말았습니다! / 다음 컨텐츠에 아이네님 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_jingburger",
+      "EventComment": "저번 노래뱅때 신나서 많이 부르셔서 그런지 징버거님의 성대에 손상이 갔습니다. 당분간은 휴식을 취해야 합니다. / 다음 컨텐츠에 징버거님 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_lilpa",
+      "EventComment": "릴파님이 방청소를 하다 예전에 코스프레를 한 사진을 발견했습니다. 부끄러워서 방송을 키지 못하겠다네요. / 다음 컨텐츠에 릴파님 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_jururu",
+      "EventComment": "저번 방송때 너무 무리했나 봅니다. 주르르님이 슬라임으로 변했습니다! / 다음 컨텐츠에 주르르님 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_gosegu",
+      "EventComment": "고세구님이 목에 부담이 가는 발성을 자주 사용해서 성대결절이 발생했습니다. 의사가 한동안 목을 아끼라 조언했습니다. / 다음 컨텐츠에 고세구 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_viichan",
+      "EventComment": "챤이봤에 비챤님이 오른손의 흑염룡을 봉인하는 영상이 유출되었습니다. 비챤님이 부끄러워서 한동안 방송을 못하겠다네요. / 다음 컨텐츠에 비챤 참여 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_concert",
+      "EventComment": "인기 아이돌 버튜버인 육광천의 콘서트가 성공적으로 마무리 되었습니다. 한동안 이들과 경쟁하는 것은 피하는게 좋겠습니다. / 다음 컨텐츠에 '콘서트' 키워드 사용 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_song",
+      "EventComment": "어둠의 프로듀서가 기획한 노래 '스키'가 발표됐습니다. 사람들은 충격에 빠져 어떤 영상을 봐도 '스키'가 생각난다고 하네요. / 다음 컨텐츠에 '노래' 키워드 사용 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_animal",
+      "EventComment": "사무실 근처에 비둘기 두마리가 너무 신경쓰입니다. 이름이 띨띨이와 빵빵이였나..? 깔깔이와 상상이였던거 같기도 하고… / 다음 컨텐츠에 '동물' 키워드 사용 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_lol",
+      "EventComment": "최근 롤 유튜버들을 대상으로 디도스가 발생하고 있습니다. 해당 게임으로 방송하는건 한동안 자제하는게 좋겠네요. / 다음 컨텐츠에 ' 리그 오브 레전드' 키워드 사용 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_gwanggo",
+      "EventComment": "한동안 팬들의 기대컨이 박살이 나버려 홍보를 하면 역효과가 나고 있습니다. 다음 컨텐츠는 광고 없이 진행하죠. / 다음 컨텐츠 제작중에 '광고' 행동 사용불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "negative_planninglimit_integratedgame",
+      "EventComment": "저번에 했던 종합게임이 너무 재미가 없어 시청자들 중 절반이 잠들었습니다. / 다음 컨텐츠에 '종합게임' 키워드 사용 불가",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {},
+    {},
+    {},
+    {
+      "EventKey": "award_event_1",
+      "EventComment": "올해의 방송상 시상이 곧 시작된다고 합니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_event_2",
+      "EventComment": "왁엔터는 올해 \"N\"개가 후보에 올랐다고 합니다. 수상할 수 있을지 기대되네요!!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_event_3",
+      "EventComment": "시상식장으로 가볼까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_1",
+      "EventComment": "여러분 안녕하십니까.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_2",
+      "EventComment": "올해에도 정말 재미있는 방송들이 많아서 선정에 어려움을 겪었습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_3",
+      "EventComment": "먼저, 가장 디자인이 아름다운 방송에 주어지는 '영상미 상' 입니다…!!",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_4",
+      "EventComment": "축하합니다!! \"@1\"",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_5",
+      "EventComment": "이어서 사운드가 가장 훌륭했던 영상으로..",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventKey": "award_comment_6",
+      "EventComment": "\"@2\"!! 축하합니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
     }
   ],
   "GameHelpInfo": [
@@ -632,1171 +3106,6 @@
       "Comment": "개추 눌렀습니다!!!",
       "Point": 4,
       "CafeRank": "느그자"
-    }
-  ],
-  "Event": [
-    {
-      "EventKey": "tutorial_main_1",
-      "EventComment": "안녕하세요! 게임 진행을 도와드릴 비서 뢴트게늄이라고 합니다.",
-      "Achivement": "왁엔터 설립",
-      "Progressed": "X",
-      "Note": "초회 한정",
-      "IsRepeat": "X"
-    },
-    {
-      "EventKey": "tutorial_main_2",
-      "EventComment": "이세계아이돌에 합격한 6명의 아이돌을 관리 및 방송을 기획하여 왁엔터를 성장시켜야 합니다.",
-      "Achivement": "-",
-      "Progressed": "X",
-      "Note": "초회 한정",
-      "IsRepeat": "X"
-    },
-    {
-      "EventKey": "tutorial_main_3",
-      "EventComment": "인기 있는 방송을 제작하여 방송대상을 받기위해 노력해봅시다!",
-      "Progressed": "X",
-      "Note": "방송기획/멤버확인",
-      "IsRepeat": "X"
-    },
-    {
-      "EventKey": "tutorial_main_4",
-      "EventComment": "진행에 어려움이 있으면 정보탭에 게임정보를 누르시면 도움이 됩니다",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "toturial_main_5",
-      "EventComment": "메뉴-방송기획으로 방송제작을 해봅시다 / 메뉴 - 고용으로 작업자 모집을 해봅시다.",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_planning_1",
-      "EventComment": "좋은 장비를 사용할 수록 제작비가 오르게 됩니다.",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_planning_2",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_planningResult_1",
-      "EventComment": "기본적으로 장비 + 방송 이름으로 제목이 결정됩니다. 이름을 누를 시 변경이 가능하고, 최대 20자까지 가능합니다.",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_result_1",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_waktube_1",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "tutorial_productor_1",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "positive_rank1Mail",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "positive_rank2Mail",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "positive_rank3Mail",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "positive_rank4Mail",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "positive_commercialMail",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "negative_rivalDuplicatedBroadcast",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "negative_duplicatedBrodacastPlan",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "negative_longTimeNoBroadcast",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "negative_mailSpam",
-      "Progressed": "X"
-    },
-    {
-      "EventKey": "normal_broadcastAward",
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    },
-    {
-      "Progressed": "X"
-    }
-  ],
-  "ProductorInfo": [
-    {
-      "Name": "아이네",
-      "IsFieldCharacter": "O",
-      "CharacterType": "Planner",
-      "Info": "이세계아이돌 첫째 멤버",
-      "ProcessCompleteComment": "이정도면 괜찮지 않을까요?"
-    },
-    {
-      "Name": "징버거",
-      "IsFieldCharacter": "O",
-      "CharacterType": "GraphicDesigner",
-      "Info": "이세계아이돌 둘째 멤버",
-      "ProcessCompleteComment": "모시깽 했습니다~"
-    },
-    {
-      "Name": "릴파",
-      "IsFieldCharacter": "O",
-      "CharacterType": "SoundDesigner",
-      "Info": "이세계아이돌 셋째 멤버"
-    },
-    {
-      "Name": "주르르",
-      "IsFieldCharacter": "O",
-      "CharacterType": "Marketer",
-      "Info": "이세계아이돌 넷째 멤버"
-    },
-    {
-      "Name": "고세구",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "Info": "이세계아이돌 다섯째 멤버"
-    },
-    {
-      "Name": "비챤",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "Info": "이세계아이돌 여섯째 멤버"
-    },
-    {
-      "Name": "둘기",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 30,
-      "DesignerStat": 5,
-      "ComposerStat": 6,
-      "MarketerStat": 7,
-      "PlannerLevel": 1,
-      "DesignerLevel": 0,
-      "ComposerLevel": 0,
-      "MarketerLevel": 0,
-      "MaxStemina": 30,
-      "Info": "아이네의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "똥강아지",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 5,
-      "DesignerStat": 30,
-      "ComposerStat": 6,
-      "MarketerStat": 7,
-      "PlannerLevel": 0,
-      "DesignerLevel": 1,
-      "ComposerLevel": 0,
-      "MarketerLevel": 0,
-      "MaxStemina": 30,
-      "Info": "징버거의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "박쥐",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 5,
-      "DesignerStat": 4,
-      "ComposerStat": 30,
-      "MarketerStat": 3,
-      "PlannerLevel": 0,
-      "DesignerLevel": 0,
-      "ComposerLevel": 1,
-      "MarketerLevel": 0,
-      "MaxStemina": 40,
-      "Info": "릴파의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "주폭도",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 5,
-      "DesignerStat": 6,
-      "ComposerStat": 4,
-      "MarketerStat": 30,
-      "PlannerLevel": 0,
-      "DesignerLevel": 0,
-      "ComposerLevel": 0,
-      "MarketerLevel": 1,
-      "MaxStemina": 35,
-      "Info": "주르르의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "균냥이",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 30,
-      "DesignerStat": 5,
-      "ComposerStat": 4,
-      "MarketerStat": 6,
-      "PlannerLevel": 1,
-      "DesignerLevel": 0,
-      "ComposerLevel": 0,
-      "MarketerLevel": 0,
-      "MaxStemina": 35,
-      "Info": "고세구의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "라니",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 300,
-      "EmployPrice": 500,
-      "PlannerStat": 3,
-      "DesignerStat": 30,
-      "ComposerStat": 5,
-      "MarketerStat": 4,
-      "PlannerLevel": 0,
-      "DesignerLevel": 1,
-      "ComposerLevel": 0,
-      "MarketerLevel": 0,
-      "MaxStemina": 30,
-      "Info": "비챤의 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "매형",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 9,
-      "DesignerStat": 7,
-      "ComposerStat": 21,
-      "MarketerStat": 50,
-      "PlannerLevel": 0,
-      "DesignerLevel": 0,
-      "ComposerLevel": 1,
-      "MarketerLevel": 2,
-      "MaxStemina": 45,
-      "Info": "아이네의 매니저 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "거머리",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 51,
-      "DesignerStat": 22,
-      "ComposerStat": 8,
-      "MarketerStat": 10,
-      "PlannerLevel": 2,
-      "DesignerLevel": 1,
-      "ComposerLevel": 0,
-      "MarketerLevel": 0,
-      "MaxStemina": 45,
-      "Info": "징버거의 친오빠 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "배트맨",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 25,
-      "DesignerStat": 10,
-      "ComposerStat": 11,
-      "MarketerStat": 49,
-      "PlannerLevel": 1,
-      "DesignerLevel": 0,
-      "ComposerLevel": 0,
-      "MarketerLevel": 2,
-      "MaxStemina": 45,
-      "Info": "릴파의 매니저 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "싹싹김치",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 10,
-      "DesignerStat": 53,
-      "ComposerStat": 23,
-      "MarketerStat": 5,
-      "PlannerLevel": 0,
-      "DesignerLevel": 2,
-      "ComposerLevel": 1,
-      "MarketerLevel": 0,
-      "MaxStemina": 40,
-      "Info": "주르르의 친오빠",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "균냥이",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 5,
-      "DesignerStat": 8,
-      "ComposerStat": 55,
-      "MarketerStat": 19,
-      "PlannerLevel": 0,
-      "DesignerLevel": 0,
-      "ComposerLevel": 2,
-      "MarketerLevel": 1,
-      "MaxStemina": 50,
-      "Info": "고세구의 다른 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "밤비",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 700,
-      "EmployPrice": 1000,
-      "PlannerStat": 58,
-      "DesignerStat": 11,
-      "ComposerStat": 7,
-      "MarketerStat": 30,
-      "PlannerLevel": 2,
-      "DesignerLevel": 0,
-      "ComposerLevel": 0,
-      "MarketerLevel": 1,
-      "MaxStemina": 45,
-      "Info": "비챤의 다른 팬덤 이름",
-      "ProcessCompleteComment": "킹아"
-    },
-    {
-      "Name": "사랑전도사 젠투",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 90,
-      "DesignerStat": 51,
-      "ComposerStat": 30,
-      "MarketerStat": 42,
-      "PlannerLevel": 3,
-      "DesignerLevel": 1,
-      "ComposerLevel": 0,
-      "MarketerLevel": 1,
-      "MaxStemina": 70,
-      "Info": "하현의 8",
-      "ProcessCompleteComment": "정말 사랑스러운 결과군요"
-    },
-    {
-      "Name": "닌닌",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 23,
-      "DesignerStat": 63,
-      "ComposerStat": 92,
-      "MarketerStat": 50,
-      "PlannerLevel": 0,
-      "DesignerLevel": 2,
-      "ComposerLevel": 3,
-      "MarketerLevel": 1,
-      "MaxStemina": 70,
-      "Info": "하현의 6",
-      "ProcessCompleteComment": "완성했다."
-    },
-    {
-      "Name": "불곰",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 67,
-      "DesignerStat": 22,
-      "ComposerStat": 46,
-      "MarketerStat": 93,
-      "PlannerLevel": 2,
-      "DesignerLevel": 0,
-      "ComposerLevel": 1,
-      "MarketerLevel": 3,
-      "MaxStemina": 75,
-      "Info": "하현의 5",
-      "ProcessCompleteComment": "아가씨를 위해서라면.."
-    },
-    {
-      "Name": "수셈이",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 93,
-      "DesignerStat": 43,
-      "ComposerStat": 46,
-      "MarketerStat": 49,
-      "PlannerLevel": 3,
-      "DesignerLevel": 1,
-      "ComposerLevel": 1,
-      "MarketerLevel": 1,
-      "MaxStemina": 75,
-      "Info": "하현의 4",
-      "ProcessCompleteComment": "다 끝냈습니ㄷ..."
-    },
-    {
-      "Name": "단답벌레",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 94,
-      "DesignerStat": 50,
-      "ComposerStat": 41,
-      "MarketerStat": 67,
-      "PlannerLevel": 3,
-      "DesignerLevel": 1,
-      "ComposerLevel": 1,
-      "MarketerLevel": 2,
-      "MaxStemina": 75,
-      "Info": "하현의 3",
-      "ProcessCompleteComment": "끝."
-    },
-    {
-      "Name": "티파티0421",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 2500,
-      "EmployPrice": 5000,
-      "PlannerStat": 61,
-      "DesignerStat": 45,
-      "ComposerStat": 91,
-      "MarketerStat": 39,
-      "PlannerLevel": 2,
-      "DesignerLevel": 1,
-      "ComposerLevel": 3,
-      "MarketerLevel": 1,
-      "MaxStemina": 75,
-      "Info": "하현의 2",
-      "ProcessCompleteComment": "와#ㄴ성@$입24^니&다!~"
-    },
-    {
-      "Name": "김치만두번영택사스가",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 71,
-      "DesignerStat": 95,
-      "ComposerStat": 89,
-      "MarketerStat": 43,
-      "PlannerLevel": 2,
-      "DesignerLevel": 3,
-      "ComposerLevel": 3,
-      "MarketerLevel": 1,
-      "MaxStemina": 80,
-      "Info": "중현의 10",
-      "ProcessCompleteComment": "오니~"
-    },
-    {
-      "Name": "풍신",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 105,
-      "DesignerStat": 69,
-      "ComposerStat": 55,
-      "MarketerStat": 87,
-      "PlannerLevel": 3,
-      "DesignerLevel": 2,
-      "ComposerLevel": 1,
-      "MarketerLevel": 3,
-      "MaxStemina": 80,
-      "Info": "중현의 8",
-      "ProcessCompleteComment": "이정도는 아무것도 아니지요."
-    },
-    {
-      "Name": "철도왕 길버트",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 130,
-      "DesignerStat": 68,
-      "ComposerStat": 70,
-      "MarketerStat": 53,
-      "PlannerLevel": 4,
-      "DesignerLevel": 2,
-      "ComposerLevel": 2,
-      "MarketerLevel": 1,
-      "MaxStemina": 80,
-      "Info": "중현의 7",
-      "ProcessCompleteComment": "Wunderbar~ 완성했습니다!"
-    },
-    {
-      "Name": "바이터",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 75,
-      "DesignerStat": 43,
-      "ComposerStat": 82,
-      "MarketerStat": 123,
-      "PlannerLevel": 2,
-      "DesignerLevel": 1,
-      "ComposerLevel": 2,
-      "MarketerLevel": 4,
-      "MaxStemina": 80,
-      "Info": "중현의 6",
-      "ProcessCompleteComment": "이런이런, 스바라시 하군요"
-    },
-    {
-      "Name": "독고혜지",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 87,
-      "DesignerStat": 35,
-      "ComposerStat": 121,
-      "MarketerStat": 84,
-      "PlannerLevel": 3,
-      "DesignerLevel": 0,
-      "ComposerLevel": 4,
-      "MarketerLevel": 3,
-      "MaxStemina": 90,
-      "Info": "중현의 5",
-      "ProcessCompleteComment": "혜디, 나이스!"
-    },
-    {
-      "Name": "메카 맹기산",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 60,
-      "DesignerStat": 88,
-      "ComposerStat": 89,
-      "MarketerStat": 95,
-      "PlannerLevel": 2,
-      "DesignerLevel": 3,
-      "ComposerLevel": 3,
-      "MarketerLevel": 3,
-      "MaxStemina": 90,
-      "Info": "중현의 4",
-      "ProcessCompleteComment": "바로 끝내버렷잖냐~"
-    },
-    {
-      "Name": "곽춘식",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 111,
-      "DesignerStat": 57,
-      "ComposerStat": 87,
-      "MarketerStat": 81,
-      "PlannerLevel": 4,
-      "DesignerLevel": 1,
-      "ComposerLevel": 3,
-      "MarketerLevel": 3,
-      "MaxStemina": 90,
-      "Info": "중현의 3",
-      "ProcessCompleteComment": "캬~ 이거지~!"
-    },
-    {
-      "Name": "버터우스 3세",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 82,
-      "DesignerStat": 115,
-      "ComposerStat": 88,
-      "MarketerStat": 53,
-      "PlannerLevel": 3,
-      "DesignerLevel": 4,
-      "ComposerLevel": 3,
-      "MarketerLevel": 2,
-      "MaxStemina": 90,
-      "Info": "중현의 2",
-      "ProcessCompleteComment": "플로렌스에서는 손쉬운 일이오"
-    },
-    {
-      "Name": "성기사 샬롯",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 5000,
-      "EmployPrice": 10000,
-      "PlannerStat": 70,
-      "DesignerStat": 72,
-      "ComposerStat": 121,
-      "MarketerStat": 84,
-      "PlannerLevel": 2,
-      "DesignerLevel": 2,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 90,
-      "Info": "중현의 1",
-      "ProcessCompleteComment": "아주 굿이네 굿"
-    },
-    {
-      "Name": "진희",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 241,
-      "DesignerStat": 121,
-      "ComposerStat": 77,
-      "MarketerStat": 71,
-      "PlannerLevel": 5,
-      "DesignerLevel": 3,
-      "ComposerLevel": 2,
-      "MarketerLevel": 2,
-      "MaxStemina": 100,
-      "Info": "상현의 10",
-      "ProcessCompleteComment": "찰 만트렀타고 생칵해요"
-    },
-    {
-      "Name": "캡틴 설리반",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 83,
-      "DesignerStat": 127,
-      "ComposerStat": 225,
-      "MarketerStat": 78,
-      "PlannerLevel": 2,
-      "DesignerLevel": 3,
-      "ComposerLevel": 5,
-      "MarketerLevel": 2,
-      "MaxStemina": 100,
-      "Info": "상현의 9",
-      "ProcessCompleteComment": "아호이!"
-    },
-    {
-      "Name": "이덕수 할아바이",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 127,
-      "DesignerStat": 83,
-      "ComposerStat": 81,
-      "MarketerStat": 235,
-      "PlannerLevel": 3,
-      "DesignerLevel": 2,
-      "ComposerLevel": 2,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "상현의 8",
-      "ProcessCompleteComment": "늙으니 이런것도 힘들구만."
-    },
-    {
-      "Name": "시리안 레인",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 97,
-      "DesignerStat": 105,
-      "ComposerStat": 231,
-      "MarketerStat": 98,
-      "PlannerLevel": 3,
-      "DesignerLevel": 3,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "상현의 7",
-      "ProcessCompleteComment": "완성했습니다."
-    },
-    {
-      "Name": "권민",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 243,
-      "DesignerStat": 152,
-      "ComposerStat": 77,
-      "MarketerStat": 93,
-      "PlannerLevel": 5,
-      "DesignerLevel": 4,
-      "ComposerLevel": 2,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "상현의 6",
-      "ProcessCompleteComment": "최선을 다했듭니다."
-    },
-    {
-      "Name": "도파민 박사",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 151,
-      "DesignerStat": 237,
-      "ComposerStat": 47,
-      "MarketerStat": 138,
-      "PlannerLevel": 4,
-      "DesignerLevel": 5,
-      "ComposerLevel": 1,
-      "MarketerLevel": 4,
-      "MaxStemina": 100,
-      "Info": "상현의 5",
-      "ProcessCompleteComment": "ㅢ..."
-    },
-    {
-      "Name": "미미짱짱세용",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 243,
-      "DesignerStat": 116,
-      "ComposerStat": 134,
-      "MarketerStat": 95,
-      "PlannerLevel": 5,
-      "DesignerLevel": 3,
-      "ComposerLevel": 4,
-      "MarketerLevel": 2,
-      "MaxStemina": 100,
-      "Info": "상현의 4",
-      "ProcessCompleteComment": "최선을 다했어용~"
-    },
-    {
-      "Name": "부정형인간",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 251,
-      "DesignerStat": 164,
-      "ComposerStat": 51,
-      "MarketerStat": 149,
-      "PlannerLevel": 5,
-      "DesignerLevel": 4,
-      "ComposerLevel": 1,
-      "MarketerLevel": 4,
-      "MaxStemina": 100,
-      "Info": "상현의 3",
-      "ProcessCompleteComment": "시청자가 안좋아하면 어쩌죠..?"
-    },
-    {
-      "Name": "왁파고",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 172,
-      "DesignerStat": 77,
-      "ComposerStat": 101,
-      "MarketerStat": 267,
-      "PlannerLevel": 4,
-      "DesignerLevel": 2,
-      "ComposerLevel": 3,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "상현의 2",
-      "ProcessCompleteComment": "완료. 했습니다"
-    },
-    {
-      "Name": "카르나르 융터르",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 10000,
-      "EmployPrice": 20000,
-      "PlannerStat": 198,
-      "DesignerStat": 243,
-      "ComposerStat": 95,
-      "MarketerStat": 88,
-      "PlannerLevel": 4,
-      "DesignerLevel": 5,
-      "ComposerLevel": 3,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "상현의 1",
-      "ProcessCompleteComment": "무의식이 이끄는대로 했습니다."
-    },
-    {
-      "Name": "켈리칼리 데이비슨",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 68,
-      "DesignerStat": 116,
-      "ComposerStat": 231,
-      "MarketerStat": 255,
-      "PlannerLevel": 2,
-      "DesignerLevel": 3,
-      "ComposerLevel": 5,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "육광천의 6",
-      "ProcessCompleteComment": "아무나 할 수 있는게 아니라구"
-    },
-    {
-      "Name": "아마데우스최",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 223,
-      "DesignerStat": 88,
-      "ComposerStat": 271,
-      "MarketerStat": 126,
-      "PlannerLevel": 5,
-      "DesignerLevel": 2,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "육광천의 5",
-      "ProcessCompleteComment": "조금 플러스~"
-    },
-    {
-      "Name": "비밀소녀",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 261,
-      "DesignerStat": 153,
-      "ComposerStat": 221,
-      "MarketerStat": 97,
-      "PlannerLevel": 5,
-      "DesignerLevel": 4,
-      "ComposerLevel": 5,
-      "MarketerLevel": 2,
-      "MaxStemina": 100,
-      "Info": "육광천의 4",
-      "ProcessCompleteComment": "이 정도면 되지 않을까용~?"
-    },
-    {
-      "Name": "데스해머쵸로키",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 253,
-      "DesignerStat": 244,
-      "ComposerStat": 124,
-      "MarketerStat": 119,
-      "PlannerLevel": 5,
-      "DesignerLevel": 5,
-      "ComposerLevel": 3,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "육광천의 3",
-      "ProcessCompleteComment": "바로 박살내고 왔다~"
-    },
-    {
-      "Name": "비즈니스킴",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 179,
-      "DesignerStat": 184,
-      "ComposerStat": 268,
-      "MarketerStat": 121,
-      "PlannerLevel": 4,
-      "DesignerLevel": 4,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "육광천의 2",
-      "ProcessCompleteComment": "레이디를 위한 작품입니다."
-    },
-    {
-      "Name": "소피아",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "WorkPrice": 15000,
-      "EmployPrice": 30000,
-      "PlannerStat": 281,
-      "DesignerStat": 178,
-      "ComposerStat": 191,
-      "MarketerStat": 153,
-      "PlannerLevel": 5,
-      "DesignerLevel": 4,
-      "ComposerLevel": 4,
-      "MarketerLevel": 4,
-      "MaxStemina": 100,
-      "Info": "육광천의 1",
-      "ProcessCompleteComment": "진심으로 상대했습니다."
-    },
-    {
-      "Name": "히키킹",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "WorkPrice": 17500,
-      "EmployPrice": 35000,
-      "PlannerStat": 182,
-      "DesignerStat": 187,
-      "ComposerStat": 164,
-      "MarketerStat": 291,
-      "PlannerLevel": 4,
-      "DesignerLevel": 4,
-      "ComposerLevel": 4,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "사황의 4",
-      "ProcessCompleteComment": "쟈 와루도!"
-    },
-    {
-      "Name": "빅토리",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "WorkPrice": 20000,
-      "EmployPrice": 40000,
-      "PlannerStat": 191,
-      "DesignerStat": 287,
-      "ComposerStat": 154,
-      "MarketerStat": 266,
-      "PlannerLevel": 4,
-      "DesignerLevel": 5,
-      "ComposerLevel": 4,
-      "MarketerLevel": 5,
-      "MaxStemina": 120,
-      "Info": "사황의 3",
-      "ProcessCompleteComment": "빅토리~~"
-    },
-    {
-      "Name": "해루석",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "WorkPrice": 25000,
-      "EmployPrice": 50000,
-      "PlannerStat": 300,
-      "DesignerStat": 300,
-      "ComposerStat": 300,
-      "MarketerStat": 300,
-      "PlannerLevel": 5,
-      "DesignerLevel": 5,
-      "ComposerLevel": 5,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "사황의 1",
-      "ProcessCompleteComment": "아, 오셨군요."
-    },
-    {
-      "Name": "햄이네",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "EmployPrice": 158,
-      "PlannerStat": 158,
-      "DesignerStat": 158,
-      "ComposerStat": 158,
-      "MarketerStat": 158,
-      "PlannerLevel": 4,
-      "DesignerLevel": 4,
-      "ComposerLevel": 4,
-      "MarketerLevel": 4,
-      "MaxStemina": 100,
-      "Info": "아이네의 부캐",
-      "ProcessCompleteComment": "완료했다네~"
-    },
-    {
-      "Name": "밥버거",
-      "IsFieldCharacter": "X",
-      "CharacterType": "GraphicDesigner",
-      "EmployPrice": 1008,
-      "PlannerStat": 63,
-      "DesignerStat": 282,
-      "ComposerStat": 160,
-      "MarketerStat": 92,
-      "PlannerLevel": 2,
-      "DesignerLevel": 5,
-      "ComposerLevel": 4,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "징버거의 부캐",
-      "ProcessCompleteComment": "어때요, 참 쉽죠~?"
-    },
-    {
-      "Name": "띨파",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer",
-      "EmployPrice": 700,
-      "PlannerStat": 77,
-      "DesignerStat": 77,
-      "ComposerStat": 177,
-      "MarketerStat": 277,
-      "PlannerLevel": 3,
-      "DesignerLevel": 3,
-      "ComposerLevel": 4,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "릴파의 부캐",
-      "ProcessCompleteComment": "다 완료했다고. 엣헴!"
-    },
-    {
-      "Name": "귀족희",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "EmployPrice": 610,
-      "PlannerStat": 91,
-      "DesignerStat": 162,
-      "ComposerStat": 292,
-      "MarketerStat": 91,
-      "PlannerLevel": 3,
-      "DesignerLevel": 4,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "주르르의 부캐",
-      "ProcessCompleteComment": "오호호~ 식은죽 먹기였사와요"
-    },
-    {
-      "Name": "BJ팡이",
-      "IsFieldCharacter": "X",
-      "CharacterType": "Planner",
-      "EmployPrice": 539,
-      "PlannerStat": 300,
-      "DesignerStat": 60,
-      "ComposerStat": 60,
-      "MarketerStat": 300,
-      "PlannerLevel": 5,
-      "DesignerLevel": 2,
-      "ComposerLevel": 2,
-      "MarketerLevel": 5,
-      "MaxStemina": 100,
-      "Info": "고세구의 부캐",
-      "ProcessCompleteComment": "어 누나야~"
-    },
-    {
-      "Name": "망냥냥",
-      "IsFieldCharacter": "X",
-      "CharacterType": "SoundDesigner",
-      "EmployPrice": 2000,
-      "PlannerStat": 116,
-      "DesignerStat": 116,
-      "ComposerStat": 282,
-      "MarketerStat": 116,
-      "PlannerLevel": 3,
-      "DesignerLevel": 3,
-      "ComposerLevel": 5,
-      "MarketerLevel": 3,
-      "MaxStemina": 100,
-      "Info": "비챤의 부캐",
-      "ProcessCompleteComment": "이몸이 못하는 것은 없느니라!!"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
-    },
-    {
-      "IsFieldCharacter": "X",
-      "CharacterType": "Marketer"
     }
   ],
   "ResourcesTable": [
@@ -2127,8 +3436,8 @@
       "InteractiveAniID": 6003006
     },
     {
-      "Key": "Character_Productor_MaeHyeong",
-      "Info": "아이네의 매니저 이름",
+      "Key": "Character_Productor_Panchi",
+      "Info": "우왁굳의 팬덤 이름",
       "ID": 3007,
       "SpriteID": 103007,
       "SitFrontID": 203007,
@@ -2146,8 +3455,8 @@
       "InteractiveAniID": 6003007
     },
     {
-      "Key": "Character_Productor_Geomeori",
-      "Info": "징버거의 친오빠 이름",
+      "Key": "Character_Productor_MaeHyeong",
+      "Info": "아이네의 매니저 이름",
       "ID": 3008,
       "SpriteID": 103008,
       "SitFrontID": 203008,
@@ -2165,8 +3474,8 @@
       "InteractiveAniID": 6003008
     },
     {
-      "Key": "Character_Productor_Batman",
-      "Info": "릴파의 매니저 이름",
+      "Key": "Character_Productor_Geomeori",
+      "Info": "징버거의 친오빠 이름",
       "ID": 3009,
       "SpriteID": 103009,
       "SitFrontID": 203009,
@@ -2184,8 +3493,8 @@
       "InteractiveAniID": 6003009
     },
     {
-      "Key": "Character_Productor_SakSakKimchi",
-      "Info": "주르르의 친오빠",
+      "Key": "Character_Productor_Batman",
+      "Info": "릴파의 매니저 이름",
       "ID": 3010,
       "SpriteID": 103010,
       "SitFrontID": 203010,
@@ -2203,8 +3512,8 @@
       "InteractiveAniID": 6003010
     },
     {
-      "Key": "Character_Productor_GyunNyangI1",
-      "Info": "고세구의 다른 팬덤 이름",
+      "Key": "Character_Productor_SakSakKimchi",
+      "Info": "주르르의 친오빠",
       "ID": 3011,
       "SpriteID": 103011,
       "SitFrontID": 203011,
@@ -2222,8 +3531,8 @@
       "InteractiveAniID": 6003011
     },
     {
-      "Key": "Character_Productor_Bambi",
-      "Info": "비챤의 다른 팬덤 이름",
+      "Key": "Character_Productor_GwakChunSik",
+      "Info": "하현의 8",
       "ID": 3012,
       "SpriteID": 103012,
       "SitFrontID": 203012,
@@ -2241,8 +3550,8 @@
       "InteractiveAniID": 6003012
     },
     {
-      "Key": "Character_Productor_GwakChunSik",
-      "Info": "하현의 8",
+      "Key": "Character_Productor_Bulgom",
+      "Info": "하현의 6",
       "ID": 3013,
       "SpriteID": 103013,
       "SitFrontID": 203013,
@@ -2260,8 +3569,8 @@
       "InteractiveAniID": 6003013
     },
     {
-      "Key": "Character_Productor_Bulgom",
-      "Info": "하현의 6",
+      "Key": "Character_Productor_LoveMissionaryJentoo",
+      "Info": "하현의 5",
       "ID": 3014,
       "SpriteID": 103014,
       "SitFrontID": 203014,
@@ -2279,8 +3588,8 @@
       "InteractiveAniID": 6003014
     },
     {
-      "Key": "Character_Productor_LoveMissionaryJentoo",
-      "Info": "하현의 5",
+      "Key": "Character_Productor_Kritz",
+      "Info": "하현의 4",
       "ID": 3015,
       "SpriteID": 103015,
       "SitFrontID": 203015,
@@ -2298,8 +3607,8 @@
       "InteractiveAniID": 6003015
     },
     {
-      "Key": "Character_Productor_Kritz",
-      "Info": "하현의 4",
+      "Key": "Character_Productor_ButterusIII",
+      "Info": "하현의 3",
       "ID": 3016,
       "SpriteID": 103016,
       "SitFrontID": 203016,
@@ -2317,8 +3626,8 @@
       "InteractiveAniID": 6003016
     },
     {
-      "Key": "Character_Productor_ButterusIII",
-      "Info": "하현의 3",
+      "Key": "Character_Productor_BujungMan",
+      "Info": "하현의 2",
       "ID": 3017,
       "SpriteID": 103017,
       "SitFrontID": 203017,
@@ -2336,8 +3645,8 @@
       "InteractiveAniID": 6003017
     },
     {
-      "Key": "Character_Productor_BujungMan",
-      "Info": "하현의 2",
+      "Key": "Character_Productor_Hodd",
+      "Info": "중현의 10",
       "ID": 3018,
       "SpriteID": 103018,
       "SitFrontID": 203018,
@@ -2355,8 +3664,8 @@
       "InteractiveAniID": 6003018
     },
     {
-      "Key": "Character_Productor_Hodd",
-      "Info": "중현의 10",
+      "Key": "Character_Productor_IceKaekki",
+      "Info": "중현의 8",
       "ID": 3019,
       "SpriteID": 103019,
       "SitFrontID": 203019,
@@ -2374,8 +3683,8 @@
       "InteractiveAniID": 6003019
     },
     {
-      "Key": "Character_Productor_IceKaekki",
-      "Info": "중현의 8",
+      "Key": "Character_Productor_MechMenggisan",
+      "Info": "중현의 7",
       "ID": 3020,
       "SpriteID": 103020,
       "SitFrontID": 203020,
@@ -2393,8 +3702,8 @@
       "InteractiveAniID": 6003020
     },
     {
-      "Key": "Character_Productor_MechMenggisan",
-      "Info": "중현의 7",
+      "Key": "Character_Productor_PungSin",
+      "Info": "중현의 6",
       "ID": 3021,
       "SpriteID": 103021,
       "SitFrontID": 203021,
@@ -2412,8 +3721,8 @@
       "InteractiveAniID": 6003021
     },
     {
-      "Key": "Character_Productor_PungSin",
-      "Info": "중현의 6",
+      "Key": "Character_Productor_SuSaemI",
+      "Info": "중현의 5",
       "ID": 3022,
       "SpriteID": 103022,
       "SitFrontID": 203022,
@@ -2431,8 +3740,8 @@
       "InteractiveAniID": 6003022
     },
     {
-      "Key": "Character_Productor_SuSaemI",
-      "Info": "중현의 5",
+      "Key": "Character_Productor_Tiffany",
+      "Info": "중현의 4",
       "ID": 3023,
       "SpriteID": 103023,
       "SitFrontID": 203023,
@@ -2450,8 +3759,8 @@
       "InteractiveAniID": 6003023
     },
     {
-      "Key": "Character_Productor_Tiffany",
-      "Info": "중현의 4",
+      "Key": "Character_Productor_LeeDeokSoo",
+      "Info": "중현의 3",
       "ID": 3024,
       "SpriteID": 103024,
       "SitFrontID": 203024,
@@ -2469,8 +3778,8 @@
       "InteractiveAniID": 6003024
     },
     {
-      "Key": "Character_Productor_LeeDeokSoo",
-      "Info": "중현의 3",
+      "Key": "Character_Productor_MiMiZZangZZang",
+      "Info": "중현의 2",
       "ID": 3025,
       "SpriteID": 103025,
       "SitFrontID": 203025,
@@ -2488,8 +3797,8 @@
       "InteractiveAniID": 6003025
     },
     {
-      "Key": "Character_Productor_MiMiZZangZZang",
-      "Info": "중현의 2",
+      "Key": "Character_Productor_Dandap",
+      "Info": "중현의 1",
       "ID": 3026,
       "SpriteID": 103026,
       "SitFrontID": 203026,
@@ -2507,8 +3816,8 @@
       "InteractiveAniID": 6003026
     },
     {
-      "Key": "Character_Productor_Dandap",
-      "Info": "중현의 1",
+      "Key": "Character_Productor_Gilbert",
+      "Info": "상현의 10",
       "ID": 3027,
       "SpriteID": 103027,
       "SitFrontID": 203027,
@@ -2526,8 +3835,8 @@
       "InteractiveAniID": 6003027
     },
     {
-      "Key": "Character_Productor_Gilbert",
-      "Info": "상현의 10",
+      "Key": "Character_Productor_Shallot",
+      "Info": "상현의 9",
       "ID": 3028,
       "SpriteID": 103028,
       "SitFrontID": 203028,
@@ -2545,8 +3854,8 @@
       "InteractiveAniID": 6003028
     },
     {
-      "Key": "Character_Productor_Shallot",
-      "Info": "상현의 9",
+      "Key": "Character_Productor_CarnarJungtur",
+      "Info": "상현의 8",
       "ID": 3029,
       "SpriteID": 103029,
       "SitFrontID": 203029,
@@ -2564,8 +3873,8 @@
       "InteractiveAniID": 6003029
     },
     {
-      "Key": "Character_Productor_CarnarJungtur",
-      "Info": "상현의 8",
+      "Key": "Character_Productor_KimchiMandoo",
+      "Info": "상현의 7",
       "ID": 3030,
       "SpriteID": 103030,
       "SitFrontID": 203030,
@@ -2583,8 +3892,8 @@
       "InteractiveAniID": 6003030
     },
     {
-      "Key": "Character_Productor_KimchiMandoo",
-      "Info": "상현의 7",
+      "Key": "Character_Productor_Dopamin",
+      "Info": "상현의 6",
       "ID": 3031,
       "SpriteID": 103031,
       "SitFrontID": 203031,
@@ -2602,8 +3911,8 @@
       "InteractiveAniID": 6003031
     },
     {
-      "Key": "Character_Productor_Dopamin",
-      "Info": "상현의 6",
+      "Key": "Character_Productor_DokkoHyeji",
+      "Info": "상현의 5",
       "ID": 3032,
       "SpriteID": 103032,
       "SitFrontID": 203032,
@@ -2621,8 +3930,8 @@
       "InteractiveAniID": 6003032
     },
     {
-      "Key": "Character_Productor_DokkoHyeji",
-      "Info": "상현의 5",
+      "Key": "Character_Productor_Secretto",
+      "Info": "상현의 4",
       "ID": 3033,
       "SpriteID": 103033,
       "SitFrontID": 203033,
@@ -2640,8 +3949,8 @@
       "InteractiveAniID": 6003033
     },
     {
-      "Key": "Character_Productor_Secretto",
-      "Info": "상현의 4",
+      "Key": "Character_Productor_Beiter",
+      "Info": "상현의 3",
       "ID": 3034,
       "SpriteID": 103034,
       "SitFrontID": 203034,
@@ -2659,8 +3968,8 @@
       "InteractiveAniID": 6003034
     },
     {
-      "Key": "Character_Productor_Beiter",
-      "Info": "상현의 3",
+      "Key": "Character_Productor_JinHee",
+      "Info": "상현의 2",
       "ID": 3035,
       "SpriteID": 103035,
       "SitFrontID": 203035,
@@ -2678,8 +3987,8 @@
       "InteractiveAniID": 6003035
     },
     {
-      "Key": "Character_Productor_JinHee",
-      "Info": "상현의 2",
+      "Key": "Character_Productor_CaptainSullivan",
+      "Info": "상현의 1",
       "ID": 3036,
       "SpriteID": 103036,
       "SitFrontID": 203036,
@@ -2697,8 +4006,8 @@
       "InteractiveAniID": 6003036
     },
     {
-      "Key": "Character_Productor_CaptainSullivan",
-      "Info": "상현의 1",
+      "Key": "Character_Productor_SirianRain",
+      "Info": "육광천의 6",
       "ID": 3037,
       "SpriteID": 103037,
       "SitFrontID": 203037,
@@ -2716,8 +4025,8 @@
       "InteractiveAniID": 6003037
     },
     {
-      "Key": "Character_Productor_SirianRain",
-      "Info": "육광천의 6",
+      "Key": "Character_Productor_NinNin",
+      "Info": "육광천의 5",
       "ID": 3038,
       "SpriteID": 103038,
       "SitFrontID": 203038,
@@ -2735,8 +4044,8 @@
       "InteractiveAniID": 6003038
     },
     {
-      "Key": "Character_Productor_NinNin",
-      "Info": "육광천의 5",
+      "Key": "Character_Productor_DeathHammerChouloky",
+      "Info": "육광천의 4",
       "ID": 3039,
       "SpriteID": 103039,
       "SitFrontID": 203039,
@@ -2754,8 +4063,8 @@
       "InteractiveAniID": 6003039
     },
     {
-      "Key": "Character_Productor_DeathHammerChouloky",
-      "Info": "육광천의 4",
+      "Key": "Character_Productor_RUSUK",
+      "Info": "육광천의 3",
       "ID": 3040,
       "SpriteID": 103040,
       "SitFrontID": 203040,
@@ -2773,8 +4082,8 @@
       "InteractiveAniID": 6003040
     },
     {
-      "Key": "Character_Productor_RUSUK",
-      "Info": "육광천의 3",
+      "Key": "Character_Productor_CallyCarlyDavidson",
+      "Info": "육광천의 2",
       "ID": 3041,
       "SpriteID": 103041,
       "SitFrontID": 203041,
@@ -2792,8 +4101,8 @@
       "InteractiveAniID": 6003041
     },
     {
-      "Key": "Character_Productor_CallyCarlyDavidson",
-      "Info": "육광천의 2",
+      "Key": "Character_Productor_BusinessKim",
+      "Info": "육광천의 1",
       "ID": 3042,
       "SpriteID": 103042,
       "SitFrontID": 203042,
@@ -2811,8 +4120,8 @@
       "InteractiveAniID": 6003042
     },
     {
-      "Key": "Character_Productor_BusinessKim",
-      "Info": "육광천의 1",
+      "Key": "Character_Productor_HIkiKing",
+      "Info": "사황의 4",
       "ID": 3043,
       "SpriteID": 103043,
       "SitFrontID": 203043,
@@ -2830,8 +4139,8 @@
       "InteractiveAniID": 6003043
     },
     {
-      "Key": "Character_Productor_HIkiKing",
-      "Info": "사황의 4",
+      "Key": "Character_Productor_Roentgenium",
+      "Info": "사황의 3",
       "ID": 3044,
       "SpriteID": 103044,
       "SitFrontID": 203044,
@@ -2849,8 +4158,8 @@
       "InteractiveAniID": 6003044
     },
     {
-      "Key": "Character_Productor_Roentgenium",
-      "Info": "사황의 3",
+      "Key": "Character_Productor_Victory",
+      "Info": "사황의 1",
       "ID": 3045,
       "SpriteID": 103045,
       "SitFrontID": 203045,
@@ -2868,8 +4177,8 @@
       "InteractiveAniID": 6003045
     },
     {
-      "Key": "Character_Productor_Victory",
-      "Info": "사황의 1",
+      "Key": "Character_Productor_HamIne",
+      "Info": "아이네의 부캐",
       "ID": 3046,
       "SpriteID": 103046,
       "SitFrontID": 203046,
@@ -2887,8 +4196,8 @@
       "InteractiveAniID": 6003046
     },
     {
-      "Key": "Character_Productor_HamIne",
-      "Info": "아이네의 부캐",
+      "Key": "Character_Productor_BobBurger",
+      "Info": "징버거의 부캐",
       "ID": 3047,
       "SpriteID": 103047,
       "SitFrontID": 203047,
@@ -2906,8 +4215,8 @@
       "InteractiveAniID": 6003047
     },
     {
-      "Key": "Character_Productor_BobBurger",
-      "Info": "징버거의 부캐",
+      "Key": "Character_Productor_Ddilpa",
+      "Info": "릴파의 부캐",
       "ID": 3048,
       "SpriteID": 103048,
       "SitFrontID": 203048,
@@ -2925,8 +4234,8 @@
       "InteractiveAniID": 6003048
     },
     {
-      "Key": "Character_Productor_Ddilpa",
-      "Info": "릴파의 부캐",
+      "Key": "Character_Productor_GuiJokHee",
+      "Info": "주르르의 부캐",
       "ID": 3049,
       "SpriteID": 103049,
       "SitFrontID": 203049,
@@ -2944,8 +4253,8 @@
       "InteractiveAniID": 6003049
     },
     {
-      "Key": "Character_Productor_GuiJokHee",
-      "Info": "주르르의 부캐",
+      "Key": "Character_Productor_BJPangE",
+      "Info": "고세구의 부캐",
       "ID": 3050,
       "SpriteID": 103050,
       "SitFrontID": 203050,
@@ -2963,8 +4272,8 @@
       "InteractiveAniID": 6003050
     },
     {
-      "Key": "Character_Productor_BJPangE",
-      "Info": "고세구의 부캐",
+      "Key": "Character_Productor_MangNyangNyang",
+      "Info": "비챤의 부캐",
       "ID": 3051,
       "SpriteID": 103051,
       "SitFrontID": 203051,
@@ -2982,512 +4291,89 @@
       "InteractiveAniID": 6003051
     },
     {
-      "Key": "Character_Productor_MangNyangNyang",
-      "Info": "비챤의 부캐",
-      "ID": 3052,
-      "SpriteID": 103052,
-      "SitFrontID": 203052,
-      "SitBackID": 303052,
-      "SitInteractiveID": 403052,
-      "WalkAniID": 1003052,
-      "FrontWorkAniID": 2003052,
-      "BackWorkAniID": 2103052,
-      "StandingIdleAniID": 3003052,
-      "SitFrontIdleStretchingAniID": 4003052,
-      "SitFrontIdleLookAroundAniID": 4103052,
-      "SitBackIdleStretchingAniID": 4203052,
-      "SitBackIdleLookAroundAniID": 4303052,
-      "SittingAniID": 5003052,
-      "InteractiveAniID": 6003052
-    }
-  ],
-  "CharacterData": [
-    {
-      "Name": "아이네",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 1,
-      "CharacterID": 1001,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "징버거",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 2,
-      "CharacterID": 1002,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "릴파",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 3,
-      "CharacterID": 1003,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "주르르",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 4,
-      "CharacterID": 1004,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "고세구",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 5,
-      "CharacterID": 1005,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "비챤",
-      "IsIsegyeIdol": "O",
-      "IsFieldCharacter": "O",
-      "SeatNumber": 6,
-      "CharacterID": 1006,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "우왁굳",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 2001,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "뢴트게늄",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 2002,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "아이네",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3001,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "징버거",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3002,
-      "RemainFeverCount": 0,
-      "Status": 3
-    },
-    {
-      "Name": "릴파",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3003,
-      "RemainFeverCount": 0,
-      "Status": 1
-    },
-    {
-      "Name": "주르르",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3004,
-      "RemainFeverCount": 0,
-      "Status": 1
-    },
-    {
-      "Name": "고세구",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3005,
-      "RemainFeverCount": 0,
-      "Status": 1
-    },
-    {
-      "Name": "비챤",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3006,
-      "RemainFeverCount": 0,
-      "Status": 1
-    },
-    {
-      "Name": "둘기",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3007,
-      "Status": 1
-    },
-    {
-      "Name": "똥강아지",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3008,
-      "Status": 1
-    },
-    {
-      "Name": "박쥐",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3009,
-      "Status": 1
-    },
-    {
-      "Name": "주폭도",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3010,
-      "Status": 1
-    },
-    {
-      "Name": "균냥이",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3011,
-      "Status": 1
-    },
-    {
-      "Name": "라니",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3012,
-      "Status": 1
-    },
-    {
-      "Name": "매형",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3013,
-      "Status": 1
-    },
-    {
-      "Name": "거머리",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3014,
-      "Status": 1
-    },
-    {
-      "Name": "배트맨",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3015,
-      "Status": 1
-    },
-    {
-      "Name": "싹싹김치",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3016,
-      "Status": 1
-    },
-    {
-      "Name": "균냥이",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3017,
-      "Status": 1
-    },
-    {
-      "Name": "밤비",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3018,
-      "Status": 1
-    },
-    {
-      "Name": "사랑전도사 젠투",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3019,
-      "Status": 1
-    },
-    {
-      "Name": "닌닌",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3020,
-      "Status": 1
-    },
-    {
-      "Name": "불곰",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3021,
-      "Status": 1
-    },
-    {
-      "Name": "수셈이",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3022,
-      "Status": 1
-    },
-    {
-      "Name": "단답벌레",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3023,
-      "Status": 1
-    },
-    {
-      "Name": "티파티0421",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3024,
-      "Status": 1
-    },
-    {
-      "Name": "김치만두번영택사스가",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3025,
-      "Status": 1
-    },
-    {
-      "Name": "풍신",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3026,
-      "Status": 1
-    },
-    {
-      "Name": "철도왕 길버트",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3027,
-      "Status": 1
-    },
-    {
-      "Name": "바이터",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3028,
-      "Status": 1
-    },
-    {
-      "Name": "독고혜지",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3029,
-      "Status": 1
-    },
-    {
-      "Name": "메카 맹기산",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3030
-    },
-    {
-      "Name": "곽춘식",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3031
-    },
-    {
-      "Name": "버터우스 3세",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3032
-    },
-    {
-      "Name": "성기사 샬롯",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3033
-    },
-    {
-      "Name": "진희",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3034
-    },
-    {
-      "Name": "캡틴 설리반",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3035
-    },
-    {
-      "Name": "이덕수 할아바이",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3036
-    },
-    {
-      "Name": "시리안 레인",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3037
-    },
-    {
-      "Name": "권민",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3038
-    },
-    {
-      "Name": "도파민 박사",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3039
-    },
-    {
-      "Name": "미미짱짱세용",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3040
-    },
-    {
-      "Name": "부정형인간",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3041
-    },
-    {
-      "Name": "왁파고",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3042
-    },
-    {
-      "Name": "카르나르 융터르",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3043
-    },
-    {
-      "Name": "켈리칼리 데이비슨",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3044
-    },
-    {
-      "Name": "아마데우스최",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3045
-    },
-    {
-      "Name": "비밀소녀",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3046
-    },
-    {
-      "Name": "데스해머쵸로키",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3047
-    },
-    {
-      "Name": "비즈니스킴",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3048
-    },
-    {
-      "Name": "소피아",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3049
-    },
-    {
-      "Name": "히키킹",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3050
-    },
-    {
-      "Name": "빅토리",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3051
-    },
-    {
-      "Name": "해루석",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X",
-      "CharacterID": 3052
-    },
-    {
-      "Name": "햄이네",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "Name": "밥버거",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "Name": "띨파",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "Name": "귀족희",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "Name": "BJ팡이",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "Name": "망냥냥",
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
-    },
-    {
-      "IsIsegyeIdol": "X",
-      "IsFieldCharacter": "X"
+      "Key": "Character_Productor_",
+      "SpriteID": 100000,
+      "SitFrontID": 200000,
+      "SitBackID": 300000,
+      "SitInteractiveID": 400000,
+      "WalkAniID": 1000000,
+      "FrontWorkAniID": 2000000,
+      "BackWorkAniID": 2100000,
+      "StandingIdleAniID": 3000000,
+      "SitFrontIdleStretchingAniID": 4000000,
+      "SitFrontIdleLookAroundAniID": 4100000,
+      "SitBackIdleStretchingAniID": 4200000,
+      "SitBackIdleLookAroundAniID": 4300000,
+      "SittingAniID": 5000000,
+      "InteractiveAniID": 6000000
+    },
+    {
+      "Key": "Character_Productor_",
+      "SpriteID": 100000,
+      "SitFrontID": 200000,
+      "SitBackID": 300000,
+      "SitInteractiveID": 400000,
+      "WalkAniID": 1000000,
+      "FrontWorkAniID": 2000000,
+      "BackWorkAniID": 2100000,
+      "StandingIdleAniID": 3000000,
+      "SitFrontIdleStretchingAniID": 4000000,
+      "SitFrontIdleLookAroundAniID": 4100000,
+      "SitBackIdleStretchingAniID": 4200000,
+      "SitBackIdleLookAroundAniID": 4300000,
+      "SittingAniID": 5000000,
+      "InteractiveAniID": 6000000
+    },
+    {
+      "Key": "Character_Productor_",
+      "SpriteID": 100000,
+      "SitFrontID": 200000,
+      "SitBackID": 300000,
+      "SitInteractiveID": 400000,
+      "WalkAniID": 1000000,
+      "FrontWorkAniID": 2000000,
+      "BackWorkAniID": 2100000,
+      "StandingIdleAniID": 3000000,
+      "SitFrontIdleStretchingAniID": 4000000,
+      "SitFrontIdleLookAroundAniID": 4100000,
+      "SitBackIdleStretchingAniID": 4200000,
+      "SitBackIdleLookAroundAniID": 4300000,
+      "SittingAniID": 5000000,
+      "InteractiveAniID": 6000000
+    },
+    {
+      "Key": "Character_Productor_",
+      "SpriteID": 100000,
+      "SitFrontID": 200000,
+      "SitBackID": 300000,
+      "SitInteractiveID": 400000,
+      "WalkAniID": 1000000,
+      "FrontWorkAniID": 2000000,
+      "BackWorkAniID": 2100000,
+      "StandingIdleAniID": 3000000,
+      "SitFrontIdleStretchingAniID": 4000000,
+      "SitFrontIdleLookAroundAniID": 4100000,
+      "SitBackIdleStretchingAniID": 4200000,
+      "SitBackIdleLookAroundAniID": 4300000,
+      "SittingAniID": 5000000,
+      "InteractiveAniID": 6000000
+    },
+    {
+      "Key": "Character_Productor_",
+      "SpriteID": 100000,
+      "SitFrontID": 200000,
+      "SitBackID": 300000,
+      "SitInteractiveID": 400000,
+      "WalkAniID": 1000000,
+      "FrontWorkAniID": 2000000,
+      "BackWorkAniID": 2100000,
+      "StandingIdleAniID": 3000000,
+      "SitFrontIdleStretchingAniID": 4000000,
+      "SitFrontIdleLookAroundAniID": 4100000,
+      "SitBackIdleStretchingAniID": 4200000,
+      "SitBackIdleLookAroundAniID": 4300000,
+      "SittingAniID": 5000000,
+      "InteractiveAniID": 6000000
     }
   ],
   "CharacterComment": [
@@ -3715,9 +4601,6 @@
     },
     {
       "ID": 3051
-    },
-    {
-      "ID": 3052
     }
   ]
 }

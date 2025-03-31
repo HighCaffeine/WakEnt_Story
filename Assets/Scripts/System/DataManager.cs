@@ -1,48 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BroadcastKeyword;
 using Devcat;
 using UnityEngine;
 
 public class DataManager : GenericSingleton<DataManager>
 {
-    public static string ResourcePath = Path.Combine(Application.dataPath, "Resources"); 
-
-    // public int Money
-    // {
-    //     get { if () return playerData.GetMoney(); } 
-    // }
-
-    // private struct PlayerData
-    // {
-    //     private int money;
-
-    //     public PlayerData(int money)
-    //     {
-    //         this.money = money;
-    //     }
-
-    //     public int GetMoney()
-    //     {
-    //         return money;
-    //     }
-    // }
-
-    // private PlayerData playerData;
-
+    public static string ResourcePath = Path.Combine(Application.dataPath, "Resources");
 
     private new void Awake()
     {
         base.Awake();
 
-        //Invoke("HashInit", 0.1f);
-
-
         HashInit();
-
-
-        //SetBroadcastValue(null);
     }
 
     private void OnEnable()
@@ -59,15 +32,15 @@ public class DataManager : GenericSingleton<DataManager>
     public void SetReviewComment(Dictionary<int, Dictionary<int, string[]>> data)
     {
         List<ReviewCommentData> reviewList = JsonManager.Instance.GetReviewCommentData();
-        
+
 
         //랭크간 멘트 통합 -> 구간별 멘트 변경
         //각 등급 멘트들의 수가 동일하기 때문에 숫자로 나눠서 판단
         //딕셔너리에는 전체 수 / 카페 등급 수로 반복
-        
+
         int cafeRankCount = ValueCastTo<int>.From(BroadcastReviewManager.CafeRank.Count);       //리뷰값 미리 캐스팅
         int reviewPointSection = reviewList.Count / cafeRankCount;                              //전체리뷰 수 / 카페 랭크 수 = 랭크당 리뷰 수
-        
+
         for (int i = 0; i < cafeRankCount; i++)
         {
             data.Add(i, new Dictionary<int, string[]>());
@@ -75,14 +48,14 @@ public class DataManager : GenericSingleton<DataManager>
             for (int j = 0; j < reviewPointSection; j++)
             {
                 int index = i * reviewPointSection + j;
-                
+
                 if (data[i].ContainsKey(reviewList[index].Point))
                 {
                     data[i][reviewList[index].Point][1] = reviewList[index].Comment;
                 }
                 else
                 {
-                    data[i].Add(reviewList[index].Point, new string[2] {reviewList[index].Comment, null});
+                    data[i].Add(reviewList[index].Point, new string[2] { reviewList[index].Comment, null });
                 }
             }
         }
@@ -104,7 +77,7 @@ public class DataManager : GenericSingleton<DataManager>
     {
         date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
-    
+
     //테스트 함수들 (예시임)
     //안에 데이터들은 임시로 넣어 둔 거고
     //이후 데이터 시트로 변경 
@@ -114,16 +87,63 @@ public class DataManager : GenericSingleton<DataManager>
         float value = 5.0f;
 
         broadCast.Add(key, value);
-    } 
+    }
 
     public void SetBroadcastMatching(List<string> matchingRateComment)
     {
-        string[] matchings = { "첫 시도", "눕", "계륵", "프로", "국밥", "해커" }; 
+        string[] matchings = { "첫 시도", "눕", "계륵", "프로", "국밥", "해커" };
 
-        foreach (var value  in matchings)
+        foreach (var value in matchings)
         {
             matchingRateComment.Add(value);
         }
+    }
+
+    public void SetMatchingValue(ref int[,] list)
+    {
+        List<MatchingData> matchingData = JsonManager.Instance.GetMatchingData();
+
+        int index = 0;
+
+        list = new int[ValueCastTo<int>.From(Content.Count), ValueCastTo<int>.From(Kategorie.Count)];
+
+        foreach (var data in matchingData)
+        {
+            int contentIndex = ValueCastTo<int>.From(Content.LOL) + index;
+
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Game)] = data.Game;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Sports)] = data.Sports;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Music)] = data.Music;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Event)] = data.Event;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.VRChat)] = data.VRChat;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Life)] = data.Life;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Creative)] = data.Creative;
+            list[contentIndex, ValueCastTo<int>.From(Kategorie.Game)] = data.Game;
+
+            index++;
+        }
+    }
+
+    public List<Keyword> GetKeyword(bool isKategorie)
+    {
+        List<Keyword> list = new List<Keyword>();
+
+        List<Keyword> keywords = JsonManager.Instance.GetKeyword();
+
+        int index = isKategorie ? 0 : ValueCastTo<int>.From(Kategorie.Creative) + 1;
+        int limit = isKategorie ? ValueCastTo<int>.From(Kategorie.Creative) + 1 : keywords.Count;
+
+        while (index < limit)
+        {
+            if (keywords[index].Unlocked == 1)
+            {
+                list.Add(keywords[index]);
+            }
+
+            index++;
+        }
+
+        return list;
     }
 
     public string ParsingBroadCastDataToString(KeywordManager.Kategorie Kategorie)
@@ -148,7 +168,7 @@ public class DataManager : GenericSingleton<DataManager>
         //언락 정보는 bit연산으로 가지고 있는걸로 함
         //Gear
         string[] gears = { "기본", "VR", "트래커", "모션캡쳐" };
-        
+
         //Content
         string[] Kategorie = { "게임", "노래", "댄스", "토크" };
 
@@ -161,7 +181,7 @@ public class DataManager : GenericSingleton<DataManager>
         kategorieDatas.Add(KeywordManager.BroadcastElement.Gear, gears);
         kategorieDatas.Add(KeywordManager.BroadcastElement.Content, Kategorie);
         kategorieDatas.Add(KeywordManager.BroadcastElement.Type, types);
-    } 
+    }
 
     public string[] GetKategorieData(KeywordManager.BroadcastElement BroadcastElement)
     {
@@ -224,7 +244,7 @@ public class DataManager : GenericSingleton<DataManager>
 
     //     //float result = Vector2.Dot(test1, test2, 0)
 
-        
+
     // }
 
     // void Start()
@@ -293,23 +313,23 @@ public class DataManager : GenericSingleton<DataManager>
         double dataB = 0;
         double product = 0;
 
-            
+
         for (int k = 0; k < 3; k++)
         {
             dataA += Mathf.Pow(a[k], 2);
             dataB += Mathf.Pow(b[k], 2);
             product += (a[k] * 1.0 * b[k]);
         }
-                
+
         double dataAB = Mathf.Sqrt((float)(dataA * dataB));
         return product / dataAB;
     }
 
-    
+
 
 
     ////////////////////////////////Resource Hash Table////////////////////////////
-    
+
     [SerializeField] private Hashtable resourceHashTable;
 
     private Dictionary<int, Character> characterDataEachSeat;
@@ -351,7 +371,7 @@ public class DataManager : GenericSingleton<DataManager>
 
         long key = ValueCastTo<long>.From(ResourceID.Character_ISD_Ine);
 
-        
+
         List<ResourcesTable> resourcesTables = JsonManager.Instance.GetResourcesTable();
         List<CharacterData> characterDatas = JsonManager.Instance.GetCharacterData();
 
@@ -366,7 +386,7 @@ public class DataManager : GenericSingleton<DataManager>
             resourceHashTable.Add(data.ID, data.Key);
 
             //item default sprite 
-            if (data.Key.Contains(ResourceType.Item.ToString()) 
+            if (data.Key.Contains(ResourceType.Item.ToString())
                 || data.Key.Contains(ResourceType.Stat.ToString()))
             {
                 if (!File.Exists(Path.Combine(ResourcePath, ResourceType.DefaultSprite.ToString(), data.Key)))
@@ -381,16 +401,16 @@ public class DataManager : GenericSingleton<DataManager>
             //sprite
             if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.DefaultSprite.ToString(), ResourceFileName.Standing.ToString(), string.Format("{0}_{1}", ResourceType.StandingSprite.ToString(), data.Key))))
             {
-                resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
-                                                                                            ResourceFileName.Standing.ToString(), 
+                resourceHashTable.Add(data.SpriteID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.Standing.ToString(),
                                                                                             string.Format("{0}_{1}", ResourceType.StandingSprite.ToString(), data.Key))));
 
-                resourceHashTable.Add(data.SitBackID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
-                                                                                            ResourceFileName.SitBack.ToString(), 
+                resourceHashTable.Add(data.SitBackID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitBack.ToString(),
                                                                                             string.Format("{0}_{1}", ResourceType.SitBackSprite.ToString(), data.Key))));
 
-                resourceHashTable.Add(data.SitFrontID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(), 
-                                                                                            ResourceFileName.SitFront.ToString(), 
+                resourceHashTable.Add(data.SitFrontID, Resources.Load<Sprite>(Path.Combine(ResourceFileName.DefaultSprite.ToString(),
+                                                                                            ResourceFileName.SitFront.ToString(),
                                                                                             string.Format("{0}_{1}", ResourceType.SitFrontSprite.ToString(), data.Key))));
 
 

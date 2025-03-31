@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Devcat;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MenuController : GenericSingleton<MenuController>
@@ -22,36 +24,68 @@ public class MenuController : GenericSingleton<MenuController>
         Count
     }
 
+    [Serializable]
+    struct PanelObject
+    {
+        public GameObject panel;
+        public UnityEvent offEvent;
+        public UnityEvent onEvent;
+
+        public void OpenPanel()
+        {
+            panel.SetActive(true);
+            onEvent?.Invoke();
+        }
+
+        public void ClosePanel()
+        {
+            offEvent?.Invoke();
+            panel.SetActive(false);
+        }
+    }
+
     [Header("팝업들")]
-    [SerializeField] private GameObject broadcastPlanningPanel;     //방송기획창
-    [SerializeField] private GameObject broadcastKeywordSelection;  //키워드 선택창
-    [SerializeField] private GameObject broadcastCreatePanel;       //카테고리 전부 선택 후 
-    [SerializeField] private GameObject productorSelectionPanel;    //작업자 선택 창
-    [SerializeField] private GameObject productorProcessPanel;      //작업자 프로세싱 창
-    [SerializeField] private GameObject cafeUserReviewPanel;        //리뷰창
-    [SerializeField] private GameObject broadcastResultPanel;       //방송 제작 후 수치 확인 및 방제 변경
-    [SerializeField] private GameObject popupStorePanel;            //팝업스토어 패널
+    [SerializeField] private PanelObject broadcastPlanningPanelObject;  //방송기획창
+
+    [SerializeField] private PanelObject gearSelectionPanelObject;      //장비 선택창
+    [SerializeField] private PanelObject keywordSelectionPanelObject;   //키워드 선택창
+    [SerializeField] private PanelObject directionSelectionPanelObject; //기획 방향성 선택창
+    [SerializeField] private PanelObject broadcastCreatePanelObject;    //카테고리 전부 선택 후 
+
+    [SerializeField] private PanelObject productorSelectionPanelObject; //작업자 선택 창
+
+    [SerializeField] private PanelObject productorProcessPanelObject;   //작업자 프로세싱 창
+
+    [SerializeField] private PanelObject cafeUserReviewPanelObject;     //리뷰창
+
+    [SerializeField] private PanelObject broadcastResultPanelObject;    //방송 제작 후 수치 확인 및 방제 변경
+
+    [SerializeField] private PanelObject popupStorePanelObject;         //팝업스토어 패널
 
 
     //해당 메뉴들이 켜졌을 경우 화면 좌측 하단에 Temp버튼이 뒤로가기로 변경
     [Header("메뉴들")]
-    [SerializeField] private GameObject menuList;                   //메뉴창
-    [SerializeField] private GameObject broadcastPlanningMenu;      //방송버튼 누르면 나오는 메뉴창
-    [SerializeField] private GameObject productorMenu;              //작업자버튼 누르면 나오는 메뉴
-    [SerializeField] private GameObject infoMenu;                   //정보버튼 누르면 나오는 메뉴
-    [SerializeField] private GameObject systemMenu;                 //시스템 메뉴
+    [SerializeField] private PanelObject menuList;                   //메뉴창
+    [SerializeField] private PanelObject broadcastPlanningMenu;      //방송버튼 누르면 나오는 메뉴창
+    [SerializeField] private PanelObject productorMenu;              //작업자버튼 누르면 나오는 메뉴
+    [SerializeField] private PanelObject infoMenu;                   //정보버튼 누르면 나오는 메뉴
+    [SerializeField] private PanelObject systemMenu;                 //시스템 메뉴
 
     [SerializeField] private GameObject raycastDisabledPanel;       //
 
 
     [SerializeField] private CanvasScaler canvasScaler;             //rect position 사용을 위해 비율 계산
 
+    private Stack<PanelObject> menuStorage;
+
     private new void Awake()
     {
         base.Awake();
 
+        menuStorage = new Stack<PanelObject>();
+
         timeRectMask = timeRect.transform.GetComponent<RectMask2D>();
-        tempButtonText.text = string.Format("Save");
+        interactiveButton.text = string.Format("Save");
     }
 
     public float CanvasScalerRatio
@@ -67,91 +101,203 @@ public class MenuController : GenericSingleton<MenuController>
         }
     }
 
+    public void MenuBack()
+    {
+        PanelObject menu = menuStorage.Pop();
+        menu.ClosePanel();
+
+        CheckActiveBackButton(true);
+
+        if (menuStorage.Count == 0)
+        {
+            TimeResume();
+        }
+    }
+
+    public void CloseAllMenu()
+    {
+        while (menuStorage.Count > 0)
+        {
+            MenuBack();
+        }
+    }
+
+    private void MenuOpen(PanelObject menu)
+    {
+        if (menuStorage.Count == 0)
+        {
+            TimePause();
+        }
+
+        menuStorage.Push(menu);
+        menu.OpenPanel();
+        CheckActiveBackButton(false);
+    }
+
+    private void TimePause()
+    {
+        isOpenTab = true;
+
+        GameManager.Instance.PauseGame();
+    }
+
+    private void TimeResume()
+    {
+        isOpenTab = false;
+
+        GameManager.Instance.ResumeGame();
+    }
+
+    private void CheckActiveBackButton(bool back)
+    {
+        if (menuStorage.Count == 0 && back)
+        {
+            //back버튼 비활성화 및 시간 다시 흐르게
+            interactiveButton.text = string.Format("Save");
+            GameManager.Instance.ResumeGame();
+        }
+        else if (menuStorage.Count == 1 && !back)
+        {
+            //back버튼 활성화 및 시간 정지
+            interactiveButton.text = string.Format("Back");
+            GameManager.Instance.PauseGame();
+        }
+    }
+
+    public void LeftButtonInteractive()
+    {
+        if (menuStorage.Count == 0)
+        {
+            GameManager.Instance.Save();
+        }
+        else
+        {
+            MenuBack();
+        }
+    }
+
+    public void OpenMenuList()
+    {
+        if (menuList.panel.activeSelf)
+        {
+            MenuBack();
+            return;
+        }
+
+        MenuOpen(menuList);
+    }
 
     //==============================팝업창==============================
     //방송-방송제작
+    //버튼 누를 때 나오는 창에만 closealldetailmenu 실행
     public void OpenBroadcastBroadCastPlan()
     {
-        broadcastPlanningPanel.SetActive(true);
-        TimeNotElapseWhenOpenTab();
+        CloseAllDetailMenu();
+        MenuOpen(broadcastPlanningPanelObject);
+    }
+    public void OpenBroadcastGearSelection()
+    {
+        MenuOpen(gearSelectionPanelObject);
+    }
+
+    public void OpenBroadcastPlanningDirection()
+    {
+        MenuOpen(directionSelectionPanelObject);
+    }
+
+    public void OpenBroadcastKeywordSelection()
+    {
+        MenuOpen(keywordSelectionPanelObject);
     }
     //방송-숙제방송
     public void OpenBroadcastHomeworkBroadcast()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //방송-고정컨텐츠
     public void OpenBroadcastFixedContent()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //작업자-고용
     public void OpenProductorEmployment()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //작업자-레벨업
     public void OpenProductorLevelUp()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //작업자-교육
     public void OpenProductorEducation()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //작업자-해고
     public void OpenProductorFire()
     {
-
-
+        CloseAllDetailMenu();
+        //
     }
 
     //정보-작업자정보
     public void OpenInfoProductorInfo()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //정보-방송이력
     public void OpenInfoBroadcastRecord()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //정보-팬카페정보
     public void OpenInfoCafeInfo()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //시스템-게임정보
     public void OpenSystemGameInfo()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //시스템-저장
     public void OpenSystemSave()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //시스템-종료
     public void OpenSystemGameExit()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
     //시스템-설정
     public void OpenSystemSettings()
     {
-
+        CloseAllDetailMenu();
+        //
     }
 
 
@@ -159,71 +305,59 @@ public class MenuController : GenericSingleton<MenuController>
     //방송-방송제작-키워드선택
     public void OpenCreateBroadcast()
     {
-        broadcastCreatePanel.SetActive(true);
-        TimeNotElapseWhenOpenTab();
+        CloseAllDetailMenu();
+        MenuOpen(broadcastCreatePanelObject);
     }
 
     //방송-방송제작-키워드선택-제작
     public void OpenProductorSelection()
     {
-        productorSelectionPanel.SetActive(true);
-        TimeNotElapseWhenOpenTab();
-
-        Debug.Log("asd");
+        MenuOpen(productorSelectionPanelObject);
     }
 
 
     public void OpenProductorWorkProcess()
     {
-        productorProcessPanel.SetActive(true);
+        MenuOpen(productorProcessPanelObject);
     }
 
     public void CloseProductorWorkProcess()
     {
-        productorProcessPanel.SetActive(false);
+        MenuOpen(productorProcessPanelObject);
         ClosePanelOnEndProcess();
     }
     
     //방송제작완료-결과창
     public void OpenBroadcastResult()
     {
-        broadcastResultPanel.SetActive(true);
+        MenuOpen(broadcastResultPanelObject);
 
         //ProcessStatus.Instance.OffCurrentStatusPanel();         //진행정보 탭 끔
         ProcessStatus.Instance.DynamicScaler();                 //스크롤 바 재설정
-        
-        TimeNotElapseWhenOpenTab();
     }
 
     //방송제작완료-결과창-리뷰
     public void OpenCafeUserReview()
     {
-        broadcastResultPanel.SetActive(false);
-        cafeUserReviewPanel.SetActive(true);
-        TimeNotElapseWhenOpenTab();
+        MenuBack();
+        MenuOpen(cafeUserReviewPanelObject);
     }
     public void CloseCafeUserReview()
     {
         ProcessStatus.Instance.OffCurrentStatusPanel(); 
-        cafeUserReviewPanel.SetActive(false);
-        CloseTabElapseTime();
+        MenuBack();
     }
 
     //팝업스토어-팝업스토어창
     public void OpenPopupStorePanel()
     {
-
+        CloseAllDetailMenu();
+        //
     }
     
     public void ClosePanelOnEndProcess()
     {
-        broadcastPlanningPanel.SetActive(false);
-        broadcastCreatePanel.SetActive(false);
-        productorSelectionPanel.SetActive(false);
-        CloseTabElapseTime();
-        //OpenMenu();
-        CloseOtherMenu();
-
+        CloseAllMenu();
     }
     /////////////////////방송제작 관련/////////////////////////
     //==============================팝업창==============================
@@ -233,100 +367,74 @@ public class MenuController : GenericSingleton<MenuController>
 
 
     //==============================메뉴==============================
-    public void OpenMenu()
-    {
-        if (menuList.activeSelf)
-        {
-            menuList.SetActive(false);
-            tempButtonText.text = string.Format("Save");
+    // public void OpenMenu()
+    // {
+    //     if (menuList.activeSelf)
+    //     {
+    //         menuList.SetActive(false);
+    //         interactiveButton.text = string.Format("Save");
 
-            CloseTabElapseTime();
+    //         CloseTabElapseTime();
 
-            return;
-        }
+    //         return;
+    //     }
 
-        TimeNotElapseWhenOpenTab();
+    //     TimeNotElapseWhenOpenTab();
 
-        menuList.SetActive(true);
-        tempButtonText.text = string.Format("Back");
-    }
+    //     menuList.SetActive(true);
+    //     interactiveButton.text = string.Format("Back");
+    // }
     public void OpenBroadcastPlanningMenu()
     {
         OpenDetailMenu();
 
-        broadcastPlanningMenu.SetActive(true);
+        MenuOpen(broadcastPlanningMenu);
+        //broadcastPlanningMenu.SetActive(true);
     }
 
     public void OpenProductorMenu()
     {
         OpenDetailMenu();
-
-        productorMenu.SetActive(true);
+        MenuOpen(productorMenu);
+        //productorMenu.SetActive(true);
     }
 
     public void OpenInfoMenu()
     {
         OpenDetailMenu();
-
-        infoMenu.SetActive(true);
+        MenuOpen(infoMenu);
+        //infoMenu.SetActive(true);
     }
 
     public void OpenSystemMenu()
     {
         OpenDetailMenu();
+        MenuOpen(systemMenu);
+        //systemMenu.SetActive(true);
+    }
 
-        systemMenu.SetActive(true);
+    private void CloseAllDetailMenu()
+    {
+        if (!isOpenDetailMenu) return;
+
+        CloseAllMenu();
+        isOpenDetailMenu = false;
     }
 
     //메뉴오픈 시 메뉴 끔
     //평소에는 세이브 버튼
-    [SerializeField] private TMPro.TextMeshProUGUI tempButtonText;
+    [SerializeField] private TMPro.TextMeshProUGUI interactiveButton;
+
     private bool isOpenDetailMenu = false;
-
-    public void TempButtonMethod()
-    {
-        if (menuList.activeSelf)
-        {
-            if (isOpenDetailMenu)
-            {
-                CloseOtherMenu();
-
-                isOpenDetailMenu = false;
-            }
-            else
-            {
-                menuList.SetActive(false);
-
-
-                tempButtonText.text = string.Format("Save");
-                
-                CloseTabElapseTime();
-            }
-        }
-        else
-        {
-            GameManager.Instance.Save();
-        }
-    }
 
     private void OpenDetailMenu()
     {
+        if (isOpenDetailMenu)
+        {
+            MenuBack();
+        }
+
         isOpenDetailMenu = true;
-
-        CloseOtherMenu();
-    }
-
-    public void CloseMenu()
-    {
-        menuList.SetActive(false);
-    }
-
-    public void CloseOtherMenu()
-    {
-        broadcastPlanningMenu.SetActive(false);
-        productorMenu.SetActive(false);
-        infoMenu.SetActive(false);
-        systemMenu.SetActive(false);
     }
     //==============================메뉴==============================
 
@@ -342,19 +450,7 @@ public class MenuController : GenericSingleton<MenuController>
     public static bool IsOpenTab => isOpenTab;
     private static bool isOpenTab;
 
-    public void TimeNotElapseWhenOpenTab()
-    {
-        isOpenTab = true;
-
-        GameManager.Instance.PauseGame();
-    }
-
-    public void CloseTabElapseTime()
-    {
-        isOpenTab = false;
-
-        GameManager.Instance.ResumeGame();
-    }
+    
 
     
     public void UpdateDate(int year, int month, int week, int time)

@@ -134,7 +134,7 @@ public class Character : MonoBehaviour,
     {
         this.characterData = characterData;
 
-        if (characterData.IsIsegyeIdol == "O")
+        if (characterData.IsIsegyeIdol == 0)
         {
             iSEGYEIDOL = ValueCastTo<CharacterManager.ISEGYEIDOL>.From(characterID - ResourceID.Character_ISD_Ine);
         }

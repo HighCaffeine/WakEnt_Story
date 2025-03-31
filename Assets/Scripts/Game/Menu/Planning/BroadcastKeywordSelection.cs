@@ -1,9 +1,108 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using BroadcastKeyword;
+using Devcat;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI.Extensions;
 
-public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection, KeywordSelect>
+namespace BroadcastKeyword
 {
+    //keyword의 각 카테고리 값이 음수일 경우 첫 시도로 취급.
+    public enum MatchingValue
+    {
+        Noob = 1,
+        Gyerueok,
+        Pro,
+        Gookbab,
+        Hacker,
+    }
+
+    public enum Kategorie
+    {
+        Game,
+        Sports,
+        Music,
+        Event,
+        VRChat,
+        Life,
+        Creative,
+
+        Count,
+    }
+
+    public enum Content
+    {
+        LOL,
+        Valorant,
+        Battleground,
+        Minecraft,
+        FIFA,
+        IntegratedGame,
+        HorrorGame,
+
+        Baseball,
+        Badminton,
+        Rugby,
+        Analyze,
+        Golf,
+        Billiards,
+        Bowling,
+        ETCSports,
+
+        Karaoke,
+        Cover,
+        NewAlbum,
+        MusicLive,
+        Streaming,
+        VirtualConcert,
+        Concert,
+
+        Compotition,
+        CompetitionRelay,
+        Audition,
+
+        Map,
+        Avatar,
+        SituationalComedy,
+
+        Talk,
+        ASMR,
+        Mukbang,
+        Fashion,
+        Dance,
+        Cookbang,
+        TaravelVlog,
+        Camping,
+        Fishing,
+        Dubbing,
+        Radio,
+        Animal,
+        Car,
+        Comedy,
+        Exercise,
+        Movie,
+        Anime,
+        Food,
+        Beauty,
+
+        Style,
+        Drawing,
+        Science,
+        Tech,
+        Education,
+        Ent,
+        KnowHow,
+
+        Count,
+    }
+}
+
+public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection, KeywordSelect> 
+{
+    public delegate void SetCurrentKeywordEvent(int index);
+
     //broadcastplanning 창에서
     //키워드 선택 시 selection창 띄움
     //selection창 킬 때 
@@ -16,9 +115,133 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     //2. 키워드의 인기정보 및 비용
     //3. 선택된 키워드와 다른 (카테고리 / 컨텐츠)와의 조합률
 
+    [SerializeField] private GameObject keywordParent; 
+    private Stack<Action> exitPanelPoolEvents;
+    private int[,] matchingValues;
+
+    [SerializeField]private Kategorie currentKategorie;
+    [SerializeField] private Content currentContent;
+
+    [Header("매칭률 출력부")][SerializeField] private TextMeshProUGUI matchingTMP;
+                            [SerializeField] private TextMeshProUGUI keywordMatchingTMP;
+
+
+    //언락된 애들만 담거나 해야할듯
+    private List<Keyword> kategories;
+    private List<Keyword> contents;
+
+    private string[] matchingValueWords = { "늅", "계륵", "프로", "국밥", "해커" };
+    private string[] popularity = { "혐", "애매쓰", "중간", "높음", "GOAT" };
+
+
     private new void Awake()
     {
         base.Awake();
+
+        exitPanelPoolEvents = new Stack<Action>();
+        kategories = new List<Keyword>();
+        contents = new List<Keyword>();
+
+        matchingValues = new int[ValueCastTo<int>.From(Kategorie.Count), ValueCastTo<int>.From(contents.Count)];
+
+        DataManager.Instance.SetMatchingValue(ref matchingValues);
+        kategories = DataManager.Instance.GetKeyword(true);
+        contents = DataManager.Instance.GetKeyword(false);
+    }
+
+    //패널 열 때에
+    //키워드 두종류 언락된 애들만 받아오고
+    //언락하는건 추후에 추가해야하는데
+    //걔는 따로 데이터쪽에 수정 요청 보내는 걸로 하는거고 어차피 여기서 하는거 아님
+
+    private bool isKategoriPanelActive;
+
+    public void SetPanel(bool isKategorie)
+    {
+        isKategoriPanelActive = isKategorie;
+
+        for (int i = 0; i < (isKategorie ? kategories.Count : contents.Count); i++)
+        {
+            KeywordSelect obj = GetPool();
+            Keyword keyword = GetKeyword(isKategorie, i);
+
+            obj.transform.SetParent(keywordParent.transform);
+            obj.SetData(keyword.KoreanName, 1, popularity[keyword.Popularity - 1], 999, i);
+        }
+
+        SetMatchingValue();
+    }
+
+    private void SetMatchingValue()
+    {
+        int matchingValue = GetMatchingValue();
+
+        keywordMatchingTMP.text = string.Format("{0}(와)과 조합=",
+                                                        isKategoriPanelActive ? GetKeyword(false, ValueCastTo<int>.From(currentContent)).KoreanName
+                                                                                : GetKeyword(true, ValueCastTo<int>.From(currentKategorie)).KoreanName);
+
+        //매칭값이 음수일 경우 첫 시도하는 조합
+        if (matchingValue > 0)
+        {
+            matchingTMP.text = matchingValueWords[matchingValue - 1];
+        }
+        else
+        {
+            matchingTMP.text = "첫 시도";
+            SetMatcingValue();              //매칭률 원래 값으로 변경
+        }
+    }
+
+    public void SetSelectedKeyword(int index)
+    {
+        if (isKategoriPanelActive)
+        {
+            currentKategorie = Kategorie.Game + index;
+        }
+        else
+        {
+            currentContent = Content.LOL + index;
+        }
+
+        SetMatchingValue();
+    }
+
+    public void SetMatchingValuePositive()
+    {
+
+    }
+
+    private Keyword GetKeyword(bool isKategorie, int index)
+    {
+        return isKategorie ? kategories[index] : contents[index];
+    }
+
+    //선택된 키워드를 기준으로
+    //아래에 매칭률 출력
+    private int GetMatchingValue()
+    {
+        return matchingValues[ValueCastTo<int>.From(currentContent), ValueCastTo<int>.From(currentKategorie)];
+    }
+
+    //-값 +로 변경
+    private void SetMatcingValue()
+    {
+        matchingValues[ValueCastTo<int>.From(currentContent), ValueCastTo<int>.From(currentKategorie)] *= -1;
+    }
+
+    //매니저 측에서 창 껏을 때 등록된 애들 호출해서 return pool
+    //setdata 시 등록
+    public void AddPoolEvent(Action returnPool)
+    {
+        exitPanelPoolEvents.Push(returnPool);
+    }
+
+    public void ClosePanel()
+    {
+        while (exitPanelPoolEvents.Count > 0)
+        {
+            exitPanelPoolEvents.Pop()?.Invoke();
+        }
     }
 
     //public 

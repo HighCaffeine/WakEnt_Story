@@ -557,8 +557,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         BroadCastPlanning.Instance.UpdateBroadcastPoint();
 
-        MenuController.Instance.CloseMenu();
-        MenuController.Instance.CloseOtherMenu();
+        MenuController.Instance.CloseAllMenu();         //확인해야함 정상작동하는지 모든 켜진 메뉴를 다 꺼야해서 
+        //MenuController.Instance.CloseOtherMenu();
         SoundManager.Instance.ReplayAudio();
     }
 

@@ -82,109 +82,109 @@ public class KeywordManager : GenericSingleton<KeywordManager>
 
     private TextMeshProUGUI matchingResult;
 
-    private new void Awake()
-    {
-        base.Awake();
+    // private new void Awake()
+    // {
+    //     base.Awake();
 
-        gearObj = transform.Find("Panel/Gear/KeywordSelect").gameObject;
-        kategorieObj = transform.Find("Panel/Kategorie/KeywordSelect").gameObject;
-        contentObj = transform.Find("Panel/Content/KeywordSelect").gameObject;
+    //     gearObj = transform.Find("Panel/Gear/KeywordSelect").gameObject;
+    //     kategorieObj = transform.Find("Panel/Kategorie/KeywordSelect").gameObject;
+    //     contentObj = transform.Find("Panel/Content/KeywordSelect").gameObject;
 
-        gearTMP = transform.Find("Panel/Gear/SelectedItem").GetComponent<TextMeshProUGUI>();
-        kategorieTMP = transform.Find("Panel/Kategorie/SelectedItem").GetComponent<TextMeshProUGUI>();
-        contentTMP = transform.Find("Panel/Content/SelectedItem").GetComponent<TextMeshProUGUI>();
+    //     gearTMP = transform.Find("Panel/Gear/SelectedItem").GetComponent<TextMeshProUGUI>();
+    //     kategorieTMP = transform.Find("Panel/Kategorie/SelectedItem").GetComponent<TextMeshProUGUI>();
+    //     contentTMP = transform.Find("Panel/Content/SelectedItem").GetComponent<TextMeshProUGUI>();
 
-        matchingResult = transform.Find("Panel/Result/Matching").GetComponent<TextMeshProUGUI>();
-    }
+    //     matchingResult = transform.Find("Panel/Result/Matching").GetComponent<TextMeshProUGUI>();
+    // }
 
-    void Start()
-    {
-        InitKategorieItem(BroadcastElement.Gear);
-        InitKategorieItem(BroadcastElement.Content);
-        InitKategorieItem(BroadcastElement.Type);
-    }
+    // void Start()
+    // {
+    //     InitKategorieItem(BroadcastElement.Gear);
+    //     InitKategorieItem(BroadcastElement.Content);
+    //     InitKategorieItem(BroadcastElement.Type);
+    // }
 
-    public void InitKategorieItem(BroadcastElement BroadcastElement)
-    {
-        InstantiateKategorieObject(BroadcastElement, DataManager.Instance.GetKategorieData(BroadcastElement));
-    }
+    // public void InitKategorieItem(BroadcastElement BroadcastElement)
+    // {
+    //     InstantiateKategorieObject(BroadcastElement, DataManager.Instance.GetKategorieData(BroadcastElement));
+    // }
 
-    public void UpdateKategorieSelect(KategorieData kategorieData)
-    {
-        switch (kategorieData.GetBroadcastElement())
-        {
-            case BroadcastElement.Gear:
-            gearTMP.text = kategorieData.GetName();
+    // public void UpdateKategorieSelect(KategorieData kategorieData)
+    // {
+    //     switch (kategorieData.GetBroadcastElement())
+    //     {
+    //         case BroadcastElement.Gear:
+    //         gearTMP.text = kategorieData.GetName();
 
-            gearObj.SetActive(false);
-            break;
-            case BroadcastElement.Content:
-            kategorieTMP.text = kategorieData.GetName();
+    //         gearObj.SetActive(false);
+    //         break;
+    //         case BroadcastElement.Content:
+    //         kategorieTMP.text = kategorieData.GetName();
 
-            kategorieObj.SetActive(false);
-            break;
-            case BroadcastElement.Type:
-            contentTMP.text = kategorieData.GetName();
+    //         kategorieObj.SetActive(false);
+    //         break;
+    //         case BroadcastElement.Type:
+    //         contentTMP.text = kategorieData.GetName();
 
-            contentObj.SetActive(false);
-            break;
-        }
+    //         contentObj.SetActive(false);
+    //         break;
+    //     }
 
-        UpdateKategorieSelect();
-    }
+    //     UpdateKategorieSelect();
+    // }
 
-    public void RequestInActiveOther(BroadcastElement type)
-    {
-        switch (type)
-        {
-            case BroadcastElement.Gear:
-            if (kategorieObj.activeSelf) kategorieObj.SetActive(false);
-            if (contentObj.activeSelf) contentObj.SetActive(false);
-            break;
-            case BroadcastElement.Content:
-            if (gearObj.activeSelf) gearObj.SetActive(false);
-            if (contentObj.activeSelf) contentObj.SetActive(false);
-            break;
-            case BroadcastElement.Type:
-            if (kategorieObj.activeSelf) kategorieObj.SetActive(false);
-            if (gearObj.activeSelf) gearObj.SetActive(false);
-            break;
-        }
-    }
+    // public void RequestInActiveOther(BroadcastElement type)
+    // {
+    //     switch (type)
+    //     {
+    //         case BroadcastElement.Gear:
+    //         if (kategorieObj.activeSelf) kategorieObj.SetActive(false);
+    //         if (contentObj.activeSelf) contentObj.SetActive(false);
+    //         break;
+    //         case BroadcastElement.Content:
+    //         if (gearObj.activeSelf) gearObj.SetActive(false);
+    //         if (contentObj.activeSelf) contentObj.SetActive(false);
+    //         break;
+    //         case BroadcastElement.Type:
+    //         if (kategorieObj.activeSelf) kategorieObj.SetActive(false);
+    //         if (gearObj.activeSelf) gearObj.SetActive(false);
+    //         break;
+    //     }
+    // }
 
-    private void UpdateKategorieSelect()
-    {
-        string matchingValue = BroadCastPlanning.Instance.CalculateBroadCastMatchingValue(kategorieTMP.text, contentTMP.text);
+    // private void UpdateKategorieSelect()
+    // {
+    //     string matchingValue = BroadCastPlanning.Instance.CalculateBroadCastMatchingValue(kategorieTMP.text, contentTMP.text);
 
-        newAttempt.SetActive(false);
+    //     newAttempt.SetActive(false);
 
-        Debug.Log(matchingValue);
+    //     Debug.Log(matchingValue);
 
-        if (matchingValue == BroadCastPlanning.Instance.GetMatchingRateComment(0))
-        {
-            newAttempt.SetActive(true);
-        }
+    //     if (matchingValue == BroadCastPlanning.Instance.GetMatchingRateComment(0))
+    //     {
+    //         newAttempt.SetActive(true);
+    //     }
 
-        matchingResult.text = string.Format("{0} + {1} -> {2}", kategorieTMP.text, contentTMP.text, matchingValue);
-    }
+    //     matchingResult.text = string.Format("{0} + {1} -> {2}", kategorieTMP.text, contentTMP.text, matchingValue);
+    // }
 
-    private void InstantiateKategorieObject(BroadcastElement BroadcastElement, string[] itemNames)
-    {
-        GameObject parent = BroadcastElement == BroadcastElement.Gear ? gear
-                            : BroadcastElement == BroadcastElement.Content ? content
-                            : type;
+    // private void InstantiateKategorieObject(BroadcastElement BroadcastElement, string[] itemNames)
+    // {
+    //     GameObject parent = BroadcastElement == BroadcastElement.Gear ? gear
+    //                         : BroadcastElement == BroadcastElement.Content ? content
+    //                         : type;
 
-        for (int i = 0; i < itemNames.Length; i++)
-        {
-            GameObject obj = Instantiate(itemPrefab, parent.transform);
+    //     for (int i = 0; i < itemNames.Length; i++)
+    //     {
+    //         GameObject obj = Instantiate(itemPrefab, parent.transform);
 
-            KeywordItem keywordItem = obj.GetComponent<KeywordItem>();
-            TextMeshProUGUI text = obj.transform.GetComponentInChildren<TextMeshProUGUI>();
+    //         KeywordItem keywordItem = obj.GetComponent<KeywordItem>();
+    //         TextMeshProUGUI text = obj.transform.GetComponentInChildren<TextMeshProUGUI>();
 
-            keywordItem.Init(BroadcastElement, itemNames[i]);
+    //         keywordItem.Init(BroadcastElement, itemNames[i]);
 
-            text.text = itemNames[i];
+    //         text.text = itemNames[i];
             
-        }
-    }
+    //     }
+    // }
 }

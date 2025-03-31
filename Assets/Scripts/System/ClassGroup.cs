@@ -122,11 +122,33 @@ public class PlayerData
 }
 
 [System.Serializable]
+public class ProductorData
+{
+    public string Name;                         //작업자 이름
+    public int IsFieldCharacter;                //필드 캐릭터인지 -> 이거는 나중에 없앨듯
+    public string CharacterType;                //작업자 타입 (플래너, 그래픽, 사운드, 마케터)
+    public int WorkPrice;                       //작업 비용
+    public int EmployPrice;                     //고용 비용
+    public int PlannerStat;                     //플래너 스텟
+    public int PlannerLevel;                    //플래너 레벨
+    public int DesignStat;                      //디자이너 스텟
+    public int DesignLevel;                     //디자이너 레벨
+    public int SoundStat;                       //음향 스텟
+    public int SoundLevel;                      //음향 레벨
+    public int MarketerStat;                    //홍보 스텟
+    public int MarketerLevel;                   //홍보 레벨
+    public int MaxStemina;                      //최대 스테미나
+    public string Info;                         //작업자 정보
+    public string RecuritType;                  //고용 방법
+    public string ProcessCompleteComment;       //작업 완료 대사
+}
+
+[System.Serializable]
 public class CharacterData
 {
     public string Name;                 //이름
-    public string IsIsegyeIdol;         //이세돌인지
-    public string isFieldCharacter;     //필드에 나와있는 캐릭터인지
+    public int IsIsegyeIdol;            //이세돌인지
+    public int isFieldCharacter;        //필드에 나와있는 캐릭터인지
     public int SeatNumber;              //좌석 번호
     public int CharacterID;             //캐릭터 고유번호(저장 및 리소스 임포트에 사용)
     public int RemainFeverCount;        //저장 시 피버 상태였던 캐릭터의 남은 피버 수(남은 수 * 100 + 최대치로 저장)
@@ -181,10 +203,28 @@ public class ResourcesTable
 [System.Serializable]
 public class MatchingData
 {
-    public string Kategorie;         //컨텐츠 키워드
-    public string Type;             //타입 키워드
-    public int MatchingPoint;       //매칭률 1~5(눕, 계륵, 프로, 국밥, 해커)
-    public string Unlocked;         //해금된 조합인지(O, X)
+    //컨텐츠이름과 각 카테고리와의 매칭률을 수치로 되어있음.
+    //1~5
+
+    public string Content;          //컨텐츠 이름
+    //아래는 Kategorie와의 매칭률
+    public int Game;
+    public int Sports;
+    public int Music;
+    public int Event;
+    public int VRChat;
+    public int Life;
+    public int Creative;
+}
+
+[System.Serializable]
+public class Keyword
+{
+    public string KeywordKey;       //enum타입으로 사용할 키워드 영어버전
+    public string KoreanName;       //해당 영어 한국어 버전
+    public string Type;             //컨텐츠인지 종류인지 
+    public int Popularity;          //해당 키워드의 인기도
+    public int Unlocked;         //해금된 조합인지(O, X)
 }
 
 //왁물원의 각 등급들의 리뷰 멘트들
@@ -221,16 +261,8 @@ public class EventData
     public string EventKey;         //이벤트 이름, 접근 시 사용
     public string EventComment;     //이벤트 멘트
     public string Achivement;       //도전과제
-    public string Progressed;       //진행유무(O, X)
+    public int Progressed;       //진행유무(O, X)
     public string Note;             //언락시기 ( ex) 튜토리얼 -> 초회한정)
-    public string IsRepeat;         //반복유무(X -> 1회성 이벤트(튜토리얼))
+    public int IsRepeat;         //반복유무(X -> 1회성 이벤트(튜토리얼))
 }    
 
-[System.Serializable]
-public class Keyword
-{
-    public string KeywordKey;       //enum타입으로 사용할 키워드 영어버전
-    public string KoreanName;       //해당 영어 한국어 버전
-    public string Type;             //컨텐츠인지 종류인지 
-    public int Popularity;          //해당 키워드의 인기도
-}

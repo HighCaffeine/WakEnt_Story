@@ -13,7 +13,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
     where PoolType : MonoBehaviour, OnReturnPool<PoolType>
     where ManagerType : MonoBehaviour
 {
-    protected Transform storageParent;
+    [SerializeField] protected Transform storageParent;
     [SerializeField] PoolType prefab;
     [SerializeField] private int poolCount;
 
@@ -38,8 +38,11 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
     protected virtual void GenerateStorageParent()
     {
-        storageParent = new GameObject("StorageParent").transform;
-        storageParent.SetParent(transform);
+        if (storageParent == null)
+        {
+            storageParent = new GameObject("StorageParent").transform;
+            storageParent.SetParent(transform);
+        }
         //storageParent.gameObject.SetActive(false);
     }
 
@@ -62,7 +65,7 @@ public class ObjectPooling<ManagerType, PoolType> : GenericSingleton<ManagerType
 
         newObj.Init(OnReturnUp);
 
-        //pool.Push(newObj);
+        pool.Push(newObj);
 
         newObj.gameObject.SetActive(false);
 
