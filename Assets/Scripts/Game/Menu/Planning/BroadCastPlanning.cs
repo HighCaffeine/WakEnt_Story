@@ -13,13 +13,19 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     //메뉴를 만들 때 broadcastplaning에 list로 되어있는 걸
     //data매니저가 먼저 세팅을 해 주고, menucontroller가 메뉴를 생성할 때(start)
     //hash/dictionary로 넘겨줄 듯(menucontroller는 이름만 알면 됨)
+        [Header("방송 제작 키워드")]
+        [SerializeField] private TMPro.TextMeshProUGUI gearText;
+        [SerializeField] private TMPro.TextMeshProUGUI kategorieText;
+        [SerializeField] private TMPro.TextMeshProUGUI contentText;
+        [SerializeField] private TMPro.TextMeshProUGUI directionText;
     [Serializable]
     private class Broadcast
     {
-        private KeywordManager.Kategorie Kategorie;
-        private KeywordManager.Content Content;
+        private BroadcastKeyword.Kategorie Kategorie;
+        private BroadcastKeyword.Content Content;
 
-        private float matchingRate;
+
+        private int matchingRate;
 
         public float processingRate { private set; get; }
 
@@ -85,34 +91,9 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             }
         }
 
-        public void SetKategorie(in KeywordManager.Kategorie Kategorie)
-        {
-            this.Kategorie = Kategorie;
-        }
-
-        public void SetContent(in KeywordManager.Content Content)
-        {
-            this.Content = Content;
-        }
-
-        public void SetMatchingRate(in float value)
-        {
-            matchingRate = value;
-        }
-
         public void SetProcessRate(float value)
         {
             this.processingRate = value;
-        }
-
-        public KeywordManager.Kategorie GetKategorie()
-        {
-            return Kategorie;
-        }
-
-        public KeywordManager.Content GetContent()
-        {
-            return Content;
         }
 
         public float GetMatchingRate()
@@ -122,8 +103,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
         public void Init()
         {
-            this.Kategorie = KeywordManager.Kategorie.Game;
-            this.Content = KeywordManager.Content.BroadcasterTogether;
+            this.Kategorie = BroadcastKeyword.Kategorie.Game;
+            this.Content = BroadcastKeyword.Content.LOL;
 
             broadCastPoint.Init();
         }
@@ -149,53 +130,26 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         broadCast.Init();
     }
 
-
-    public string CalculateBroadCastMatchingValue(string Kategorie, string Content)
+    public void SetBroadcastGearText(string str)
     {
-        SetBroadCastValue(Kategorie, Content);
-
-        return GetMatchingRateComment(Mathf.RoundToInt(broadCast.GetMatchingRate()));
+        gearText.text = str;
     }
 
-    private void SetBroadCastValue(string Kategorie, string Content)
+    public void SetKategorieText(string str)
     {
-        int KategorieCount = ValueCastTo<int>.From(KeywordManager.Kategorie.Count);
-
-        for (int i = 0; i < KategorieCount; i++)
-        {
-            if ((KeywordManager.Content.BroadcasterTogether + i).ToString() == Kategorie)
-            {
-                broadCast.SetContent(KeywordManager.Content.BroadcasterTogether + i);
-            }
-        }
-
-        int ContentCount = ValueCastTo<int>.From(KeywordManager.Kategorie.Count);
-
-        for (int i = 0; i < ContentCount; i++)
-        {
-            if ((KeywordManager.Kategorie.Game + i).ToString() == Content)
-            {
-                broadCast.SetKategorie(KeywordManager.Kategorie.Game + i);
-            }
-        }
- 
-        string key = string.Format(Kategorie + "_" + Content);
-
-        float matchingRate = GetMatchingRate(Kategorie, Content);
-
-        broadCast.SetMatchingRate(matchingRate);
+        kategorieText.text = str;
     }
 
-    public float GetMatchingRate(string Kategorie, string Content)
+    public void SetContentText(string str)
     {
-        string key = string.Format("{0}_{1}", Kategorie, Content);
-
-        //float value = keywordMatching.ContainsKey(key) ? keywordMatching[key] : 0.0f;
-
-        float value = 0.0f;
-
-        return value;
+        contentText.text = str;
     }
+
+    public void SetDirectionText(string str)
+    {
+        directionText.text = str;
+    }
+
 
     public float GetCurrentMatchingRate()
     {
@@ -218,16 +172,6 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         // return matchingRateComment[index];
 
         return "";
-    }
-
-    public string GetCurrentKategorie()
-    {
-        return DataManager.Instance.ParsingBroadCastDataToString(broadCast.GetKategorie());
-    }
-
-    public string GetCurrentContent()
-    {
-        return DataManager.Instance.ParsingBroadCastDataToString(broadCast.GetContent());
     }
 
     //matchingrate 값을 broadcastplanning에서 관리하고, 모든 곳에서 수치로 사용

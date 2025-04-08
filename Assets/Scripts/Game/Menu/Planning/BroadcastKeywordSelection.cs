@@ -19,9 +19,14 @@ namespace BroadcastKeyword
         Hacker,
     }
 
+    public enum KeywordType
+    {
+        Kategorie, Content, Count,
+    }
+
     public enum Kategorie
     {
-        Game,
+        Game, 
         Sports,
         Music,
         Event,
@@ -34,74 +39,48 @@ namespace BroadcastKeyword
 
     public enum Content
     {
-        LOL,
-        Valorant,
-        Battleground,
-        Minecraft,
-        FIFA,
-        IntegratedGame,
-        HorrorGame,
+        LOL, Valorant, Battleground, Minecraft, FIFA, IntegratedGame, HorrorGame,
 
-        Baseball,
-        Badminton,
-        Rugby,
-        Analyze,
-        Golf,
-        Billiards,
-        Bowling,
-        ETCSports,
+        Baseball, Badminton, Rugby, Analyze, Golf, Billiards, Bowling, ETCSports,
 
-        Karaoke,
-        Cover,
-        NewAlbum,
-        MusicLive,
-        Streaming,
-        VirtualConcert,
-        Concert,
+        Karaoke, Cover, NewAlbum, MusicLive, Streaming, VirtualConcert, Concert,
 
-        Compotition,
-        CompetitionRelay,
-        Audition,
+        Compotition, CompetitionRelay, Audition,
 
-        Map,
-        Avatar,
-        SituationalComedy,
+        Map, Avatar, SituationalComedy,
 
-        Talk,
-        ASMR,
-        Mukbang,
-        Fashion,
-        Dance,
-        Cookbang,
-        TaravelVlog,
-        Camping,
-        Fishing,
-        Dubbing,
-        Radio,
-        Animal,
-        Car,
-        Comedy,
-        Exercise,
-        Movie,
-        Anime,
-        Food,
-        Beauty,
+        Talk, ASMR, Mukbang, Fashion, Dance,Cookbang, TaravelVlog, Camping, Fishing, Dubbing, Radio,
+        Animal, Car, Comedy, Exercise, Movie, Anime, Food, Beauty,
 
-        Style,
-        Drawing,
-        Science,
-        Tech,
-        Education,
-        Ent,
-        KnowHow,
+        Style, Drawing, Science, Tech, Education, Ent, KnowHow,
 
         Count,
+    }
+}
+
+public class UIButtonSelectionControll
+{
+    private Action buttonCancel;
+
+    public void RegisterCancelEvent(Action buttonCancel)
+    {
+        this.buttonCancel?.Invoke();
+
+        this.buttonCancel = buttonCancel;
+    }
+
+    //패널 종료
+    public void ResetEvent()
+    {
+        buttonCancel = null;
     }
 }
 
 public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection, KeywordSelect> 
 {
     public delegate void SetCurrentKeywordEvent(int index);
+    public delegate void ConfirmSelectKeyword(int index);
+    public delegate void CancelButtonEvent(Action action);
 
     //broadcastplanning 창에서
     //키워드 선택 시 selection창 띄움
@@ -115,11 +94,14 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     //2. 키워드의 인기정보 및 비용
     //3. 선택된 키워드와 다른 (카테고리 / 컨텐츠)와의 조합률
 
+    [Header("키워드 이미지 0 : 카테고리, 1 : 컨텐츠")] [SerializeField] private Sprite[] keywordImages;
+    [SerializeField] private UnityEngine.UI.Image keywordIcon;
+
     [SerializeField] private GameObject keywordParent; 
     private Stack<Action> exitPanelPoolEvents;
     private int[,] matchingValues;
 
-    [SerializeField]private Kategorie currentKategorie;
+    [SerializeField] private Kategorie currentKategorie;
     [SerializeField] private Content currentContent;
 
     [Header("매칭률 출력부")][SerializeField] private TextMeshProUGUI matchingTMP;
@@ -133,6 +115,9 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     private string[] matchingValueWords = { "늅", "계륵", "프로", "국밥", "해커" };
     private string[] popularity = { "혐", "애매쓰", "중간", "높음", "GOAT" };
 
+    //얘로 패널 끌 때, 리셋
+    //이벤트 등록 함수 넘겨주기
+    public UIButtonSelectionControll buttonSelectionController = new UIButtonSelectionControll();
 
     private new void Awake()
     {
@@ -159,6 +144,7 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     public void SetPanel(bool isKategorie)
     {
         isKategoriPanelActive = isKategorie;
+        buttonSelectionController.ResetEvent();
 
         for (int i = 0; i < (isKategorie ? kategories.Count : contents.Count); i++)
         {
@@ -169,12 +155,19 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
             obj.SetData(keyword.KoreanName, 1, popularity[keyword.Popularity - 1], 999, i);
         }
 
-        SetMatchingValue();
+        SetKeywordIcon();
+        SetMatchingValue(0);
     }
 
-    private void SetMatchingValue()
+    private void SetKeywordIcon()
     {
-        int matchingValue = GetMatchingValue();
+        keywordIcon.sprite = isKategoriPanelActive ? keywordImages[ValueCastTo<int>.From(KeywordType.Kategorie)]
+                                                    : keywordImages[ValueCastTo<int>.From(KeywordType.Content)];
+    }
+
+    private void SetMatchingValue(int index)
+    {
+        int matchingValue = GetMatchingValue(index);
 
         keywordMatchingTMP.text = string.Format("{0}(와)과 조합=",
                                                         isKategoriPanelActive ? GetKeyword(false, ValueCastTo<int>.From(currentContent)).KoreanName
@@ -188,11 +181,22 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         else
         {
             matchingTMP.text = "첫 시도";
-            SetMatcingValue();              //매칭률 원래 값으로 변경
         }
     }
 
     public void SetSelectedKeyword(int index)
+    {
+        if (isKategoriPanelActive)
+        {
+            SetMatchingValue(index);
+        }
+        else
+        {
+            SetMatchingValue(index);
+        }
+    }
+
+    public void ConfirmKeyword(int index)
     {
         if (isKategoriPanelActive)
         {
@@ -203,12 +207,29 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
             currentContent = Content.LOL + index;
         }
 
-        SetMatchingValue();
+        ConfirmToBroadcastPanel();
+        MenuController.Instance.MenuBack();
     }
 
+    private void ConfirmToBroadcastPanel()
+    {
+        if (isKategoriPanelActive)
+        {
+            BroadCastPlanning.Instance.SetKategorieText(GetKeyword(isKategoriPanelActive, ValueCastTo<int>.From(currentKategorie)).KoreanName);
+        }
+        else
+        {
+            BroadCastPlanning.Instance.SetContentText(GetKeyword(isKategoriPanelActive, ValueCastTo<int>.From(currentContent)).KoreanName);
+        }
+    }
+
+    //broadcastpanel에서 결정 누를 때 해당 함수도 같이 호출
     public void SetMatchingValuePositive()
     {
-
+        if (GetMatchingValue() < 0)
+        {
+            matchingValues[ValueCastTo<int>.From(currentContent), ValueCastTo<int>.From(currentKategorie)] *= -1;
+        }
     }
 
     private Keyword GetKeyword(bool isKategorie, int index)
@@ -223,11 +244,14 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         return matchingValues[ValueCastTo<int>.From(currentContent), ValueCastTo<int>.From(currentKategorie)];
     }
 
-    //-값 +로 변경
-    private void SetMatcingValue()
+    private int GetMatchingValue(int index)
     {
-        matchingValues[ValueCastTo<int>.From(currentContent), ValueCastTo<int>.From(currentKategorie)] *= -1;
+        Kategorie kategorie = isKategoriPanelActive ?  Kategorie.Game + index : currentKategorie;
+        Content content = isKategoriPanelActive ? currentContent : Content.LOL + index ;
+
+        return matchingValues[ValueCastTo<int>.From(content), ValueCastTo<int>.From(kategorie)];
     }
+
 
     //매니저 측에서 창 껏을 때 등록된 애들 호출해서 return pool
     //setdata 시 등록
@@ -242,6 +266,11 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         {
             exitPanelPoolEvents.Pop()?.Invoke();
         }
+    }
+
+    private void UpdateSelectedKeyword()
+    {
+
     }
 
     //public 

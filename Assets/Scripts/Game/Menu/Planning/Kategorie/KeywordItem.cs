@@ -8,17 +8,17 @@ public class KeywordItem : MonoBehaviour
     //BroadcastPlanning에게 값을 주고 어떤 애를 바꿔야 하는지도 같이 넘겨주고
     //broadcastplanning에게 넘겨줘야 result 반영 가능
 
-    [SerializeField] private KeywordManager.KategorieData kategorieData;
+    // [SerializeField] private KeywordManager.KategorieData kategorieData;
 
-    public void Init(KeywordManager.BroadcastElement BroadcastElement, string itemName)
-    {
-        kategorieData = new KeywordManager.KategorieData();
+    // public void Init(KeywordManager.BroadcastElement BroadcastElement, string itemName)
+    // {
+    //     kategorieData = new KeywordManager.KategorieData();
 
-        kategorieData.Init(BroadcastElement, itemName);
-    }
+    //     kategorieData.Init(BroadcastElement, itemName);
+    // }
 
-    public void SelectItem()
-    {
-        //KeywordManager.Instance.UpdateKategorieSelect(kategorieData);
-    }
+    // public void SelectItem()
+    // {
+    //     //KeywordManager.Instance.UpdateKategorieSelect(kategorieData);
+    // }
 }

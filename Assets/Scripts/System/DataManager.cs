@@ -18,17 +18,6 @@ public class DataManager : GenericSingleton<DataManager>
         HashInit();
     }
 
-    private void OnEnable()
-    {
-        SetKategorieData();
-    }
-
-    //시트에서 Point_Comment format으로 string 변환 후 dictionary 추가
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="data"> int : caferank, int : point, string : comment</param>
     public void SetReviewComment(Dictionary<int, Dictionary<int, string[]>> data)
     {
         List<ReviewCommentData> reviewList = JsonManager.Instance.GetReviewCommentData();
@@ -78,27 +67,6 @@ public class DataManager : GenericSingleton<DataManager>
         date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
 
-    //테스트 함수들 (예시임)
-    //안에 데이터들은 임시로 넣어 둔 거고
-    //이후 데이터 시트로 변경 
-    public void SetBroadcastValue(Dictionary<string, float> broadCast)
-    {
-        string key = string.Format("{0}_{1}", "게임", "개인");
-        float value = 5.0f;
-
-        broadCast.Add(key, value);
-    }
-
-    public void SetBroadcastMatching(List<string> matchingRateComment)
-    {
-        string[] matchings = { "첫 시도", "눕", "계륵", "프로", "국밥", "해커" };
-
-        foreach (var value in matchings)
-        {
-            matchingRateComment.Add(value);
-        }
-    }
-
     public void SetMatchingValue(ref int[,] list)
     {
         List<MatchingData> matchingData = JsonManager.Instance.GetMatchingData();
@@ -145,54 +113,6 @@ public class DataManager : GenericSingleton<DataManager>
 
         return list;
     }
-
-    public string ParsingBroadCastDataToString(KeywordManager.Kategorie Kategorie)
-    {
-        return KategorieWords[(int)Kategorie];
-    }
-
-    public string ParsingBroadCastDataToString(KeywordManager.Content Content)
-    {
-        return typeWords[(int)Content];
-    }
-
-    private Dictionary<KeywordManager.BroadcastElement, string[]> kategorieDatas = new Dictionary<KeywordManager.BroadcastElement, string[]>();
-
-    private string[] KategorieWords;
-    private string[] typeWords;
-
-    private void SetKategorieData()
-    {
-        //json데이터 읽는 거 추가 후 변경
-        //초기 프로토타입으로 4개씩 임의로 설정하는 걸로
-        //언락 정보는 bit연산으로 가지고 있는걸로 함
-        //Gear
-        string[] gears = { "기본", "VR", "트래커", "모션캡쳐" };
-
-        //Content
-        string[] Kategorie = { "게임", "노래", "댄스", "토크" };
-
-        //Type
-        string[] types = { "개인", "합방", "시참", "대결" };
-
-        KategorieWords = Kategorie;
-        typeWords = types;
-
-        kategorieDatas.Add(KeywordManager.BroadcastElement.Gear, gears);
-        kategorieDatas.Add(KeywordManager.BroadcastElement.Content, Kategorie);
-        kategorieDatas.Add(KeywordManager.BroadcastElement.Type, types);
-    }
-
-    public string[] GetKategorieData(KeywordManager.BroadcastElement BroadcastElement)
-    {
-        if (!kategorieDatas.ContainsKey(BroadcastElement))
-        {
-            return new string[] { "" };
-        }
-
-        return kategorieDatas[BroadcastElement];
-    }
-
 
     /// <summary>
     /// 여기부터 테스트용임.

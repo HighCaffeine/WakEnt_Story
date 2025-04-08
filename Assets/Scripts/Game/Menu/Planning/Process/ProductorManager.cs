@@ -438,7 +438,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         SetTitle(1);
         
 
-        ProcessingMessage(BroadCastPlanning.Instance.GetCurrentKategorie() + "방송 제작 알잘딱하게");
+        //ProcessingMessage(BroadCastPlanning.Instance.GetCurrentKategorie() + "방송 제작 알잘딱하게");
         
         //GameScene에서 Processing종료 후 플레이어가 확인 후 SOundmanager에게 replay요청
 
@@ -559,7 +559,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         MenuController.Instance.CloseAllMenu();         //확인해야함 정상작동하는지 모든 켜진 메뉴를 다 꺼야해서 
         //MenuController.Instance.CloseOtherMenu();
-        SoundManager.Instance.ReplayAudio();
+        if (SoundManager.Instance) SoundManager.Instance.ReplayAudio();
     }
 
     private void ProcessedPointAddToBroadcast()

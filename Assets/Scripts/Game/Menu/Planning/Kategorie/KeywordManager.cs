@@ -11,76 +11,76 @@ public class KeywordManager : GenericSingleton<KeywordManager>
     //broadcastplanning이 나머지 정보들 업데이트 해서 결과값 반영되게
 
 
-    public enum BroadcastElement
-    {
-        Gear,
-        Content,
-        Type,
-    }
+    // public enum BroadcastElement
+    // {
+    //     Gear,
+    //     Content,
+    //     Type,
+    // }
 
-    public enum Content
-    {
-        BroadcasterTogether,
-        ViewerParticipation,
+    // public enum Content
+    // {
+    //     BroadcasterTogether,
+    //     ViewerParticipation,
 
-        Count,
-    }
+    //     Count,
+    // }
 
-    public enum Kategorie
-    {
-        Game,
-        VRTalk,
-        Dance,
-        SingASong,
-        Talk,
-        Radio,
+    // public enum Kategorie
+    // {
+    //     Game,
+    //     VRTalk,
+    //     Dance,
+    //     SingASong,
+    //     Talk,
+    //     Radio,
 
-        Count,
-    }
+    //     Count,
+    // }
 
     
 
-    [Serializable]
-    public class KategorieData
-    {
-        [SerializeField] private string kategorieData;
-        [SerializeField] private BroadcastElement BroadcastElement;
+    // [Serializable]
+    // public class KategorieData
+    // {
+    //     [SerializeField] private string kategorieData;
+    //     [SerializeField] private BroadcastElement BroadcastElement;
 
-        public string GetName()
-        {
-            return kategorieData;
-        }
+    //     public string GetName()
+    //     {
+    //         return kategorieData;
+    //     }
 
-        public BroadcastElement GetBroadcastElement()
-        {
-            return BroadcastElement;
-        }
+    //     public BroadcastElement GetBroadcastElement()
+    //     {
+    //         return BroadcastElement;
+    //     }
 
-        public void Init(BroadcastElement BroadcastElement, string kategorieData)
-        {
-            this.BroadcastElement = BroadcastElement;
-            this.kategorieData = kategorieData;
-        }
-    }
+    //     public void Init(BroadcastElement BroadcastElement, string kategorieData)
+    //     {
+    //         this.BroadcastElement = BroadcastElement;
+    //         this.kategorieData = kategorieData;
+    //     }
+    // }
 
-    [SerializeField] private GameObject itemPrefab;
+    // [SerializeField] private GameObject itemPrefab;
 
-    [SerializeField] private GameObject newAttempt;
+    // [SerializeField] private GameObject newAttempt;
 
-    [Header("Kategorie")]
-    [SerializeField] private GameObject gear;
-    [SerializeField] private GameObject content;
-    [SerializeField] private GameObject type;
+    // [Header("Kategorie")]
+    // [SerializeField] private GameObject gear;
+    // [SerializeField] private GameObject content;
+    // [SerializeField] private GameObject type;
 
-    private GameObject gearObj;
-    private GameObject kategorieObj;
-    private GameObject contentObj;
+    // private GameObject gearObj;
+    // private GameObject kategorieObj;
+    // private GameObject contentObj;
 
-    [SerializeField] private TextMeshProUGUI gearTMP;
-    private TextMeshProUGUI kategorieTMP;
-    private TextMeshProUGUI contentTMP;
+    // [SerializeField] private TextMeshProUGUI gearTMP;
+    // private TextMeshProUGUI kategorieTMP;
+    // private TextMeshProUGUI contentTMP;
 
-    private TextMeshProUGUI matchingResult;
+    // private TextMeshProUGUI matchingResult;
 
     // private new void Awake()
     // {
