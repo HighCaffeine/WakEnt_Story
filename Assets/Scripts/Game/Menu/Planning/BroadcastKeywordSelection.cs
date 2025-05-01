@@ -134,6 +134,13 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         contents = DataManager.Instance.GetKeyword(false);
     }
 
+    public int GetSelectCharacterLimit()
+    {
+        //각 키워드별 멤버 선택 수 제한
+
+        return 2;
+    }
+
     //패널 열 때에
     //키워드 두종류 언락된 애들만 받아오고
     //언락하는건 추후에 추가해야하는데

@@ -13,11 +13,65 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     //메뉴를 만들 때 broadcastplaning에 list로 되어있는 걸
     //data매니저가 먼저 세팅을 해 주고, menucontroller가 메뉴를 생성할 때(start)
     //hash/dictionary로 넘겨줄 듯(menucontroller는 이름만 알면 됨)
-        [Header("방송 제작 키워드")]
-        [SerializeField] private TMPro.TextMeshProUGUI gearText;
-        [SerializeField] private TMPro.TextMeshProUGUI kategorieText;
-        [SerializeField] private TMPro.TextMeshProUGUI contentText;
-        [SerializeField] private TMPro.TextMeshProUGUI directionText;
+    [Header("방송 제작 키워드")]
+    [SerializeField] private TMPro.TextMeshProUGUI gearText;
+    [SerializeField] private TMPro.TextMeshProUGUI kategorieText;
+    [SerializeField] private TMPro.TextMeshProUGUI contentText;
+    [SerializeField] private TMPro.TextMeshProUGUI directionText;
+
+    [SerializeField] private TMPro.TextMeshProUGUI priceText;           //방송제작 비용
+    //[SerializeField] private TMPro.TextMeshProUGUI memberSelectCount;   //선택할 멤버 수 (특정 키워드는 2명 이상 선택 가능)
+
+    [Space(10f)]
+    [Header("이세돌 선택")]
+    [SerializeField] private GameObject isedolSelectParent;
+    private List<UnityEngine.UI.Image> isedolSelectList = new List<UnityEngine.UI.Image>();
+    private float unselectedAlpha = 65;
+    private float selectedAlpha = 255;
+    private int isedolSelected = 0;
+    private int isedolSelectCount = 0;
+
+    public void SelectIsedol(int index)
+    {
+        if (index < ValueCastTo<int>.From(CharacterManager.ISEGYEIDOL.Ine)
+            || index > ValueCastTo<int>.From(CharacterManager.ISEGYEIDOL.Viichan))
+        {
+            //out of range
+            return;
+        }
+        
+        int isedolIndex = 1 << (ValueCastTo<int>.From((CharacterManager.ISEGYEIDOL.Ine)) + index);
+
+        if (isedolSelected < BroadcastKeywordSelection.Instance.GetSelectCharacterLimit())
+        {
+            //선택 안햇으면 무조건 다 하고 return
+            if ((isedolSelected & isedolIndex) == 0)
+            {
+                isedolSelectCount++;
+                isedolSelected |= isedolIndex;
+
+                Color color = isedolSelectList[index].color;
+                color.a = selectedAlpha;
+                isedolSelectList[isedolIndex].color = color;
+
+                return;
+            }
+        }
+
+        if ((isedolSelected & isedolIndex) != 0)
+        {
+            isedolSelectCount--;
+            isedolSelected &= ~isedolIndex;
+
+            Color color = isedolSelectList[index].color;
+            color.a = unselectedAlpha;
+            isedolSelectList[isedolIndex].color = color;
+
+            return;
+        }
+    }
+
+
     [Serializable]
     private class Broadcast
     {
@@ -51,13 +105,13 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 switch (type)
                 {
                     case ProductorManager.ProductorType.Planner:
-                    return plannerPoint;
+                        return plannerPoint;
                     case ProductorManager.ProductorType.Designer:
-                    return designerPoint;
+                        return designerPoint;
                     case ProductorManager.ProductorType.Composer:
-                    return composerPoint;
+                        return composerPoint;
                     case ProductorManager.ProductorType.Promotor:
-                    return promotionPoint;
+                        return promotionPoint;
                 }
 
                 return 0;
@@ -68,17 +122,17 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 switch (type)
                 {
                     case ProductorManager.ProductorType.Planner:
-                    plannerPoint = value;
-                    break;
+                        plannerPoint = value;
+                        break;
                     case ProductorManager.ProductorType.Designer:
-                    designerPoint = value;
-                    break;
+                        designerPoint = value;
+                        break;
                     case ProductorManager.ProductorType.Composer:
-                    composerPoint = value;
-                    break;
+                        composerPoint = value;
+                        break;
                     case ProductorManager.ProductorType.Promotor:
-                    promotionPoint = value;
-                    break;
+                        promotionPoint = value;
+                        break;
                 }
             }
 
@@ -112,6 +166,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     private new void Awake()
     {
         base.Awake();
+
+        SetIsedolImageComponenet();
     }
 
     [SerializeField] private Broadcast broadCast;
@@ -128,6 +184,16 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public void InitBroadcast()
     {
         broadCast.Init();
+        isedolSelected = 0;
+        isedolSelectCount = 0;
+    }
+
+    private void SetIsedolImageComponenet()
+    {
+        for (int i = 0; i < isedolSelectParent.transform.childCount; i++)
+        {
+            isedolSelectList.Add(isedolSelectParent.transform.GetChild(i).GetChild(0).GetComponent<UnityEngine.UI.Image>());
+        }
     }
 
     public void SetBroadcastGearText(string str)
@@ -148,6 +214,22 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public void SetDirectionText(string str)
     {
         directionText.text = str;
+    }
+
+    //키워드쪽에서 수치 계산해서 줘야함.
+    //패널 끌 때 여기서 가지고 있거나 selection쪽에서 해야하는데.
+    //여기서 받은 수치 * 기어배율 * 기획방향 배율로 비용 결정정
+    public void SetPriceText(int price)
+    {
+        priceText.text = string.Format("제작비 : {0}", price.ToString());
+    }
+
+    //키워드쪽에서 판단해서 limit값 전달.
+    //limit보다 현재 선택된 캐릭터수가 많을 경우
+    //글자수를 빨간색으로 변경만하고 다른행동 X
+    public void SetMemberCount(int limit)
+    {
+        
     }
 
 
@@ -206,7 +288,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
         UpdateBroadcastPoint();
     }
- 
+
 
     //화면 하단/상단에 진행도, 스텟 4개 보여지게 
     public void UpdateBroadcastPoint()
@@ -271,7 +353,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         //ProcessStatus.Instance.UpdateViewerTap();       //tab에서 받아서 업데이트
     }
 
-    private int[] stepValue = {40, 80, 100};
+    private int[] stepValue = { 40, 80, 100 };
 
     private int currentProcessStep = 0;
 
@@ -297,13 +379,13 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
             return;
         }
-        else 
-        {       
+        else
+        {
             //현재 단계에 맞는 작업자 선택창
             SetNextProductorSelection();
         }
     }
-    
+
 
 
     public void TestProcessingMethod()
@@ -316,17 +398,17 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         switch (processStep)
         {
             case 0:     //기획
-            value = 0;
-            break;
+                value = 0;
+                break;
             case 1:     //맵 제작
-            value = 40;
-            break;
+                value = 40;
+                break;
             case 2:     //작곡
-            value = 80;
-            break;
+                value = 80;
+                break;
             case 3:
-            value = 100;
-            break;
+                value = 100;
+                break;
         }
 
         broadCast.SetProcessRate(value);                                //새로 업데이트 된 진행률 값
@@ -340,8 +422,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
 
             return;
         }
-        else 
-        {       
+        else
+        {
             //현재 단계에 맞는 작업자 선택창
             SetNextProductorSelection();
         }
