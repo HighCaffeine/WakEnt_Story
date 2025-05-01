@@ -45931,7 +45931,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   raycastDisabledPanel: {fileID: 0}
-  canvasScaler: {fileID: 0}
+  canvasScaler: {fileID: 968073241}
   interactiveButton: {fileID: 2087841425}
   dateText: {fileID: 2129891126}
   timeRect: {fileID: 363397750}
@@ -56113,14 +56113,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: INE
       objectReference: {fileID: 0}
-    - target: {fileID: 3095563715921792060, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 97258601}
-    - target: {fileID: 3720809260791183531, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
-      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 97258601}
     - target: {fileID: 7457376691780176686, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
