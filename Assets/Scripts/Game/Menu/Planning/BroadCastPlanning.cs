@@ -25,9 +25,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     [Space(10f)]
     [Header("이세돌 선택")]
     [SerializeField] private GameObject isedolSelectParent;
-    private List<UnityEngine.UI.Image> isedolSelectList = new List<UnityEngine.UI.Image>();
-    private float unselectedAlpha = 65;
-    private float selectedAlpha = 255;
+    private List<ImagePointerEvent> isedolPointerEvents = new List<ImagePointerEvent>();
     private int isedolSelected = 0;
     private int isedolSelectCount = 0;
 
@@ -39,33 +37,32 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             //out of range
             return;
         }
-        
-        int isedolIndex = 1 << (ValueCastTo<int>.From((CharacterManager.ISEGYEIDOL.Ine)) + index);
 
-        if (isedolSelected < BroadcastKeywordSelection.Instance.GetSelectCharacterLimit())
+        int isedolIndex = ValueCastTo<int>.From(CharacterManager.ISEGYEIDOL.Ine) + index;
+        int isedolBinary = 1 << isedolIndex;
+
+        if (isedolSelectCount < BroadcastKeywordSelection.Instance.GetSelectCharacterLimit())
         {
             //선택 안햇으면 무조건 다 하고 return
-            if ((isedolSelected & isedolIndex) == 0)
+            if ((isedolSelected & isedolBinary) == 0)
             {
                 isedolSelectCount++;
-                isedolSelected |= isedolIndex;
+                isedolSelected |= isedolBinary;
 
-                Color color = isedolSelectList[index].color;
-                color.a = selectedAlpha;
-                isedolSelectList[isedolIndex].color = color;
+                isedolPointerEvents[index].SetNormalColor();
+                isedolPointerEvents[index].SetAllowMouseEvent(false);
 
                 return;
             }
         }
 
-        if ((isedolSelected & isedolIndex) != 0)
+        if ((isedolSelected & isedolBinary) != 0)
         {
             isedolSelectCount--;
-            isedolSelected &= ~isedolIndex;
+            isedolSelected &= ~isedolBinary;
 
-            Color color = isedolSelectList[index].color;
-            color.a = unselectedAlpha;
-            isedolSelectList[isedolIndex].color = color;
+            isedolPointerEvents[index].SetTransparencyColor();
+            isedolPointerEvents[index].SetAllowMouseEvent(true);
 
             return;
         }
@@ -186,13 +183,19 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         broadCast.Init();
         isedolSelected = 0;
         isedolSelectCount = 0;
+
+        foreach (var isedolPointerEvent in isedolPointerEvents)
+        {
+            isedolPointerEvent.SetAllowMouseEvent(true);
+            isedolPointerEvent.SetTransparencyColor();
+        }
     }
 
     private void SetIsedolImageComponenet()
     {
         for (int i = 0; i < isedolSelectParent.transform.childCount; i++)
         {
-            isedolSelectList.Add(isedolSelectParent.transform.GetChild(i).GetChild(0).GetComponent<UnityEngine.UI.Image>());
+            isedolPointerEvents.Add(isedolSelectParent.transform.GetChild(i).GetChild(0).GetComponent<ImagePointerEvent>());
         }
     }
 

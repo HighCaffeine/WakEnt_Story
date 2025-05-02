@@ -45805,7 +45805,19 @@ MonoBehaviour:
         m_Calls: []
     onEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 97258601}
+          m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
+          m_MethodName: InitBroadcast
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   gearSelectionPanelObject:
     panel: {fileID: 976539728}
     offEvent:
@@ -55765,7 +55777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840711470710757792, guid: 6fcdf10bf23e03c49984fc889bfbec17, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8033970315865697034, guid: 6fcdf10bf23e03c49984fc889bfbec17, type: 3}
       propertyPath: effect
@@ -56112,6 +56124,14 @@ PrefabInstance:
     - target: {fileID: 1936522624337477579, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
       propertyPath: m_Name
       value: INE
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720809260791183531, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 97258601}
+    - target: {fileID: 7236317030965982588, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
+      propertyPath: m_Color.a
+      value: 0.25490198
       objectReference: {fileID: 0}
     - target: {fileID: 7457376691780176686, guid: 06ee001bd8914a342898bdf159c4dcc3, type: 3}
       propertyPath: m_Pivot.x

@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 7236317030965982588}
-  normalColor: {r: 1, g: 1, b: 1, a: 0.25490198}
+  trancparencyColor: {r: 1, g: 1, b: 1, a: 0.25490198}
   pointerEnterColor: {r: 1, g: 1, b: 1, a: 1}
   clickEvent:
     m_PersistentCalls:

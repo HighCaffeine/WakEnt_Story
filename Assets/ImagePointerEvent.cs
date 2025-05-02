@@ -6,23 +6,46 @@ using UnityEngine.Events;
 public class ImagePointerEvent : MonoBehaviour
 {
     [Header("Target Image")][SerializeField] private UnityEngine.UI.Image target;
-    [Header("Normal Color")][SerializeField] private Color normalColor;
+    [Header("Trancparency Color")][SerializeField] private Color trancparencyColor;
     [Header("Pointer Enter Color")][SerializeField] private Color pointerEnterColor;
 
     [Header("Click Event")][SerializeField] private UnityEvent clickEvent;
 
+
+    private bool isAllowMouseEvent = true;
+
     public void OnPointerEnter()
     {
-        target.color = pointerEnterColor;
+        if (!isAllowMouseEvent) return;
+
+        SetNormalColor();
     }
 
     public void OnPointerExit()
     {
-        target.color = normalColor; 
+        if (!isAllowMouseEvent) return;
+
+        SetTransparencyColor();
     }
 
     public void OnPointerClick()
     {
         clickEvent?.Invoke();
+    }
+
+    public void SetNormalColor()
+    {
+        target.color = pointerEnterColor;
+    }
+
+    public void SetTransparencyColor()
+    {
+        Debug.Log("set transparency");
+        target.color = trancparencyColor;
+    }
+
+    public void SetAllowMouseEvent(bool value)
+    {
+        isAllowMouseEvent = value;
     }
 }

@@ -242,8 +242,6 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
     public void OpenProductorSelection()
     {
-        Debug.Log(productorStatusList.Count);
-
         foreach (var data in productorStatusList)
         {
             if (CurrentProductorType == data.productorInfo.productorType)
