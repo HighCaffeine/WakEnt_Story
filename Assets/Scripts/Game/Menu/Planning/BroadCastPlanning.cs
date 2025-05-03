@@ -29,6 +29,13 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     private int isedolSelected = 0;
     private int isedolSelectCount = 0;
 
+    public bool IsActiveMember(CharacterManager.ISEGYEIDOL isegyeidol)
+    {
+        int value = 1 << (ValueCastTo<int>.From(isegyeidol));
+
+        return ((isedolSelected & value) != 0);
+    }
+
     public void SelectIsedol(int index)
     {
         if (index < ValueCastTo<int>.From(CharacterManager.ISEGYEIDOL.Ine)

@@ -40,7 +40,6 @@ public class ImagePointerEvent : MonoBehaviour
 
     public void SetTransparencyColor()
     {
-        Debug.Log("set transparency");
         target.color = trancparencyColor;
     }
 

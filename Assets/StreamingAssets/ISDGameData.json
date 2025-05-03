@@ -1424,7 +1424,7 @@
     },
     {
       "Content": "Valorant",
-      "Game": -4,
+      "Game": 4,
       "Sports": -1,
       "Music": -1,
       "Event": -4,
@@ -1464,7 +1464,7 @@
     },
     {
       "Content": "IntegratedGame",
-      "Game": -5,
+      "Game": 5,
       "Sports": -1,
       "Music": -1,
       "Event": -1,
@@ -1953,6 +1953,557 @@
       "Creative": -3
     }
   ],
+  "ISDKeywordLevel": [
+    {
+      "Keyword": "Game",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Sports",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Music",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Event",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "VRChat",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Life",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Creative",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "LOL",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Valorant",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Battleground",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Minecraft",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "FIFA",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "IntegratedGame",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "HorrorGame",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Baseball",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Badminton",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Rugby",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Analyze",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Golf",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Billiards",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Bowling",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "ETCSports",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Karaoke",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Cover",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "NewAlbum",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "MusicLive",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Streaming",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "VirtualConcert",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Concert",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Compotition",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "CompetitionRelay",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Audition",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Map",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Avatar",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "SituationalComedy",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Talk",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "ASMR",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Mukbang",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Fashion",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Dance",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Cookbang",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "TaravelVlog",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Camping",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Fishing",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Dubbing",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Radio",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Animal",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Car",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Comedy",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Exercise",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Movie",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Anime",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Food",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Beauty",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Style",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Drawing",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Science",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Tech",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Education",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "Ent",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    },
+    {
+      "Keyword": "KnowHow",
+      "Ine": 1,
+      "JingBurger": 1,
+      "Lilpa": 1,
+      "Jururu": 1,
+      "Gosegu": 1,
+      "Viichan": 1
+    }
+  ],
   "Keyword": [
     {
       "KeywordKey": "Game",
@@ -2187,7 +2738,7 @@
     },
     {
       "KeywordKey": "Avatar",
-      "KoreanName": "바타",
+      "KoreanName": "아바타",
       "Type": "Content",
       "Popularity": 3,
       "Unlocked": 1

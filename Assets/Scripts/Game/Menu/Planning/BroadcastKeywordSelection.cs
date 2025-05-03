@@ -107,6 +107,9 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     [Header("매칭률 출력부")][SerializeField] private TextMeshProUGUI matchingTMP;
                             [SerializeField] private TextMeshProUGUI keywordMatchingTMP;
 
+    [Space(10f)]
+    [Header("이세돌 스킬 레벨 하트")]
+    [SerializeField] private TextMeshProUGUI[] memberSkillLevels;
 
     //언락된 애들만 담거나 해야할듯
     private List<Keyword> kategories;
@@ -148,10 +151,30 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
 
     private bool isKategoriPanelActive;
 
+    public struct IsedolMemberSkillInfo
+    {
+        public int level;
+        public bool isSelected;
+
+        public IsedolMemberSkillInfo(int level, bool isSelected)
+        {
+            this.level = level;
+            this.isSelected = isSelected;
+        }
+    }
+
     public void SetPanel(bool isKategorie)
     {
         isKategoriPanelActive = isKategorie;
         buttonSelectionController.ResetEvent();
+
+        for (int i = 0; i < memberSkillLevels.Length; i++)
+        {
+            Color color = memberSkillLevels[i].color;
+            color.a = (BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Ine + i) ? 255f : 65f) / 255f;
+
+            memberSkillLevels[i].color = color;
+        }
 
         for (int i = 0; i < (isKategorie ? kategories.Count : contents.Count); i++)
         {
@@ -159,7 +182,21 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
             Keyword keyword = GetKeyword(isKategorie, i);
 
             obj.transform.SetParent(keywordParent.transform);
-            obj.SetData(keyword.KoreanName, 1, popularity[keyword.Popularity - 1], 999, i);
+
+            int keywordIndex = i + (isKategorie ? 0 : ValueCastTo<int>.From(Kategorie.Count));
+            ISDKeywordLevel isdKeywordLevel = DataManager.Instance.GetISDKeyworldLevel(keywordIndex);
+
+            obj.SetData(keyword.KoreanName, 
+                new IsedolMemberSkillInfo[]
+                { new IsedolMemberSkillInfo(isdKeywordLevel.Ine, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Ine)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.JingBurger, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.JingBurger)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Lilpa, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Lilpa)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Jururu, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Jururu)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Gosegu, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Gosegu)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Viichan, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Viichan)) },
+                  popularity[keyword.Popularity - 1], 
+                  999, 
+                  i);
         }
 
         SetKeywordIcon();

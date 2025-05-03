@@ -267,6 +267,13 @@ public class DataManager : GenericSingleton<DataManager>
         return temp;
     }
 
+    public ISDKeywordLevel GetISDKeyworldLevel(int index)
+    {
+        List<ISDKeywordLevel> iSDKeywordLevels = JsonManager.Instance.GetISDKeywordLevel();
+
+        return iSDKeywordLevels[index];
+    }
+
     public AnimationClip GetAnimationClipFromID(ResourceID resourceID, ResourceType resourceType)
     {
         long key = ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType);

@@ -1,31 +1,79 @@
+using JetBrains.Annotations;
 using System;
 
 public enum ResourceID
 {
-    Item_Broadcast_Fever                = 101,
-    Item_Broadcast_FatigueReliever      = 102,
-    Item_Broadcast_PlanPointBoost       = 103,
-    Item_Broadcast_DesignPointBoost     = 104,
-    Item_Broadcast_SoundPointBoost      = 105,
-    Item_Broadcast_PromotionPointBoost  = 106,
-    Stat_Broadcast_InterestPoint        = 201,
-    Stat_Broadcast_QualityPoint         = 202,
-    Stat_Broadcast_SoundPoint           = 203,
-    Stat_Broadcast_EditingPoint         = 204,
-    Character_ISD_Ine                   = 1001,
-    Character_ISD_Jingburger            = 1002,
-    Character_ISD_Lilpa                 = 1003,
-    Character_ISD_Jururu                = 1004,
-    Character_ISD_Gosegu                = 1005,
-    Character_ISD_Viichan               = 1006,
-    Character_WAK_Wakgood               = 2001,
-    Character_WAK_Roentgenium           = 2002,
-    Character_Productor_Temp1           = 3001,
-    Character_Productor_Temp2           = 3002,
-    Character_Productor_Temp3           = 3003,
-    Character_Productor_Temp4           = 3004,
-    Character_Productor_Temp5           = 3005,
-    Character_Productor_Temp6           = 3006,
+    Item_Broadcast_Fever                        = 101,
+    Item_Broadcast_FatigueReliever              = 102,
+    Item_Broadcast_PlanPointBoost               = 103,
+    Item_Broadcast_DesignPointBoost             = 104,
+    Item_Broadcast_SoundPointBoost              = 105,
+    Item_Broadcast_PromotionPointBoost          = 106,
+    Stat_Broadcast_InterestPoint                = 201,
+    Stat_Broadcast_QualityPoint                 = 202,
+    Stat_Broadcast_SoundPoint                   = 203,
+    Stat_Broadcast_EditingPoint                 = 204,
+
+    Character_ISD_Ine                           = 1001,
+    Character_ISD_Jingburger                    = 1002,
+    Character_ISD_Lilpa                         = 1003,
+    Character_ISD_Jururu                        = 1004,
+    Character_ISD_Gosegu                        = 1005,
+    Character_ISD_Viichan                       = 1006,
+    Character_WAK_Wakgood                       = 2001,
+    Character_WAK_Roentgenium                   = 2002,
+
+    Character_Productor_Dulgi                   = 3001,
+    Character_Productor_DdongGangAJi            = 3002,
+    Character_Productor_PackJi                  = 3003,
+    Character_Productor_JuPockDo                = 3004,
+    Character_Productor_GyunNyangI              = 3005,
+    Character_Productor_Rani                    = 3006,
+    Character_Productor_Panchi                  = 3007,
+    Character_Productor_MaeHyeong               = 3008,
+    Character_Productor_Geomeori                = 3009,
+    Character_Productor_Batman                  = 3010,
+    Character_Productor_SakSakKimchi            = 3011,
+    Character_Productor_GwakChunSik             = 3012,
+    Character_Productor_Bulgom                  = 3013,
+    Character_Productor_LoveMissionaryJentoo    = 3014,
+    Character_Productor_Kritz                   = 3015,
+    Character_Productor_ButterusIII             = 3016,
+    Character_Productor_BujungMan               = 3017,
+    Character_Productor_Hodd                    = 3018,
+    Character_Productor_IceKaekki               = 3019,
+    Character_Productor_MechMenggisan           = 3020,
+    Character_Productor_PungSin                 = 3021,
+    Character_Productor_SuSaemI                 = 3022,
+    Character_Productor_Tiffany                 = 3023,
+    Character_Productor_LeeDeokSoo              = 3024,
+    Character_Productor_MiMiZZangZZang          = 3025,
+    Character_Productor_Dandap                  = 3026,
+    Character_Productor_Gilbert                 = 3027,
+    Character_Productor_Shallot                 = 3028,
+    Character_Productor_CarnarJungtur           = 3029,
+    Character_Productor_KimchiMandoo            = 3030,
+    Character_Productor_Dopamin                 = 3031,
+    Character_Productor_DokkoHyeji              = 3032,
+    Character_Productor_Secretto                = 3033,
+    Character_Productor_Beiter                  = 3034,
+    Character_Productor_JinHee                  = 3035,
+    Character_Productor_CaptainSullivan         = 3036,
+    Character_Productor_SirianRain              = 3037,
+    Character_Productor_NinNin                  = 3038,
+    Character_Productor_DeathHammerChouloky     = 3039,
+    Character_Productor_RUSUK                   = 3040,
+    Character_Productor_CallyCarlyDavidson      = 3041,
+    Character_Productor_BusinessKim             = 3042,
+    Character_Productor_HIkiKing                = 3043,
+    Character_Productor_Roentgenium             = 3044,
+    Character_Productor_Victory                 = 3045,
+    Character_Productor_HamIne                  = 3046,
+    Character_Productor_BobBurger               = 3047,
+    Character_Productor_Ddilpa                  = 3048,
+    Character_Productor_GuiJokHee               = 3049,
+    Character_Productor_BJPangE                 = 3050,
+    Character_Productor_MangNyangNyang          = 3051,
 } 
 
 //위의 ResourceID + Type값 -> 리소스 데이터
@@ -101,6 +149,7 @@ public class DataTable
 {
     public System.Collections.Generic.List<PlayerData> PlayerData;
     public System.Collections.Generic.List<MatchingData> MatchingData;
+    public System.Collections.Generic.List<ISDKeywordLevel> ISDKeywordLevel;
     public System.Collections.Generic.List<ReviewCommentData> ReviewComment;
     public System.Collections.Generic.List<EventData> Event;
     public System.Collections.Generic.List<Keyword> Keyword;
@@ -216,6 +265,20 @@ public class MatchingData
     public int Life;
     public int Creative;
 }
+
+//이세돌분들 각 키워드들 숙련도
+[System.Serializable]
+public class ISDKeywordLevel
+{
+    public string Keyword;
+    public int Ine;
+    public int JingBurger;
+    public int Lilpa;
+    public int Jururu;
+    public int Gosegu;
+    public int Viichan;
+}
+
 
 [System.Serializable]
 public class Keyword
