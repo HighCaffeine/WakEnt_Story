@@ -7,12 +7,35 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
+
+
 public class MenuController : GenericSingleton<MenuController>
 {
+    public delegate void CancelButtonEvent(Action action);
+
+    public class UIButtonSelectionControll
+    {
+        private Action buttonCancel;
+
+        public void RegisterCancelEvent(Action buttonCancel)
+        {
+            this.buttonCancel?.Invoke();
+
+            this.buttonCancel = buttonCancel;
+        }
+
+        //패널 종료
+        public void ResetEvent()
+        {
+            buttonCancel = null;
+        }
+    }
+
     //게임씬에 있는 모든 메뉴를 관리하고
     //기획창은 BroadcastPlaning 파일 만들어서 따로 거기서 작동소스 작성하기로
 
-    
+
 
     private enum Menu
     {

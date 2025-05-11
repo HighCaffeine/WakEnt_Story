@@ -92,6 +92,11 @@ public class DataManager : GenericSingleton<DataManager>
         }
     }
 
+    public void SetDirectionComment()
+    {
+
+    }
+
     public List<Keyword> GetKeyword(bool isKategorie)
     {
         List<Keyword> list = new List<Keyword>();

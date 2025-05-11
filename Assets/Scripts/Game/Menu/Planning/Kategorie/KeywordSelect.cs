@@ -9,7 +9,7 @@ public class KeywordSelect : MonoBehaviour, OnReturnPool<KeywordSelect>
     BroadcastKeywordSelection.SetCurrentKeywordEvent OnSelectKeyword;
     BroadcastKeywordSelection.ConfirmSelectKeyword OnConfirmSelect;
 
-    BroadcastKeywordSelection.CancelButtonEvent OnCancelButtonEvent;
+    MenuController.CancelButtonEvent OnCancelButtonEvent;
 
     [Header("키워드 이름")] [SerializeField] private TextMeshProUGUI keywordNameTMP;            //키워드 이름
     [Header("인기도")] [SerializeField] private TextMeshProUGUI popularityTMP;                  //인기도

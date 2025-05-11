@@ -29,6 +29,10 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     private int isedolSelected = 0;
     private int isedolSelectCount = 0;
 
+    private float priceRatio;   // 제작 비용 배율 
+
+    private const float DefaultPriceRatio = 1.00f;
+
     public bool IsActiveMember(CharacterManager.ISEGYEIDOL isegyeidol)
     {
         int value = 1 << (ValueCastTo<int>.From(isegyeidol));
@@ -191,6 +195,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         isedolSelected = 0;
         isedolSelectCount = 0;
 
+        priceRatio = DefaultPriceRatio;
+
         foreach (var isedolPointerEvent in isedolPointerEvents)
         {
             isedolPointerEvent.SetAllowMouseEvent(true);
@@ -224,6 +230,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public void SetDirectionText(string str)
     {
         directionText.text = str;
+    }
+
+    public void SetPriceRatio(float ratio)
+    {
+        this.priceRatio = ratio;
     }
 
     //키워드쪽에서 수치 계산해서 줘야함.

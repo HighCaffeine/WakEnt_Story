@@ -58,29 +58,10 @@ namespace BroadcastKeyword
     }
 }
 
-public class UIButtonSelectionControll
-{
-    private Action buttonCancel;
-
-    public void RegisterCancelEvent(Action buttonCancel)
-    {
-        this.buttonCancel?.Invoke();
-
-        this.buttonCancel = buttonCancel;
-    }
-
-    //패널 종료
-    public void ResetEvent()
-    {
-        buttonCancel = null;
-    }
-}
-
 public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection, KeywordSelect> 
 {
     public delegate void SetCurrentKeywordEvent(int index);
     public delegate void ConfirmSelectKeyword(int index);
-    public delegate void CancelButtonEvent(Action action);
 
     //broadcastplanning 창에서
     //키워드 선택 시 selection창 띄움
@@ -120,7 +101,7 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
 
     //얘로 패널 끌 때, 리셋
     //이벤트 등록 함수 넘겨주기
-    public UIButtonSelectionControll buttonSelectionController = new UIButtonSelectionControll();
+    public MenuController.UIButtonSelectionControll buttonSelectionController = new MenuController.UIButtonSelectionControll();
 
     private new void Awake()
     {
