@@ -29,9 +29,9 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     private int isedolSelected = 0;
     private int isedolSelectCount = 0;
 
-    private float priceRatio;   // 제작 비용 배율 
+    private int price;
 
-    private const float DefaultPriceRatio = 1.00f;
+    private const float DefaultPriceRatio = 0.00f;
 
     public bool IsActiveMember(CharacterManager.ISEGYEIDOL isegyeidol)
     {
@@ -195,7 +195,7 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         isedolSelected = 0;
         isedolSelectCount = 0;
 
-        priceRatio = DefaultPriceRatio;
+        //priceRatio = DefaultPriceRatio;
 
         foreach (var isedolPointerEvent in isedolPointerEvents)
         {
@@ -232,17 +232,17 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         directionText.text = str;
     }
 
-    public void SetPriceRatio(float ratio)
-    {
-        this.priceRatio = ratio;
-    }
-
     //키워드쪽에서 수치 계산해서 줘야함.
     //패널 끌 때 여기서 가지고 있거나 selection쪽에서 해야하는데.
     //여기서 받은 수치 * 기어배율 * 기획방향 배율로 비용 결정정
     public void SetPriceText(int price)
     {
-        priceText.text = string.Format("제작비 : {0}", price.ToString());
+        int resultPrice = price;
+
+        resultPrice = (int)(resultPrice * BroadcastGearSelection.Instance.gearPriceMultiRatio);      //장비 배율 추가
+        resultPrice = (int)(resultPrice * (BroadcastDirectionSelection.Instance.ratio + 1.00f));     //기존 가격에 배율 비용 추가
+
+        priceText.text = string.Format("제작비 : {0}", resultPrice.ToString());
     }
 
     //키워드쪽에서 판단해서 limit값 전달.

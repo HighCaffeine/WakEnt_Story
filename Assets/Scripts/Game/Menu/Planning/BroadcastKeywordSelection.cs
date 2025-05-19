@@ -176,7 +176,7 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
                   new IsedolMemberSkillInfo(isdKeywordLevel.Gosegu, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Gosegu)),
                   new IsedolMemberSkillInfo(isdKeywordLevel.Viichan, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Viichan)) },
                   popularity[keyword.Popularity - 1], 
-                  999, 
+                  ValueCastTo<int>.From((keyword.Price * BroadcastDirectionSelection.Instance.ratio)), 
                   i);
         }
 

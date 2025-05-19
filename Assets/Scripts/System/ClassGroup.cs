@@ -289,6 +289,7 @@ public class Keyword
     public string Type;             //컨텐츠인지 종류인지 
     public int Popularity;          //해당 키워드의 인기도
     public int Unlocked;         //해금된 조합인지(O, X)
+    public int Price;               //가격 (장비 배율 적용 X)
 }
 
 //왁물원의 각 등급들의 리뷰 멘트들

@@ -12,8 +12,9 @@ public class BroadcastDirectionSelection : GenericSingleton<BroadcastDirectionSe
 
     [SerializeField] private TMPro.TextMeshProUGUI directionInfo;
 
-    private float ratio;
+    public float ratio { get; private set; }
 
+  
     //menuController에 openMenu에 등록해서 사용할 거
     public void Init()
     {
@@ -23,7 +24,6 @@ public class BroadcastDirectionSelection : GenericSingleton<BroadcastDirectionSe
     public void RequestDirectionRatioUpdate(float ratio)
     {
         this.ratio = ratio;
-        BroadCastPlanning.Instance.SetPriceRatio(ratio);
     }
 
     public void RequestMenuBack()

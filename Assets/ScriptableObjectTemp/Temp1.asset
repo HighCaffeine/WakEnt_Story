@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0e7697e3750cb4eaf6f40e5d4a69de, type: 3}
+  m_Name: Temp1
+  m_EditorClassIdentifier: 
+  gearImage: {fileID: 21300000, guid: 6de236494feb448b4b4dff10ea4038cd, type: 3}
+  gearName: "\uB290\uADF8\uD3F0"
+  releaseData: "1\uB144:1\uC6D4:1\uC8FC"
+  company: "\uB290\uADF8\uCEF4\uD37C\uB2C8"
+  preferenceValue: 30
+  isUnlocked: 1
+  isBought: 1
+  usePrice: 1
+  buyPrice: 11
+  count: 111
