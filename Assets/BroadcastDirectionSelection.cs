@@ -9,7 +9,6 @@ public class BroadcastDirectionSelection : GenericSingleton<BroadcastDirectionSe
     public delegate void OnDirectionRatioValueUpdate(float ratio);
     public delegate void OnMenuBack();
     public delegate void OnSetDirectionText(string str);
-
     [SerializeField] private TMPro.TextMeshProUGUI directionInfo;
 
     public float ratio { get; private set; }

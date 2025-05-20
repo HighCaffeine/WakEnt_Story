@@ -16,6 +16,7 @@ MonoBehaviour:
   gearName: "\uBAA8\uC2DC\uAE7D\uC774 PC"
   releaseData: "70\uB144:07\uC6D4:00\uC8FC"
   company: "\uBAA8\uC2DC\uAE7D\uC774"
+  priceRatio: 2.64
   preferenceValue: 35
   isUnlocked: 1
   isBought: 0

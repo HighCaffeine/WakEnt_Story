@@ -118,6 +118,14 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         contents = DataManager.Instance.GetKeyword(false);
     }
 
+    public int GetKeywordPrice()
+    {
+        int kategoriePrice = kategories[ValueCastTo<int>.From(currentKategorie)].Price;
+        int keywordPrice = kategories[ValueCastTo<int>.From(currentContent)].Price;
+
+        return kategoriePrice + keywordPrice;
+    }
+
     public int GetSelectCharacterLimit()
     {
         //각 키워드별 멤버 선택 수 제한

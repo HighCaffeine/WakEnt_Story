@@ -417,6 +417,8 @@ public class CharacterManager : ObjectPooling<CharacterManager, Character>
                 //본인좌석에 해당하는 위치값 넣어줌
                 charactersPos[data.SeatNumber - 1] = characterSeatList[data.SeatNumber - 1];
 
+                //break;
+
                 yield return new WaitForSeconds(0.5f);
             }
         }

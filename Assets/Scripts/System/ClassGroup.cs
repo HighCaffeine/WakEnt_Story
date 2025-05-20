@@ -111,16 +111,16 @@ public enum ResourceType : long
 
 public enum SitInteractiveResourceType : long
 {
-    SitFrontInteractiveLeft             = 4000000,
-    SitFrontInteractiveRight            = 4100000,
-    SitBackInteractiveLeft              = 4200000,
-    SitBackInteractiveRight             = 4300000,
+    SitFrontInteractiveLeft             = 400000,
+    SitFrontInteractiveRight            = 410000,
+    SitBackInteractiveLeft              = 420000,
+    SitBackInteractiveRight             = 430000,
 }
 
 public enum ResourceFileName 
 {   
     DefaultSprite, SitBack, SitFront, Standing, SitInteractive, //Sprite 
-    BackIdleLookAround, BackIdleStretching, BackWork, FrontIdleLookAround, FrontIdleStretching, FrontWork, //Work Ani File
+    BackIdleLookAroundAni, BackIdleStretchingAni, BackWorkAni, FrontIdleLookAroundAni, FrontIdleStretchingAni, FrontWorkAni, //Work Ani File
     WalkAni, StandingIdleAni, WorkAni, SitAni, InteractiveAni, //Ani Root File
 };
 

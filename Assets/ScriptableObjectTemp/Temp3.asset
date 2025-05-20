@@ -17,6 +17,7 @@ MonoBehaviour:
     \uCFE0\uB8E8\uCFE0\uB8E8 \uCC28\uC9C0 \uCE94\uB514\uB85C\uB4DC"
   releaseData: "21\uB144:12\uC6D4:3\uC8FC"
   company: "\uD558\uC774\uB124"
+  priceRatio: 5
   preferenceValue: 999
   isUnlocked: 1
   isBought: 1

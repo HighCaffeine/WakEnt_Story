@@ -4050,7 +4050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.7411765, b: 0.63529414, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14338,7 +14338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.7411765, b: 0.63529414, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18712,7 +18712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 553.7691
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.y
@@ -18748,11 +18748,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.88455
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -154.53944
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30540,7 +30540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3274057067431881705, guid: 6fcdf10bf23e03c49984fc889bfbec17, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.1304
+      value: 0.1303711
       objectReference: {fileID: 0}
     - target: {fileID: 3274057067431881705, guid: 6fcdf10bf23e03c49984fc889bfbec17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -30938,9 +30938,10 @@ MonoBehaviour:
   realeaseData: {fileID: 2097428123}
   company: {fileID: 507622081}
   preferenceRatio: {fileID: 1847258663}
-  price: {fileID: 947503436}
+  price: {fileID: 794609149}
   createCount: {fileID: 1760345454}
   processText: {fileID: 1483336571}
+  gearImage: {fileID: 1288669897}
   gearInfoList:
   - {fileID: 11400000, guid: 63de104646cd08148ac15eb9f36487bc, type: 2}
   - {fileID: 11400000, guid: 8a1f59c9a36d73d4c82909f2c5e78d55, type: 2}
@@ -35726,7 +35727,7 @@ GameObject:
   - component: {fileID: 1288669898}
   - component: {fileID: 1288669897}
   m_Layer: 5
-  m_Name: Productor
+  m_Name: GearImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49272,6 +49273,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1729820234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729820235}
+  - component: {fileID: 1729820237}
+  - component: {fileID: 1729820236}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1729820235
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729820234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2006817641}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0010719, y: -0.00007391}
+  m_SizeDelta: {x: 339.41, y: 82.035}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1729820236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729820234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1729820237
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729820234}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1734802301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49707,14 +49783,50 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 97258601}
+          m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
+          m_MethodName: SetPriceText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   gearSelectionPanelObject:
-    panel: {fileID: 0}
+    panel: {fileID: 1845825258}
     offEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 97258601}
+          m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
+          m_MethodName: SetPriceText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 976539729}
+          m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
+          m_MethodName: OpenGearSelection
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   keywordSelectionPanelObject:
     panel: {fileID: 181544759}
     offEvent:
@@ -49732,6 +49844,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 97258601}
+          m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
+          m_MethodName: SetPriceText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -49739,7 +49863,19 @@ MonoBehaviour:
     panel: {fileID: 2049230279}
     offEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 97258601}
+          m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
+          m_MethodName: SetPriceText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -49902,7 +50038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 553.7691
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.y
@@ -49938,11 +50074,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.88455
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -368.59204
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -51419,7 +51555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1845825259
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51504,7 +51640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 553.7691
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.y
@@ -51540,11 +51676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.88455
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -261.56573
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -55226,7 +55362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006640891}
-  - component: {fileID: 2006640892}
+  - component: {fileID: 2006640893}
   m_Layer: 5
   m_Name: NextGear
   m_TagString: Untagged
@@ -55255,7 +55391,7 @@ RectTransform:
   m_AnchoredPosition: {x: -0.099975586, y: -0.5}
   m_SizeDelta: {x: -1, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2006640892
+--- !u!114 &2006640893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55264,26 +55400,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006640890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 976539729}
-          m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
-          m_MethodName: ChangeGearData
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 35172935}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 976539729}
+        m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
+        m_MethodName: ChangeGearData
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2006817640
 GameObject:
   m_ObjectHideFlags: 0
@@ -55293,7 +55456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2006817641}
-  - component: {fileID: 2006817642}
+  - component: {fileID: 2006817643}
   m_Layer: 5
   m_Name: Process
   m_TagString: Untagged
@@ -55315,6 +55478,7 @@ RectTransform:
   m_Children:
   - {fileID: 399524760}
   - {fileID: 1483336570}
+  - {fileID: 1729820235}
   m_Father: {fileID: 1845825259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.648, y: 0.08467694}
@@ -55322,7 +55486,7 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5, y: -1}
   m_SizeDelta: {x: -1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2006817642
+--- !u!114 &2006817643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55331,26 +55495,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006817640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 976539727}
-          m_TargetAssemblyTypeName: ProductorManager, Assembly-CSharp
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.21568628}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1729820236}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 976539729}
+        m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2013969069
 GameObject:
   m_ObjectHideFlags: 0
@@ -55493,7 +55684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2014581178}
-  - component: {fileID: 2014581179}
+  - component: {fileID: 2014581180}
   m_Layer: 5
   m_Name: PreviousGear
   m_TagString: Untagged
@@ -55519,10 +55710,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.57500005, y: 0.08467694}
   m_AnchorMax: {x: 0.6416414, y: 0.18232307}
-  m_AnchoredPosition: {x: 0, y: -0.50006104}
+  m_AnchoredPosition: {x: 0, y: -0.5001221}
   m_SizeDelta: {x: 0, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2014581179
+--- !u!114 &2014581180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55531,26 +55722,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 2014581177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 976539729}
-          m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
-          m_MethodName: ChangeGearData
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 282846648}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 976539729}
+        m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
+        m_MethodName: ChangeGearData
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2022911646
 GameObject:
   m_ObjectHideFlags: 0
@@ -58395,7 +58613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 553.7691
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_SizeDelta.y
@@ -58431,11 +58649,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 276.88455
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -47.51315
       objectReference: {fileID: 0}
     - target: {fileID: 813579194400769618, guid: 7a23affd3745c104c87c2204ac909238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

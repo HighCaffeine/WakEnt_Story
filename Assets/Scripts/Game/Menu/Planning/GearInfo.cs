@@ -12,7 +12,7 @@ public class GearInfo : ScriptableObject
     public string releaseData;      // 출시일 (##년:##월:##주)
     public string company;          // 업체명
 
-    [Range(1.00f, 5.00f)]public float priceRatio;        // 키워드 비용 배율 (1.00f)
+    [Range(1.00f, 5.00f)] public float priceRatio;        // 키워드 비용 배율 (1.00f)
 
     public int preferenceValue;     // 선호 수치
     public bool isUnlocked;         // 언락됐는지?

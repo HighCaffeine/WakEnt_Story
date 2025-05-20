@@ -235,9 +235,9 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     //키워드쪽에서 수치 계산해서 줘야함.
     //패널 끌 때 여기서 가지고 있거나 selection쪽에서 해야하는데.
     //여기서 받은 수치 * 기어배율 * 기획방향 배율로 비용 결정정
-    public void SetPriceText(int price)
+    public void SetPriceText()
     {
-        int resultPrice = price;
+        int resultPrice = BroadcastKeywordSelection.Instance.GetKeywordPrice();
 
         resultPrice = (int)(resultPrice * BroadcastGearSelection.Instance.gearPriceMultiRatio);      //장비 배율 추가
         resultPrice = (int)(resultPrice * (BroadcastDirectionSelection.Instance.ratio + 1.00f));     //기존 가격에 배율 비용 추가

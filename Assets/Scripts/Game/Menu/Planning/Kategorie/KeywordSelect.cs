@@ -48,6 +48,8 @@ public class KeywordSelect : MonoBehaviour, OnReturnPool<KeywordSelect>
             Color color = memberKeywordLevels[i].color;
             color.a = (memberSkills[i].isSelected ? 255f : 65f) / 255f;
 
+            priceTMP.text = price.ToString();
+
             memberKeywordLevels[i].color = color;
         }
 

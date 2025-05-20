@@ -2,7 +2,6 @@ using Devcat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ProductorManager;
 
 public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
 {
@@ -14,6 +13,8 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
     [SerializeField] private TMPro.TextMeshProUGUI createCount;         //방송제작횟수
 
     [SerializeField] private TMPro.TextMeshProUGUI processText;         //선택, 구입버튼
+
+    [SerializeField] private UnityEngine.UI.Image gearImage;
 
 
     private List<GearData> gearList;
@@ -44,8 +45,8 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
         base.Awake();
 
         gearList = new List<GearData>();
-        gearInfoList = new List<GearInfo>();
 
+        //gearInfoList = new List<GearInfo>();
         // gearInfoList 세팅 -> dataManager
 
         SetGearList();          //각 데이터의 NextInfo값 넣고 list에 추가
@@ -57,7 +58,7 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
 
     private GearData SetGearList(int index = 0)
     {
-        if (index == gearList.Count)
+        if (index >= gearInfoList.Count)
         {
             return null;
         }
@@ -93,23 +94,24 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
 
     private void UpdateGearData(GearInfo info)
     {
-        gearName.text = info.name;              //장비 이름
+        gearName.text = info.gearName;              //장비 이름
 
         string[] datas = info.releaseData.Split(':');
 
+        gearImage.sprite = info.gearImage;      //이미지
         realeaseData.text = info.releaseData;   //출시일
         company.text = info.company;            //업체
-        preferenceRatio.text = string.Format("{0}%", ValueCastTo<int>.From((info.preferenceValue / totalPreferenceValue)));           //선호비율
+        preferenceRatio.text = string.Format("{0}%", ValueCastTo<int>.From((100.0f * info.preferenceValue / totalPreferenceValue)));           //선호비율
         price.text = (info.isUnlocked ? info.usePrice : info.buyPrice).ToString();                          //가격
         createCount.text = info.count.ToString();                    //방송제작횟수
 
-        SetProcessButtonText(info.isUnlocked);
+        SetProcessButtonText(info.isBought);
     }
 
-    private void SetProcessButtonText(bool isUnlocked)
+    private void SetProcessButtonText(bool isBought)
     {
-        processText.text = isUnlocked ? "선택" : "구매";
-        processText.color = isUnlocked ? Color.black : Color.red;
+        processText.text = isBought ? "선택" : "구매";
+        //processText.color = isBought ? Color.black : Color.red;
     }
 
     public void ChangeGearData(bool isPrevious)
@@ -117,7 +119,8 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
         GearData newData;
 
         newData = isPrevious ? currentGearData.previousData : currentGearData.nextData;
-        
+
+        currentGearData = newData;
         if (newData == null)
         {
             return;
