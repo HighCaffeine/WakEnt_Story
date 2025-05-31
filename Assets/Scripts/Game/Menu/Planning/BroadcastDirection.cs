@@ -12,7 +12,7 @@ public class BroadcastDirection : MonoBehaviour
     
 
     [Header("비용 배율")] [SerializeField] private float priceMulti;
-    [Header("방향성 설명")][SerializeField] private string directionDescription;
+    [TextArea][Header("방향성 설명")][SerializeField] private string directionDescription;
 
     private bool currentSelected;
 
@@ -28,6 +28,8 @@ public class BroadcastDirection : MonoBehaviour
         OnDirectionRatioValueUpdate = BroadcastDirectionSelection.Instance.RequestDirectionRatioUpdate;
         OnMenuBack = BroadcastDirectionSelection.Instance.RequestMenuBack;
         OnSetDirectionText = BroadcastDirectionSelection.Instance.SetDirectionText;
+        OnCancelButtonEvent = BroadcastDirectionSelection.Instance.buttonSelection.RegisterCancelEvent;
+
     }
 
     private void OnEnable()
@@ -45,13 +47,14 @@ public class BroadcastDirection : MonoBehaviour
     {
         if (currentSelected)
         {
-            OnDirectionRatioValueUpdate?.Invoke(priceMulti);    // pricemulti 값으로 배율 변경
+            OnDirectionRatioValueUpdate?.Invoke(priceMulti * 0.01f);    // pricemulti 값으로 배율 변경
             OnMenuBack?.Invoke();                               // 탭 종료
 
             return;
         }
 
         currentSelected = true;
+        OnSetDirectionText?.Invoke(directionDescription);   //설명 업데이트
         OnCancelButtonEvent?.Invoke(CancelSelect);
     }
 }

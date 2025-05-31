@@ -11,6 +11,10 @@ public class BroadcastDirectionSelection : GenericSingleton<BroadcastDirectionSe
     public delegate void OnSetDirectionText(string str);
     [SerializeField] private TMPro.TextMeshProUGUI directionInfo;
 
+
+    [Header("임시 데이터")]
+    [SerializeField] private string[] infos;
+
     public float ratio { get; private set; }
 
   

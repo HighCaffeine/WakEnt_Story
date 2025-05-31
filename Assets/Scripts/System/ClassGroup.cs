@@ -109,6 +109,7 @@ public enum ResourceType : long
     AniCount                            = 10,
 }
 
+
 public enum SitInteractiveResourceType : long
 {
     SitFrontInteractiveLeft             = 400000,
@@ -149,6 +150,7 @@ public enum CommentType {ToIne, ToJingBurger, ToLilpa, ToJururu, ToGosegu, ToVii
 public class DataTable
 {
     public System.Collections.Generic.List<PlayerData> PlayerData;
+    public System.Collections.Generic.List<ProductorData> ProductorData;
     public System.Collections.Generic.List<MatchingData> MatchingData;
     public System.Collections.Generic.List<ISDKeywordLevel> ISDKeywordLevel;
     public System.Collections.Generic.List<ReviewCommentData> ReviewComment;
@@ -174,10 +176,12 @@ public class PlayerData
 [System.Serializable]
 public class ProductorData
 {
+    public long ID;
     public string Name;                         //작업자 이름
     public int IsFieldCharacter;                //필드 캐릭터인지 -> 이거는 나중에 없앨듯
     public string CharacterType;                //작업자 타입 (플래너, 그래픽, 사운드, 마케터)
     public int WorkPrice;                       //작업 비용
+    public int OutsourcePrice;                  //외주 비용
     public int EmployPrice;                     //고용 비용
     public int PlannerStat;                     //플래너 스텟
     public int PlannerLevel;                    //플래너 레벨
@@ -191,6 +195,8 @@ public class ProductorData
     public string Info;                         //작업자 정보
     public string RecuritType;                  //고용 방법
     public string ProcessCompleteComment;       //작업 완료 대사
+
+    public int SeatNum;                         //시트번호가 있을 경우 사내 멤버임. 0일경우 외주
 }
 
 [System.Serializable]

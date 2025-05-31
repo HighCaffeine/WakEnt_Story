@@ -10,6 +10,7 @@
   "BroadcastRecord": [],
   "ProductorData": [
     {
+      "ID": 1001,
       "Name": "아이네",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
@@ -17,6 +18,7 @@
       "ProcessCompleteComment": "이정도면 괜찮지 않을까요?"
     },
     {
+      "ID": 1002,
       "Name": "징버거",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
@@ -24,42 +26,49 @@
       "ProcessCompleteComment": "모시깽 했습니다~"
     },
     {
+      "ID": 1003,
       "Name": "릴파",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 셋째 멤버"
     },
     {
+      "ID": 1004,
       "Name": "주르르",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 넷째 멤버"
     },
     {
+      "ID": 1005,
       "Name": "고세구",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 다섯째 멤버"
     },
     {
+      "ID": 1006,
       "Name": "비챤",
       "IsFieldCharacter": 1,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 여섯째 멤버"
     },
     {
+      "ID": 2001,
       "Name": "우왁굳",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 사장"
     },
     {
+      "ID": 2002,
       "Name": "뢴트게늄",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
       "Info": "이세계아이돌 매니저"
     },
     {
+      "ID": 3001,
       "Name": "둘기",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -78,6 +87,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3002,
       "Name": "똥강아지",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -96,6 +106,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3003,
       "Name": "박쥐",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -114,6 +125,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3004,
       "Name": "주폭도",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -132,6 +144,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3005,
       "Name": "균냥이",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -150,6 +163,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3006,
       "Name": "라니",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -168,6 +182,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3007,
       "Name": "팬치",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -186,6 +201,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3008,
       "Name": "매형",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -204,6 +220,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3009,
       "Name": "거머리",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -222,6 +239,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3010,
       "Name": "배트맨",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -240,6 +258,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3011,
       "Name": "싹싹김치",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -258,6 +277,7 @@
       "ProcessCompleteComment": "킹아"
     },
     {
+      "ID": 3012,
       "Name": "사랑전도사 젠투",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -276,6 +296,7 @@
       "ProcessCompleteComment": "정말 사랑스러운 결과군요"
     },
     {
+      "ID": 3013,
       "Name": "닌닌",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -294,6 +315,7 @@
       "ProcessCompleteComment": "완성했다."
     },
     {
+      "ID": 3014,
       "Name": "불곰",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -312,6 +334,7 @@
       "ProcessCompleteComment": "아가씨를 위해서라면.."
     },
     {
+      "ID": 3015,
       "Name": "수셈이",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -330,6 +353,7 @@
       "ProcessCompleteComment": "다 끝냈습니ㄷ..."
     },
     {
+      "ID": 3016,
       "Name": "단답벌레",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -348,6 +372,7 @@
       "ProcessCompleteComment": "끝."
     },
     {
+      "ID": 3017,
       "Name": "티파티0421",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -366,6 +391,7 @@
       "ProcessCompleteComment": "와#ㄴ성@$입24^니&다!~"
     },
     {
+      "ID": 3018,
       "Name": "김치만두번영택사스가",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -384,6 +410,7 @@
       "ProcessCompleteComment": "오니~"
     },
     {
+      "ID": 3019,
       "Name": "풍신",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -402,6 +429,7 @@
       "ProcessCompleteComment": "이정도는 아무것도 아니지요."
     },
     {
+      "ID": 3020,
       "Name": "철도왕 길버트",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -420,6 +448,7 @@
       "ProcessCompleteComment": "Wunderbar~ 완성했습니다!"
     },
     {
+      "ID": 3021,
       "Name": "바이터",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -438,6 +467,7 @@
       "ProcessCompleteComment": "이런이런, 스바라시 하군요"
     },
     {
+      "ID": 3022,
       "Name": "독고혜지",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -456,6 +486,7 @@
       "ProcessCompleteComment": "혜디, 나이스!"
     },
     {
+      "ID": 3023,
       "Name": "메카 맹기산",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -474,6 +505,7 @@
       "ProcessCompleteComment": "바로 끝내버렷잖냐~"
     },
     {
+      "ID": 3024,
       "Name": "곽춘식",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -492,6 +524,7 @@
       "ProcessCompleteComment": "캬~ 이거지~!"
     },
     {
+      "ID": 3025,
       "Name": "버터우스 3세",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -510,6 +543,7 @@
       "ProcessCompleteComment": "플로렌스에서는 손쉬운 일이오"
     },
     {
+      "ID": 3026,
       "Name": "성기사 샬롯",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -528,6 +562,7 @@
       "ProcessCompleteComment": "아주 굿이네 굿"
     },
     {
+      "ID": 3027,
       "Name": "진희",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -546,6 +581,7 @@
       "ProcessCompleteComment": "찰 만트렀타고 생칵해요"
     },
     {
+      "ID": 3028,
       "Name": "캡틴 설리반",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -564,6 +600,7 @@
       "ProcessCompleteComment": "아호이!"
     },
     {
+      "ID": 3029,
       "Name": "이덕수 할아바이",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -582,6 +619,7 @@
       "ProcessCompleteComment": "늙으니 이런것도 힘들구만."
     },
     {
+      "ID": 3030,
       "Name": "시리안 레인",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -600,6 +638,7 @@
       "ProcessCompleteComment": "완성했습니다."
     },
     {
+      "ID": 3031,
       "Name": "권민",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -618,6 +657,7 @@
       "ProcessCompleteComment": "최선을 다했듭니다."
     },
     {
+      "ID": 3032,
       "Name": "도파민 박사",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -636,6 +676,7 @@
       "ProcessCompleteComment": "ㅢ..."
     },
     {
+      "ID": 3033,
       "Name": "미미짱짱세용",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -654,6 +695,7 @@
       "ProcessCompleteComment": "최선을 다했어용~"
     },
     {
+      "ID": 3034,
       "Name": "부정형인간",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -672,6 +714,7 @@
       "ProcessCompleteComment": "시청자가 안좋아하면 어쩌죠..?"
     },
     {
+      "ID": 3035,
       "Name": "왁파고",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -690,6 +733,7 @@
       "ProcessCompleteComment": "완료. 했습니다"
     },
     {
+      "ID": 3036,
       "Name": "카르나르 융터르",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -708,6 +752,7 @@
       "ProcessCompleteComment": "무의식이 이끄는대로 했습니다."
     },
     {
+      "ID": 3037,
       "Name": "켈리칼리 데이비슨",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -726,6 +771,7 @@
       "ProcessCompleteComment": "아무나 할 수 있는게 아니라구"
     },
     {
+      "ID": 3038,
       "Name": "아마데우스최",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -744,6 +790,7 @@
       "ProcessCompleteComment": "조금 플러스~"
     },
     {
+      "ID": 3039,
       "Name": "비밀소녀",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -762,6 +809,7 @@
       "ProcessCompleteComment": "이 정도면 되지 않을까용~?"
     },
     {
+      "ID": 3040,
       "Name": "데스해머쵸로키",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -780,6 +828,7 @@
       "ProcessCompleteComment": "바로 박살내고 왔다~"
     },
     {
+      "ID": 3041,
       "Name": "비즈니스킴",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -798,6 +847,7 @@
       "ProcessCompleteComment": "레이디를 위한 작품입니다."
     },
     {
+      "ID": 3042,
       "Name": "소피아",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -816,6 +866,7 @@
       "ProcessCompleteComment": "진심으로 상대했습니다."
     },
     {
+      "ID": 3043,
       "Name": "히키킹",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -834,6 +885,7 @@
       "ProcessCompleteComment": "쟈 와루도!"
     },
     {
+      "ID": 3044,
       "Name": "빅토리",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -852,6 +904,7 @@
       "ProcessCompleteComment": "빅토리~~"
     },
     {
+      "ID": 3045,
       "Name": "해루석",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -870,6 +923,7 @@
       "ProcessCompleteComment": "아, 오셨군요."
     },
     {
+      "ID": 3046,
       "Name": "햄이네",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -887,6 +941,7 @@
       "ProcessCompleteComment": "완료했다네~"
     },
     {
+      "ID": 3047,
       "Name": "밥버거",
       "IsFieldCharacter": 0,
       "CharacterType": "GraphicDesigner",
@@ -904,6 +959,7 @@
       "ProcessCompleteComment": "어때요, 참 쉽죠~?"
     },
     {
+      "ID": 3048,
       "Name": "띨파",
       "IsFieldCharacter": 0,
       "CharacterType": "Marketer",
@@ -921,6 +977,7 @@
       "ProcessCompleteComment": "다 완료했다고. 엣헴!"
     },
     {
+      "ID": 3049,
       "Name": "귀족희",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -938,6 +995,7 @@
       "ProcessCompleteComment": "오호호~ 식은죽 먹기였사와요"
     },
     {
+      "ID": 3050,
       "Name": "BJ팡이",
       "IsFieldCharacter": 0,
       "CharacterType": "Planner",
@@ -955,6 +1013,7 @@
       "ProcessCompleteComment": "어 누나야~"
     },
     {
+      "ID": 3051,
       "Name": "망냥냥",
       "IsFieldCharacter": 0,
       "CharacterType": "SoundDesigner",
@@ -1411,60 +1470,60 @@
     {
       "Content": "LOL",
       "Game": 5,
-      "Sports": -1,
-      "Music": -1,
-      "Event": -5,
-      "VRChat": -1,
+      "Sports": 3,
+      "Music": -2,
+      "Event": 2,
+      "VRChat": -3,
       "Life": -1,
       "Creative": -1
     },
     {
       "Content": "Valorant",
       "Game": 4,
-      "Sports": -1,
-      "Music": -1,
-      "Event": -4,
+      "Sports": 3,
+      "Music": -3,
+      "Event": 4,
       "VRChat": -1,
-      "Life": -1,
-      "Creative": -1
+      "Life": -2,
+      "Creative": -3
     },
     {
       "Content": "Battleground",
       "Game": 3,
-      "Sports": -1,
-      "Music": -1,
-      "Event": -5,
-      "VRChat": -1,
-      "Life": -1,
-      "Creative": -1
+      "Sports": 3,
+      "Music": -3,
+      "Event": 3,
+      "VRChat": -3,
+      "Life": 1,
+      "Creative": 1
     },
     {
       "Content": "Minecraft",
       "Game": 4,
-      "Sports": -1,
+      "Sports": -2,
       "Music": -1,
-      "Event": -1,
-      "VRChat": -1,
-      "Life": -1,
+      "Event": 3,
+      "VRChat": 2,
+      "Life": 1,
       "Creative": -1
     },
     {
       "Content": "FIFA",
       "Game": 3,
-      "Sports": -1,
-      "Music": -1,
-      "Event": -2,
-      "VRChat": -1,
-      "Life": -1,
-      "Creative": -1
+      "Sports": 2,
+      "Music": -4,
+      "Event": 2,
+      "VRChat": 1,
+      "Life": -2,
+      "Creative": -4
     },
     {
       "Content": "IntegratedGame",
       "Game": 5,
-      "Sports": -1,
-      "Music": -1,
-      "Event": -1,
-      "VRChat": -1,
+      "Sports": 1,
+      "Music": -5,
+      "Event": 2,
+      "VRChat": 2,
       "Life": -1,
       "Creative": -1
     },
@@ -3284,10 +3343,44 @@
       "Progressed": 0,
       "IsRepeat": 0
     },
-    {},
-    {},
-    {},
-    {},
+    {
+      "EventComment": "나 초밥 먹었다.' 어느 닌자의 발언이 화제입니다. 구독자들은 이세돌의 먹방을 원하고 있습니다!!"
+    },
+    {
+      "EventComment": "재미있는 그란투리스모~' 알고리즘에 의해 이상한 노래가 유행입니다. 이때를 노려 맞춤 컨텐츠를 제작하면 좋지 않을까요?"
+    },
+    {
+      "EventComment": "합격해서 같이 놀자네~' 도깨비공주의 발언에 고멤오디션의 관심이 증가하고 있습니다."
+    },
+    {
+      "EventComment": "공포게임인 \"뽀삐\"가 출시되면서 큰 인기를 끌고 있습니다. 일부 구독자들은 해당 시리즈가 출시되면 이세돌의 노래가 발표된다는 미신도 믿고 있습니다."
+    },
+    {
+      "EventComment": "왁파트~ 왁파트~' 마인크래프트를 주제로 한 노래가 빌보드를 점령하고 있습니다. 이를 활용할 수 있지 않을까요?",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventComment": "요즘 (#)의 인기가 상승하고 있습니다. 알고리즘을 잘 타려면 이를 이용하면 좋겠네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
     {
       "EventKey": "negative_debuff_",
       "EventComment": "최근 저희 방송이 재미없다는 댓글들이 많이 보이고 있습니다. 조금 더 분발해야 할 거 같습니다.",
@@ -3356,21 +3449,15 @@
     },
     {
       "EventKey": "negative_planninglimit_concert",
-      "EventComment": "인기 아이돌 버튜버인 육광천의 콘서트가 성공적으로 마무리 되었습니다. 한동안 이들과 경쟁하는 것은 피하는게 좋겠습니다. / 다음 컨텐츠에 '콘서트' 키워드 사용 불가",
-      "Progressed": 0,
-      "IsRepeat": 0
+      "EventComment": "인기 아이돌 버튜버인 육광천의 콘서트가 성공적으로 마무리 되었습니다. 한동안 이들과 경쟁하는 것은 피하는게 좋겠습니다. / 다음 컨텐츠에 '콘서트' 키워드 사용 불가"
     },
     {
       "EventKey": "negative_planninglimit_song",
-      "EventComment": "어둠의 프로듀서가 기획한 노래 '스키'가 발표됐습니다. 사람들은 충격에 빠져 어떤 영상을 봐도 '스키'가 생각난다고 하네요. / 다음 컨텐츠에 '노래' 키워드 사용 불가",
-      "Progressed": 0,
-      "IsRepeat": 0
+      "EventComment": "어둠의 프로듀서가 기획한 노래 '스키'가 발표됐습니다. 사람들은 충격에 빠져 어떤 영상을 봐도 '스키'가 생각난다고 하네요. / 다음 컨텐츠에 '노래' 키워드 사용 불가"
     },
     {
       "EventKey": "negative_planninglimit_animal",
-      "EventComment": "사무실 근처에 비둘기 두마리가 너무 신경쓰입니다. 이름이 띨띨이와 빵빵이였나..? 깔깔이와 상상이였던거 같기도 하고… / 다음 컨텐츠에 '동물' 키워드 사용 불가",
-      "Progressed": 0,
-      "IsRepeat": 0
+      "EventComment": "사무실 근처에 비둘기 두마리가 너무 신경쓰입니다. 이름이 띨띨이와 빵빵이였나..? 깔깔이와 상상이였던거 같기도 하고… / 다음 컨텐츠에 '동물' 키워드 사용 불가"
     },
     {
       "EventKey": "negative_planninglimit_lol",
@@ -3390,60 +3477,31 @@
       "Progressed": 0,
       "IsRepeat": 0
     },
-    {},
-    {},
-    {},
+    {
+      "EventComment": "유명 유튜버가 야심차게 준비한 '히든 고기만두'가 폭망했습니다. 한동안 vr챗의 컨텐츠는 인기가 없겠네요.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "EventComment": "한 프로듀서가 만든 'Suki'가 알고리즘을 타면서 사람들을 충격에 빠트리고 있습니다. 사람들은 어떤 노래를 들어도 해당 음악이 생각난다며 비명을 지르고 있습니다.",
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
+    {
+      "Progressed": 0,
+      "IsRepeat": 0
+    },
     {
       "EventKey": "award_event_1",
       "EventComment": "올해의 방송상 시상이 곧 시작된다고 합니다.",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_event_2",
-      "EventComment": "왁엔터는 올해 \"N\"개가 후보에 올랐다고 합니다. 수상할 수 있을지 기대되네요!!",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_event_3",
-      "EventComment": "시상식장으로 가볼까요?",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_1",
-      "EventComment": "여러분 안녕하십니까.",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_2",
-      "EventComment": "올해에도 정말 재미있는 방송들이 많아서 선정에 어려움을 겪었습니다.",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_3",
-      "EventComment": "먼저, 가장 디자인이 아름다운 방송에 주어지는 '영상미 상' 입니다…!!",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_4",
-      "EventComment": "축하합니다!! \"@1\"",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_5",
-      "EventComment": "이어서 사운드가 가장 훌륭했던 영상으로..",
-      "Progressed": 0,
-      "IsRepeat": 0
-    },
-    {
-      "EventKey": "award_comment_6",
-      "EventComment": "\"@2\"!! 축하합니다.",
       "Progressed": 0,
       "IsRepeat": 0
     }

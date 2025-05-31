@@ -98,8 +98,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         public class BroadCastPoint
         {
             private int plannerPoint;
-            private int designerPoint;
-            private int composerPoint;
+            private int GraphicDesignerPoint;
+            private int SoundDesignerPoint;
             private int promotionPoint;
 
             public int this[ProductorManager.ProductorType type]
@@ -114,11 +114,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 {
                     case ProductorManager.ProductorType.Planner:
                         return plannerPoint;
-                    case ProductorManager.ProductorType.Designer:
-                        return designerPoint;
-                    case ProductorManager.ProductorType.Composer:
-                        return composerPoint;
-                    case ProductorManager.ProductorType.Promotor:
+                    case ProductorManager.ProductorType.GraphicDesigner:
+                        return GraphicDesignerPoint;
+                    case ProductorManager.ProductorType.SoundDesigner:
+                        return SoundDesignerPoint;
+                    case ProductorManager.ProductorType.Marketer:
                         return promotionPoint;
                 }
 
@@ -132,13 +132,13 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                     case ProductorManager.ProductorType.Planner:
                         plannerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Designer:
-                        designerPoint = value;
+                    case ProductorManager.ProductorType.GraphicDesigner:
+                        GraphicDesignerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Composer:
-                        composerPoint = value;
+                    case ProductorManager.ProductorType.SoundDesigner:
+                        SoundDesignerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Promotor:
+                    case ProductorManager.ProductorType.Marketer:
                         promotionPoint = value;
                         break;
                 }
@@ -147,8 +147,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             public void Init()
             {
                 plannerPoint = 0;
-                designerPoint = 0;
-                composerPoint = 0;
+                GraphicDesignerPoint = 0;
+                SoundDesignerPoint = 0;
                 promotionPoint = 0;
             }
         }
@@ -230,6 +230,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     public void SetDirectionText(string str)
     {
         directionText.text = str;
+    }
+
+    public void SetGearText(string str)
+    {
+        gearText.text = str;
     }
 
     //키워드쪽에서 수치 계산해서 줘야함.

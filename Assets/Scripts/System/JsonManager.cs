@@ -108,6 +108,11 @@ public class JsonManager : GenericSingleton<JsonManager>
         return data.PlayerData[0];
     }
 
+    public List<ProductorData> GetProductorData()
+    {
+        return data.ProductorData;
+    }
+
     public List<BroadcastRecord> GetBroadcastRecord()
     {
         return data.BroadcastRecord;

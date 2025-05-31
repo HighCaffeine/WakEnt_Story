@@ -67,6 +67,20 @@ public class DataManager : GenericSingleton<DataManager>
         date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
 
+    public void SetProductorInfo(List<ProductorInfo> infoList)
+    {
+        List<ProductorData> datas = JsonManager.Instance.GetProductorData();
+
+        foreach (var data in datas)
+        {
+            ProductorInfo newInfo = new ProductorInfo();
+
+            newInfo.SetProductorData(data);
+
+            infoList.Add(newInfo);
+        }
+    }
+
     public void SetMatchingValue(ref int[,] list)
     {
         List<MatchingData> matchingData = JsonManager.Instance.GetMatchingData();

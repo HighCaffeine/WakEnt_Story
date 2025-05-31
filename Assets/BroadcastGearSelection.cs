@@ -134,12 +134,19 @@ public class BroadcastGearSelection : GenericSingleton<BroadcastGearSelection>
         if (currentGearData.gearInfo.isBought)
         {
             // 선택 broadcastplanning으로 전송
+
+            string gearName = currentGearData.gearInfo.usePrice == 158 ? "그 긴거" : currentGearData.gearInfo.gearName;
+
+            BroadCastPlanning.Instance.SetGearText(gearName);
             gearPriceMultiRatio = currentGearData.gearInfo.priceRatio;
+            MenuController.Instance.MenuBack(); //메뉴 종료
         }
         else
         {
             // 구매 탭 킴 (info window에 출력)
             currentGearData.gearInfo.isBought = true;
+
+            //window 매니저 만들어서 메세지 출력
         }
     }
 

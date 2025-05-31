@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FrontWorkAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b87c8d5da0f8ec741aadc395f6e5c5ab, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - c600bbd1a18fff542becece482f88182: 1185821539
+    - c600bbd1a18fff542becece482f88182: -402099836
+    - 213367e38d98e2049898ab71b2c588f1: 1034971951
+    - 213367e38d98e2049898ab71b2c588f1: -1663507565
+    - 952bd904c92cdb049a5d7cb4ff65bdf4: -1250767759
+    - 952bd904c92cdb049a5d7cb4ff65bdf4: -196057853
+    - 51d2a5a58c2e90a43a32bb0edda4af00: -702206714
+    - 51d2a5a58c2e90a43a32bb0edda4af00: -653912167
+    - d9b84a4763302dc4fb7d09e40cdd8b3e: -1458786019
+    - d9b84a4763302dc4fb7d09e40cdd8b3e: -1634407291
+    - cfd6c1b71c5a6d04ba4d8f4573e75a86: 749666497
+    - cfd6c1b71c5a6d04ba4d8f4573e75a86: 1406845897
+    - 32024238d3f95d34e864e70d1e772ed0: 1708116249
+    - 32024238d3f95d34e864e70d1e772ed0: -1758276556
+    - 65224f78b54dc2648b1c27b13b13360a: -1759622973
+    - 65224f78b54dc2648b1c27b13b13360a: -1066503057
+    - a187d5dacfd41784e90b0e62157601be: -1135539402
+    - a187d5dacfd41784e90b0e62157601be: 1393830551
+    - 141fba5b9d407bb4392992f60c423981: -1831233964
+    - 141fba5b9d407bb4392992f60c423981: 1211357021
+    - 798578fbf458ebc42a9c83271a3e1c5c: 748629475
+    - 798578fbf458ebc42a9c83271a3e1c5c: -1607582129
+    - 2c9c0b9c3a2b40e4abac294038ec6445: -629595942
+    - 2c9c0b9c3a2b40e4abac294038ec6445: -505459565
+    - db03a2fc7af8a8b44bb6d1a0d7638c25: -2145539411
+    - db03a2fc7af8a8b44bb6d1a0d7638c25: 978528863
+    - 9bd1789d0db6862438c7a6a7a386a71c: 1273401978
+    - 9bd1789d0db6862438c7a6a7a386a71c: -1772684300
+    - 39a91b1e01ee02541a3190b89171bf75: 677541427
+    - 39a91b1e01ee02541a3190b89171bf75: -841556027
+    - 78945d6efb4eed34b970e35bc6092643: -1370941358
+    - 78945d6efb4eed34b970e35bc6092643: 586771098
+    - 930e819e4638b7440871da6ecf16813c: 817895961
+    - 930e819e4638b7440871da6ecf16813c: -702103386
+    - ea74149fa84c5314eb8479b56783cd79: -1898977801
+    - ea74149fa84c5314eb8479b56783cd79: 142470092
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 1185821539, guid: c600bbd1a18fff542becece482f88182, type: 3}
+  - {fileID: -402099836, guid: c600bbd1a18fff542becece482f88182, type: 3}
+  - {fileID: 1034971951, guid: 213367e38d98e2049898ab71b2c588f1, type: 3}
+  - {fileID: -1663507565, guid: 213367e38d98e2049898ab71b2c588f1, type: 3}
+  - {fileID: -1250767759, guid: 952bd904c92cdb049a5d7cb4ff65bdf4, type: 3}
+  - {fileID: -196057853, guid: 952bd904c92cdb049a5d7cb4ff65bdf4, type: 3}
+  - {fileID: -702206714, guid: 51d2a5a58c2e90a43a32bb0edda4af00, type: 3}
+  - {fileID: -653912167, guid: 51d2a5a58c2e90a43a32bb0edda4af00, type: 3}
+  - {fileID: -1458786019, guid: d9b84a4763302dc4fb7d09e40cdd8b3e, type: 3}
+  - {fileID: -1634407291, guid: d9b84a4763302dc4fb7d09e40cdd8b3e, type: 3}
+  - {fileID: 749666497, guid: cfd6c1b71c5a6d04ba4d8f4573e75a86, type: 3}
+  - {fileID: 1406845897, guid: cfd6c1b71c5a6d04ba4d8f4573e75a86, type: 3}
+  - {fileID: 1708116249, guid: 32024238d3f95d34e864e70d1e772ed0, type: 3}
+  - {fileID: -1758276556, guid: 32024238d3f95d34e864e70d1e772ed0, type: 3}
+  - {fileID: -1759622973, guid: 65224f78b54dc2648b1c27b13b13360a, type: 3}
+  - {fileID: -1066503057, guid: 65224f78b54dc2648b1c27b13b13360a, type: 3}
+  - {fileID: -1135539402, guid: a187d5dacfd41784e90b0e62157601be, type: 3}
+  - {fileID: 1393830551, guid: a187d5dacfd41784e90b0e62157601be, type: 3}
+  - {fileID: -1831233964, guid: 141fba5b9d407bb4392992f60c423981, type: 3}
+  - {fileID: 1211357021, guid: 141fba5b9d407bb4392992f60c423981, type: 3}
+  - {fileID: 748629475, guid: 798578fbf458ebc42a9c83271a3e1c5c, type: 3}
+  - {fileID: -1607582129, guid: 798578fbf458ebc42a9c83271a3e1c5c, type: 3}
+  - {fileID: -629595942, guid: 2c9c0b9c3a2b40e4abac294038ec6445, type: 3}
+  - {fileID: -505459565, guid: 2c9c0b9c3a2b40e4abac294038ec6445, type: 3}
+  - {fileID: -2145539411, guid: db03a2fc7af8a8b44bb6d1a0d7638c25, type: 3}
+  - {fileID: 978528863, guid: db03a2fc7af8a8b44bb6d1a0d7638c25, type: 3}
+  - {fileID: 1273401978, guid: 9bd1789d0db6862438c7a6a7a386a71c, type: 3}
+  - {fileID: -1772684300, guid: 9bd1789d0db6862438c7a6a7a386a71c, type: 3}
+  - {fileID: 677541427, guid: 39a91b1e01ee02541a3190b89171bf75, type: 3}
+  - {fileID: -841556027, guid: 39a91b1e01ee02541a3190b89171bf75, type: 3}
+  - {fileID: -1370941358, guid: 78945d6efb4eed34b970e35bc6092643, type: 3}
+  - {fileID: 586771098, guid: 78945d6efb4eed34b970e35bc6092643, type: 3}
+  - {fileID: 817895961, guid: 930e819e4638b7440871da6ecf16813c, type: 3}
+  - {fileID: -702103386, guid: 930e819e4638b7440871da6ecf16813c, type: 3}
+  - {fileID: -1898977801, guid: ea74149fa84c5314eb8479b56783cd79, type: 3}
+  - {fileID: 142470092, guid: ea74149fa84c5314eb8479b56783cd79, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - FrontWork_Bulgom_1
+  - FrontWork_Bulgom_0
+  - FrontWork_Ine_1
+  - FrontWork_Ine_0
+  - FrontWork_DdongGangAJi_0
+  - FrontWork_DdongGangAJi_1
+  - FrontWork_CarnarJungtur_1
+  - FrontWork_CarnarJungtur_0
+  - FrontWork_Secretto_0
+  - FrontWork_Secretto_1
+  - FrontWork_Panchi_0
+  - FrontWork_Panchi_1
+  - FrontWork_Jentoo_0
+  - FrontWork_Jentoo_1
+  - FrontWork_Dulgi_0
+  - FrontWork_Dulgi_1
+  - FrontWork_Lilpa_1
+  - FrontWork_Lilpa_0
+  - FrontWork_ButterusIII_0
+  - FrontWork_ButterusIII_1
+  - FrontWork_PungSin_1
+  - FrontWork_PungSin_0
+  - FrontWork_SuSaemi_0
+  - FrontWork_SuSaemi_1
+  - FrontWork_WooWakGood_0
+  - FrontWork_WooWakGood_1
+  - FrontWork_Jururu_0
+  - FrontWork_Jururu_1
+  - FrontWork_Viichan_1
+  - FrontWork_Viichan_0
+  - FrontWork_Gosegu_1
+  - FrontWork_Gosegu_0
+  - FrontWork_JingBurger_0
+  - FrontWork_JingBurger_1
+  - FrontWork_Roentgenium_0
+  - FrontWork_Roentgenium_1
+  m_RenderDataMap: {}
+  m_Tag: FrontWorkAtlas
+  m_IsVariant: 0
