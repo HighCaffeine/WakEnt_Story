@@ -8797,7 +8797,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 957ef7a0fe69444d1aa0042350cfaa6a, type: 3}
     - target: {fileID: 6157584844410789134, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_Name
-      value: DesignerScore
+      value: GraphicDesignScore
       objectReference: {fileID: 0}
     - target: {fileID: 6572564851133951431, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -17828,6 +17828,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 408dd1df0985f634e84279a143bb5f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &415351176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1002263258128345121, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 251199330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &426025960
@@ -28773,7 +28784,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3771068918189507128, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_Name
-      value: PromotorPoint
+      value: MarketingPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6430459646290718625, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_fontSize
@@ -29243,13 +29254,12 @@ MonoBehaviour:
   reverseDelay: 0
   plannerStartXPos: {fileID: 1475638598178569365}
   plannerStat: {fileID: 1640488648}
-  GraphicDesignerStartXPos: {fileID: 0}
-  GraphicDesignerStat: {fileID: 0}
-  SoundDesignerStartXPos: {fileID: 0}
-  SoundDesignerStat: {fileID: 0}
-  MarketerStartXPos: {fileID: 0}
-  MarketerStat: {fileID: 0}
-  rect: {fileID: 0}
+  GraphicDesignerStartXPos: {fileID: 2026899196}
+  GraphicDesignerStat: {fileID: 415351176}
+  SoundDesignerStartXPos: {fileID: 1157580381}
+  SoundDesignerStat: {fileID: 1029420370}
+  MarketerStartXPos: {fileID: 2110472625}
+  MarketerStat: {fileID: 1930516880}
   icons:
   - {fileID: 21300000, guid: 028723b5ae79f42e4a0732dd09eaa970, type: 3}
   - {fileID: 21300000, guid: 957ef7a0fe69444d1aa0042350cfaa6a, type: 3}
@@ -30998,7 +31008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6157584844410789134, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_Name
-      value: PromotorScore
+      value: MarketingScore
       objectReference: {fileID: 0}
     - target: {fileID: 6572564851133951431, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -31595,6 +31605,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1029420370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1002263258128345121, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 1490536219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1038483735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32851,6 +32872,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &1157580381 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6572564851133951431, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 1490536219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1159357668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36692,7 +36718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentProcessProductorType: 0
-  productorImage: {fileID: 0}
+  productorImage: {fileID: 1372788562}
   productorName: {fileID: 308116841}
   productorStatObj: {fileID: 1241528548}
   productorStats: []
@@ -42623,7 +42649,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 126284ca0bdc24dafa48748b05fc6718, type: 3}
     - target: {fileID: 6157584844410789134, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_Name
-      value: ComposerScore
+      value: SoundDesignScore
       objectReference: {fileID: 0}
     - target: {fileID: 6157584844410789134, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
       propertyPath: m_IsActive
@@ -48733,7 +48759,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3771068918189507128, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_Name
-      value: DesignerPoint
+      value: GraphicPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6430459646290718625, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_fontSize
@@ -49810,7 +49836,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 97258601}
           m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: SetBroadcastPlanning
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49822,7 +49848,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 97258601}
           m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: SetPriceText
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49834,7 +49860,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 2049230281}
           m_TargetAssemblyTypeName: BroadcastDirectionSelection, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: Init
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49851,7 +49877,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 97258601}
           m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: SetPriceText
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49866,7 +49892,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 976539729}
           m_TargetAssemblyTypeName: BroadcastGearSelection, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: OpenGearSelection
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49883,7 +49909,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 181544761}
           m_TargetAssemblyTypeName: BroadcastKeywordSelection, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: ClosePanel
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49895,7 +49921,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 97258601}
           m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: SetPriceText
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49915,7 +49941,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 97258601}
           m_TargetAssemblyTypeName: BroadCastPlanning, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: SetPriceText
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -49946,7 +49972,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1355145996}
           m_TargetAssemblyTypeName: ProductorManager, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: OpenProductorSelection
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -50294,7 +50320,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3771068918189507128, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_Name
-      value: ComposerPoint
+      value: SoundPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6430459646290718625, guid: 9540f9c964cc11749a9f206fb9d3bef6, type: 3}
       propertyPath: m_fontSize
@@ -52883,6 +52909,17 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1930516880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1002263258128345121, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 988329254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946615500
 GameObject:
   m_ObjectHideFlags: 0
@@ -56510,6 +56547,11 @@ MonoBehaviour:
   moveTileLayer: {fileID: 2023622566}
   moveSortingGroupLayer: {fileID: 0}
   sortingLayerCalculator: {fileID: 0}
+--- !u!224 &2026899196 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6572564851133951431, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 251199330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2032013926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59345,6 +59387,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106810760}
   m_CullTransparentMesh: 1
+--- !u!224 &2110472625 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6572564851133951431, guid: 95a7ec7ca5864be49b05a42b022f6c0a, type: 3}
+  m_PrefabInstance: {fileID: 988329254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2113385307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61986,7 +62033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3664627292986027629
 MonoBehaviour:
   m_ObjectHideFlags: 0
