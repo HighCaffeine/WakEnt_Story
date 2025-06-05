@@ -64,34 +64,40 @@ public class SortingLayerCalculator : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR || UNITY_EDITOR_64
 [CustomEditor(typeof(SortingLayerCalculator))]
 public class CustomInspector : Editor
 {
     SerializedProperty calculateTypeProperty;
+    SerializedProperty spriteRenderersProperty;
+    SerializedProperty sortingGroupsProperty;
 
     void OnEnable()
     {
         calculateTypeProperty = serializedObject.FindProperty("calculateType");
+        spriteRenderersProperty = serializedObject.FindProperty("spriteRenderers");
+        sortingGroupsProperty = serializedObject.FindProperty("sortingGroups");
     }
 
     /* Inspector를 그리는 함수 */
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
+        serializedObject.Update();
+
         GUILayout.Label("레이어 계산할 객체 타입");
         EditorGUILayout.PropertyField(calculateTypeProperty);
 
-        if ((CalculateType)calculateTypeProperty.enumValueIndex == CalculateType.SpriteRenderer)
+        switch ((CalculateType)calculateTypeProperty.enumValueIndex)
         {
-            var list = serializedObject.FindProperty("spriteRenderers");
-            EditorGUILayout.PropertyField(list);
-        }
-        else if ((CalculateType)calculateTypeProperty.enumValueIndex == CalculateType.SortingGroup)
-        {
-            var list = serializedObject.FindProperty("sortingGroups");
-            EditorGUILayout.PropertyField(list);
+            case CalculateType.SpriteRenderer:
+                EditorGUILayout.PropertyField(spriteRenderersProperty, true);
+                break;
+            case CalculateType.SortingGroup:
+                EditorGUILayout.PropertyField(sortingGroupsProperty, true);
+                break;
         }
 
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

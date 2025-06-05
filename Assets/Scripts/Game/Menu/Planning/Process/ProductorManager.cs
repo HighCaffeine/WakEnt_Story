@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using Devcat;
+using static SpriteAnimation;
 
 public class ProductorManager : GenericSingleton<ProductorManager>
 {
@@ -252,6 +253,8 @@ public class ProductorManager : GenericSingleton<ProductorManager>
                 break;
             }
         }
+
+        SpriteAnimation.Instance.SetData(AtlasAniType.Idle, productorImage);
     }
 
 
@@ -301,7 +304,7 @@ public class ProductorManager : GenericSingleton<ProductorManager>
         if (isRun)
         {
             string[] resourceName = ValueCastTo<ResourceID>.From(info.GetID()).ToString().Split('_');
-            SpriteAnimation.Instance.PlayAnimation(resourceName[2], true);
+            SpriteAnimation.Instance.PlayAnimation(resourceName[2], true, 0f);
         }
     }
 
@@ -470,7 +473,12 @@ public class ProductorManager : GenericSingleton<ProductorManager>
                 break;
             }
 
-            yield return new WaitForSeconds(2f);
+            float playDelay = 2f;
+
+            //애니메이션 실행
+            SpriteAnimation.Instance.SetData(AtlasAniType.Work, StatIconManager.Instance.GetImageComponenet());
+            SpriteAnimation.Instance.PlayAnimation(info.GetName(), true, playDelay);
+            yield return new WaitForSeconds(playDelay);
 
             if (SoundManager.Instance != null && isFirst) 
             {
@@ -481,9 +489,11 @@ public class ProductorManager : GenericSingleton<ProductorManager>
 
             StartCoroutine(TimeCheck(processingTime, checkTime));
 
-            ProcessingMessage("ㄷㄱㅈ");
+            ProcessingMessage("두개재");
             SetTitle(processStep);
-            
+
+
+
             while (true)
             {
                 if (checkTime.isOverTime)

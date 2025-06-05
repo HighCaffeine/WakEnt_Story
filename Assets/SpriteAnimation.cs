@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 using UnityEngine;
 
 public class SpriteAnimation : GenericSingleton<SpriteAnimation>
 {
-    [SerializeField] private SpriteAnimationData aniData;   //enum으로 관리 나중에
-    [SerializeField] private UnityEngine.UI.Image target;   //타겟
+    //현재는 여기서 UI쪽 컨트롤로하고, 
+    //2d오브젝트 캐릭터들도 컨트롤 해야할 경우 classgroup에 있는 resourcetype을 사용할듯
+    //모든 캐릭터들에 해당 소스를 붙여도 써도 괜찮을지와
+    //그러면 결국 지금 매니저 방식으로 만들고 있지만
+    //필요한 곳에서 각자 캐싱해서 사용하는 방식으로 해야함.
+    public enum AtlasAniType { Idle, Work }
+
+    public AtlasAniType TEST_atlasType;
+    [Header("0 : Idle, 1 : Work")][SerializeField] private SpriteAnimationData[] aniData;   //enum으로 관리 나중에
+    private UnityEngine.UI.Image target;   //타겟
 
     [Header("Frame")] [SerializeField] private float frame;                  //fps
 
@@ -35,28 +42,28 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
     }
     
     //애니메이션 필요 패널 켰을 때 실행
-    public void SetData(ResourceType resourceType, UnityEngine.UI.Image target)
+    public void SetData(AtlasAniType TEST_atlasType, UnityEngine.UI.Image target)
     {
-        aniCount = aniData.aniCount;
+        aniCount = aniData[(int)TEST_atlasType].aniCount;
         this.target = target;
     }
 
     //패널 내부에서 전환 시 사용
-    public void PlayAnimation(string characterName, bool loop)
+    public void PlayAnimation(string characterName, bool loop, float playDealy)
     {
-        aniCount = aniData.aniCount;
+        aniCount = aniData[(int)TEST_atlasType].aniCount;
 
         this.loop = loop;
-        string aniKey = string.Format($"{aniData.animationName}_{characterName}");
+        string aniKey = string.Format($"{aniData[(int)TEST_atlasType].animationName}_{characterName}");
 
         if (sprites.Count > 1)
         {
             sprites.Clear();
         }
 
-        for (int i = 0; i < aniData.aniCount; i++)
+        for (int i = 0; i < aniData[(int)TEST_atlasType].aniCount; i++)
         {
-            Sprite sprite = aniData.atlas.GetSprite($"{aniKey}_{i}");
+            Sprite sprite = aniData[(int)TEST_atlasType].atlas.GetSprite($"{aniKey}_{i}");
             sprites.Add(sprite);
         }
 
@@ -66,16 +73,25 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
             StopCoroutine(aniCoroutine);
         }
 
-        aniCoroutine = StartCoroutine(SpriteAniCoroutine());
+        Debug.Log($"Play {characterName}");
+        aniCoroutine = StartCoroutine(SpriteAniCoroutine(playDealy));
     }
 
     Coroutine aniCoroutine;
 
-    public IEnumerator SpriteAniCoroutine()
+    public IEnumerator SpriteAniCoroutine(float playDelay)
     {
         bool isPlay = true;
 
         index = 0;
+
+        target.sprite = sprites[0];
+
+        //if (playDelay > 0.0f) yield return new WaitForSeconds(playDelay);
+
+        if (sprites[0] == null) isPlay = false;
+
+        Debug.Log(isPlay ? "Play" : "Not Play");
 
         while (isPlay)
         {
@@ -83,14 +99,14 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
 
             if (timer >= 1f / frame)
             {
-                if (aniData.frames[index] == (frameCount++ + beforeFrameCount))
+                if (aniData[(int)TEST_atlasType].frames[index] == (frameCount++ + beforeFrameCount))
                 {
-                    beforeFrameCount = aniData.frames[index];
+                    beforeFrameCount = aniData[(int)TEST_atlasType].frames[index];
                     frameCount = 0;
                     timer = 0.0f;
                     index++;
 
-                    if (index >= aniData.spriteOrder.Length - 1)
+                    if (index >= aniData[(int)TEST_atlasType].spriteOrder.Length - 1)
                     {
                         if (loop)
                         {
@@ -101,12 +117,12 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
                         }
                         else
                         {
-                            index = aniData.spriteOrder.Length - 1;
+                            index = aniData[(int)TEST_atlasType].spriteOrder.Length - 1;
                             isPlay = false;
                         }
                     }
 
-                    target.sprite = sprites[aniData.spriteOrder[index]];
+                    target.sprite = sprites[aniData[(int)TEST_atlasType].spriteOrder[index]];
                 }
             }
 

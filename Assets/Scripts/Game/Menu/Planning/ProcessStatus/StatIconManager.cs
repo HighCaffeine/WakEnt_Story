@@ -10,23 +10,23 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
 {
     [SerializeField] private Transform dropStartYPos;
 
-    [SerializeField] private RectTransform avatar;
+    [SerializeField] private UnityEngine.UI.Image avatar;
     [SerializeField] private float reverseDelay;
 
-    [Header("기획")]
+    [Header("재미")]
     [SerializeField] private Transform plannerStartXPos; 
     [SerializeField] private TextMeshProUGUI plannerStat;
-    [Header("맵")]
+    [Header("퀄리티")]
     [SerializeField] private Transform GraphicDesignerStartXPos;
     [SerializeField] private TextMeshProUGUI GraphicDesignerStat;
-    [Header("작곡")]
+    [Header("음향")]
     [SerializeField] private Transform SoundDesignerStartXPos;
     [SerializeField] private TextMeshProUGUI SoundDesignerStat;
     [Header("홍보")]
     [SerializeField] private Transform MarketerStartXPos;
     [SerializeField] private TextMeshProUGUI MarketerStat;
 
-    [SerializeField]private RectTransform rect;
+    private RectTransform rect;
 
     private new void Awake()
     {
@@ -36,6 +36,11 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
     }
     
     [Tooltip("1 : 기획, 2 : 맵, 3 : 사운드, 4 : 홍보")][SerializeField] private Sprite[] icons;
+
+    public UnityEngine.UI.Image GetImageComponenet()
+    {
+        return avatar;
+    }
     
     public void AddStatIcon(ProductorManager.ProductorType type)
     {

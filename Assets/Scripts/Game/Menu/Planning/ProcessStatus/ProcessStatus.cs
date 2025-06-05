@@ -5,7 +5,7 @@ public class ProcessStatus : GenericSingleton<ProcessStatus>
 {
     [Header("작업 총 스텟")]
     [Space(5f)]
-    [Header("0 : 기획, 1 : 맵, 2 : 작곡, 3 : 홍보")]
+    [Header("0 : 기획, 1 : 퀄리티, 2 : 음향, 3 : 홍보")]
     [SerializeField] private TextMeshProUGUI[] broadcastStat;
     [SerializeField] private TextMeshProUGUI progress;
 
