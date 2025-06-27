@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BackIdleStretchingAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 64cccde2ce854ac4291883c33a5f3582, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 19608f1292fc26d479195a70eb8bf9f9: -1252944733
+    - 19608f1292fc26d479195a70eb8bf9f9: -718240499
+    - dd37e452628259c43b7cb7e800d62836: 1611702137
+    - dd37e452628259c43b7cb7e800d62836: 135816161
+    - 2ec82c92d9e1bc04bbc4bc90bdd5e08b: 278635794
+    - 2ec82c92d9e1bc04bbc4bc90bdd5e08b: -516428558
+    - ee456ff468641174291ffe7a2dd2b232: -834057946
+    - ee456ff468641174291ffe7a2dd2b232: 1693351408
+    - f418b8468a07c464cbe584e2d6df7393: 757392373
+    - f418b8468a07c464cbe584e2d6df7393: 1392131860
+    - 9e48829746a6429408f844b149db97e5: -1709404825
+    - 9e48829746a6429408f844b149db97e5: -1141191103
+    - c3f06eb71dbd0bf4b83ee3366ce12afc: -1643883776
+    - c3f06eb71dbd0bf4b83ee3366ce12afc: 443167583
+    - 6235e0e79649c4b4ba9813d71721a0ad: 1418272615
+    - 6235e0e79649c4b4ba9813d71721a0ad: 680704961
+    - b0fc9c49a07f07e4f9bf5b4eff7ba0cc: -26348534
+    - b0fc9c49a07f07e4f9bf5b4eff7ba0cc: -825618623
+    - 8caa014a11e431c4686025cef20e0113: 1401242314
+    - 8caa014a11e431c4686025cef20e0113: -2142533294
+    - a5f18eda6a3c7f942b47a3344a383437: 1495765594
+    - a5f18eda6a3c7f942b47a3344a383437: 1784439058
+    - eb5bbd0ba6c056246bce8cb9288b40bf: -1557050787
+    - eb5bbd0ba6c056246bce8cb9288b40bf: -1262081862
+    - f4c50f3bb3081ca408ae7ca93b8f1fcb: 964377227
+    - f4c50f3bb3081ca408ae7ca93b8f1fcb: -1692782230
+    - bc84a34b6b58b374589580bde7c899aa: -1678809378
+    - bc84a34b6b58b374589580bde7c899aa: 1025466070
+    - 4c642e8e94ed49442946b39ecc8b8a90: -1810505974
+    - 4c642e8e94ed49442946b39ecc8b8a90: -1992081943
+    - 021aa2ce11e819a46971628d446a025c: -1086109593
+    - 021aa2ce11e819a46971628d446a025c: -1923872460
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -1252944733, guid: 19608f1292fc26d479195a70eb8bf9f9, type: 3}
+  - {fileID: -718240499, guid: 19608f1292fc26d479195a70eb8bf9f9, type: 3}
+  - {fileID: 1611702137, guid: dd37e452628259c43b7cb7e800d62836, type: 3}
+  - {fileID: 135816161, guid: dd37e452628259c43b7cb7e800d62836, type: 3}
+  - {fileID: 278635794, guid: 2ec82c92d9e1bc04bbc4bc90bdd5e08b, type: 3}
+  - {fileID: -516428558, guid: 2ec82c92d9e1bc04bbc4bc90bdd5e08b, type: 3}
+  - {fileID: -834057946, guid: ee456ff468641174291ffe7a2dd2b232, type: 3}
+  - {fileID: 1693351408, guid: ee456ff468641174291ffe7a2dd2b232, type: 3}
+  - {fileID: 757392373, guid: f418b8468a07c464cbe584e2d6df7393, type: 3}
+  - {fileID: 1392131860, guid: f418b8468a07c464cbe584e2d6df7393, type: 3}
+  - {fileID: -1709404825, guid: 9e48829746a6429408f844b149db97e5, type: 3}
+  - {fileID: -1141191103, guid: 9e48829746a6429408f844b149db97e5, type: 3}
+  - {fileID: -1643883776, guid: c3f06eb71dbd0bf4b83ee3366ce12afc, type: 3}
+  - {fileID: 443167583, guid: c3f06eb71dbd0bf4b83ee3366ce12afc, type: 3}
+  - {fileID: 1418272615, guid: 6235e0e79649c4b4ba9813d71721a0ad, type: 3}
+  - {fileID: 680704961, guid: 6235e0e79649c4b4ba9813d71721a0ad, type: 3}
+  - {fileID: -26348534, guid: b0fc9c49a07f07e4f9bf5b4eff7ba0cc, type: 3}
+  - {fileID: -825618623, guid: b0fc9c49a07f07e4f9bf5b4eff7ba0cc, type: 3}
+  - {fileID: 1401242314, guid: 8caa014a11e431c4686025cef20e0113, type: 3}
+  - {fileID: -2142533294, guid: 8caa014a11e431c4686025cef20e0113, type: 3}
+  - {fileID: 1495765594, guid: a5f18eda6a3c7f942b47a3344a383437, type: 3}
+  - {fileID: 1784439058, guid: a5f18eda6a3c7f942b47a3344a383437, type: 3}
+  - {fileID: -1557050787, guid: eb5bbd0ba6c056246bce8cb9288b40bf, type: 3}
+  - {fileID: -1262081862, guid: eb5bbd0ba6c056246bce8cb9288b40bf, type: 3}
+  - {fileID: 964377227, guid: f4c50f3bb3081ca408ae7ca93b8f1fcb, type: 3}
+  - {fileID: -1692782230, guid: f4c50f3bb3081ca408ae7ca93b8f1fcb, type: 3}
+  - {fileID: -1678809378, guid: bc84a34b6b58b374589580bde7c899aa, type: 3}
+  - {fileID: 1025466070, guid: bc84a34b6b58b374589580bde7c899aa, type: 3}
+  - {fileID: -1810505974, guid: 4c642e8e94ed49442946b39ecc8b8a90, type: 3}
+  - {fileID: -1992081943, guid: 4c642e8e94ed49442946b39ecc8b8a90, type: 3}
+  - {fileID: -1086109593, guid: 021aa2ce11e819a46971628d446a025c, type: 3}
+  - {fileID: -1923872460, guid: 021aa2ce11e819a46971628d446a025c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BackIdleStretching_Secretto_0
+  - BackIdleStretching_Secretto_1
+  - BackIdleStretching_SuSaemi_0
+  - BackIdleStretching_SuSaemi_1
+  - BackIdleStretching_Panchi_0
+  - BackIdleStretching_Panchi_1
+  - BackIdleStretching_Viichan_1
+  - BackIdleStretching_Viichan_0
+  - BackIdleStretching_JingBurger_0
+  - BackIdleStretching_JingBurger_1
+  - BackIdleStretching_PungSin_1
+  - BackIdleStretching_PungSin_0
+  - BackIdleStretching_Dulgi_0
+  - BackIdleStretching_Dulgi_1
+  - BackIdleStretching_DdongGangAJi_0
+  - BackIdleStretching_DdongGangAJi_1
+  - BackIdleStretching_CarnarJungtur_1
+  - BackIdleStretching_CarnarJungtur_0
+  - BackIdleStretching_Lilpa_1
+  - BackIdleStretching_Lilpa_0
+  - BackIdleStretching_Gosegu_1
+  - BackIdleStretching_Gosegu_0
+  - BackIdleStretching_Bulgom_1
+  - BackIdleStretching_Bulgom_0
+  - BackIdleStretching_Ine_1
+  - BackIdleStretching_Ine_0
+  - BackIdleStretching_Jentoo_0
+  - BackIdleStretching_Jentoo_1
+  - BackIdleStretching_ButterusIII_0
+  - BackIdleStretching_ButterusIII_1
+  - BackIdleStretching_Jururu_0
+  - BackIdleStretching_Jururu_1
+  m_RenderDataMap: {}
+  m_Tag: BackIdleStretchingAtlas
+  m_IsVariant: 0

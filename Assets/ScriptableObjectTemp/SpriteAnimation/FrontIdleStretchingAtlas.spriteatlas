@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FrontIdleStretchingAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: dded97a1ce8616e42909fa851e2a92e5, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 48a22ea06feadca46bcf98d372407352: -1147994724
+    - 48a22ea06feadca46bcf98d372407352: 608650647
+    - e1b19941634a8d840ab7bdc95fbbff67: 2134457370
+    - e1b19941634a8d840ab7bdc95fbbff67: 686242091
+    - 6666b3a1a27862e4f9f40c6f4e8b298f: 1631653992
+    - 6666b3a1a27862e4f9f40c6f4e8b298f: 761006024
+    - 079345e1accd9844393c9dbf2d4dceb6: -1803660561
+    - 079345e1accd9844393c9dbf2d4dceb6: 1369284639
+    - 514d1bd31c32fa44a8e332fad0256f49: 1021103003
+    - 514d1bd31c32fa44a8e332fad0256f49: 935760914
+    - d535d7644e414f740a74e13deca67b07: -1751505298
+    - d535d7644e414f740a74e13deca67b07: 815896577
+    - b3823ae69786fba45ba0b4b61ef01264: 1312324164
+    - b3823ae69786fba45ba0b4b61ef01264: -896307216
+    - d82111288d2c68d40b74b32d3b8e4fd2: -1930535674
+    - d82111288d2c68d40b74b32d3b8e4fd2: -1363871352
+    - 9ad5a878c5f7be544b5214336d685bdc: 1237383775
+    - 9ad5a878c5f7be544b5214336d685bdc: 1920983737
+    - e0cda77a747e80b42b3215ff14847c24: -920656208
+    - e0cda77a747e80b42b3215ff14847c24: 437082830
+    - 7b61b3ea5e390684ea9f6d3061b2b520: -27553376
+    - 7b61b3ea5e390684ea9f6d3061b2b520: 24679578
+    - cf2005dbea8ceec41acad02baa6a1aa0: -1532183588
+    - cf2005dbea8ceec41acad02baa6a1aa0: 1438427782
+    - a813529c0a0dd264380cb342a62572dd: 779822445
+    - a813529c0a0dd264380cb342a62572dd: 535709058
+    - 9ad0945d131dfcd44a0632832b297eb7: 1741638659
+    - 9ad0945d131dfcd44a0632832b297eb7: 1471988552
+    - d9335bdd40a277c4b8eb1c42172c525e: 385031465
+    - d9335bdd40a277c4b8eb1c42172c525e: 989664973
+    - 66050c6fe81323a4f8f2a3b48de2d0dc: -170755252
+    - 66050c6fe81323a4f8f2a3b48de2d0dc: -874246748
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -1147994724, guid: 48a22ea06feadca46bcf98d372407352, type: 3}
+  - {fileID: 608650647, guid: 48a22ea06feadca46bcf98d372407352, type: 3}
+  - {fileID: 2134457370, guid: e1b19941634a8d840ab7bdc95fbbff67, type: 3}
+  - {fileID: 686242091, guid: e1b19941634a8d840ab7bdc95fbbff67, type: 3}
+  - {fileID: 1631653992, guid: 6666b3a1a27862e4f9f40c6f4e8b298f, type: 3}
+  - {fileID: 761006024, guid: 6666b3a1a27862e4f9f40c6f4e8b298f, type: 3}
+  - {fileID: -1803660561, guid: 079345e1accd9844393c9dbf2d4dceb6, type: 3}
+  - {fileID: 1369284639, guid: 079345e1accd9844393c9dbf2d4dceb6, type: 3}
+  - {fileID: 1021103003, guid: 514d1bd31c32fa44a8e332fad0256f49, type: 3}
+  - {fileID: 935760914, guid: 514d1bd31c32fa44a8e332fad0256f49, type: 3}
+  - {fileID: -1751505298, guid: d535d7644e414f740a74e13deca67b07, type: 3}
+  - {fileID: 815896577, guid: d535d7644e414f740a74e13deca67b07, type: 3}
+  - {fileID: 1312324164, guid: b3823ae69786fba45ba0b4b61ef01264, type: 3}
+  - {fileID: -896307216, guid: b3823ae69786fba45ba0b4b61ef01264, type: 3}
+  - {fileID: -1930535674, guid: d82111288d2c68d40b74b32d3b8e4fd2, type: 3}
+  - {fileID: -1363871352, guid: d82111288d2c68d40b74b32d3b8e4fd2, type: 3}
+  - {fileID: 1237383775, guid: 9ad5a878c5f7be544b5214336d685bdc, type: 3}
+  - {fileID: 1920983737, guid: 9ad5a878c5f7be544b5214336d685bdc, type: 3}
+  - {fileID: -920656208, guid: e0cda77a747e80b42b3215ff14847c24, type: 3}
+  - {fileID: 437082830, guid: e0cda77a747e80b42b3215ff14847c24, type: 3}
+  - {fileID: -27553376, guid: 7b61b3ea5e390684ea9f6d3061b2b520, type: 3}
+  - {fileID: 24679578, guid: 7b61b3ea5e390684ea9f6d3061b2b520, type: 3}
+  - {fileID: -1532183588, guid: cf2005dbea8ceec41acad02baa6a1aa0, type: 3}
+  - {fileID: 1438427782, guid: cf2005dbea8ceec41acad02baa6a1aa0, type: 3}
+  - {fileID: 779822445, guid: a813529c0a0dd264380cb342a62572dd, type: 3}
+  - {fileID: 535709058, guid: a813529c0a0dd264380cb342a62572dd, type: 3}
+  - {fileID: 1741638659, guid: 9ad0945d131dfcd44a0632832b297eb7, type: 3}
+  - {fileID: 1471988552, guid: 9ad0945d131dfcd44a0632832b297eb7, type: 3}
+  - {fileID: 385031465, guid: d9335bdd40a277c4b8eb1c42172c525e, type: 3}
+  - {fileID: 989664973, guid: d9335bdd40a277c4b8eb1c42172c525e, type: 3}
+  - {fileID: -170755252, guid: 66050c6fe81323a4f8f2a3b48de2d0dc, type: 3}
+  - {fileID: -874246748, guid: 66050c6fe81323a4f8f2a3b48de2d0dc, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - FrontIdleStretching_Panchi_0
+  - FrontIdleStretching_Panchi_1
+  - FrontIdleStretching_Gosegu_1
+  - FrontIdleStretching_Gosegu_0
+  - FrontIdleStretching_Jentoo_0
+  - FrontIdleStretching_Jentoo_1
+  - FrontIdleStretching_DdongGangAJi_0
+  - FrontIdleStretching_DdongGangAJi_1
+  - FrontIdleStretching_Lilpa_1
+  - FrontIdleStretching_Lilpa_0
+  - FrontIdleStretching_Secretto_0
+  - FrontIdleStretching_Secretto_1
+  - FrontIdleStretching_SuSaemi_0
+  - FrontIdleStretching_SuSaemi_1
+  - FrontIdleStretching_CarnarJungtur_1
+  - FrontIdleStretching_CarnarJungtur_0
+  - FrontIdleStretching_ButterusIII_0
+  - FrontIdleStretching_ButterusIII_1
+  - FrontIdleStretching_JingBurger_0
+  - FrontIdleStretching_JingBurger_1
+  - FrontIdleStretching_Viichan_1
+  - FrontIdleStretching_Viichan_0
+  - FrontIdleStretching_Dulgi_0
+  - FrontIdleStretching_Dulgi_1
+  - FrontIdleStretching_Ine_1
+  - FrontIdleStretching_Ine_0
+  - FrontIdleStretching_Jururu_0
+  - FrontIdleStretching_Jururu_1
+  - FrontIdleStretching_Bulgom_1
+  - FrontIdleStretching_Bulgom_0
+  - FrontIdleStretching_PungSin_1
+  - FrontIdleStretching_PungSin_0
+  m_RenderDataMap: {}
+  m_Tag: FrontIdleStretchingAtlas
+  m_IsVariant: 0
