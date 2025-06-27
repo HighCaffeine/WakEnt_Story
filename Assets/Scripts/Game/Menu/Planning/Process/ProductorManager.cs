@@ -254,7 +254,7 @@ public class ProductorManager : GenericSingleton<ProductorManager>
             }
         }
 
-        SpriteAnimation.Instance.SetData(AtlasAniType.Idle, productorImage);
+        SpriteAnimation.Instance.SetDataImage(AtlasAniType.Idle, productorImage);
     }
 
 
@@ -476,7 +476,7 @@ public class ProductorManager : GenericSingleton<ProductorManager>
             float playDelay = 2f;
 
             //애니메이션 실행
-            SpriteAnimation.Instance.SetData(AtlasAniType.Work, StatIconManager.Instance.GetImageComponenet());
+            SpriteAnimation.Instance.SetDataImage(AtlasAniType.FrontWork, StatIconManager.Instance.GetImageComponenet());
             SpriteAnimation.Instance.PlayAnimation(info.GetName(), true, playDelay);
             yield return new WaitForSeconds(playDelay);
 

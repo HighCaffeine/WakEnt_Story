@@ -6906,6 +6906,12 @@ MonoBehaviour:
   aniData:
   - {fileID: 11400000, guid: 1ee165e06c59b0b45acd898414cfce3a, type: 2}
   - {fileID: 11400000, guid: 7532da43618ec1c408facb0c3308c8ad, type: 2}
+  - {fileID: 11400000, guid: 5fbfaf44b1552614998ec12c450c561e, type: 2}
+  - {fileID: 11400000, guid: 3b71069ea0bc1c941a206a42d6fed224, type: 2}
+  - {fileID: 11400000, guid: ce6242f0bce3182419ff85b3feea9ebe, type: 2}
+  - {fileID: 11400000, guid: 75c9b37604a6fd944bdd53873de24212, type: 2}
+  - {fileID: 11400000, guid: 8fcfe36f57ed381488f45103bc47c197, type: 2}
+  - {fileID: 11400000, guid: 54b0e1e52b5a4b241a3cbee129b6f3aa, type: 2}
   frame: 30
   sprites: []
   aniDelay: 0.7

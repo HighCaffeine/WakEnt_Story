@@ -9,21 +9,34 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
     //모든 캐릭터들에 해당 소스를 붙여도 써도 괜찮을지와
     //그러면 결국 지금 매니저 방식으로 만들고 있지만
     //필요한 곳에서 각자 캐싱해서 사용하는 방식으로 해야함.
-    public enum AtlasAniType { Idle, Work }
+    public enum AtlasAniType
+    {
+        Idle,
+        FrontWork,
+        BackWork,
+        Walk,
+        FrontIdleStretching,
+        FrontIdleLookAround,
+        BackIdleStretching,
+        BackIdleLookAround,
+    }
 
     public AtlasAniType TEST_atlasType;
     [Header("0 : Idle, 1 : Work")][SerializeField] private SpriteAnimationData[] aniData;   //enum으로 관리 나중에
-    private UnityEngine.UI.Image target;   //타겟
+    private UnityEngine.UI.Image imageTarget;               //타겟
+    private UnityEngine.SpriteRenderer spriteRenderTarget;
 
-    [Header("Frame")] [SerializeField] private float frame;                  //fps
+    private bool isSpriteRenderer;
 
-    [SerializeField] private List<Sprite> sprites;
+    [Header("Frame")][SerializeField] private float frame;                  //fps
+
+    private List<Sprite> sprites;
 
     int aniCount;           //이미지 수
     private float timer;    //시간 체크
     private int index;
     private int beforeFrameCount;
-    
+
     private int frameCount;
     private bool loop;
 
@@ -40,12 +53,27 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
 
         sprites = new List<Sprite>();
     }
-    
+
+    private void Init()
+    {
+        imageTarget = null;
+        spriteRenderTarget = null;
+        aniCount = 0;
+    }
+
     //애니메이션 필요 패널 켰을 때 실행
-    public void SetData(AtlasAniType TEST_atlasType, UnityEngine.UI.Image target)
+    public void SetDataImage(AtlasAniType TEST_atlasType, UnityEngine.UI.Image target)
     {
         aniCount = aniData[(int)TEST_atlasType].aniCount;
-        this.target = target;
+        this.imageTarget = target;
+        isSpriteRenderer = false;
+    }
+
+    public void SetDataSpriteRender(AtlasAniType TEST_atlasType, UnityEngine.SpriteRenderer target)
+    {
+        aniCount = aniData[(int)TEST_atlasType].aniCount;
+        this.spriteRenderTarget = target;
+        isSpriteRenderer = true;
     }
 
     //패널 내부에서 전환 시 사용
@@ -85,7 +113,14 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
 
         index = 0;
 
-        target.sprite = sprites[0];
+        if (isSpriteRenderer)
+        {
+            spriteRenderTarget.sprite = sprites[0];
+        }
+        else
+        {
+            imageTarget.sprite = sprites[0];   
+        }
 
         //if (playDelay > 0.0f) yield return new WaitForSeconds(playDelay);
 
@@ -122,7 +157,14 @@ public class SpriteAnimation : GenericSingleton<SpriteAnimation>
                         }
                     }
 
-                    target.sprite = sprites[aniData[(int)TEST_atlasType].spriteOrder[index]];
+                    if (isSpriteRenderer)
+                    {
+                        spriteRenderTarget.sprite = sprites[aniData[(int)TEST_atlasType].spriteOrder[index]];
+                    }
+                    else
+                    {
+                        imageTarget.sprite = sprites[aniData[(int)TEST_atlasType].spriteOrder[index]];
+                    }
                 }
             }
 
