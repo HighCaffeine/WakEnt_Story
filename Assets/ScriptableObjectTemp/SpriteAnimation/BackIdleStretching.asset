@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c1754922158134d849969c99d054a8, type: 3}
   m_Name: BackIdleStretching
   m_EditorClassIdentifier: 
-  animationName: BackIdleStretchingAni
+  animationName: BackIdleStretching
   aniCount: 2
   frames: 0000000014000000
   spriteOrder: 0100000000000000

@@ -342,7 +342,6 @@ public class Character : MonoBehaviour,
         path = OnGetPath?.Invoke(transform.position, CharacterManager.PathFindMode.Random,
                                             characterData.SeatNumber - 1, out targetIndex, out lastPos, ref noneCurvedPath);
 
-
         if (path == null)
         {
             SetCurrentStateAni();
@@ -352,7 +351,6 @@ public class Character : MonoBehaviour,
             return;
         }
 
-        TEST_targetPos = lastPos;
         moveType = MoveType.Target;
         moveDelegate = null;
         moveToTarget = true;
@@ -550,8 +548,6 @@ public class Character : MonoBehaviour,
     //sprite의 경우 애니메이션 내부에서 이벤트 추가해서 해줄 수 있으니깐 그걸로 하고
     //애니메이션 실행 함수만 넘겨서 받는걸로
     private Action interactiveTargetAction;
-
-    public Vector2 TEST_targetPos;
 
     public void SetAnimatorEnabled()
     {

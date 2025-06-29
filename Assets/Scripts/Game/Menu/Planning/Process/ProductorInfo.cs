@@ -37,6 +37,11 @@ public class ProductorInfo : ScriptableObject
         isCompanyMember = seatNum != 0;
     }
 
+    public string GetIDName()
+    {
+        return ((ResourceID)GetID()).ToString().Split('_')[2];
+    }
+
     public string GetName() { return productorData.Name; }
     public long GetID() { return productorData.ID; }
     public ProductorManager.ProductorType GetProductorType()

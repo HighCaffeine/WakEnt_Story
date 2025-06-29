@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c1754922158134d849969c99d054a8, type: 3}
   m_Name: FrontIdleLookAround
   m_EditorClassIdentifier: 
-  animationName: FrontIdleLookAroundAni
+  animationName: FrontIdleLookAround
   aniCount: 5
   frames: 00000000050000000f0000002800000046000000640000006e000000
   spriteOrder: 00000000010000000200000003000000040000000000000000000000

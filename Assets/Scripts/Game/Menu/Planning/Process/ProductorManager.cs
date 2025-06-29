@@ -82,7 +82,9 @@ public class ProductorManager : GenericSingleton<ProductorManager>
     [SerializeField] private Image processingProductorImage;
     [SerializeField] private TextMeshProUGUI productorMessage;
 
-    
+    [Space(10f)]
+    [SerializeField] private SpriteAnimation selectionSpriteAni;
+    [SerializeField] private SpriteAnimation processSpriteAni;
 
     //작업자 이미지 ㅇ
     //작업자 이름 ㅇ
@@ -253,8 +255,6 @@ public class ProductorManager : GenericSingleton<ProductorManager>
                 break;
             }
         }
-
-        SpriteAnimation.Instance.SetDataImage(AtlasAniType.Idle, productorImage);
     }
 
 
@@ -304,7 +304,7 @@ public class ProductorManager : GenericSingleton<ProductorManager>
         if (isRun)
         {
             string[] resourceName = ValueCastTo<ResourceID>.From(info.GetID()).ToString().Split('_');
-            SpriteAnimation.Instance.PlayAnimation(resourceName[2], true, 0f);
+            selectionSpriteAni.PlayAnimation(SpriteAnimationManager.AtlasAniType.Idle, resourceName[2], true, 0f);
         }
     }
 
@@ -476,9 +476,11 @@ public class ProductorManager : GenericSingleton<ProductorManager>
             float playDelay = 2f;
 
             //애니메이션 실행
-            SpriteAnimation.Instance.SetDataImage(AtlasAniType.FrontWork, StatIconManager.Instance.GetImageComponenet());
-            SpriteAnimation.Instance.PlayAnimation(info.GetName(), true, playDelay);
+
+            processSpriteAni.PlayAnimation(SpriteAnimationManager.AtlasAniType.FrontWork, info.GetIDName(), true, 0);
+
             yield return new WaitForSeconds(playDelay);
+
 
             if (SoundManager.Instance != null && isFirst) 
             {
@@ -516,6 +518,8 @@ public class ProductorManager : GenericSingleton<ProductorManager>
                 yield return new WaitForSeconds(processingDelay);
             }
         }
+
+        processSpriteAni.StopAni();
 
         //현재 기획중인 방송에 스텟 추가 및 
         //게임 화면 하단에 현재 기획중이 방송 스텟 정보 창 추가
