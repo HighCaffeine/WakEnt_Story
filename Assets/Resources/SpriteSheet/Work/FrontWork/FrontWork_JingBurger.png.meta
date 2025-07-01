@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FrontWork_JingBurger_0
+      name: FrontWork_Jingburger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FrontWork_JingBurger_1
+      name: FrontWork_Jingburger_1
       rect:
         serializedVersion: 2
         x: 350
@@ -188,8 +188,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      FrontWork_JingBurger_0: 817895961
-      FrontWork_JingBurger_1: -702103386
+      FrontWork_Jingburger_0: 817895961
+      FrontWork_Jingburger_1: -702103386
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

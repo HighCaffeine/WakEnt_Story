@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationName: WalkAni
   aniCount: 4
-  aniDelay: 4
   frames: 0000000004000000080000000c000000
   spriteOrder: 00000000010000000200000003000000
   atlas: {fileID: 4343727234628468602, guid: a24ffa72c295ecd4da34a33be3776806, type: 2}

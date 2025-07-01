@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackIdleLookAround_JingBurger_0
+      name: BackIdleLookAround_Jingburger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackIdleLookAround_JingBurger_1
+      name: BackIdleLookAround_Jingburger_1
       rect:
         serializedVersion: 2
         x: 350
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackIdleLookAround_JingBurger_2
+      name: BackIdleLookAround_Jingburger_2
       rect:
         serializedVersion: 2
         x: 700
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackIdleLookAround_JingBurger_3
+      name: BackIdleLookAround_Jingburger_3
       rect:
         serializedVersion: 2
         x: 1050
@@ -220,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackIdleLookAround_JingBurger_4
+      name: BackIdleLookAround_Jingburger_4
       rect:
         serializedVersion: 2
         x: 1400
@@ -251,11 +251,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BackIdleLookAround_JingBurger_0: 535207165
-      BackIdleLookAround_JingBurger_1: -1302909348
-      BackIdleLookAround_JingBurger_2: -1894060558
-      BackIdleLookAround_JingBurger_3: 504006218
-      BackIdleLookAround_JingBurger_4: -850011800
+      BackIdleLookAround_Jingburger_0: 535207165
+      BackIdleLookAround_Jingburger_1: -1302909348
+      BackIdleLookAround_Jingburger_2: -1894060558
+      BackIdleLookAround_Jingburger_3: 504006218
+      BackIdleLookAround_Jingburger_4: -850011800
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

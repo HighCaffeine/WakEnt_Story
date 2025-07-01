@@ -200,11 +200,11 @@ SpriteAtlas:
   - {fileID: 1499659912, guid: 2603a92fed6d575459cbed3a159fc961, type: 3}
   - {fileID: 1766362304, guid: 2603a92fed6d575459cbed3a159fc961, type: 3}
   m_PackedSpriteNamesToIndex:
-  - FrontIdleLookAround_JingBurger_3
-  - FrontIdleLookAround_JingBurger_2
-  - FrontIdleLookAround_JingBurger_1
-  - FrontIdleLookAround_JingBurger_0
-  - FrontIdleLookAround_JingBurger_4
+  - FrontIdleLookAround_Jingburger_3
+  - FrontIdleLookAround_Jingburger_2
+  - FrontIdleLookAround_Jingburger_1
+  - FrontIdleLookAround_Jingburger_0
+  - FrontIdleLookAround_Jingburger_4
   - FrontIdleLookAround_Lilpa_2
   - FrontIdleLookAround_Lilpa_3
   - FrontIdleLookAround_Lilpa_0

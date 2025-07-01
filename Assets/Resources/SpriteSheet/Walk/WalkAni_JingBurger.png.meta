@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WalkAni_JingBurger_0
+      name: WalkAni_Jingburger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WalkAni_JingBurger_1
+      name: WalkAni_Jingburger_1
       rect:
         serializedVersion: 2
         x: 350
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WalkAni_JingBurger_2
+      name: WalkAni_Jingburger_2
       rect:
         serializedVersion: 2
         x: 700
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WalkAni_JingBurger_3
+      name: WalkAni_Jingburger_3
       rect:
         serializedVersion: 2
         x: 1050
@@ -230,10 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WalkAni_JingBurger_0: -1532626580
-      WalkAni_JingBurger_1: -610272439
-      WalkAni_JingBurger_2: -1964366585
-      WalkAni_JingBurger_3: 1299521642
+      WalkAni_Jingburger_0: -1532626580
+      WalkAni_Jingburger_1: -610272439
+      WalkAni_Jingburger_2: -1964366585
+      WalkAni_Jingburger_3: 1299521642
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

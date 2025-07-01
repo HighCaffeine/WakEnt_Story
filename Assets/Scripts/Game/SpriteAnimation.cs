@@ -13,6 +13,7 @@ public class SpriteAnimation : MonoBehaviour
     private int beforeFrameCount;
     private int frameCount;
     private bool loop;
+    private bool pauseAni;
 
     //애니메이션 Sprite데이터
     private Sprite[] sprites;
@@ -32,10 +33,16 @@ public class SpriteAnimation : MonoBehaviour
     }
 
     //캐싱한 클래스쪽에서 사용
-    public void PlayAnimation(SpriteAnimationManager.AtlasAniType atlasType, string characterName, bool loop, float playDealy)
+    public void PlayAnimation(SpriteAnimationManager.AtlasAniType atlasType, string characterName, bool loop, float playDealy, float aniSpeed = 1.0f, Action Callback = null, float callbackTime = 0.0f)
     {
         Init();
         this.loop = loop;
+        pauseAni = false;
+
+        if (characterName == "Jingburger")
+        {
+            Debug.Log("a");
+        }
 
         sprites = SpriteAnimationManager.Instance.GetSprite(atlasType, characterName);
         frames = SpriteAnimationManager.Instance.GetFrameTiming(atlasType);
@@ -47,10 +54,10 @@ public class SpriteAnimation : MonoBehaviour
         }
 
         Debug.Log($"Play {characterName} {atlasType.ToString()}");
-        aniCoroutine = StartCoroutine(SpriteAniCoroutine(playDealy));
+        aniCoroutine = StartCoroutine(SpriteAniCoroutine(playDealy, aniSpeed, Callback, callbackTime));
     }
 
-    public IEnumerator SpriteAniCoroutine(float playDelay)
+    public IEnumerator SpriteAniCoroutine(float playDelay, float aniSpeed, Action Callback, float callbackTime)
     {
         bool isPlay = true;
 
@@ -71,13 +78,17 @@ public class SpriteAnimation : MonoBehaviour
 
         Debug.Log(isPlay ? "Play" : "Not Play");
 
-        float aniSpeed = SpriteAnimationManager.Instance.GetAniSpeed();
+        float currentAniSpeed = SpriteAnimationManager.Instance.GetAniSpeed() * aniSpeed;
         float frame = SpriteAnimationManager.Instance.GetFrame();
+
+        frame = frames[frames.Length - 1];
 
         WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
         while (isPlay)
         {
+            if (pauseAni) continue;
+
             timer += Time.deltaTime * aniSpeed;
 
             if (timer >= 1f / frame)
@@ -116,8 +127,21 @@ public class SpriteAnimation : MonoBehaviour
 
             yield return wait;
         }
+
+        yield return new WaitForSeconds(callbackTime);
+
+        Callback?.Invoke();
     }
 
+    public void PauseAni()
+    {
+        pauseAni = true;
+    }
+
+    public void ResumeAni()
+    {
+        pauseAni = false;
+    }
     public void StopAni()
     {
         if (aniCoroutine != null)

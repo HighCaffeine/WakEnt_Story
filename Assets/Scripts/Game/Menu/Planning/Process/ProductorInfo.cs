@@ -6,6 +6,12 @@ public class ProductorInfo : ScriptableObject
 {
     ProductorData productorData;
 
+    public void TEST_SetID()
+    {
+        productorData.ID = (long)ResourceID.Character_Productor_Victory;
+    }
+
+
     public void SetProductorData(ProductorData productorData)
     {
         this.productorData = productorData;

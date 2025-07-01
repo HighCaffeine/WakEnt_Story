@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BackIdleStretching_JingBurger_0
+      name: BackIdleStretching_Jingburger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackIdleStretching_JingBurger_1
+      name: BackIdleStretching_Jingburger_1
       rect:
         serializedVersion: 2
         x: 350
@@ -188,8 +188,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BackIdleStretching_JingBurger_0: 757392373
-      BackIdleStretching_JingBurger_1: 1392131860
+      BackIdleStretching_Jingburger_0: 757392373
+      BackIdleStretching_Jingburger_1: 1392131860
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
