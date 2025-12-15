@@ -25,11 +25,20 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
     [Space(10f)]
     [Header("이세돌 선택")]
     [SerializeField] private GameObject isedolSelectParent;
-    private List<UnityEngine.UI.Image> isedolSelectList = new List<UnityEngine.UI.Image>();
-    private float unselectedAlpha = 65;
-    private float selectedAlpha = 255;
+    private List<ImagePointerEvent> isedolPointerEvents = new List<ImagePointerEvent>();
     private int isedolSelected = 0;
     private int isedolSelectCount = 0;
+
+    private int price;
+
+    private const float DefaultPriceRatio = 0.00f;
+
+    public bool IsActiveMember(CharacterManager.ISEGYEIDOL isegyeidol)
+    {
+        int value = 1 << (ValueCastTo<int>.From(isegyeidol));
+
+        return ((isedolSelected & value) != 0);
+    }
 
     public void SelectIsedol(int index)
     {
@@ -39,33 +48,32 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             //out of range
             return;
         }
-        
-        int isedolIndex = 1 << (ValueCastTo<int>.From((CharacterManager.ISEGYEIDOL.Ine)) + index);
 
-        if (isedolSelected < BroadcastKeywordSelection.Instance.GetSelectCharacterLimit())
+        int isedolIndex = ValueCastTo<int>.From(CharacterManager.ISEGYEIDOL.Ine) + index;
+        int isedolBinary = 1 << isedolIndex;
+
+        if (isedolSelectCount < BroadcastKeywordSelection.Instance.GetSelectCharacterLimit())
         {
             //선택 안햇으면 무조건 다 하고 return
-            if ((isedolSelected & isedolIndex) == 0)
+            if ((isedolSelected & isedolBinary) == 0)
             {
                 isedolSelectCount++;
-                isedolSelected |= isedolIndex;
+                isedolSelected |= isedolBinary;
 
-                Color color = isedolSelectList[index].color;
-                color.a = selectedAlpha;
-                isedolSelectList[isedolIndex].color = color;
+                isedolPointerEvents[index].SetNormalColor();
+                isedolPointerEvents[index].SetAllowMouseEvent(false);
 
                 return;
             }
         }
 
-        if ((isedolSelected & isedolIndex) != 0)
+        if ((isedolSelected & isedolBinary) != 0)
         {
             isedolSelectCount--;
-            isedolSelected &= ~isedolIndex;
+            isedolSelected &= ~isedolBinary;
 
-            Color color = isedolSelectList[index].color;
-            color.a = unselectedAlpha;
-            isedolSelectList[isedolIndex].color = color;
+            isedolPointerEvents[index].SetTransparencyColor();
+            isedolPointerEvents[index].SetAllowMouseEvent(true);
 
             return;
         }
@@ -90,8 +98,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         public class BroadCastPoint
         {
             private int plannerPoint;
-            private int designerPoint;
-            private int composerPoint;
+            private int GraphicDesignerPoint;
+            private int SoundDesignerPoint;
             private int promotionPoint;
 
             public int this[ProductorManager.ProductorType type]
@@ -106,11 +114,11 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                 {
                     case ProductorManager.ProductorType.Planner:
                         return plannerPoint;
-                    case ProductorManager.ProductorType.Designer:
-                        return designerPoint;
-                    case ProductorManager.ProductorType.Composer:
-                        return composerPoint;
-                    case ProductorManager.ProductorType.Promotor:
+                    case ProductorManager.ProductorType.GraphicDesigner:
+                        return GraphicDesignerPoint;
+                    case ProductorManager.ProductorType.SoundDesigner:
+                        return SoundDesignerPoint;
+                    case ProductorManager.ProductorType.Marketer:
                         return promotionPoint;
                 }
 
@@ -124,13 +132,13 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
                     case ProductorManager.ProductorType.Planner:
                         plannerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Designer:
-                        designerPoint = value;
+                    case ProductorManager.ProductorType.GraphicDesigner:
+                        GraphicDesignerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Composer:
-                        composerPoint = value;
+                    case ProductorManager.ProductorType.SoundDesigner:
+                        SoundDesignerPoint = value;
                         break;
-                    case ProductorManager.ProductorType.Promotor:
+                    case ProductorManager.ProductorType.Marketer:
                         promotionPoint = value;
                         break;
                 }
@@ -139,8 +147,8 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
             public void Init()
             {
                 plannerPoint = 0;
-                designerPoint = 0;
-                composerPoint = 0;
+                GraphicDesignerPoint = 0;
+                SoundDesignerPoint = 0;
                 promotionPoint = 0;
             }
         }
@@ -186,13 +194,21 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         broadCast.Init();
         isedolSelected = 0;
         isedolSelectCount = 0;
+
+        //priceRatio = DefaultPriceRatio;
+
+        foreach (var isedolPointerEvent in isedolPointerEvents)
+        {
+            isedolPointerEvent.SetAllowMouseEvent(true);
+            isedolPointerEvent.SetTransparencyColor();
+        }
     }
 
     private void SetIsedolImageComponenet()
     {
         for (int i = 0; i < isedolSelectParent.transform.childCount; i++)
         {
-            isedolSelectList.Add(isedolSelectParent.transform.GetChild(i).GetChild(0).GetComponent<UnityEngine.UI.Image>());
+            isedolPointerEvents.Add(isedolSelectParent.transform.GetChild(i).GetChild(0).GetComponent<ImagePointerEvent>());
         }
     }
 
@@ -216,12 +232,22 @@ public class BroadCastPlanning : GenericSingleton<BroadCastPlanning>
         directionText.text = str;
     }
 
+    public void SetGearText(string str)
+    {
+        gearText.text = str;
+    }
+
     //키워드쪽에서 수치 계산해서 줘야함.
     //패널 끌 때 여기서 가지고 있거나 selection쪽에서 해야하는데.
     //여기서 받은 수치 * 기어배율 * 기획방향 배율로 비용 결정정
-    public void SetPriceText(int price)
+    public void SetPriceText()
     {
-        priceText.text = string.Format("제작비 : {0}", price.ToString());
+        int resultPrice = BroadcastKeywordSelection.Instance.GetKeywordPrice();
+
+        resultPrice = (int)(resultPrice * BroadcastGearSelection.Instance.gearPriceMultiRatio);      //장비 배율 추가
+        resultPrice = (int)(resultPrice * (BroadcastDirectionSelection.Instance.ratio + 1.00f));     //기존 가격에 배율 비용 추가
+
+        priceText.text = string.Format("제작비 : {0}", resultPrice.ToString());
     }
 
     //키워드쪽에서 판단해서 limit값 전달.

@@ -81,6 +81,11 @@ public class JsonManager : GenericSingleton<JsonManager>
         return data.MatchingData;
     }
 
+    public List<ISDKeywordLevel> GetISDKeywordLevel()
+    {
+        return data.ISDKeywordLevel;
+    }
+
     public List<ReviewCommentData> GetReviewCommentData()
     {
         List<ReviewCommentData> returnList = new List<ReviewCommentData>();
@@ -101,6 +106,11 @@ public class JsonManager : GenericSingleton<JsonManager>
     public PlayerData GetPlayerData()
     {
         return data.PlayerData[0];
+    }
+
+    public List<ProductorData> GetProductorData()
+    {
+        return data.ProductorData;
     }
 
     public List<BroadcastRecord> GetBroadcastRecord()

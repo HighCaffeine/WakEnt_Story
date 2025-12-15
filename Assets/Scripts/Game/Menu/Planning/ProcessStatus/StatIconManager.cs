@@ -17,14 +17,14 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
     [SerializeField] private Transform plannerStartXPos; 
     [SerializeField] private TextMeshProUGUI plannerStat;
     [Header("맵")]
-    [SerializeField] private Transform designerStartXPos;
-    [SerializeField] private TextMeshProUGUI designerStat;
+    [SerializeField] private Transform GraphicDesignerStartXPos;
+    [SerializeField] private TextMeshProUGUI GraphicDesignerStat;
     [Header("작곡")]
-    [SerializeField] private Transform composerStartXPos;
-    [SerializeField] private TextMeshProUGUI composerStat;
+    [SerializeField] private Transform SoundDesignerStartXPos;
+    [SerializeField] private TextMeshProUGUI SoundDesignerStat;
     [Header("홍보")]
-    [SerializeField] private Transform promotorStartXPos;
-    [SerializeField] private TextMeshProUGUI promotorStat;
+    [SerializeField] private Transform MarketerStartXPos;
+    [SerializeField] private TextMeshProUGUI MarketerStat;
 
     [SerializeField]private RectTransform rect;
 
@@ -52,16 +52,16 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
             startPos.x = plannerStartXPos.position.x;
             sprite = icons[0];
             break;
-            case ProductorManager.ProductorType.Designer:
-            startPos.x = designerStartXPos.position.x;
+            case ProductorManager.ProductorType.GraphicDesigner:
+            startPos.x = GraphicDesignerStartXPos.position.x;
             sprite = icons[1];
             break;
-            case ProductorManager.ProductorType.Composer:
-            startPos.x = composerStartXPos.position.x;
+            case ProductorManager.ProductorType.SoundDesigner:
+            startPos.x = SoundDesignerStartXPos.position.x;
             sprite = icons[2];
             break;
-            case ProductorManager.ProductorType.Promotor:
-            startPos.x = promotorStartXPos.position.x;    
+            case ProductorManager.ProductorType.Marketer:
+            startPos.x = MarketerStartXPos.position.x;    
             sprite = icons[3];        
             break;
         }
@@ -76,9 +76,9 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
     public void SetInitStat()
     {
         plannerStat.text = string.Format("0");
-        designerStat.text = string.Format("0");
-        composerStat.text = string.Format("0");
-        promotorStat.text = string.Format("0");
+        GraphicDesignerStat.text = string.Format("0");
+        SoundDesignerStat.text = string.Format("0");
+        MarketerStat.text = string.Format("0");
     }
 
     public void SetStat(ProductorManager.ProductorType type)
@@ -88,14 +88,14 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
             case ProductorManager.ProductorType.Planner:
             plannerStat.text = string.Format("{0}", int.Parse(plannerStat.text) + 1);
             break;
-            case ProductorManager.ProductorType.Designer:
-            designerStat.text = string.Format("{0}", int.Parse(designerStat.text) + 1);
+            case ProductorManager.ProductorType.GraphicDesigner:
+            GraphicDesignerStat.text = string.Format("{0}", int.Parse(GraphicDesignerStat.text) + 1);
             break;
-            case ProductorManager.ProductorType.Composer:
-            composerStat.text = string.Format("{0}", int.Parse(composerStat.text) + 1);
+            case ProductorManager.ProductorType.SoundDesigner:
+            SoundDesignerStat.text = string.Format("{0}", int.Parse(SoundDesignerStat.text) + 1);
             break;
-            case ProductorManager.ProductorType.Promotor:  
-            promotorStat.text = string.Format("{0}", int.Parse(promotorStat.text) + 1);
+            case ProductorManager.ProductorType.Marketer:  
+            MarketerStat.text = string.Format("{0}", int.Parse(MarketerStat.text) + 1);
             break;
         }
     }
@@ -127,9 +127,9 @@ public class StatIconManager : ObjectPooling<StatIconManager, StatIcon>
         int[] value = new int[4];
 
         value[0] = int.Parse(plannerStat.text);
-        value[1] = int.Parse(designerStat.text);
-        value[2] = int.Parse(composerStat.text);
-        value[3] = int.Parse(promotorStat.text);
+        value[1] = int.Parse(GraphicDesignerStat.text);
+        value[2] = int.Parse(SoundDesignerStat.text);
+        value[3] = int.Parse(MarketerStat.text);
 
         return value;
     }

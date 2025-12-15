@@ -62,7 +62,7 @@ public class MyEventTrigger : MonoBehaviour,
     }
     [SerializeField]
     [FormerlySerializedAs("delegates")] 
-    private List<Entry> myDelegate;
+    protected List<Entry> myDelegate;
     public List<EventTrigger.Entry> delegates;
 
     public EventTrigger test;
@@ -101,22 +101,22 @@ public class MyEventTrigger : MonoBehaviour,
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        ExecuteEvent(EventTriggerType.PointerClick, eventData);
+        //ExecuteEvent(EventTriggerType.PointerClick, eventData);
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        ExecuteEvent(EventTriggerType.PointerEnter, eventData);
+        //ExecuteEvent(EventTriggerType.PointerEnter, eventData);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        ExecuteEvent(EventTriggerType.PointerExit, eventData);
+        //ExecuteEvent(EventTriggerType.PointerExit, eventData);
     }
 
     public virtual void OnSelect(BaseEventData eventData)
     {
-        ExecuteEvent(EventTriggerType.Select, eventData);
+        //ExecuteEvent(EventTriggerType.Select, eventData);
     }
 }
 
@@ -137,18 +137,26 @@ public class ButtonSelect : MyEventTrigger
     void Awake()
     {
         test = GetComponent<EventTrigger>();
-        //AddEventTrigger(entry, EventTriggerType.PointerClick, entry.callback);
+
+        foreach (var e in myDelegate)
+        {
+            AddEventTrigger(test, e.triggerData, (data) => e.triggerEvent.Invoke(data));
+        }
     }
-
-
     public void OnPointerEnter()
     {
-        selected.SetActive(true);
-
-
+        if (selected != null) selected.SetActive(true);
         if (SoundManager.Instance != null) SoundManager.Instance.PlaySound(effect.ToString(), false);
     }
 
+    public void OnPointerExit()
+    {
+        if (selected != null) selected.SetActive(false);
+    }
+    public void OnPointerClick()
+    {
+
+    }
 
     //Event
 
@@ -183,6 +191,19 @@ public class ButtonSelect : MyEventTrigger
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = type;
         entry.callback.AddListener(callback);
+
+        switch (type)
+        {
+            case EventTriggerType.PointerEnter:
+                entry.callback.AddListener((data) => OnPointerEnter());
+                break;
+            case EventTriggerType.PointerExit:
+                entry.callback.AddListener((data) => OnPointerExit());
+                break;
+            case EventTriggerType.PointerClick:
+                break;
+        }
+
         trigger.triggers.Add(entry);
     }
 

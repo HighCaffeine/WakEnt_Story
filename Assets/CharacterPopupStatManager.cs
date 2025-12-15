@@ -44,15 +44,15 @@ public class CharacterPopupStatManager : ObjectPooling<CharacterPopupStatManager
             resourceID = ResourceID.Stat_Broadcast_InterestPoint;
             statIndex = 0;
             break;
-            case ProductorManager.ProductorType.Designer:
+            case ProductorManager.ProductorType.GraphicDesigner:
             resourceID = ResourceID.Stat_Broadcast_QualityPoint;
             statIndex = 1;
             break;
-            case ProductorManager.ProductorType.Composer:
+            case ProductorManager.ProductorType.SoundDesigner:
             resourceID = ResourceID.Stat_Broadcast_SoundPoint;
             statIndex = 2;
             break;
-            case ProductorManager.ProductorType.Promotor:
+            case ProductorManager.ProductorType.Marketer:
             resourceID = ResourceID.Stat_Broadcast_EditingPoint;
             statIndex = 3;
             break;

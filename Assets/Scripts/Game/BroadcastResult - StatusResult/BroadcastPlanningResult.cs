@@ -14,8 +14,8 @@ public class BroadcastPlanningResult : GenericSingleton<BroadcastPlanningResult>
 
     [Header("방송 스텟들")]
     [SerializeField] private TextMeshProUGUI planningPoint;
-    [SerializeField] private TextMeshProUGUI designerPoint;
-    [SerializeField] private TextMeshProUGUI composerPoint;
+    [SerializeField] private TextMeshProUGUI GraphicDesignerPoint;
+    [SerializeField] private TextMeshProUGUI SoundDesignerPoint;
     [SerializeField] private TextMeshProUGUI promotionPoint;
 
     private new void Awake()
@@ -37,13 +37,13 @@ public class BroadcastPlanningResult : GenericSingleton<BroadcastPlanningResult>
                 case ProductorManager.ProductorType.Planner:
                 planningPoint.text = value.ToString();
                 break;
-                case ProductorManager.ProductorType.Designer:
-                designerPoint.text = value.ToString();
+                case ProductorManager.ProductorType.GraphicDesigner:
+                GraphicDesignerPoint.text = value.ToString();
                 break;
-                case ProductorManager.ProductorType.Composer:
-                composerPoint.text = value.ToString();
+                case ProductorManager.ProductorType.SoundDesigner:
+                SoundDesignerPoint.text = value.ToString();
                 break;
-                case ProductorManager.ProductorType.Promotor:
+                case ProductorManager.ProductorType.Marketer:
                 promotionPoint.text = value.ToString();
                 break;
             }

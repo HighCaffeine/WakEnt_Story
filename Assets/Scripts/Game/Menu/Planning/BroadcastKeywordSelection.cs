@@ -58,29 +58,10 @@ namespace BroadcastKeyword
     }
 }
 
-public class UIButtonSelectionControll
-{
-    private Action buttonCancel;
-
-    public void RegisterCancelEvent(Action buttonCancel)
-    {
-        this.buttonCancel?.Invoke();
-
-        this.buttonCancel = buttonCancel;
-    }
-
-    //패널 종료
-    public void ResetEvent()
-    {
-        buttonCancel = null;
-    }
-}
-
 public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection, KeywordSelect> 
 {
     public delegate void SetCurrentKeywordEvent(int index);
     public delegate void ConfirmSelectKeyword(int index);
-    public delegate void CancelButtonEvent(Action action);
 
     //broadcastplanning 창에서
     //키워드 선택 시 selection창 띄움
@@ -107,6 +88,9 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
     [Header("매칭률 출력부")][SerializeField] private TextMeshProUGUI matchingTMP;
                             [SerializeField] private TextMeshProUGUI keywordMatchingTMP;
 
+    [Space(10f)]
+    [Header("이세돌 스킬 레벨 하트")]
+    [SerializeField] private TextMeshProUGUI[] memberSkillLevels;
 
     //언락된 애들만 담거나 해야할듯
     private List<Keyword> kategories;
@@ -117,7 +101,7 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
 
     //얘로 패널 끌 때, 리셋
     //이벤트 등록 함수 넘겨주기
-    public UIButtonSelectionControll buttonSelectionController = new UIButtonSelectionControll();
+    public MenuController.UIButtonSelectionControll buttonSelectionController = new MenuController.UIButtonSelectionControll();
 
     private new void Awake()
     {
@@ -134,6 +118,14 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
         contents = DataManager.Instance.GetKeyword(false);
     }
 
+    public int GetKeywordPrice()
+    {
+        int kategoriePrice = kategories[ValueCastTo<int>.From(currentKategorie)].Price;
+        int keywordPrice = kategories[ValueCastTo<int>.From(currentContent)].Price;
+
+        return kategoriePrice + keywordPrice;
+    }
+
     public int GetSelectCharacterLimit()
     {
         //각 키워드별 멤버 선택 수 제한
@@ -148,10 +140,30 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
 
     private bool isKategoriPanelActive;
 
+    public struct IsedolMemberSkillInfo
+    {
+        public int level;
+        public bool isSelected;
+
+        public IsedolMemberSkillInfo(int level, bool isSelected)
+        {
+            this.level = level;
+            this.isSelected = isSelected;
+        }
+    }
+
     public void SetPanel(bool isKategorie)
     {
         isKategoriPanelActive = isKategorie;
         buttonSelectionController.ResetEvent();
+
+        for (int i = 0; i < memberSkillLevels.Length; i++)
+        {
+            Color color = memberSkillLevels[i].color;
+            color.a = (BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Ine + i) ? 255f : 65f) / 255f;
+
+            memberSkillLevels[i].color = color;
+        }
 
         for (int i = 0; i < (isKategorie ? kategories.Count : contents.Count); i++)
         {
@@ -159,7 +171,21 @@ public class BroadcastKeywordSelection : ObjectPooling<BroadcastKeywordSelection
             Keyword keyword = GetKeyword(isKategorie, i);
 
             obj.transform.SetParent(keywordParent.transform);
-            obj.SetData(keyword.KoreanName, 1, popularity[keyword.Popularity - 1], 999, i);
+
+            int keywordIndex = i + (isKategorie ? 0 : ValueCastTo<int>.From(Kategorie.Count));
+            ISDKeywordLevel isdKeywordLevel = DataManager.Instance.GetISDKeyworldLevel(keywordIndex);
+
+            obj.SetData(keyword.KoreanName, 
+                new IsedolMemberSkillInfo[]
+                { new IsedolMemberSkillInfo(isdKeywordLevel.Ine, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Ine)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.JingBurger, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.JingBurger)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Lilpa, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Lilpa)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Jururu, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Jururu)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Gosegu, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Gosegu)),
+                  new IsedolMemberSkillInfo(isdKeywordLevel.Viichan, BroadCastPlanning.Instance.IsActiveMember(CharacterManager.ISEGYEIDOL.Viichan)) },
+                  popularity[keyword.Popularity - 1], 
+                  ValueCastTo<int>.From((keyword.Price * BroadcastDirectionSelection.Instance.ratio)), 
+                  i);
         }
 
         SetKeywordIcon();

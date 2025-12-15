@@ -1,31 +1,80 @@
+using JetBrains.Annotations;
 using System;
 
 public enum ResourceID
 {
-    Item_Broadcast_Fever                = 101,
-    Item_Broadcast_FatigueReliever      = 102,
-    Item_Broadcast_PlanPointBoost       = 103,
-    Item_Broadcast_DesignPointBoost     = 104,
-    Item_Broadcast_SoundPointBoost      = 105,
-    Item_Broadcast_PromotionPointBoost  = 106,
-    Stat_Broadcast_InterestPoint        = 201,
-    Stat_Broadcast_QualityPoint         = 202,
-    Stat_Broadcast_SoundPoint           = 203,
-    Stat_Broadcast_EditingPoint         = 204,
-    Character_ISD_Ine                   = 1001,
-    Character_ISD_Jingburger            = 1002,
-    Character_ISD_Lilpa                 = 1003,
-    Character_ISD_Jururu                = 1004,
-    Character_ISD_Gosegu                = 1005,
-    Character_ISD_Viichan               = 1006,
-    Character_WAK_Wakgood               = 2001,
-    Character_WAK_Roentgenium           = 2002,
-    Character_Productor_Temp1           = 3001,
-    Character_Productor_Temp2           = 3002,
-    Character_Productor_Temp3           = 3003,
-    Character_Productor_Temp4           = 3004,
-    Character_Productor_Temp5           = 3005,
-    Character_Productor_Temp6           = 3006,
+    Item_Broadcast_Fever                        = 101,
+    Item_Broadcast_FatigueReliever              = 102,
+    Item_Broadcast_PlanPointBoost               = 103,
+    Item_Broadcast_DesignPointBoost             = 104,
+    Item_Broadcast_SoundPointBoost              = 105,
+    Item_Broadcast_PromotionPointBoost          = 106,
+    Stat_Broadcast_InterestPoint                = 201,
+    Stat_Broadcast_QualityPoint                 = 202,
+    Stat_Broadcast_SoundPoint                   = 203,
+    Stat_Broadcast_EditingPoint                 = 204,
+
+    Character_ISD_Ine                           = 1001,
+    Character_ISD_Jingburger                    = 1002,
+    Character_ISD_Lilpa                         = 1003,
+    Character_ISD_Jururu                        = 1004,
+    Character_ISD_Gosegu                        = 1005,
+    Character_ISD_Viichan                       = 1006,
+
+    Character_WAK_Wakgood                       = 2001,
+    Character_WAK_Roentgenium                   = 2002,
+
+    Character_Productor_Dulgi                   = 3001,
+    Character_Productor_DdongGangAJi            = 3002,
+    Character_Productor_PackJi                  = 3003,
+    Character_Productor_JuPockDo                = 3004,
+    Character_Productor_GyunNyangI              = 3005,
+    Character_Productor_Rani                    = 3006,
+    Character_Productor_Panchi                  = 3007,
+    Character_Productor_MaeHyeong               = 3008,
+    Character_Productor_Geomeori                = 3009,
+    Character_Productor_Batman                  = 3010,
+    Character_Productor_SakSakKimchi            = 3011,
+    Character_Productor_Jentoo                  = 3012,
+    Character_Productor_NinNin                  = 3013,
+    Character_Productor_Bulgomo                 = 3014,
+    Character_Productor_SuSaemi                 = 3015,
+    Character_Productor_Dandap                  = 3016,
+    Character_Productor_Tiffany                 = 3017,
+    Character_Productor_KimchiMandoo            = 3018,
+    Character_Productor_PungSin                 = 3019,
+    Character_Productor_Gilbert                 = 3020,
+    Character_Productor_Beiter                  = 3021,
+    Character_Productor_DokkoHyeji              = 3022,
+    Character_Productor_MechMenggisan           = 3023,
+    Character_Productor_GwakChunSik             = 3024,
+    Character_Productor_ButterusIII             = 3025,
+    Character_Productor_Shallot                 = 3026,
+    Character_Productor_JinHee                  = 3027,
+    Character_Productor_CaptainSullivan         = 3028,
+    Character_Productor_LeeDeokSoo              = 3029,
+    Character_Productor_SirianRain              = 3030,
+    Character_Productor_Gwonmin                 = 3031,
+    Character_Productor_Dopamin                 = 3032,
+    Character_Productor_Saeyong                 = 3033,
+    Character_Productor_BujungMan               = 3034,
+    Character_Productor_Wakpago                 = 3035,
+    Character_Productor_CarnarJungtur           = 3036,
+    Character_Productor_CallyCarly              = 3037,
+    Character_Productor_AmadeusChoi             = 3038,
+    Character_Productor_Secretto                = 3039,
+    Character_Productor_Chouloky                = 3040,
+    Character_Productor_BusinessKim             = 3041,
+    Character_Productor_Sophia                  = 3042,
+    Character_Productor_HIkiKing                = 3043,
+    Character_Productor_Victory                 = 3044,
+    Character_Productor_RUSUK                   = 3045,
+    Character_Productor_HamIne                  = 3046,
+    Character_Productor_BobBurger               = 3047,
+    Character_Productor_Ddilpa                  = 3048,
+    Character_Productor_GuiJokHee               = 3049,
+    Character_Productor_BJPangE                 = 3050,
+    Character_Productor_MangNyangNyang          = 3051,
 } 
 
 //위의 ResourceID + Type값 -> 리소스 데이터
@@ -60,6 +109,7 @@ public enum ResourceType : long
     AniCount                            = 10,
 }
 
+
 public enum SitInteractiveResourceType : long
 {
     SitFrontInteractiveLeft             = 400000,
@@ -71,7 +121,7 @@ public enum SitInteractiveResourceType : long
 public enum ResourceFileName 
 {   
     DefaultSprite, SitBack, SitFront, Standing, SitInteractive, //Sprite 
-    BackIdleLookAround, BackIdleStretching, BackWork, FrontIdleLookAround, FrontIdleStretching, FrontWork, //Work Ani File
+    BackIdleLookAroundAni, BackIdleStretchingAni, BackWorkAni, FrontIdleLookAroundAni, FrontIdleStretchingAni, FrontWorkAni, //Work Ani File
     WalkAni, StandingIdleAni, WorkAni, SitAni, InteractiveAni, //Ani Root File
 };
 
@@ -100,7 +150,9 @@ public enum CommentType {ToIne, ToJingBurger, ToLilpa, ToJururu, ToGosegu, ToVii
 public class DataTable
 {
     public System.Collections.Generic.List<PlayerData> PlayerData;
+    public System.Collections.Generic.List<ProductorData> ProductorData;
     public System.Collections.Generic.List<MatchingData> MatchingData;
+    public System.Collections.Generic.List<ISDKeywordLevel> ISDKeywordLevel;
     public System.Collections.Generic.List<ReviewCommentData> ReviewComment;
     public System.Collections.Generic.List<EventData> Event;
     public System.Collections.Generic.List<Keyword> Keyword;
@@ -124,10 +176,12 @@ public class PlayerData
 [System.Serializable]
 public class ProductorData
 {
+    public long ID;
     public string Name;                         //작업자 이름
     public int IsFieldCharacter;                //필드 캐릭터인지 -> 이거는 나중에 없앨듯
     public string CharacterType;                //작업자 타입 (플래너, 그래픽, 사운드, 마케터)
     public int WorkPrice;                       //작업 비용
+    public int OutsourcePrice;                  //외주 비용
     public int EmployPrice;                     //고용 비용
     public int PlannerStat;                     //플래너 스텟
     public int PlannerLevel;                    //플래너 레벨
@@ -141,6 +195,8 @@ public class ProductorData
     public string Info;                         //작업자 정보
     public string RecuritType;                  //고용 방법
     public string ProcessCompleteComment;       //작업 완료 대사
+
+    public int SeatNum;                         //시트번호가 있을 경우 사내 멤버임. 0일경우 외주
 }
 
 [System.Serializable]
@@ -217,6 +273,20 @@ public class MatchingData
     public int Creative;
 }
 
+//이세돌분들 각 키워드들 숙련도
+[System.Serializable]
+public class ISDKeywordLevel
+{
+    public string Keyword;
+    public int Ine;
+    public int JingBurger;
+    public int Lilpa;
+    public int Jururu;
+    public int Gosegu;
+    public int Viichan;
+}
+
+
 [System.Serializable]
 public class Keyword
 {
@@ -225,6 +295,7 @@ public class Keyword
     public string Type;             //컨텐츠인지 종류인지 
     public int Popularity;          //해당 키워드의 인기도
     public int Unlocked;         //해금된 조합인지(O, X)
+    public int Price;               //가격 (장비 배율 적용 X)
 }
 
 //왁물원의 각 등급들의 리뷰 멘트들

@@ -67,6 +67,20 @@ public class DataManager : GenericSingleton<DataManager>
         date = JsonManager.Instance.GetPlayerData().TimeElapsed;
     }
 
+    public void SetProductorInfo(List<ProductorInfo> infoList)
+    {
+        List<ProductorData> datas = JsonManager.Instance.GetProductorData();
+
+        foreach (var data in datas)
+        {
+            ProductorInfo newInfo = new ProductorInfo();
+
+            newInfo.SetProductorData(data);
+
+            infoList.Add(newInfo);
+        }
+    }
+
     public void SetMatchingValue(ref int[,] list)
     {
         List<MatchingData> matchingData = JsonManager.Instance.GetMatchingData();
@@ -90,6 +104,11 @@ public class DataManager : GenericSingleton<DataManager>
 
             index++;
         }
+    }
+
+    public void SetDirectionComment()
+    {
+
     }
 
     public List<Keyword> GetKeyword(bool isKategorie)
@@ -267,6 +286,13 @@ public class DataManager : GenericSingleton<DataManager>
         return temp;
     }
 
+    public ISDKeywordLevel GetISDKeyworldLevel(int index)
+    {
+        List<ISDKeywordLevel> iSDKeywordLevels = JsonManager.Instance.GetISDKeywordLevel();
+
+        return iSDKeywordLevels[index];
+    }
+
     public AnimationClip GetAnimationClipFromID(ResourceID resourceID, ResourceType resourceType)
     {
         long key = ValueCastTo<long>.From(resourceID) + ValueCastTo<long>.From(resourceType);
@@ -369,24 +395,24 @@ public class DataManager : GenericSingleton<DataManager>
             }
 
             //workani
-            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWork.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))))
+            if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWorkAni.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))))
             {
                 //back
                 //lookaround
-                resourceHashTable.Add(data.SitBackIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleLookAround.ToString(), string.Format("{0}_{1}", ResourceType.BackIdleLookAroundAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.SitBackIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleLookAroundAni.ToString(), string.Format("{0}_{1}", ResourceType.BackIdleLookAroundAni.ToString(), data.Key))));
                 //stretching
-                resourceHashTable.Add(data.SitBackIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleStretching.ToString(), string.Format("{0}_{1}", ResourceType.BackIdleStretchingAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.SitBackIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackIdleStretchingAni.ToString(), string.Format("{0}_{1}", ResourceType.BackIdleStretchingAni.ToString(), data.Key))));
                 //work
-                resourceHashTable.Add(data.BackWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackWork.ToString(), string.Format("{0}_{1}", ResourceType.BackWorkAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.BackWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.BackWorkAni.ToString(), string.Format("{0}_{1}", ResourceType.BackWorkAni.ToString(), data.Key))));
 
 
                 //front
                 //lookaround
-                resourceHashTable.Add(data.SitFrontIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleLookAround.ToString(), string.Format("{0}_{1}", ResourceType.FrontIdleLookAroundAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.SitFrontIdleLookAroundAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleLookAroundAni.ToString(), string.Format("{0}_{1}", ResourceType.FrontIdleLookAroundAni.ToString(), data.Key))));
                 //stretching
-                resourceHashTable.Add(data.SitFrontIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleStretching.ToString(), string.Format("{0}_{1}", ResourceType.FrontIdleStretchingAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.SitFrontIdleStretchingAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontIdleStretchingAni.ToString(), string.Format("{0}_{1}", ResourceType.FrontIdleStretchingAni.ToString(), data.Key))));
                 //work
-                resourceHashTable.Add(data.FrontWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWork.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))));
+                resourceHashTable.Add(data.FrontWorkAniID, Resources.Load<AnimationClip>(Path.Combine(ResourceFileName.WorkAni.ToString(), ResourceFileName.FrontWorkAni.ToString(), string.Format("{0}_{1}", ResourceType.FrontWorkAni.ToString(), data.Key))));
             }
 
             if (!File.Exists(Path.Combine(ResourcePath, ResourceFileName.InteractiveAni.ToString(), string.Format("{0}_{1}", ResourceType.InteractiveAni.ToString(), data.Key))))

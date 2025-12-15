@@ -671,76 +671,76 @@ public class PathFinding : GenericSingleton<PathFinding>
     private Vector2[] checkPos = { new Vector2(-33f, -5.75f), new Vector2(-32.5f, -6f) };
 
     //경로 체크
-    void OnDrawGizmos()
-    {
-        if (testCheckBezier != null)
-        {
-            for (int i = 0; i < testCheckBezier.Count - 1; i++)
-            {
-                Vector2 current = testCheckBezier[i];
-                Vector2 target = testCheckBezier[i + 1];
+    //void OnDrawGizmos()
+    //{
+    //    if (testCheckBezier != null)
+    //    {
+    //        for (int i = 0; i < testCheckBezier.Count - 1; i++)
+    //        {
+    //            Vector2 current = testCheckBezier[i];
+    //            Vector2 target = testCheckBezier[i + 1];
 
-                if (target == checkPos[0] || target == checkPos[1])
-                {
-                    continue;
-                }
+    //            if (target == checkPos[0] || target == checkPos[1])
+    //            {
+    //                continue;
+    //            }
 
-                //Gizmos.color = Color.red;
-                //Gizmos.DrawLine(current, target);
+    //            //Gizmos.color = Color.red;
+    //            //Gizmos.DrawLine(current, target);
 
-                var p1 = current;
-                var p2 = target;
-                var thickness = 10;
-                UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.blue, null, thickness);
-            }
-        }
+    //            var p1 = current;
+    //            var p2 = target;
+    //            var thickness = 10;
+    //            UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.blue, null, thickness);
+    //        }
+    //    }
 
-        if (testCheckPath != null)
-        {
-            for (int i = 0; i < testCheckPath.Count - 1; i++)
-            {
-                Vector2 current = testCheckPath[i];
-                Vector2 target = testCheckPath[i + 1];
-
-
-                if (current == checkPos[0] || current == checkPos[1])
-                {
-                    continue;
-                }
-
-                var p1 = current;
-                var p2 = target;
-                var thickness = 5;
-                UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
-            }
-        }
-
-        if (testCheckBezierPoint != null)
-        {
-            foreach (var point in testCheckBezierPoint)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(point, 0.05f);
-            }
-        }
-
-        // if (testCheckPath != null)
-        // {
-        //     foreach (var pos in testCheckPath)
-        //     {
-        //         Gizmos.color = Color.red;
-        //         Gizmos.DrawSphere(pos, 0.1f);
-        //     }
-        // }
+    //    if (testCheckPath != null)
+    //    {
+    //        for (int i = 0; i < testCheckPath.Count - 1; i++)
+    //        {
+    //            Vector2 current = testCheckPath[i];
+    //            Vector2 target = testCheckPath[i + 1];
 
 
-        // if (testCheckError != null)
-        // {
-        //     foreach (var node in testCheckError)
-        //     {
-        //         Gizmos.color = Color.red;
-        //         Gizmos.DrawSphere(node, 0.05f);
-        //     }
-        // }
-    }
+    //            if (current == checkPos[0] || current == checkPos[1])
+    //            {
+    //                continue;
+    //            }
+
+    //            var p1 = current;
+    //            var p2 = target;
+    //            var thickness = 5;
+    //            UnityEditor.Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
+    //        }
+    //    }
+
+    //    if (testCheckBezierPoint != null)
+    //    {
+    //        foreach (var point in testCheckBezierPoint)
+    //        {
+    //            Gizmos.color = Color.green;
+    //            Gizmos.DrawWireSphere(point, 0.05f);
+    //        }
+    //    }
+
+    //    // if (testCheckPath != null)
+    //    // {
+    //    //     foreach (var pos in testCheckPath)
+    //    //     {
+    //    //         Gizmos.color = Color.red;
+    //    //         Gizmos.DrawSphere(pos, 0.1f);
+    //    //     }
+    //    // }
+
+
+    //    // if (testCheckError != null)
+    //    // {
+    //    //     foreach (var node in testCheckError)
+    //    //     {
+    //    //         Gizmos.color = Color.red;
+    //    //         Gizmos.DrawSphere(node, 0.05f);
+    //    //     }
+    //    // }
+    //}
 }

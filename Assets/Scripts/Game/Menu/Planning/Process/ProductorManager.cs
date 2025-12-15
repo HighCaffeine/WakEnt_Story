@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System;
 using Devcat;
 
-public class ProductorManager : ObjectPooling<ProductorManager, Productor>
+public class ProductorManager : GenericSingleton<ProductorManager>
 {
     public const int PRODUCTORMAXSTAT = 999;
     public const int MINFEVERCOUNT = 3;
@@ -15,9 +15,9 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     public enum ProductorType
     {
         Planner,    //기획자  (기획자는 왁굳님이지만 세부 기획으로 들어가는 작업자를 뜻 함)
-        Designer,  //맵 제작자 (컨텐츠에 해당하는 맵을 제작하는 작업자)
-        Composer,   //작곡가 (방송에 쓰일 곡을 작곡하는 작업자) -> 해당 작곡가의 곡을 사용하면 좋겠지만 어려울 듯
-        Promotor,   //공지 및 홍보 담당 (방송 컨텐츠를 왁물원에 정리 및 홍보하는 역할)
+        GraphicDesigner,  //맵 제작자 (컨텐츠에 해당하는 맵을 제작하는 작업자)
+        SoundDesigner,   //작곡가 (방송에 쓰일 곡을 작곡하는 작업자) -> 해당 작곡가의 곡을 사용하면 좋겠지만 어려울 듯
+        Marketer,   //공지 및 홍보 담당 (방송 컨텐츠를 왁물원에 정리 및 홍보하는 역할)
         Count,
     }
 
@@ -100,7 +100,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         productorStats = new List<TextMeshProUGUI>();
 
-        //productorInfos = new List<ProductorInfo>();
+        productorInfos = new List<ProductorInfo>();
         productorStatusList = new List<ProductorInfoStatusData>();
 
         for (int i = 0; i < productorStatObj.transform.childCount; i++)
@@ -109,20 +109,19 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
             productorStats.Add(text);
         }
-        //SetProductorInfo();
+        DataManager.Instance.SetProductorInfo(productorInfos);
 
         SetProductorStatusList();       //각 데이터의 NextInfo값 넣고 list에 추가
         productorStatusList.Reverse();  //앞 뒤 바뀐 상태라 reverse
         SetProductorPreviousData();     //Previous값 넣어주기
 
         OpenProductorSelection();
+
+        isRun = true;
     }
 
-    private new void Start()
-    {
-        base.Start();
+    bool isRun = false;
 
-    }
     public int TEST_MoveToNextProcessing()
     {
         if (currentProcessProductorType >= ProcessingType.Count)
@@ -191,7 +190,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
             currentNewData = newData;
 
-            if (newData.productorInfo.productorType != CurrentProductorType)
+            if (newData.productorInfo.GetProductorType() != CurrentProductorType)
             {
                 continue;
             }
@@ -216,7 +215,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
             currentStatusData = newData;
 
-            if (newData.productorInfo.productorType != CurrentProductorType)
+            if (newData.productorInfo.GetProductorType() != CurrentProductorType)
             {
                 continue;
             }
@@ -224,7 +223,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             break;
         }
 
-        if (newData.productorInfo.productorType != CurrentProductorType)
+        if (newData.productorInfo.GetProductorType() != CurrentProductorType)
         {
             ChangeProductorMethodMoveToFirst(false);
         }
@@ -242,11 +241,9 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
     public void OpenProductorSelection()
     {
-        Debug.Log(productorStatusList.Count);
-
         foreach (var data in productorStatusList)
         {
-            if (CurrentProductorType == data.productorInfo.productorType)
+            if (CurrentProductorType == data.productorInfo.GetProductorType())
             {
                 UpdateProductorStatus(data.productorInfo);
 
@@ -291,15 +288,21 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     private void UpdateProductorStatus(ProductorInfo info)
     {
         CalculateProductorStat(info);                                   //작업자 스텟값 반영
-        productorImage.sprite = info.productorImage;                    //작업자 이미지
-        productorName.text = info.productorName;                        //작업자 이름
+        //productorImage.sprite = info.productorImage;                    //작업자 이미지
+        productorName.text = info.GetName();                        //작업자 이름
         UpdateProductorStat(info);                                      //작업자 스텟값 4개
         UpdateProductorLevel(info);                                     //작업자 레벨
-        productorPrice.text = info.price.ToString();                    //작업자 비용
+        productorPrice.text = info.GetPrice().ToString();                    //작업자 비용
         ProductorPreviousPlanningCheck(info);                           //작업자 이전 작업 유무
         companyMember.text = info.isCompanyMember ? "작업계" : "외주";   //회사맴
-        infoText.text = info.info;                                      //정보
+        infoText.text = info.GetInfo();                                      //정보
         productorStemina.fillAmount = info.currentStemina / 100;
+
+        if (isRun)
+        {
+            string[] resourceName = ValueCastTo<ResourceID>.From(info.GetID()).ToString().Split('_');
+            SpriteAnimation.Instance.PlayAnimation(resourceName[2], true);
+        }
     }
 
     private void UpdateProductorLevel(ProductorInfo info)
@@ -311,13 +314,13 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             case ProductorType.Planner:
             job = "기획자";
             break;
-            case ProductorType.Designer:
+            case ProductorType.GraphicDesigner:
             job = "맵 제작자";
             break;
-            case ProductorType.Composer:
+            case ProductorType.SoundDesigner:
             job = "작곡가";
             break;
-            case ProductorType.Promotor:
+            case ProductorType.Marketer:
             job = "홍보 담당";
             break;
         }
@@ -355,7 +358,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
 
         float multiplier = 0.7f;
 
-        if (CurrentProductorType == info.productorType)
+        if (CurrentProductorType == info.GetProductorType())
         {
             multiplier = 1.3f;
         }
@@ -408,7 +411,8 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         BroadCastPlanning.Instance.UpdateBroadcastPoint();
 
         ProductorInfo info = currentStatusData.productorInfo;
-        processingProductorImage.sprite = info.productorImage;
+        //processingProductorImage.sprite = info.productorImage;
+        //sprite animation 실행
 
         isProcessed = false;
 
@@ -506,7 +510,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
         //현재 기획중인 방송에 스텟 추가 및 
         //게임 화면 하단에 현재 기획중이 방송 스텟 정보 창 추가
         //맵에 작업자들 작업
-        productorMessage.text = string.Format("{0}", info.productorProcessedMessage);
+        productorMessage.text = string.Format("{0}", info.GetProcessCompleteComment());
         if (SoundManager.Instance != null) SoundManager.Instance.EndMultiAudio();
 
         isProcessed = true;
@@ -579,13 +583,13 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
             case ProductorType.Planner:
             value = "기획";
             break;
-            case ProductorType.Designer:
+            case ProductorType.GraphicDesigner:
             value = "방송 맵 제작";
             break;
-            case ProductorType.Composer:
+            case ProductorType.SoundDesigner:
             value = "곡";
             break;
-            case ProductorType.Promotor:
+            case ProductorType.Marketer:
             value = "홍보";
             break;
         }
@@ -614,7 +618,7 @@ public class ProductorManager : ObjectPooling<ProductorManager, Productor>
     private float[] CalculateStemina(ProductorInfo info)
     {
         float[] newRateArray = processRate;
-        float currentSteminaRate = (1 - info.fatigueLevel / info.maxStemina) * 100;
+        float currentSteminaRate = info.currentStemina * 0.01f;
 
         for (int i = 1; i < newRateArray.Length; i++)
         {

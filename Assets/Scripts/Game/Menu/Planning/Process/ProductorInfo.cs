@@ -1,24 +1,78 @@
+using Devcat;
+using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewProductor", menuName = "Productor/CreateNewProductor")]
 public class ProductorInfo : ScriptableObject
 {
-    public bool isFieldCharacter;       //캐릭터가 맵에 있는지 기본 세팅 캐릭터 는 true
-    public bool isIsegyeIdol;           //이세돌분들인지 -> 이세돌분들의 경우 작업자가 아니기 때문에 하단 구조체 등의 값들은 없음.
-                                        //캐릭터 생성을 위한 정보들 추가 필요 이미지나 멘트 종류 등
-    public int seatNum;                 //좌석번호
+    ProductorData productorData;
 
+    public void SetProductorData(ProductorData productorData)
+    {
+        this.productorData = productorData;
 
-    public string productorName;    //작업계 이름
-    public Sprite productorImage;   //특정 작업자 이미지 (기본은 팬덤 이미지로 대체)
-    public ProductorManager.ProductorType productorType;      //어떤 작업자인지(작업자 타입별로 해당 분야 보너스 존재)\
+        //MAX -> ProductorManager.PRODUCTORMAXSTAT
+        productorStat = new ProductorStat(productorData.PlannerStat, productorData.DesignStat, productorData.SoundStat, productorData.MarketerStat);
+        productorLevel = new ProductorLevel(productorData.PlannerLevel, productorData.DesignLevel, productorData.SoundLevel, productorData.MarketerLevel);
+    }
 
-    public string productorProcessedMessage = "킹아";       //임시 값
+    public void InitStat(params int[] stat)
+    {
+        productorStat.Init(stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)]);
+    }
+    public void InitLevel(params int[] stat)
+    {
+        productorLevel.Init(stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)],
+                            stat[ValueCastTo<int>.From(ProductorManager.ProductorType.Planner)]);
+    }
 
+    public void InitSeat(int seatNum)
+    {
+        productorData.SeatNum = seatNum;
+
+        isCompanyMember = seatNum != 0;
+    }
+
+    public string GetName() { return productorData.Name; }
+    public long GetID() { return productorData.ID; }
+    public ProductorManager.ProductorType GetProductorType()
+    {
+        ProductorManager.ProductorType type = ProductorManager.ProductorType.Count;
+
+        //Planner, GraphicDesigner, SoundGraphicDesigner, Marketer
+        switch (productorData.CharacterType)
+        {
+            case string str when str == ProductorManager.ProductorType.Planner.ToString():
+                type = ProductorManager.ProductorType.Planner;
+                break;
+            case string str when str == ProductorManager.ProductorType.GraphicDesigner.ToString():
+                type = ProductorManager.ProductorType.GraphicDesigner;
+                break;
+            case string str when str == ProductorManager.ProductorType.SoundDesigner.ToString():
+                type = ProductorManager.ProductorType.SoundDesigner;
+                break;
+            case string str when str == ProductorManager.ProductorType.Marketer.ToString():
+                type = ProductorManager.ProductorType.Marketer;
+                break;
+        }
+
+        return type;
+    }
+
+    public string GetProcessCompleteComment() { return productorData.ProcessCompleteComment; }
+    public string GetInfo() { return productorData.Info; }
+    public int GetPrice() { return /*isCompanyMember ?*/ productorData.WorkPrice /*: productorData.OutsourcePrice*/; }
 
     //====
-    public float ProcessedPoint { get { return processedPoint; } 
-                                     set { AddToPoint(value); } }
+    public float ProcessedPoint
+    {
+        get { return processedPoint; }
+        set { AddToPoint(value); }
+    }
     private float processedPoint;
     private void AddToPoint(float value)
     {
@@ -35,33 +89,49 @@ public class ProductorInfo : ScriptableObject
     public bool isCompanyMember;                        //회사 멤버인지
     public bool previousBroadcastProduction;            //이전 작업을 했는지
 
-    public int price;                                   //회사 맴버가 아닐 시 외주 가격
-
     public ProductorStat productorStat;
     public ProductorLevel productorLevel;
 
-    
-    [Header("피로도")] [Range(0, 10)] public int fatigueLevel;
-    [Range(1, 100)] public int maxStemina;
 
-    public int currentStemina  { get { return Mathf.Clamp(maxStemina - fatigueLevel * 10, 0, 100); } private set {} }
+    [Header("피로도")][Range(0, 10)] public int fatigueLevel;
+
+    public int currentStemina { get { return Mathf.Clamp(productorData.MaxStemina - fatigueLevel * 10, 0, 100); } private set { } }
 
     [Space(10f)][Multiline(3)] public string info;
 
-    public int AllStat { get { return productorStat[ProductorManager.ProductorType.Planner]
-                                        + productorStat[ProductorManager.ProductorType.Designer]
-                                        + productorStat[ProductorManager.ProductorType.Composer]
-                                        + productorStat[ProductorManager.ProductorType.Promotor]; } }
+    public int AllStat
+    {
+        get
+        {
+            return productorStat[ProductorManager.ProductorType.Planner]
+                                        + productorStat[ProductorManager.ProductorType.GraphicDesigner]
+                                        + productorStat[ProductorManager.ProductorType.SoundDesigner]
+                                        + productorStat[ProductorManager.ProductorType.Marketer];
+        }
+    }
 
     [System.Serializable]
     public class ProductorLevel
     {
-        [Range(0, 5)] [SerializeField] private int plannerLevel;
-        [Range(0, 5)] [SerializeField] private int designerLevel;
-        [Range(0, 5)] [SerializeField] private int composerLevel;
-        [Range(0, 5)] [SerializeField] private int promotorLevel;
+        private int plannerLevel;
+        private int GraphicDesignerLevel;
+        private int SoundDesignerLevel;
+        private int MarketerLevel;
 
-        public int this [ProductorManager.ProductorType type]
+        public ProductorLevel(int plannerLevel, int GraphicDesignerLevel, int SoundDesignerLevel, int MarketerLevel)
+        {
+            Init(plannerLevel, GraphicDesignerLevel, SoundDesignerLevel, MarketerLevel);
+        }
+
+        public void Init(int plannerLevel, int GraphicDesignerLevel, int SoundDesignerLevel, int MarketerLevel)
+        {
+            this.plannerLevel = plannerLevel;
+            this.GraphicDesignerLevel = GraphicDesignerLevel;
+            this.SoundDesignerLevel = SoundDesignerLevel;
+            this.MarketerLevel = MarketerLevel;
+        }
+
+        public int this[ProductorManager.ProductorType type]
         {
             get { return GetValue(type); }
         }
@@ -71,13 +141,13 @@ public class ProductorInfo : ScriptableObject
             switch (type)
             {
                 case ProductorManager.ProductorType.Planner:
-                return plannerLevel;
-                case ProductorManager.ProductorType.Designer:
-                return designerLevel;
-                case ProductorManager.ProductorType.Composer:
-                return composerLevel;
-                case ProductorManager.ProductorType.Promotor:
-                return promotorLevel;
+                    return plannerLevel;
+                case ProductorManager.ProductorType.GraphicDesigner:
+                    return GraphicDesignerLevel;
+                case ProductorManager.ProductorType.SoundDesigner:
+                    return SoundDesignerLevel;
+                case ProductorManager.ProductorType.Marketer:
+                    return MarketerLevel;
             }
 
             return 0;
@@ -87,28 +157,41 @@ public class ProductorInfo : ScriptableObject
     [System.Serializable]
     public class ProductorStat
     {
-        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short plannerStat;
-        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short designerStat;
-        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short composerStat;
-        [Range(0, ProductorManager.PRODUCTORMAXSTAT)] [SerializeField] private short promotorStat;
+        private int plannerStat;
+        private int GraphicDesignerStat;
+        private int SoundDesignerStat;
+        private int MarketerStat;
 
-        public short this [ProductorManager.ProductorType type]
+        public ProductorStat(int plannerStat, int GraphicDesignerStat, int SoundDesignerStat, int MarketerStat)
+        {
+            Init(plannerStat, GraphicDesignerStat, SoundDesignerStat, MarketerStat);
+        }
+
+        public void Init(int plannerStat, int GraphicDesignerStat, int SoundDesignerStat, int MarketerStat)
+        {
+            this.plannerStat = plannerStat;
+            this.GraphicDesignerStat = GraphicDesignerStat;
+            this.SoundDesignerStat = SoundDesignerStat;
+            this.MarketerStat = MarketerStat;
+        }
+
+        public int this[ProductorManager.ProductorType type]
         {
             get { return GetValue(type); }
         }
 
-        private short GetValue(ProductorManager.ProductorType type)
+        private int GetValue(ProductorManager.ProductorType type)
         {
             switch (type)
             {
                 case ProductorManager.ProductorType.Planner:
-                return plannerStat;
-                case ProductorManager.ProductorType.Designer:
-                return designerStat;
-                case ProductorManager.ProductorType.Composer:
-                return composerStat;
-                case ProductorManager.ProductorType.Promotor:
-                return promotorStat;
+                    return plannerStat;
+                case ProductorManager.ProductorType.GraphicDesigner:
+                    return GraphicDesignerStat;
+                case ProductorManager.ProductorType.SoundDesigner:
+                    return SoundDesignerStat;
+                case ProductorManager.ProductorType.Marketer:
+                    return MarketerStat;
             }
 
             return 0;
